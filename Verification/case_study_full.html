@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification Revamp · Dream11</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;--ink2:#4a4a47;--ink3:#9a9994;
+  --line:rgba(0,0,0,.07);--line2:rgba(0,0,0,.12);
+  --surf:#f7f6f2;--surf2:#eeedea;--white:#fff;
+  --green:#1a9e75;--gl:#e2f5ee;--gt:#085041;--gb:#9fe1cb;
+  --red:#d94040;--rl:#fceaea;--rt:#7a1f1f;--rb:#f4b8b8;
+  --amber:#b87015;--al:#faeeda;--at:#3f2200;--ab:#f9c870;
+  --purple:#4f46b8;--pl:#eeedfe;--pt:#26215c;--pb:#afa9ec;
+  --blue:#1760a5;--bl:#e6f1fb;--bt:#042c53;--bb:#b5d4f4;
+  --crl:#faece7;--crt:#4a1b0c;--crb:#f0997b;
+  --r:10px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+
+nav{border-bottom:.5px solid var(--line2);padding:16px 0;position:sticky;top:0;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);z-index:100}
+.nav-i{display:flex;align-items:center;justify-content:space-between;max-width:680px;margin:0 auto;padding:0 24px}
+.nav-name{font-size:13px;font-weight:500;color:var(--ink)}
+.nav-links{display:flex;gap:20px}
+.nav-links a{font-size:12px;color:var(--ink3);text-decoration:none}
+.nav-links a:hover{color:var(--ink)}
+
+/* SS placeholders */
+.ssp{border:.5px dashed var(--line2);border-radius:var(--r);background:var(--surf);overflow:hidden}
+.ssp-h{padding:7px 13px;background:var(--surf2);border-bottom:.5px dashed var(--line2);display:flex;align-items:center;justify-content:space-between}
+.ssp-l{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.ssp-s{font-size:9px;color:var(--ink3);padding:2px 6px;border-radius:3px;background:var(--white);border:.5px solid var(--line2)}
+.ssp-b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:18px;min-height:150px}
+.ssp-b.tall{min-height:220px}
+.ssp-ic{width:28px;height:28px;border-radius:5px;background:var(--surf2);border:.5px solid var(--line2);display:flex;align-items:center;justify-content:center}
+.ssp-ic svg{width:14px;height:14px;color:var(--ink3)}
+.ssp-d{font-size:11px;color:var(--ink3);text-align:center;max-width:260px;line-height:1.5}
+.ssp-t{font-size:10px;color:var(--ink3);padding:2px 7px;border-radius:3px;border:.5px solid var(--line2);background:var(--white)}
+
+/* Hero */
+.hero{padding:80px 0 64px;border-bottom:.5px solid var(--line)}
+.hook{font-size:20px;font-weight:400;color:var(--ink2);line-height:1.5;max-width:540px;margin-bottom:28px;font-style:italic}
+.hook em{font-style:normal;color:var(--ink);font-weight:500}
+.kicker{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.kicker::before{content:'';display:block;width:18px;height:.5px;background:var(--ink3)}
+h1{font-size:38px;font-weight:600;line-height:1.15;letter-spacing:-.025em;margin-bottom:14px}
+.hero-sub{font-size:15px;color:var(--ink2);line-height:1.7;max-width:460px;margin-bottom:16px}
+.hero-role{font-size:12px;color:var(--ink3);padding:8px 0;border-top:.5px solid var(--line)}
+
+/* Section */
+.sec{padding:72px 0 0}
+.sec-k{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-k::before{content:'';display:block;width:16px;height:.5px;background:var(--ink3)}
+h2{font-size:24px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+.lede{font-size:14px;color:var(--ink2);line-height:1.7;max-width:480px;margin-bottom:28px}
+hr{border:none;border-top:.5px solid var(--line);margin:0}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.sc{padding:18px 20px}
+.sc+.sc{border-left:.5px solid var(--line)}
+.sn{font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:3px}
+.sn.r{color:var(--red)}.sn.g{color:var(--green)}
+.sl{font-size:12px;color:var(--ink2)}
+.sm{font-size:11px;color:var(--ink3);margin-top:1px}
+
+/* Pull quote */
+.pq{margin:22px 0;padding:16px 20px;border-left:2px solid var(--ink);background:var(--surf)}
+.pq-t{font-size:15px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:5px}
+.pq-t .hi{font-style:normal;font-weight:500}
+.pq-a{font-size:11px;color:var(--ink3)}
+.pq.sm{padding:10px 14px;margin:0 0 12px}
+.pq.sm .pq-t{font-size:13px}
+
+/* Hindi quote */
+.hq{margin:18px 0;padding:14px 18px;border-radius:var(--r);background:var(--surf2);border:.5px solid var(--line2)}
+.hq-t{font-size:13px;font-style:italic;color:var(--ink2);line-height:1.7;margin-bottom:6px}
+.hq-tr{font-size:11px;color:var(--ink3);line-height:1.6;padding-top:7px;border-top:.5px solid var(--line)}
+.hq-a{font-size:11px;color:var(--ink3);margin-top:4px}
+
+/* Strategy shift */
+.strategy-shift{background:var(--ink);border-radius:var(--r);padding:20px 24px;margin:28px 0}
+.strategy-shift p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:4px}
+.strategy-shift strong{color:#fff;font-weight:500}
+
+/* Journey */
+.journey{background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:16px;overflow-x:auto;margin-bottom:24px}
+.j-row{display:flex;align-items:flex-start;min-width:520px}
+.j-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.j-tag{height:26px;padding:0 8px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap;display:flex;align-items:center;background:var(--white);border:.5px solid var(--line2);color:var(--ink2)}
+.j-tag.x{background:var(--rl);border-color:var(--rb);color:var(--rt)}
+.j-scr{width:46px;height:78px;border-radius:5px;background:var(--surf2);border:1.5px solid var(--line2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px}
+.j-scr.x{border-color:var(--red)}
+.jl{height:2px;border-radius:1px;background:var(--line2);width:100%}
+.jlx{background:var(--rb)}
+.j-lbl{font-size:9px;color:var(--ink3);text-align:center}
+.j-lbl.x{color:var(--red);font-weight:500}
+.j-sep{display:flex;align-items:center;padding-bottom:36px;flex-shrink:0}
+.j-sep svg{width:10px;height:10px;color:var(--ink3)}
+.j-leg{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:.5px solid var(--line)}
+.j-li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--ink2)}
+.j-dot{width:7px;height:7px;border-radius:2px}
+
+/* Tags */
+.tag{display:inline-flex;font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:.5px solid}
+.tg{background:var(--gl);color:var(--gt);border-color:var(--gb)}
+.tr{background:var(--rl);color:var(--rt);border-color:var(--rb)}
+.ta{background:var(--al);color:var(--at);border-color:var(--ab)}
+.tp{background:var(--pl);color:var(--pt);border-color:var(--pb)}
+.tb{background:var(--bl);color:var(--bt);border-color:var(--bb)}
+
+/* Cards */
+.card{background:var(--white);border:.5px solid var(--line2);border-radius:var(--r);overflow:hidden}
+.card.ul{border-left:2px solid #d87030}
+.cb{padding:15px 17px}
+.cf{border-top:.5px solid var(--line);background:var(--surf);padding:8px 17px;font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cf b{color:var(--ink2);font-weight:500}
+.stack{display:flex;flex-direction:column;gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* 2x2 constraint grid */
+.grid22{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ccard{background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:16px}
+.ccard-tag{margin-bottom:9px;display:inline-flex}
+.ccard-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.ccard-body{font-size:12px;color:var(--ink2);line-height:1.6}
+
+/* Insight screens */
+.ic-scr{height:114px;background:var(--surf);border-bottom:.5px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;position:relative}
+.ic-ph{width:50px;height:90px;border-radius:6px;background:var(--white);border:1.5px solid var(--line2);display:flex;flex-direction:column;gap:3px;padding:6px}
+.ic-ph.x{border-color:var(--red)}
+.ic-b{height:2px;border-radius:1px;background:var(--line2)}
+.ic-l{font-size:7px;color:var(--ink3);text-align:center;line-height:1.3;padding-top:3px}
+.scc{position:absolute;bottom:6px;right:8px;font-size:9px;padding:1px 6px;border-radius:3px;background:var(--white);border:.5px solid var(--line);color:var(--ink3)}
+
+/* States */
+.states{display:flex;flex-wrap:wrap;gap:4px;padding:8px 17px;border-top:.5px solid var(--line);background:var(--surf)}
+.sb{font-size:10px;padding:2px 7px;border-radius:3px;background:var(--white);border:.5px solid var(--line2);color:var(--ink2)}
+.sb.r{background:var(--rl);border-color:var(--rb);color:var(--rt)}
+
+/* Before/After */
+.ba{display:grid;grid-template-columns:1fr 22px 1fr;gap:8px;align-items:center}
+.ba-c{background:var(--surf);border-radius:6px;padding:10px 12px}
+.ba-l{font-size:9px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.ba-l.b{color:var(--red)}.ba-l.a{color:var(--green)}
+.ba-t{font-size:12px;color:var(--ink2);line-height:1.5}
+.ba-arr svg{width:14px;height:14px;color:var(--ink3);display:block;margin:0 auto}
+
+/* Flow steps */
+.flow{display:flex;flex-direction:column}
+.fstep{display:flex;gap:11px;padding:9px 0;border-bottom:.5px solid var(--line)}
+.fstep:last-child{border-bottom:none}
+.fdot{width:20px;height:20px;border-radius:50%;flex-shrink:0;background:var(--surf2);border:.5px solid var(--line2);font-size:9px;font-weight:600;color:var(--ink3);display:flex;align-items:center;justify-content:center}
+.fdot.on{background:var(--pl);border-color:var(--pb);color:var(--pt)}
+.fdot.dn{background:var(--gl);border-color:var(--gb);color:var(--gt)}
+.ft{font-size:13px;font-weight:500;color:var(--ink)}
+.fd{font-size:12px;color:var(--ink2);margin-top:1px;line-height:1.5}
+
+/* PAN options */
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.opt{background:var(--surf);border:.5px solid var(--line2);border-radius:6px;padding:10px 11px}
+.opt.pick{background:var(--gl);border-color:var(--gb)}
+.opt-t{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.opt-s{font-size:10px;color:var(--ink3);margin-bottom:4px}
+.pro{font-size:11px;color:var(--gt)}
+.con{font-size:11px;color:var(--rt)}
+.pbadge{display:inline-block;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:3px;margin-bottom:4px;background:var(--gl);color:var(--gt);border:.5px solid var(--gb)}
+
+/* Callouts */
+.prd{background:var(--bl);border:.5px solid var(--bb);border-radius:6px;padding:8px 12px;margin-top:10px}
+.prd-k{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:2px}
+.prd-t{font-size:12px;color:#0c447c;line-height:1.6}
+.adapt{background:var(--al);border:.5px solid var(--ab);border-radius:6px;padding:8px 12px;margin-bottom:10px;display:flex;gap:7px}
+.adapt svg{flex-shrink:0;margin-top:2px}
+.adapt-k{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--at);margin-bottom:2px}
+.adapt-t{font-size:12px;color:var(--at);line-height:1.6}
+
+/* Chips */
+.chip{display:inline-flex;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;background:var(--white);border:.5px solid var(--line2);color:var(--ink2)}
+.chip.g{background:var(--gl);border-color:var(--gb);color:var(--gt)}
+.chip.hot{background:var(--crl);border-color:var(--crb);color:var(--crt)}
+
+/* Beat */
+.beat{display:flex;align-items:flex-start;gap:13px;margin-bottom:14px}
+.beat-n{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--surf2);border:.5px solid var(--line2);font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:center;margin-top:2px}
+.beat-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:2px}
+.beat-sub{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* Retry flow */
+.retry{background:var(--surf);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:5px}
+.rnode{padding:8px 10px;border-radius:6px;border:.5px solid var(--line2);background:var(--white)}
+.rnode.p{border-color:var(--gb);background:var(--gl)}
+.rnode.f{border-color:var(--ab);background:var(--al)}
+.rnode.l{border-color:var(--pb);background:var(--pl)}
+.rn-t{font-size:12px;font-weight:500;color:var(--ink)}
+.rn-s{font-size:10px;color:var(--ink3);margin-top:1px}
+.r-conn{display:flex;align-items:center;gap:6px;padding-left:10px}
+.r-line{width:1px;height:12px;background:var(--line2)}
+.r-lbl{font-size:10px;color:var(--rt);background:var(--rl);padding:1px 6px;border-radius:3px;border:.5px solid var(--rb)}
+
+/* TN comparison */
+.tn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.tn-col{border-radius:var(--r);overflow:hidden}
+.tn-col.interim{border:.5px solid var(--line2)}
+.tn-col.mine{border:.5px solid var(--gb)}
+.tn-head{padding:7px 12px;display:flex;align-items:center;justify-content:space-between}
+.tn-head.interim{background:var(--surf2);border-bottom:.5px solid var(--line)}
+.tn-head.mine{background:var(--gl);border-bottom:.5px solid var(--gb)}
+.tn-hl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.tn-hl.interim{color:var(--ink3)}
+.tn-hl.mine{color:var(--gt)}
+.tn-badge{font-size:9px;padding:1px 6px;border-radius:3px}
+.tn-badge.old{background:var(--al);border:.5px solid var(--ab);color:var(--at)}
+.tn-badge.new{background:var(--white);border:.5px solid var(--gb);color:var(--gt)}
+.tn-note{padding:7px 12px;font-size:11px;line-height:1.5}
+.tn-note.interim{border-top:.5px solid var(--line);color:var(--ink3)}
+.tn-note.mine{border-top:.5px solid var(--gb);background:var(--gl);color:var(--gt)}
+
+/* What my design added */
+.adds{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.add-row{display:flex;align-items:flex-start;gap:7px}
+.add-dot{width:4px;height:4px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0}
+
+/* Metrics */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mc{background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:18px 20px}
+.mc.s2{grid-column:span 2}
+.mn{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:3px}
+.mn.g{color:var(--green)}.mn.r{color:var(--red)}
+.ml{font-size:13px;color:var(--ink2);line-height:1.5;margin-bottom:4px}
+.ms2{font-size:11px;color:var(--ink3)}
+.mdelta{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;margin-top:5px}
+.mdelta.g{background:var(--gl);color:var(--gt)}
+
+/* TAT */
+.tat{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--line)}
+.tat:last-child{border-bottom:none}
+.tat-l{font-size:12px;color:var(--ink2)}
+.tat-r{display:flex;align-items:center;gap:8px}
+.bar-bg{width:80px;height:3px;background:var(--line);border-radius:2px}
+.bar-f{height:3px;border-radius:2px;background:var(--red)}
+.bar-f.g{background:var(--green)}
+.tat-v{font-size:12px;font-weight:500;min-width:68px;text-align:right}
+.tat-v.r{color:var(--red)}.tat-v.g{color:var(--green)}
+
+/* Reflection */
+.ritem{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:.5px solid var(--line)}
+.ritem:last-child{border-bottom:none}
+.rico{width:24px;height:24px;border-radius:5px;background:var(--surf2);border:.5px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;color:var(--ink3)}
+.ritem.bad .rico{background:var(--rl);border-color:var(--rb);color:var(--rt)}
+.ritem.good .rico{background:var(--gl);border-color:var(--gb);color:var(--gt)}
+.rt{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.rd{font-size:12px;color:var(--ink2);line-height:1.6}
+
+/* Footer */
+.footer{padding:48px 0;border-top:.5px solid var(--line);margin-top:72px}
+.footer-i{display:flex;align-items:center;justify-content:space-between}
+.footer-name{font-size:12px;color:var(--ink3)}
+.footer-back{font-size:12px;color:var(--ink3);text-decoration:none}
+.footer-back:hover{color:var(--ink)}
+
+@media(max-width:560px){
+  .g2,.metrics,.opts,.grid22,.tn-grid{grid-template-columns:1fr}
+  .ba{grid-template-columns:1fr}
+  .ba-arr{display:none}
+  .mc.s2{grid-column:span 1}
+  h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-i">
+    <span class="nav-name">Bikiran Halder</span>
+    <div class="nav-links"><a href="#">Work</a><a href="#">About</a></div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <p class="hook">Dream11 had 100 million users. Getting your own money out took <em>35 minutes</em>. Every week, 9,000 people wrote in to say so.</p>
+    <div class="kicker">Dream11 · Payments &amp; Trust · 2022–23</div>
+    <h1>Verification Revamp</h1>
+    <p class="hero-sub">Redesigning PAN, KYC, UPI, bank and email verification to bring the first-withdrawal TAT from 35 minutes to under 2.</p>
+    <p class="hero-role">Sole designer · 2 PMs · 12-person eng team · ~4 months · iOS &amp; Android</p>
+  </div>
+
+
+  <!-- ══ 01 — PROBLEM ══ -->
+  <div class="sec">
+    <div class="sec-k">01 — The problem</div>
+    <h2>The cost of friction</h2>
+    <p class="lede">15% of support tickets were KYC or withdrawal related. Users didn't just struggle — they felt the friction was deliberate.</p>
+
+    <div class="stats">
+      <div class="sc"><div class="sn r">35 min</div><div class="sl">First withdrawal TAT (p90)</div><div class="sm">Before redesign</div></div>
+      <div class="sc"><div class="sn r">15%</div><div class="sl">Of all support tickets</div><div class="sm">KYC + withdrawal</div></div>
+      <div class="sc"><div class="sn r">~9,000</div><div class="sl">Tickets per week</div><div class="sm">At peak load</div></div>
+    </div>
+
+    <div class="pq">
+      <p class="pq-t">It's 7:20pm. IPL starts in 10 minutes. You've built your team, you tap "Join Contest" — and a verification screen appears. Five options. You don't know if you need one or all. You close the app.</p>
+      <p class="pq-a">— What using the old flow felt like</p>
+    </div>
+
+    <div class="journey">
+      <div class="j-row">
+        <div class="j-col"><div class="j-tag">Reg</div><div class="j-scr"><div class="jl"></div><div class="jl" style="width:70%"></div><div class="jl" style="width:80%"></div></div><div class="j-lbl">Entry</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag">Home</div><div class="j-scr"><div class="jl"></div><div class="jl" style="width:75%"></div><div class="jl" style="width:60%"></div></div><div class="j-lbl">Browse</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag">Contest</div><div class="j-scr"><div class="jl"></div><div class="jl" style="width:65%"></div><div class="jl" style="width:78%"></div></div><div class="j-lbl">Explore</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag x">KYC gate</div><div class="j-scr x"><div class="jl jlx"></div><div class="jl jlx" style="width:72%"></div></div><div class="j-lbl x">Drop-off</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag">Gameplay</div><div class="j-scr"><div class="jl"></div><div class="jl" style="width:82%"></div></div><div class="j-lbl">Play</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag x">Location</div><div class="j-scr x"><div class="jl jlx"></div><div class="jl jlx" style="width:60%"></div></div><div class="j-lbl x">2nd gate</div></div>
+        <div class="j-sep"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="j-col"><div class="j-tag">Withdraw</div><div class="j-scr"><div class="jl"></div><div class="jl" style="width:70%"></div></div><div class="j-lbl">Convert</div></div>
+      </div>
+      <div class="j-leg">
+        <div class="j-li"><span class="j-dot" style="background:var(--surf2);border:.5px solid var(--line2)"></span>Standard</div>
+        <div class="j-li"><span class="j-dot" style="background:var(--rl);border:.5px solid var(--rb)"></span>Friction / drop-off</div>
+      </div>
+    </div>
+
+    <div class="ssp">
+      <div class="ssp-h"><span class="ssp-l">My Balance + Verify entry point</span><span class="ssp-s">Image 4</span></div>
+      <div class="ssp-b"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">My Balance → "Verify to Withdraw" CTA → "Verify in 3 easy steps" (Email → Govt ID → PAN)</p><span class="ssp-t">2 screens</span></div>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 02 — CONTEXT ══ -->
+  <div class="sec">
+    <div class="sec-k">02 — Context</div>
+    <h2>Why this was hard</h2>
+    <p class="lede">Four constraints compounded each other. Understanding all four shaped every design decision.</p>
+
+    <div class="grid22">
+      <div class="ccard">
+        <span class="tag tp ccard-tag">Infrastructure</span>
+        <p class="ccard-title">Low Aadhaar-mobile linkage</p>
+        <p class="ccard-body">Most users hadn't linked mobile to Aadhaar — ruling out OTP and forcing document fallbacks.</p>
+      </div>
+      <div class="ccard">
+        <span class="tag ta ccard-tag">Regulatory</span>
+        <p class="ccard-title">State-level geo-gating</p>
+        <p class="ccard-body">AP, Telangana, TN and others required location checks at every contest entry — not once at reg.</p>
+      </div>
+      <div class="ccard" style="border-left:2px solid #d87030">
+        <span class="tag" style="background:var(--crl);color:var(--crt);border-color:var(--crb)" class="ccard-tag">Timing</span>
+        <p class="ccard-title" style="margin-top:9px">IPL rush</p>
+        <p class="ccard-body">Drop-off peaks when intent is highest. At 7:25pm on match day, patience is zero.</p>
+      </div>
+      <div class="ccard">
+        <span class="tag tb ccard-tag">Complexity</span>
+        <p class="ccard-title">5 docs, 5 paths, 0 guidance</p>
+        <p class="ccard-body">Aadhaar, PAN, Passport, Voter ID, DL — each with different backends and validation flows.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 03 — DISCOVERY ══ -->
+  <div class="sec">
+    <div class="sec-k">03 — Discovery</div>
+    <h2>What we learned</h2>
+    <p class="lede">I ran 15–16 interviews to understand which documents users actually carry — driving document priority order. A team mall study surfaced the trust and guidance failures.</p>
+
+    <div class="ssp" style="margin-bottom:20px">
+      <div class="ssp-h"><span class="ssp-l">Research findings slide</span><span class="ssp-s">Research slide</span></div>
+      <div class="ssp-b"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M5 5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><p class="ssp-d">"Mandatory verification is not unexpected" — 5-option screen, 3 findings, Hindi quote from P4, Jaunpur</p><span class="ssp-t">Full slide</span></div>
+    </div>
+
+    <!-- Screen evidence -->
+    <div style="background:var(--surf2);border:.5px solid var(--line2);border-radius:var(--r);padding:14px;display:flex;gap:13px;align-items:flex-start;margin-bottom:14px">
+      <div style="width:110px;flex-shrink:0;border-radius:11px;border:2px solid var(--ink);overflow:hidden;background:var(--white)">
+        <div style="background:#1a1a18;height:7px;display:flex;align-items:center;justify-content:center"><div style="width:5px;height:5px;border-radius:50%;background:#333"></div></div>
+        <div style="padding:5px">
+          <div style="background:#b82020;border-radius:4px;padding:5px;margin-bottom:4px">
+            <div style="background:rgba(255,255,255,.2);border-radius:2px;padding:1px 3px;font-size:6px;font-weight:600;color:#fff;display:inline-block;margin-bottom:2px">90% OFF</div>
+            <div style="font-size:7px;font-weight:600;color:#fff;margin-bottom:1px">Get verified in 2 mins</div>
+            <div style="font-size:5px;color:rgba(255,255,255,.8)">As per Indian regulations...</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 4px;border:.5px solid var(--gb);border-radius:2px;background:var(--gl)"><span style="font-size:5.5px;color:var(--ink)">Verify Aadhaar via OTP</span><div style="width:6px;height:6px;border-radius:50%;background:var(--green)"></div></div>
+            <div style="text-align:center;font-size:5px;color:var(--ink3);padding:1px 0">OR</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 4px;border:.5px solid var(--line2);border-radius:2px;background:var(--white)"><span style="font-size:5.5px">Enter Aadhaar number</span><div style="width:6px;height:6px;border-radius:50%;border:.5px solid var(--line2)"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 4px;border:.5px solid var(--line2);border-radius:2px;background:var(--white)"><span style="font-size:5.5px">Upload Aadhaar</span><div style="width:6px;height:6px;border-radius:50%;border:.5px solid var(--line2)"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 4px;border:.5px solid var(--line2);border-radius:2px;background:var(--white)"><span style="font-size:5.5px">Upload Voter ID</span><div style="width:6px;height:6px;border-radius:50%;border:.5px solid var(--line2)"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 4px;border:.5px solid var(--line2);border-radius:2px;background:var(--white)"><span style="font-size:5.5px">Upload Driving License</span><div style="width:6px;height:6px;border-radius:50%;border:.5px solid var(--line2)"></div></div>
+            <div style="background:#2a8a2a;border-radius:2px;padding:3px;text-align:center;font-size:6px;font-weight:600;color:#fff;margin-top:2px">CONTINUE</div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1">
+        <p style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:8px">Three sharp findings</p>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px">
+          <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Timing kills intent</strong> — verification before team creation asked for trust before delivering value</p></div>
+          <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Choice reads as obligation</strong> — users read a list of 5 options as a checklist. Only ONE was needed.</p></div>
+          <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Aadhaar mistrust is real</strong> — privacy fears around OTP misuse, not just UI confusion</p></div>
+        </div>
+        <div style="background:var(--white);border:.5px solid var(--gb);border-radius:5px;padding:7px 10px;display:flex;gap:6px"><span style="font-size:12px;flex-shrink:0">💡</span><span style="font-size:11px;color:var(--gt);font-weight:500;line-height:1.5">Only ONE document needed. The screen communicated choice as obligation.</span></div>
+      </div>
+    </div>
+
+    <div class="pq">
+      <p class="pq-t"><span class="hi">"I feel as if Dream11 is enforcing a lot of steps, purposely adding friction to not allow me to place my first withdrawal."</span></p>
+      <p class="pq-a">— User interview</p>
+    </div>
+
+    <div class="hq">
+      <p class="hq-t">"Agar financially kuch zaruri hai toh AADHAR diya jaa sakta hai, lekin zamana kharab hai, AADHAR OTP misuse ho sakta hai (camera access karke) to main jaldi se nahi dena chahunga apna AADHAR."</p>
+      <p class="hq-tr"><strong>Translation:</strong> "If financially necessary I can give Aadhaar — but times are bad, OTP can be misused through camera access, so I wouldn't give it quickly."</p>
+      <p class="hq-a">— P4, Male, Jaunpur</p>
+    </div>
+
+    <!-- Strategy shift -->
+    <div class="strategy-shift">
+      <p>We reframed the goal.</p>
+      <p><strong>From "collecting documents" → to "protecting user momentum."</strong></p>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 04 — EXECUTION ══ -->
+  <div class="sec">
+    <div class="sec-k">04 — Execution</div>
+    <h2>Three core decisions</h2>
+
+    <!-- Beat 1 -->
+    <div class="beat" style="margin-bottom:14px">
+      <div class="beat-n">1</div>
+      <div><div class="beat-title">Retime the ask</div><div class="beat-sub">Move KYC to after team creation — when intent is real, not assumed.</div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:40px">
+      <div class="cb">
+        <div class="ba" style="margin-bottom:14px">
+          <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">KYC at registration — before the user built a team or felt invested</p></div>
+          <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">KYC gated at cash add — only after team creation</p></div>
+        </div>
+        <div class="flow">
+          <div class="fstep"><div class="fdot dn">1</div><div><p class="ft">Browse &amp; social connect</p><p class="fd">Entry. No commitment required.</p></div></div>
+          <div class="fstep"><div class="fdot dn">2</div><div><p class="ft">Create team</p><p class="fd">Intent anchored. User is invested.</p></div></div>
+          <div class="fstep"><div class="fdot on">3</div><div><p class="ft">KYC + verification &larr; gated here</p><p class="fd">Compliance at peak motivation — not at the door.</p></div></div>
+          <div class="fstep"><div class="fdot">4</div><div><p class="ft">Add cash &amp; play</p></div></div>
+        </div>
+      </div>
+      <div class="cf"><span class="chip g">+30% funnel uplift</span><span>Reg → cash add · TG vs CG</span></div>
+    </div>
+
+    <!-- Beat 2 -->
+    <div class="beat" style="margin-bottom:14px">
+      <div class="beat-n">2</div>
+      <div><div class="beat-title">Reduce choice, route on failure</div><div class="beat-sub">Surface the highest-SR path first. Adapt on failure — don't restart.</div></div>
+    </div>
+
+    <div class="stack" style="margin-bottom:40px">
+
+      <!-- Option overload fix -->
+      <div class="card">
+        <div class="cb">
+          <span class="tag tp" style="margin-bottom:9px;display:inline-flex">Document selection</span>
+          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">"Select any one" — direct fix to the overload finding</p>
+          <div class="ba">
+            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">5 options shown simultaneously — read as a checklist</p></div>
+            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">Best option surfaced first. "Select any one." Others revealed progressively.</p></div>
+          </div>
+        </div>
+        <div class="cf">Document priority driven by field research — Aadhaar first, DL second, Voter ID third</div>
+      </div>
+
+      <!-- Smart retry -->
+      <div class="card">
+        <div class="cb">
+          <span class="tag tp" style="margin-bottom:9px;display:inline-flex">Adaptive retry</span>
+          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Aadhaar lite + OTP — route on failure, not upfront choice</p>
+          <div class="retry" style="margin-bottom:10px">
+            <div class="rnode p"><div class="rn-t">Aadhaar OTP</div><div class="rn-s">Highest SR · shown first</div></div>
+            <div class="r-conn"><div class="r-line"></div><span class="r-lbl" style="margin-left:8px">OTP fails / mobile not linked</span></div>
+            <div class="rnode f"><div class="rn-t">Aadhaar Lite (OCR)</div><div class="rn-s">Auto-suggested · no recall needed</div></div>
+            <div class="r-conn"><div class="r-line"></div><span class="r-lbl" style="margin-left:8px">OCR fails / poor image</span></div>
+            <div class="rnode l"><div class="rn-t">DigiLocker</div><div class="rn-s">Third option · govt-verified</div></div>
+          </div>
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">Aadhaar retry + DigiLocker flow</span><span class="ssp-s">Image 5</span></div>
+            <div class="ssp-b"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Retry nudging: not linked → upload / DL / PAN + full DigiLocker sign-up and OTP screens</p><span class="ssp-t">Image 5</span></div>
+          </div>
+        </div>
+        <div class="cf">Click count unchanged · TAT nudge shown at method selection (Bank 5 min vs UPI 7 sec)</div>
+      </div>
+
+      <!-- Full flow -->
+      <div class="card">
+        <div class="cb">
+          <span class="tag tp" style="margin-bottom:9px;display:inline-flex">Complete flow</span>
+          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">End-to-end KYC journey</p>
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">Full KYC journey — Figma canvas</span><span class="ssp-s">Image 2</span></div>
+            <div class="ssp-b tall"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 7h8M4 10h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><p class="ssp-d">Home → Create → Add Cash → KYC → OTP → Location → Payment · full scope</p><span class="ssp-t">Full canvas</span></div>
+          </div>
+        </div>
+        <div class="cf">Full Aadhaar decision tree also in Image 1</div>
+      </div>
+
+    </div>
+
+    <!-- Beat 3 -->
+    <div class="beat" style="margin-bottom:14px">
+      <div class="beat-n">3</div>
+      <div><div class="beat-title">Remove the friction</div><div class="beat-sub">Two removals at withdrawal. One outcome.</div></div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <div class="cb">
+          <span class="tag ta" style="margin-bottom:9px;display:inline-flex">Withdrawal — PAN</span>
+          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">PAN upload removed from withdrawal</p>
+          <div class="ba">
+            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">PAN form + upload triggered at withdrawal</p></div>
+            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">PAN collected at KYC — withdrawal skips it</p></div>
+          </div>
+        </div>
+        <div class="cf">Worst-moment friction eliminated</div>
+      </div>
+
+      <div class="card">
+        <div class="cb">
+          <span class="tag ta" style="margin-bottom:9px;display:inline-flex">Withdrawal — Bank</span>
+          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Smart bank details fetch</p>
+          <div class="pq sm"><p class="pq-t">"<span class="hi">A real friction — the documents needed to verify my bank.</span>"</p><p class="pq-a">— User interview</p></div>
+          <div class="ba">
+            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">Manual IFSC + account entry · doc upload on failure</p></div>
+            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">Auto-fetched from linked mobile · upload deferred to X failed attempts</p></div>
+          </div>
+        </div>
+        <div class="cf"><span class="chip g">55% → 72% success rate</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 05 — IMPACT ══ -->
+  <div class="sec">
+    <div class="sec-k">05 — Impact</div>
+    <h2>What moved</h2>
+
+    <div class="metrics">
+      <div class="mc"><div class="mn g">+30%</div><div class="ml">Funnel uplift — reg to cash add</div><div class="ms2">TG vs CG · Beat 1</div><span class="mdelta g">Statistically significant</span></div>
+      <div class="mc"><div class="mn g">72%</div><div class="ml">Withdrawal success rate</div><div class="ms2">Up from 55% · Beat 3</div><span class="mdelta g">+17pp</span></div>
+      <div class="mc s2">
+        <p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:12px">TAT — first withdrawal (p90)</p>
+        <div class="tat"><span class="tat-l">Before</span><div class="tat-r"><div class="bar-bg"><div class="bar-f" style="width:100%"></div></div><span class="tat-v r">~35 min</span></div></div>
+        <div class="tat"><span class="tat-l">After (target)</span><div class="tat-r"><div class="bar-bg"><div class="bar-f g" style="width:6%"></div></div><span class="tat-v g">Under 2 min</span></div></div>
+        <div class="tat"><span class="tat-l">Bank TAT before</span><div class="tat-r"><div class="bar-bg"><div class="bar-f" style="width:18%"></div></div><span class="tat-v r">~6 min</span></div></div>
+        <div class="tat"><span class="tat-l">UPI TAT after</span><div class="tat-r"><div class="bar-bg"><div class="bar-f g" style="width:1%"></div></div><span class="tat-v g">7 sec</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 06 — TRADEOFFS ══ -->
+  <div class="sec">
+    <div class="sec-k">06 — Tradeoffs &amp; reality</div>
+    <h2>Where the ground moved</h2>
+    <p class="lede">Two decisions that shaped this project weren't design decisions at all — they were regulatory ones. How we handled them mattered.</p>
+
+    <!-- TN flow -->
+    <div class="card" style="margin-bottom:8px">
+      <div class="cb">
+        <div style="display:flex;gap:7px;align-items:center;margin-bottom:9px;flex-wrap:wrap">
+          <span class="tag ta">Tamil Nadu</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:var(--surf2);border:.5px solid var(--line2);color:var(--ink3)">Mid-project rule change</span>
+        </div>
+        <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">Location-first — and the design that didn't ship</p>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:14px">TN's RMG law changed mid-project. We moved location check to step 1 — filtering banned-state users before KYC, so they don't complete a flow that will reject them anyway. A smart product decision that also reduced wasted user time.</p>
+
+        <div class="tn-grid">
+          <div class="tn-col interim">
+            <div class="tn-head interim"><span class="tn-hl interim">Interim — shipped</span><span class="tn-badge old">Old system</span></div>
+            <div class="ssp" style="border:none;border-radius:0">
+              <div class="ssp-h" style="background:transparent;border:none;padding:6px 12px 3px"><span class="ssp-l">Interim TN screens</span><span class="ssp-s">Image 1</span></div>
+              <div class="ssp-b" style="min-height:110px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">2-step: Location (active) → Govt ID (locked)</p><span class="ssp-t">2 screens</span></div>
+            </div>
+            <div class="tn-note interim">Built by another team. I contributed UX direction — didn't own end-to-end.</div>
+          </div>
+          <div class="tn-col mine">
+            <div class="tn-head mine"><span class="tn-hl mine">My design</span><span class="tn-badge new">New system</span></div>
+            <div class="ssp" style="border:none;border-radius:0;background:var(--gl)">
+              <div class="ssp-h" style="background:transparent;border:none;padding:6px 12px 3px"><span class="ssp-l" style="color:var(--gt)">Final design</span><span class="ssp-s" style="border-color:var(--gb);color:var(--gt)">Image 4</span></div>
+              <div class="ssp-b" style="min-height:110px"><div class="ssp-ic" style="background:var(--white)"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d" style="color:var(--gt)">Value-prop screen + doc tabs + input method tabs</p><span class="ssp-t" style="border-color:var(--gb);color:var(--gt)">2 screens</span></div>
+            </div>
+            <div class="tn-note mine">Not shipped — RMG ban hit during development. Migration planned.</div>
+          </div>
+        </div>
+
+        <p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin-bottom:7px">What the new design added</p>
+        <div class="adds">
+          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">Value first</strong> — benefits grid before any verification ask</p></div>
+          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">"Select any one document"</strong> — direct fix to the overload finding</p></div>
+          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">Input method per doc</strong> — Number / Image / Digilocker tabs per document type</p></div>
+        </div>
+      </div>
+      <div class="cf">Location-first protects user time and platform SR for non-banned-state users</div>
+    </div>
+
+    <!-- PAN pivot -->
+    <div class="card">
+      <div class="cb">
+        <div class="adapt">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#b87015" stroke-width="1.2"/><path d="M7 4.5V7.5" stroke="#b87015" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".6" fill="#b87015"/></svg>
+          <div><p class="adapt-k">Mid-project pivot</p><p class="adapt-t">PAN verification at KYC was removed after a regulatory change — but the PRD wasn't updated. I'd designed the full flow and had to rethink placement without an updated brief.</p></div>
+        </div>
+        <span class="tag tp" style="margin-bottom:9px;display:inline-flex">PAN verification</span>
+        <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Net winner / loser routing</p>
+        <div style="background:var(--surf);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;align-items:flex-start;gap:7px"><span class="tag tr" style="flex-shrink:0;margin-top:1px">Net loser</span><p style="font-size:12px;color:var(--ink2)">PAN skipped — no winnings to comply against.</p></div>
+          <div style="height:.5px;background:var(--line)"></div>
+          <div style="display:flex;align-items:flex-start;gap:7px"><span class="tag tg" style="flex-shrink:0;margin-top:1px">Net winner</span><p style="font-size:12px;color:var(--ink2)">PAN required — compliance triggered only when earnings are present.</p></div>
+        </div>
+        <div class="prd"><p class="prd-k">From the PRD</p><p class="prd-t">Lifetime deposits &gt; ₹50k → PAN mandatory regardless. Configurable via feature flag.</p></div>
+      </div>
+      <div class="cf">A stale PRD is a silent design risk — regulatory changes need to reach the design brief, not just engineering</div>
+    </div>
+  </div>
+
+  <hr style="margin-top:72px">
+
+
+  <!-- ══ 07 — REFLECTION ══ -->
+  <div class="sec">
+    <div class="sec-k">07 — Reflection</div>
+    <h2>Earned lessons</h2>
+
+    <div class="card">
+      <div class="cb" style="padding-bottom:0">
+
+        <div class="ritem good" style="padding-top:0">
+          <div class="rico">→</div>
+          <div><p class="rt">Show and tell beats tell alone</p>
+          <p class="rd">The "more steps = more friction" pushback only resolved when I mapped the flow visually — showing the click count staying the same. Not everyone has strong visualisation. That's not a gap to judge; it's a design problem to solve.</p></div>
+        </div>
+
+        <div class="ritem bad">
+          <div class="rico">!</div>
+          <div><p class="rt">Design work can be made obsolete by things outside design</p>
+          <p class="rd">Two flows — the TN location design and the full PAN-at-KYC flow — didn't ship as intended. One due to an RMG ban, one to a regulatory change that never reached the brief. The work wasn't wrong. The ground moved. Learning to design resilient handoffs matters as much as the design itself.</p></div>
+        </div>
+
+        <div class="ritem">
+          <div class="rico">→</div>
+          <div><p class="rt">Track the 28% who still fail</p>
+          <p class="rd">55% → 72% is real progress. But 28% still hit a wall. We didn't instrument follow-through on those users post-launch. That 28% is the next design problem — probably several problems in a trenchcoat.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-i">
+      <span class="footer-name">Bikiran Halder · 2024</span>
+      <a class="footer-back" href="#">← All work</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

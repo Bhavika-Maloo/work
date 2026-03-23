@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="From Friction to Trust - Redesigning verification for 200M+ users at Dream11" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+    <style>
+      /* =============================================
+         Reset & Base
+         ============================================= */
+
+      /* Box sizing for all elements */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Remove default margin and padding from layout & text elements */
+      body, h1, h2, h3, h4, h5, h6,
+      p, blockquote, ul, ol, li, figure, figcaption {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Sensible body defaults */
+      html, body {
+        height: 100%;
+        overflow-x: hidden;
+        line-height: 1.5;
+        font-family: \'DM Sans\', sans-serif;
+      }
+
+      /* Lists used for navigation/UI shouldn't look like lists */
+      ul, ol { list-style: none; }
+
+      /* Images should never overflow their container */
+      img, video { max-width: 100%; height: auto; display: block; }
+
+      /* Remove default link underline */
+      a { text-decoration: none; }
+
+      /* Tables collapse their borders by default */
+      table { border-collapse: collapse; }
+      /* =============================================
+         CSS Variables
+         ============================================= */
+      :root {
+        --background-d11colorbgwarninglighter: rgba(238, 231, 251, 1);
+        --global-tokens-color-purple-purple-30: rgba(95, 0, 192, 1);
+        --global-tokens-color-grey-grey-20: rgba(32, 44, 61, 1);
+        --alias-tokens-color-decorative1-text-4: var(--global-tokens-color-purple-purple-30);
+        --alias-tokens-color-neutral-text-7: var(--global-tokens-color-grey-grey-20);
+        --Color-decorative1-text_4: #5F00C0;
+        --Color-neutral-text_7: #202C3D;
+        --Color-neutral-text_8: #7D8BA2;
+        --Color-neutral-text_5: #515E74;
+        --Color-neutral-text_3: #BCC5D2;
+        --Color-neutral-bg_1: #ffffff;
+        --Color-neutral-bg_2: #F8FBFF;
+        --Color-neutral-bg_3: #F0F3F7;
+        --Color-neutral-border_2: #F0F3F7;
+        --Color-neutral-border_3: #DFE3E8;
+        --Color-neutral-border_4: #CFD5DE;
+        --Color-neutral-border_5: #97A4B8;
+        --Color-neutral-shape_5: #515E74;
+        --Color-neutral-shape_7: #202C3D;
+        --Color-accent1-text_5: #00461B;
+        --Color-accent1-text_3: #00A348;
+        --Color-accent1-bg_2: #EFFAF1;
+        --Color-accent1-bg_4: #00A348;
+        --Color-accent1-bg_5: #008A3C;
+        --Color-accent1-border_1: #A4EBA9;
+        --Color-accent1-shape_3: #00A348;
+        --Color-accent2-bg_2: #EDF7FF;
+        --Color-accent2-text_3: #2B6DD8;
+        --Color-accent2-text_5: #002E6B;
+        --Color-accent2-shape_2: #87BFFF;
+        --Color-accent3-bg_1: #FEFCED;
+        --Color-accent3-text_3: #9E7900;
+        --Color-alert-border_2: #DD500F;
+        --Color-alert-text_3: #DD500F;
+        --Button-primary-enabled-label-text_color: white;
+        --Button-primary-disabled-background_color: #F0F3F7;
+        --Button-primary-disabled-label-text_color: #BCC5D2;
+        --Input_field-default-background_color: white;
+        --Input_field-default-border_color: #CFD5DE;
+        --Input_field-default-label-text_color: #515E74;
+        --Links-default-text_color: var(--Color-neutral-text_7);
+        --Schemes-On-Primary-Fixed: #21005D;
+        --Text-Danger-Secondary: #C00F0C;
+      }
+
+      /* =============================================
+         Page Wrapper
+         ============================================= */
+      .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+        padding: 80px 48px;
+        max-width: 1280px;
+        margin: 0 auto;
+        overflow-x: hidden;
+      }
+
+      /* Each section is also a flex column so its children
+         get consistent vertical gaps, not just block stacking */
+      .page-wrapper > section:not(#hero) {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+
+      /* =============================================
+         Hero Section (Section 1)
+         ============================================= */
+      .frame {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+      .frame .div {
+        flex: 1;
+        max-width: calc(100% - 360px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+        position: relative;
+      }
+      .frame .div-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        position: relative;
+        width: 100%;
+      }
+      .frame .text-wrapper {
+        position: relative;
+        width: fit-content;
+        font-weight: 800;
+        color: var(--alias-tokens-color-decorative1-text-4);
+        font-size: clamp(44px, 6vw, 72px);
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      .frame .p {
+        position: relative;
+        width: fit-content;
+        font-weight: 400;
+        color: var(--alias-tokens-color-neutral-text-7);
+        font-size: clamp(18px, 2.2vw, 26px);
+        letter-spacing: -0.01em;
+        line-height: 1.4;
+      }
+      .frame .div-3 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        position: relative;
+        width: 100%;
+      }
+      .frame .transforming {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        font-weight: 400;
+        color: var(--alias-tokens-color-neutral-text-7);
+        font-size: clamp(15px, 1.4vw, 18px);
+        letter-spacing: 0;
+        line-height: 1.65;
+      }
+      .frame .div-4 {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        position: relative;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .frame .div-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 20px;
+        position: relative;
+        flex: 0 0 auto;
+        background-color: var(--background-d11colorbgwarninglighter);
+        border-radius: 10px;
+      }
+      .frame .text-wrapper-2 {
+        position: relative;
+        width: fit-content;
+        font-weight: 500;
+        color: var(--alias-tokens-color-decorative1-text-4);
+        font-size: 14px;
+        letter-spacing: 0.02em;
+        line-height: normal;
+      }
+      /* Hero placeholder — dimension box */
+      .hero-placeholder {
+        flex: 0 0 320px;
+        width: 320px;
+        height: 320px;
+        position: relative;
+        background: rgba(95, 0, 192, 0.03);
+        border: 1.5px dashed #C9B8E8;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      /* Crosshair lines */
+      .hp-line {
+        position: absolute;
+        background: rgba(95, 0, 192, 0.08);
+        pointer-events: none;
+      }
+      .hp-line-h {
+        width: 100%;
+        height: 1px;
+        top: 50%;
+        left: 0;
+      }
+      .hp-line-v {
+        height: 100%;
+        width: 1px;
+        left: 50%;
+        top: 0;
+      }
+
+      /* Corner L-brackets */
+      .hp-corner {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-color: #97A4B8;
+        border-style: solid;
+        pointer-events: none;
+      }
+      .hp-corner-tl { top: 12px; left: 12px;  border-width: 1.5px 0 0 1.5px; }
+      .hp-corner-tr { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; }
+      .hp-corner-bl { bottom: 12px; left: 12px;  border-width: 0 0 1.5px 1.5px; }
+      .hp-corner-br { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; }
+
+      /* Dimension label in center */
+      .hp-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid #E8D5FF;
+        border-radius: 8px;
+        padding: 8px 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .hp-label span {
+        font-size: 13px;
+        font-weight: 500;
+        color: #7D8BA2;
+        letter-spacing: 0.04em;
+      }
+
+      /* =============================================
+         Section 2 — Meta Row
+         ============================================= */
+      .cs-meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        width: 100%;
+      }
+      .cs-meta-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cs-meta-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_3);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .cs-meta-value {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(14px, 1.3vw, 16px);
+        font-weight: 500;
+        line-height: 1.55;
+      }
+
+      /* =============================================
+         Section 3 — Dark Slide (Phone Mockup)
+         ============================================= */
+      .cs-slide {
+        background: linear-gradient(305deg, #8C75AC 0%, #1F1439 100%);
+        border-radius: 48px;
+        padding: 80px 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        width: 100%;
+        overflow: hidden;
+      }
+      .cs-slide-phones {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .cs-phone-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        flex: 0 0 auto;
+      }
+      .cs-phone-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cs-phone-label img {
+        width: 48px;
+        height: 48px;
+      }
+      .cs-phone-label span {
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .cs-phone-badge {
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .cs-phone-caption {
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+        color: rgba(255,255,255,0.75);
+        max-width: 328px;
+        line-height: 1.5;
+      }
+      /* The phone frame itself stays fixed at 360×720 — it's a UI mockup */
+      .cs-phone-scroll-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        padding-bottom: 8px;
+      }
+      .cs-phone-scroll-inner {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: center;
+        min-width: max-content;
+        padding: 8px 4px;
+      }
+
+      /* Showcase — single centered phone on dark backdrop */
+      .cs-showcase-phone-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 16px 0 8px;
+      }
+      .cs-showcase-phone {
+        width: 300px;
+        background: #F2F3F7;
+        border-radius: 36px;
+        overflow: hidden;
+        box-shadow: 0 32px 96px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(255,255,255,0.14);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+      }
+      .cs-sp-statusbar {
+        background: #111111;
+        padding: 9px 16px 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .cs-sp-statusbar-icons {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+      .cs-sp-navbar {
+        background: #111111;
+        padding: 4px 14px 10px;
+        color: rgba(255,255,255,0.85);
+        font-size: 18px;
+        line-height: 1;
+      }
+      .cs-sp-body {
+        background: #F2F3F7;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 24px;
+      }
+      .cs-sp-header-area {
+        background: white;
+        padding: 16px 14px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        border-bottom: 1px solid #F0F0F2;
+      }
+      .cs-sp-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--Color-accent1-bg_5);
+        text-align: center;
+        line-height: 1.3;
+      }
+      .cs-sp-verified-badge {
+        font-size: 10.5px;
+        color: #5F00C0;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .cs-sp-benefits {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        padding: 10px 0;
+      }
+      .cs-sp-benefit {
+        background: #F7F8FA;
+        border-radius: 6px;
+        padding: 10px 10px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        overflow: hidden;
+        min-height: 60px;
+        position: relative;
+      }
+      .cs-sp-benefit--wide {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        min-height: 120px;
+      }
+      .cs-sp-benefit-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.3;
+      }
+      .cs-sp-benefit-img {
+        position: absolute;
+        bottom: 6px;
+        right: 6px;
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .cs-sp-benefit--wide .cs-sp-benefit-img {
+        width: 56px;
+        height: 56px;
+      }
+      .cs-sp-divider-area {
+        background: white;
+        padding: 12px 14px 0;
+        margin-top: 6px;
+      }
+      .cs-sp-steps-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+        margin-bottom: 8px;
+      }
+      .cs-sp-progress-bar {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 14px;
+      }
+      .cs-sp-progress-seg {
+        height: 2.5px;
+        flex: 1;
+        border-radius: 2px;
+      }
+      .cs-sp-progress-seg.on  { background: #5F00C0; }
+      .cs-sp-progress-seg.off { background: #E0E3E8; }
+      .cs-sp-step {
+        background: white;
+        padding: 12px 14px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .cs-sp-step + .cs-sp-step {
+        border-top: 1px solid #F0F0F2;
+      }
+      .cs-sp-step-num {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #5F00C0;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .cs-sp-step--inactive .cs-sp-step-num {
+        background: #D0D5DD;
+      }
+      .cs-sp-step-inner {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .cs-sp-step-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+      }
+      .cs-sp-step--inactive .cs-sp-step-title { color: var(--Color-neutral-text_3); }
+      .cs-sp-step-desc {
+        font-size: 11px;
+        color: #667085;
+        line-height: 1.4;
+      }
+      .cs-sp-step-desc u { text-decoration-color: var(--Color-neutral-text_3); }
+      .cs-sp-share-btn {
+        margin-top: 10px;
+        background: var(--Color-accent1-bg_5);
+        color: white;
+        border-radius: 5px;
+        padding: 9px 10px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* New-user intro card inside the slide */
+      .cs-intro-card {
+        background: var(--Color-neutral-bg_3);
+        box-shadow: 0px 4px 16px 6px rgba(32, 44, 61, 0.16);
+        border-radius: 22px;
+        outline: 16px rgba(120, 109, 152, 0.50) solid;
+        width: 360px;
+        height: 720px;
+        position: relative;
+        overflow: hidden;
+        flex: 0 0 auto;
+      }
+
+      /* =============================================
+         Section 4 — Key Contributions & Impact
+         ============================================= */
+      .cs-contributions {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 40px 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 60px;
+        width: 100%;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .cs-contributions-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      .cs-col-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_3);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .cs-items {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      .cs-item-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(15px, 1.3vw, 17px);
+        font-weight: 600;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      .cs-item-body {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 400;
+        line-height: 1.55;
+      }
+
+      /* =============================================
+         Section 5 — Background / Section heading pattern
+         ============================================= */
+      .cs-section-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+      }
+      .cs-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-decorative1-text_4);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 12px;
+      }
+      .cs-h2 {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      .cs-subtitle {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(15px, 1.4vw, 18px);
+        font-weight: 400;
+        width: 100%;
+        line-height: 1.65;
+        max-width: 72ch;
+      }
+
+      /* =============================================
+         Section 6 — Platforms (scrollable cards)
+         ============================================= */
+      .cs-platforms {
+        display: flex;
+        gap: 32px;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .cs-platform-card {
+        flex: 1;
+        padding: 32px;
+        border-radius: 32px;
+        outline: 1px var(--Color-neutral-border_5) solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        min-width: 0;
+      }
+
+      /* =============================================
+         Section 7 — Future Callout
+         ============================================= */
+      .cs-future-callout {
+        background: linear-gradient(127deg, #F8F0FF 0%, rgba(248, 240, 255, 0) 100%);
+        border-radius: 32px;
+        padding: 56px 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+        width: 100%;
+      }
+      .cs-future-title {
+        color: var(--Color-decorative1-text_4);
+        font-size: clamp(22px, 2.8vw, 36px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      .cs-future-sub {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(14px, 1.3vw, 17px);
+        font-weight: 400;
+        text-align: center;
+        line-height: 1.65;
+        max-width: 60ch;
+      }
+      .cs-future-highlight {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      /* =============================================
+         Section 8 — Industry / Numbered cards
+         ============================================= */
+      
+      
+      
+      
+      
+      
+      
+      .cs-number {
+        color: rgba(95,0,192,0.15);
+        font-size: clamp(40px, 4vw, 64px);
+        font-weight: 800;
+        flex-shrink: 0;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .cs-card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .cs-card-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(15px, 1.3vw, 18px);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .cs-card-body {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 400;
+        line-height: 1.65;
+      }
+      .cs-card-badges {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .cs-badge-outlined {
+        padding: 12px 16px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .cs-badge-title {
+        font-size: clamp(13px, 1.1vw, 16px);
+        font-weight: 700;
+        text-align: center;
+        color: black;
+      }
+      .cs-badge-sub {
+        font-size: 11px;
+        font-weight: 400;
+        color: black;
+        text-align: center;
+      }
+
+      /* =============================================
+         Section 9 — Quote
+         ============================================= */
+      .cs-quote {
+        text-align: left;
+        color: #3F047C;
+        font-size: clamp(17px, 1.6vw, 22px);
+        font-weight: 300;
+        font-style: italic;
+        width: 100%;
+        line-height: 1.6;
+        border-left: 3px solid #5F00C0;
+        padding-left: 32px;
+        max-width: 70ch;
+      }
+
+      /* =============================================
+         Section 10 — Problem Cards Grid
+         ============================================= */
+      .cs-problem-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+        width: 100%;
+      }
+      .cs-problem-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 46px;
+        width: 100%;
+      }
+      .cs-problem-card {
+        background: #F8F0FF;
+        border-radius: 20px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+        box-shadow: 0 2px 12px rgba(95,0,192,0.06);
+      }
+      .cs-problem-icon {
+        padding: 12px;
+        background: #5F00C0;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+      }
+      .cs-problem-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(14px, 1.2vw, 16px);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .cs-problem-body {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1vw, 14px);
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      .cs-problem-tag {
+        padding: 6px 12px;
+        background: var(--Schemes-On-Primary-Fixed);
+        border-radius: 6px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        align-self: flex-start;
+      }
+      .cs-problem-tag span {
+        color: #F2F2F2;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+
+      /* =============================================
+         Observations sidebar
+         ============================================= */
+      .cs-observations {
+        display: flex;
+        gap: 65px;
+        align-items: flex-start;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+      .cs-obs-highlight {
+        background: linear-gradient(139deg, #FFF1EB 0%, rgba(255, 241, 235, 0) 100%);
+        border-radius: 30px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        flex: 0 0 auto;
+        min-width: 180px;
+      }
+      .cs-obs-big {
+        color: var(--Color-alert-text_3);
+        font-size: clamp(32px, 3.2vw, 48px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .cs-obs-caption {
+        color: #282D46;
+        font-size: clamp(12px, 1vw, 14px);
+        font-weight: 500;
+        line-height: 1.4;
+        text-align: center;
+      }
+      .cs-obs-rows {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-width: 260px;
+      }
+      .cs-obs-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #F0F3F7;
+      }
+      .cs-obs-row:last-child { border-bottom: none; padding-bottom: 0; }
+      .cs-obs-row-label {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 400;
+        line-height: 1.5;
+      }
+      .cs-obs-row-value {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 700;
+        line-height: 1.5;
+        flex-shrink: 0;
+      }
+
+      /* =============================================
+         Section 11 — Goals
+         ============================================= */
+      .cs-goals-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 46px;
+        width: 100%;
+      }
+      .cs-goal-card {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .cs-goal-card.compliance {
+        border-top: 3px solid var(--Color-accent1-bg_4);
+      }
+      .cs-goal-card.business {
+        border-top: 3px solid #2B6DD8;
+      }
+      .cs-goal-card.users {
+        border-top: 3px solid #5F00C0;
+      }
+      .cs-goal-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(15px, 1.3vw, 17px);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .cs-goal-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-self: stretch;
+        align-items: center;
+      }
+      .cs-goal-item {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 400;
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      /* =============================================
+         User journey flow
+         ============================================= */
+      .cs-flow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 500;
+        color: var(--Color-neutral-text_7);
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 12px;
+        padding: 16px 24px;
+      }
+      .cs-flow .danger { color: var(--Text-Danger-Secondary); }
+
+      /* =============================================
+         Responsive
+         ============================================= */
+      @media (max-width: 1024px) {
+        .page-wrapper { padding: 48px 32px; gap: 80px; }
+        .page-wrapper > section:not(#hero) { gap: 56px; }
+
+        /* Hero */
+        .frame { gap: 48px; }
+        .frame .div { max-width: calc(100% - 320px); }
+        .hero-placeholder { flex: 0 0 300px; width: 300px; height: 260px; }
+
+        .cs-meta { grid-template-columns: repeat(3, 1fr); }
+        .cs-contributions { flex-direction: column; }
+        .cs-problem-grid { grid-template-columns: repeat(2, 1fr); }
+        .cs-goals-grid { grid-template-columns: 1fr 1fr; }
+        .cs-platforms { flex-direction: column; }
+        
+        
+        
+        .cs-phase-cards { grid-template-columns: 1fr 1fr; }
+        .cs-final-solution-banner { padding: 56px 40px; }
+      }
+      @media (max-width: 1024px) and (min-width: 768px) {
+        .cs-platform-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .cs-platform-name { font-size: 18px; }
+      }
+
+      @media (max-width: 767px) {
+        .page-wrapper { padding: 40px 20px; gap: 64px; }
+        .page-wrapper > section:not(#hero) { gap: 40px; }
+
+        /* Hero */
+        .frame { flex-direction: column; align-items: center; gap: 32px; }
+        .frame .div { width: 100%; max-width: 100%; }
+        .frame .div-3, .frame .div-2 { width: 100%; }
+        .frame .transforming { width: 100%; }
+        .frame .div-4 { gap: 12px; }
+        .hero-placeholder { flex: none; width: 100%; height: 220px; }
+
+        .cs-meta { grid-template-columns: 1fr; gap: 20px; }
+        .cs-contributions { padding: 32px 24px; flex-direction: column; }
+        .cs-problem-grid { grid-template-columns: 1fr; }
+        .cs-problem-grid-2 { grid-template-columns: 1fr; }
+        .cs-goals-grid { grid-template-columns: 1fr; }
+        
+        .cs-observations { flex-direction: column; gap: 32px; }
+        .cs-slide { padding: 40px 24px; border-radius: 24px; }
+        
+        .cs-platforms { flex-direction: column; }
+        .cs-platform-card { padding: 20px; }
+        .cs-future-callout { padding: 40px 24px; }
+        
+        .cs-platform-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+        .ch-insight-grid { grid-template-columns: 1fr; }
+        .ch-impact-row { grid-template-columns: 1fr; }
+        .sol-framework-nav { gap: 8px; }
+        .sol-screen-grid.three { grid-template-columns: 1fr 1fr; }
+        .sol-ps-row { grid-template-columns: 1fr; }
+        .sol-arrow { display: none; }
+        .sol-stat-row { grid-template-columns: 1fr; }
+        .cs-phase-cards { grid-template-columns: 1fr; }
+        .cs-two-col-phone { flex-direction: column; align-items: center; }
+        .cs-final-solution-banner { padding: 40px 24px; border-radius: 24px; }
+        .cs-principle-slides { flex-direction: column; }
+        .cs-principle-slide { min-height: 100px; }
+        .cs-why-matters { padding: 40px 24px; border-radius: 20px; }
+        .cs-regulatory-callout { padding: 40px 24px; border-radius: 20px; }
+      }
+
+      /* =============================================
+         PART 2 — New Classes
+         ============================================= */
+
+      /* Phone frame scaling — outer clamps width, inner is fixed 360×720 */
+      .cs-phone-frame {
+        width: clamp(200px, 28vw, 320px);
+        aspect-ratio: 1 / 2;
+        position: relative;
+        overflow: hidden;
+        border-radius: 22px;
+        flex-shrink: 0;
+        outline: 3px rgba(32,44,61,0.15) solid;
+        background: var(--Color-neutral-bg_3, #F0F3F7);
+      }
+      .cs-phone-frame-inner {
+        position: absolute;
+        top: 0; left: 0;
+        width: 360px;
+        height: 720px;
+        transform-origin: top left;
+      }
+
+      /* Platform comparison grid — verification landscape */
+      .cs-platform-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+      }
+      .cs-platform-card {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 28px 24px 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.06);
+      }
+      .cs-platform-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        align-self: flex-start;
+      }
+      .cs-platform-name {
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--Color-neutral-text_7);
+        letter-spacing: -0.01em;
+      }
+      .cs-platform-phone {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #F0F3F7;
+        outline: 2px solid rgba(32,44,61,0.12);
+        position: relative;
+      }
+      .cs-platform-phone img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .cs-platform-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+      }
+      .cs-platform-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2B6DD8;
+        letter-spacing: 0.01em;
+      }
+      .cs-platform-label.geo {
+        color: #C17900;
+      }
+      .cs-platform-desc {
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.55;
+      }
+      .cs-platform-desc strong {
+        font-weight: 700;
+        color: var(--Color-neutral-text_7);
+      }
+
+
+
+      /* Industry section — 2-col split layout */
+      
+      
+      
+      /* Stacked doc image effect */
+      
+      
+      
+      
+      
+      
+      /* Numbered card — flat row style matching reference */
+      
+      
+
+
+      /* =============================================
+         Section 08 — Industry (Redesigned)
+         ============================================= */
+      .cs-industry-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 40px 0;
+      }
+      .cs-industry-heading {
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .cs-industry-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--Color-neutral-text_8, #7D8BA2);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .cs-industry-h2 {
+        font-size: 26px;
+        font-weight: 500;
+        color: var(--Color-neutral-text_7);
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+      }
+      .cs-industry-lede {
+        font-size: 14px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.5;
+      }
+      /* Zone A: Context Bar */
+      .cs-context-bar-wrapper {
+        margin-bottom: 32px;
+      }
+      .cs-context-bar {
+        background: var(--Color-neutral-bg_3, #F0F3F7);
+        border-radius: 16px;
+        padding: 16px 24px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 8px;
+      }
+      .cs-context-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-right: 20px;
+        padding-left: 20px;
+        border-right: 0.5px solid var(--Color-neutral-border_4, #CFD5DE);
+      }
+      .cs-context-cell:first-child { padding-left: 0; }
+      .cs-context-cell:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+      .cs-context-num {
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.1;
+      }
+      .cs-context-lbl {
+        font-size: 12px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.3;
+      }
+      .cs-context-caption {
+        font-size: 13px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.5;
+        padding: 0 4px;
+      }
+      /* Zone B: Constraints */
+      .cs-constraint-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+      .cs-constraint-card {
+        background: #FFFFFF;
+        border: 1px solid var(--Color-neutral-border_3, #DFE3E8);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .cs-constraint-card.accent-coral {
+        border-left: 2px solid #D85A30;
+      }
+      .cs-constraint-top {
+        padding: 10px 16px 0;
+      }
+      .cs-constraint-body {
+        padding: 12px 16px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .cs-constraint-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.3;
+      }
+      .cs-constraint-desc {
+        font-size: 13px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.65;
+      }
+      .cs-constraint-footer {
+        border-top: 0.5px solid var(--Color-neutral-border_3, #DFE3E8);
+        background: var(--Color-neutral-bg_3, #F0F3F7);
+        padding: 10px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cs-constraint-impl {
+        font-size: 11px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.4;
+      }
+      .cs-proof-chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .cs-proof-pill {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #FFFFFF;
+        border: 0.5px solid var(--Color-neutral-border_4, #CFD5DE);
+        color: var(--Color-neutral-text_7);
+      }
+      /* Tag System */
+      .cs-tag-pill {
+        display: inline-flex;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .cs-tag-infrastructure { background: #F3E8FF; color: #6B21A8; }
+      .cs-tag-regulatory { background: #FFFBEB; color: #B45309; }
+      .cs-tag-timing { background: #FFE4E6; color: #9F1239; }
+      .cs-tag-decision { background: #EFF6FF; color: #1E40AF; }
+      
+      /* Zone C: Regulation Image */
+      .cs-reg-evidence {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .cs-reg-evidence img {
+        width: 100%;
+        max-height: 180px;
+        border-radius: 8px;
+        object-fit: cover;
+        display: block;
+        border: 1px solid rgba(0,0,0,0.06);
+      }
+      .cs-reg-caption {
+        font-size: 11px;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.3;
+      }
+      @media (max-width: 600px) {
+        .cs-context-bar {
+          grid-template-columns: 1fr;
+          gap: 16px;
+          padding: 20px;
+        }
+        .cs-context-cell {
+          padding: 0;
+          border-right: none;
+          border-bottom: 0.5px solid var(--Color-neutral-border_4);
+          padding-bottom: 12px;
+        }
+        .cs-context-cell:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+      /* Phase cards — Navigating Uncertainty */
+      .cs-phase-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        width: 100%;
+      }
+      .cs-phase-card {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 28px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .cs-phase-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(15px, 1.3vw, 17px);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .cs-phase-body {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 400;
+        line-height: 1.55;
+        flex: 1;
+      }
+      .cs-phase-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .cs-phase-badge {
+        padding: 5px 14px;
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        color: var(--Color-neutral-text_5);
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      /* Final Solution banner — light purple bg */
+      .cs-final-solution-banner {
+        background: #F9F4FF;
+        border-radius: 40px;
+        padding: 80px 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 64px;
+        width: 100%;
+      }
+      .cs-final-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        border: 1.5px solid #202C3D;
+        border-radius: 8px;
+        color: var(--Color-neutral-text_7);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: rotate(-2deg);
+      }
+      .cs-final-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 700;
+        text-align: center;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+
+      /* Two-column layout: content + phone */
+      .cs-two-col-phone {
+        display: flex;
+        gap: 48px;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .cs-two-col-content {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Redesigned flow steps */
+      .cs-flow-step {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        background: #EADDFF;
+      }
+      .cs-flow-step.green { background: #E8FFDD; }
+      .cs-flow-step-dot {
+        width: 12px;
+        height: 12px;
+        background: #202C3D;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .cs-flow-step-text {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(13px, 1vw, 15px);
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .cs-flow-connector {
+        width: 2px;
+        height: 20px;
+        background: #C9B8E8;
+        margin-left: 37px;
+      }
+      .cs-flow-note {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(12px, 0.9vw, 13px);
+        font-weight: 400;
+        padding: 0 14px;
+        font-style: italic;
+      }
+
+      /* Big stat number */
+      .cs-stat-big {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(22px, 2.4vw, 34px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      /* Annotation callout card — purple tint */
+      .cs-annotation-card {
+        background: rgba(248,240,255,0.7);
+        border: 1px solid #E8D5FF;
+        border-radius: 16px;
+        padding: 20px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .cs-annotation-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--Color-decorative1-text_4);
+      }
+      .cs-annotation-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(13px, 1vw, 16px);
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .cs-annotation-body {
+        font-size: clamp(13px, 1vw, 15px);
+        font-weight: 400;
+        color: var(--Color-neutral-text_5);
+        line-height: 1.65;
+      }
+
+      /* Why This Matters — purple gradient callout */
+      .cs-why-matters {
+        background: linear-gradient(127deg, rgba(248,240,255,1) 0%, rgba(248,240,255,0) 100%);
+        border-radius: 32px;
+        padding: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        text-align: center;
+        width: 100%;
+      }
+      .cs-why-matters-title {
+        font-weight: 700;
+        color: var(--Color-decorative1-text_4);
+        font-size: clamp(24px, 3vw, 38px);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      .cs-why-matters-body {
+        font-weight: 400;
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(14px, 1.3vw, 17px);
+        line-height: 1.65;
+        max-width: 60ch;
+        text-align: center;
+      }
+
+      /* Design principles slides */
+      .cs-principle-slides {
+        display: flex;
+        gap: 16px;
+        align-items: stretch;
+        width: 100%;
+      }
+      .cs-principle-slide {
+        flex: 1;
+        min-height: 200px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(270deg, rgba(140,117,172,1) 0%, rgba(31,20,57,1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        cursor: default;
+      }
+      .cs-principle-slide:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(31,20,57,0.45), 0 6px 12px rgba(31,20,57,0.20);
+      }
+      .cs-principle-label {
+        font-weight: 700;
+        color: #ffffff;
+        font-size: clamp(16px, 2vw, 24px);
+        text-align: center;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      /* Regulatory Reality closing callout */
+      .cs-regulatory-callout {
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .cs-regulatory-title {
+        color: var(--Color-neutral-text_7);
+        font-size: clamp(22px, 2.5vw, 32px);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.25;
+      }
+      .cs-regulatory-body {
+        color: var(--Color-neutral-text_5);
+        font-size: clamp(15px, 1.4vw, 18px);
+        font-weight: 400;
+        line-height: 1.65;
+        max-width: 60ch;
+      }
+
+      /* ─── Challenge / Problem-space section ─── */
+      .ch-section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--Color-neutral-text_3);
+        margin-bottom: 16px;
+      }
+      .ch-divider {
+        height: 1px;
+        background: #E8ECF2;
+        margin: 40px 0;
+      }
+
+      /* Journey map */
+      .ch-journey-outer {
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 24px 20px 18px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .ch-journey-steps {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        min-width: 640px;
+      }
+      .ch-j-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+      }
+      .ch-j-node {
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(12px, 1vw, 14px);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .ch-j-node.neutral {
+        background: #FFFFFF;
+        border: 1px solid #D0D5DD;
+        color: var(--Color-neutral-text_5);
+      }
+      .ch-j-node.pain {
+        background: #FCEBEB;
+        border: 1px solid #F09595;
+        color: #791F1F;
+      }
+      .ch-j-connector {
+        display: flex;
+        align-items: center;
+        padding-top: 16px;
+        flex-shrink: 0;
+        color: var(--Color-neutral-text_3);
+      }
+      .ch-j-connector svg { width: 14px; height: 14px; }
+      /* Mini phone in journey */
+      .ch-phone-frame {
+        width: 72px;
+        height: 120px;
+        border-radius: 10px;
+        border: 1.5px solid #D0D5DD;
+        background: #FFFFFF;
+        overflow: hidden;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .ch-phone-frame.pain-frame {
+        border-color: #E24B4A;
+      }
+      .ch-phone-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        background: #F8FBFF;
+      }
+      .ch-phone-frame.pain-frame .ch-phone-screen {
+        background: #FCEBEB;
+      }
+      .ch-ph-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        border: 1px solid #D0D5DD;
+      }
+      .ch-phone-frame.pain-frame .ch-ph-icon {
+        border-color: #F09595;
+      }
+      .ch-ph-label {
+        font-size: 8px;
+        color: var(--Color-neutral-text_3);
+        text-align: center;
+        line-height: 1.3;
+        padding: 0 4px;
+      }
+      .ch-phone-frame.pain-frame .ch-ph-label {
+        color: #A32D2D;
+      }
+      .ch-j-step-label {
+        font-size: clamp(11px, 0.9vw, 13px);
+        color: var(--Color-neutral-text_3);
+        text-align: center;
+      }
+      .ch-j-step-label.pain {
+        color: #E24B4A;
+        font-weight: 600;
+      }
+      /* Journey legend */
+      .ch-j-legend {
+        display: flex;
+        gap: 20px;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid #E8ECF2;
+      }
+      .ch-j-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: clamp(12px, 1vw, 13px);
+        color: var(--Color-neutral-text_5);
+      }
+      .ch-leg-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      .ch-leg-dot.n { background: #FFFFFF; border: 1px solid #D0D5DD; }
+      .ch-leg-dot.p { background: #FCEBEB; border: 1px solid #F09595; }
+
+      /* Insight cards */
+      .ch-insight-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ch-i-card {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .ch-screen-evidence {
+        background: #F8FBFF;
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px;
+        position: relative;
+        border-bottom: 1px solid #E8ECF2;
+      }
+      .ch-evidence-phone {
+        width: 76px;
+        height: 132px;
+        border-radius: 9px;
+        border: 1.5px solid #D0D5DD;
+        background: #FFFFFF;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .ch-ep-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        background: #F0F3F7;
+      }
+      .ch-ep-label {
+        font-size: 8px;
+        color: var(--Color-neutral-text_3);
+        text-align: center;
+        line-height: 1.3;
+        padding: 0 5px;
+      }
+      .ch-ep-bar {
+        height: 2px;
+        width: 36px;
+        border-radius: 1px;
+        background: #D0D5DD;
+      }
+      .ch-screen-caption {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        color: var(--Color-neutral-text_3);
+      }
+      .ch-i-card-body {
+        padding: 18px 18px 0;
+        flex: 1;
+      }
+      .ch-i-flag {
+        display: inline-flex;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 3px 9px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      .ch-flag-r { background: #FCEBEB; color: #791F1F; border: 1px solid #F7C1C1; }
+      .ch-flag-o { background: #FAEEDA; color: #633806; border: 1px solid #FAC775; }
+      .ch-flag-b { background: #E6F1FB; color: #0C447C; border: 1px solid #B5D4F4; }
+      .ch-i-title {
+        font-size: clamp(15px, 1.3vw, 18px);
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      .ch-i-body {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+        line-height: 1.65;
+      }
+      .ch-i-footer {
+        margin-top: 14px;
+        padding: 12px 18px;
+        background: #F8FBFF;
+        border-top: 1px solid #E8ECF2;
+        font-size: clamp(12px, 1vw, 14px);
+        color: var(--Color-neutral-text_3);
+      }
+      .ch-i-footer span {
+        font-weight: 600;
+        color: var(--Color-neutral-text_5);
+      }
+
+      /* Impact row */
+      .ch-impact-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ch-impact-hero {
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 28px 28px;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .ch-impact-num {
+        font-size: clamp(48px, 5.5vw, 72px);
+        font-weight: 700;
+        line-height: 1;
+        color: #A32D2D;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+      }
+      .ch-impact-lbl {
+        font-size: clamp(14px, 1.3vw, 17px);
+        color: var(--Color-neutral-text_5);
+        line-height: 1.55;
+        margin-bottom: 14px;
+      }
+      .ch-impact-sub {
+        font-size: clamp(12px, 1vw, 14px);
+        color: var(--Color-neutral-text_3);
+      }
+      .ch-impact-chart {
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        padding: 20px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+        box-shadow: 0 2px 16px rgba(32,44,61,0.07);
+      }
+      .ch-brow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #E8ECF2;
+      }
+      .ch-brow:last-child { border-bottom: none; }
+      .ch-brow-lbl {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+      }
+      .ch-brow-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .ch-bbar-bg {
+        width: 100px;
+        height: 4px;
+        background: #E8ECF2;
+        border-radius: 2px;
+      }
+      .ch-bbar-fill {
+        height: 4px;
+        border-radius: 2px;
+        background: #E24B4A;
+      }
+      .ch-brow-pct {
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+        min-width: 32px;
+        text-align: right;
+      }
+
+
+      /* ─── Problem space: 3-col stat card ─── */
+      .ch-stats-card {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        overflow: hidden;
+        box-shadow: 0 1px 8px rgba(32,44,61,0.05);
+      }
+      .ch-stat-col {
+        padding: 24px 28px;
+        border-right: 1px solid #E8ECF2;
+      }
+      .ch-stat-col:last-child { border-right: none; }
+      .ch-stat-num {
+        font-size: clamp(26px, 2.8vw, 36px);
+        font-weight: 700;
+        color: #A32D2D;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 6px;
+      }
+      .ch-stat-primary {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+        margin-bottom: 3px;
+      }
+      .ch-stat-secondary {
+        font-size: clamp(11px, 0.9vw, 13px);
+        color: var(--Color-neutral-text_3);
+      }
+      /* Problem space: pull quote */
+      .ch-pull-quote {
+        border-left: 3px solid #8A9AB5;
+        padding: 4px 0 4px 24px;
+        margin: 0;
+      }
+      .ch-pull-quote p {
+        font-size: clamp(16px, 1.5vw, 20px);
+        font-style: italic;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.65;
+        margin-bottom: 12px;
+      }
+      .ch-pull-quote footer {
+        font-size: clamp(12px, 1vw, 14px);
+        color: var(--Color-neutral-text_3);
+      }
+      @media (max-width: 767px) {
+        .ch-stats-card { grid-template-columns: 1fr; }
+        .ch-stat-col { border-right: none; border-bottom: 1px solid #E8ECF2; }
+        .ch-stat-col:last-child { border-bottom: none; }
+      }
+
+      /* ─── Solution section redesign ─── */
+      .sol-hero {
+        text-align: center;
+        padding: 48px 40px;
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+      }
+      .sol-hero-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: #5F00C0;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .sol-hero-title {
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 700;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+      .sol-hero-sub {
+        font-size: clamp(14px, 1.3vw, 16px);
+        color: var(--Color-neutral-text_5);
+        line-height: 1.65;
+        max-width: 60ch;
+        margin: 0 auto;
+      }
+      /* Framework nav pills */
+      .sol-framework-nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .sol-fnav-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        font-size: clamp(13px, 1.1vw, 15px);
+        font-weight: 500;
+        color: var(--Color-neutral-text_5);
+      }
+      .sol-fnav-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .sol-fnav-dot.p1 { background: #5F00C0; }
+      .sol-fnav-dot.p2 { background: var(--Color-accent1-bg_5); }
+      .sol-fnav-dot.p3 { background: #2B6DD8; }
+      .sol-fnav-dot.p4 { background: #C17900; }
+      /* Section header row: num circle + label + title + desc */
+      .sol-section-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .sol-section-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #F0F3F7;
+        border: 1px solid #E8ECF2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_5);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .sol-section-meta { flex: 1; }
+      .sol-section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: var(--Color-neutral-text_3);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .sol-section-title {
+        font-size: clamp(22px, 2.5vw, 32px);
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+        margin-bottom: 6px;
+      }
+      .sol-section-desc {
+        font-size: clamp(15px, 1.4vw, 18px);
+        color: var(--Color-neutral-text_5);
+        line-height: 1.65;
+      }
+      /* Solution block card */
+      .sol-block {
+        border: 1px solid #E8ECF2;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      /* Metric bar at top of each block */
+      .sol-metric-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 24px;
+        background: #F8FBFF;
+        border-bottom: 1px solid #E8ECF2;
+        flex-wrap: wrap;
+      }
+      .sol-metric-pill {
+        font-size: clamp(14px, 1.2vw, 16px);
+        font-weight: 600;
+        padding: 5px 14px;
+        border-radius: 20px;
+      }
+      .sol-metric-pill.green { background: #E6F7E7; color: #0F6E56; }
+      .sol-metric-pill.purple { background: #F0EEFF; color: #3C1E8A; }
+      .sol-metric-pill.blue { background: #E7F3FF; color: #2B6DD8; }
+      .sol-metric-label {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+      }
+      /* Tag chip (UX / Flow / Perf) */
+      .sol-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .sol-tag.ux     { background: #F0EEFF; color: #3C1E8A; }
+      .sol-tag.flow   { background: #E1F5EE; color: #0F6E56; }
+      .sol-tag.perf   { background: #E7F3FF; color: #2B6DD8; }
+      /* Before → After row */
+      .sol-ps-row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 16px;
+        align-items: center;
+        padding: 20px 24px;
+      }
+      .sol-ps-card {
+        background: #F8FBFF;
+        border-radius: 12px;
+        padding: 18px 20px;
+        min-height: 80px;
+      }
+      .sol-ps-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .sol-ps-label.problem { color: #993C1D; }
+      .sol-ps-label.solution { color: #0F6E56; }
+      .sol-ps-text {
+        font-size: clamp(14px, 1.2vw, 16px);
+        color: var(--Color-neutral-text_7);
+        line-height: 1.6;
+      }
+      .sol-arrow {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #C0C8D4;
+      }
+      /* Screen placeholder slots */
+      .sol-screen-grid {
+        padding: 0 20px 20px;
+        display: grid;
+        gap: 12px;
+      }
+      .sol-screen-grid.two   { grid-template-columns: 1fr 1fr; }
+      .sol-screen-grid.three { grid-template-columns: repeat(3, 1fr); }
+      .sol-screen-slot {
+        background: #F8FBFF;
+        border: 1px solid #E8ECF2;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 130px;
+        padding: 20px 16px;
+        text-align: center;
+      }
+      .sol-screen-icon {
+        width: 32px;
+        height: 22px;
+        border: 1.5px solid #C0C8D4;
+        border-radius: 4px;
+        opacity: 0.5;
+      }
+      .sol-screen-caption {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+        font-weight: 500;
+      }
+      .sol-screen-label {
+        font-size: clamp(12px, 1vw, 14px);
+        color: var(--Color-neutral-text_3);
+      }
+      /* Step list (guided onboarding) */
+      .sol-step-list {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .sol-step-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .sol-step-dot-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .sol-step-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid #E8ECF2;
+        background: #F0F3F7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_5);
+        flex-shrink: 0;
+      }
+      .sol-step-dot.active {
+        background: #F0EEFF;
+        border-color: #B8AFEC;
+        color: #3C1E8A;
+      }
+      .sol-step-connector {
+        width: 1px;
+        height: 16px;
+        background: #E8ECF2;
+      }
+      .sol-step-body { flex: 1; padding-bottom: 4px; }
+      .sol-step-title {
+        font-size: clamp(15px, 1.3vw, 17px);
+        font-weight: 600;
+        color: var(--Color-neutral-text_7);
+      }
+      .sol-step-sub {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+        margin-top: 2px;
+        line-height: 1.55;
+      }
+      /* Outcome stat row at bottom of block */
+      .sol-stat-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 20px 24px;
+        background: #F8FBFF;
+        border-top: 1px solid #E8ECF2;
+      }
+      .sol-stat-card {
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 20px 20px;
+        border: 1px solid #E8ECF2;
+      }
+      .sol-stat-label {
+        font-size: clamp(13px, 1.1vw, 15px);
+        color: var(--Color-neutral-text_5);
+        margin-bottom: 6px;
+      }
+      .sol-stat-number {
+        font-size: clamp(28px, 3.2vw, 44px);
+        font-weight: 700;
+        color: var(--Color-neutral-text_7);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+      .sol-stat-delta {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 6px;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+      .sol-stat-delta.up { background: #E6F7E7; color: #0F6E56; }
+      /* Sub-section label inside a block */
+      .sol-sub-label {
+        padding: 14px 20px 4px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--Color-neutral-text_3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+
+      /* Part 2 responsive */
+
+
+    
+      /* ==========================================================
+         MYSTERY BOX AESTHETIC OVERRIDES (bikiron.in/mysterybox)
+         ========================================================== */
+      
+      /* Base Typography & Spacing */
+      html, body {
+        font-family: 'DM Sans', sans-serif;
+      }
+      .page-wrapper {
+        gap: 160px !important;
+      }
+      .page-wrapper > section:not(#hero) {
+        gap: 160px !important;
+      }
+      
+      /* Global Body Text Upgrade */
+      .cs-constraint-desc,
+      .cs-industry-lede,
+      .ch-i-text,
+      .ch-sol-desc,
+      .cs-meta-value,
+      .sol-section-desc,
+      .sol-step-desc,
+      .cs-phase-body,
+      p {
+        font-size: 18px !important;
+        line-height: 1.6 !important;
+        font-weight: 400 !important;
+      }
+
+      /* Section Headings */
+      .sol-section-title,
+      .cs-industry-h2,
+      .cs-why-title,
+      .cs-hero-title,
+      .sol-hero-title {
+        font-size: 48px !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.02em !important;
+        line-height: 1.1 !important;
+      }
+
+      /* Card Titles */
+      .cs-constraint-title,
+      .ch-i-title,
+      .cs-goal-title,
+      .cs-phase-title,
+      .sol-step-title {
+        font-size: 24px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+      }
+
+      /* Eyebrows, Labels, Numbers */
+      .cs-industry-eyebrow,
+      .sol-section-num,
+      .cs-meta-label,
+      .cs-goal-eyebrow {
+        font-size: 13px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.2em !important;
+        color: #6B7280 !important;
+        font-weight: 500 !important;
+        margin-bottom: 8px;
+        opacity: 1 !important; /* fixing ghost numbers if any remain */
+      }
+
+      /* Cards & Surfaces (Massive border radius & soft shadows) */
+      .cs-constraint-card,
+      .cs-meta,
+      .ch-i-card,
+      .cs-goal-card,
+      .cs-phase-card,
+      .sol-ps-card,
+      .cs-why-matters,
+      .cs-future-callout {
+        border-radius: 48px !important;
+        padding: 48px !important;
+        box-shadow: 0 24px 48px rgba(0,0,0,0.03) !important;
+        border: 1px solid rgba(0,0,0,0.04) !important;
+        background: #FFFFFF;
+      }
+      
+      /* Remove inner padding if we just blasted padding recursively on flex wrappers */
+      .cs-constraint-body, .cs-constraint-top, .cs-constraint-footer {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .cs-constraint-card {
+        padding: 40px !important;
+      }
+      .cs-constraint-footer {
+        border-top: 1px solid rgba(0,0,0,0.04) !important;
+        margin-top: 24px !important;
+        padding-top: 24px !important;
+        background: transparent !important;
+      }
+
+      /* Tags & Pills */
+      .cs-tag-pill,
+      .cs-proof-pill,
+      .sol-tag,
+      .ch-i-flag,
+      .cs-phase-badge {
+        border-radius: 100px !important;
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+      }
+
+      /* Context bar matching the aesthetic */
+      .cs-context-bar {
+        border-radius: 32px !important;
+        padding: 32px 48px !important;
+        box-shadow: 0 24px 48px rgba(0,0,0,0.02) !important;
+        border: 1px solid rgba(0,0,0,0.04) !important;
+      }
+      .cs-context-num {
+        font-size: 32px !important;
+      }
+
+      /* Mobile Adjustments */
+      @media (max-width: 768px) {
+        .page-wrapper { gap: 120px !important; }
+        .page-wrapper > section:not(#hero) { gap: 120px !important; }
+        
+        .cs-constraint-card,
+        .cs-meta,
+        .ch-i-card,
+        .cs-goal-card,
+        .cs-phase-card,
+        .sol-ps-card,
+        .cs-why-matters,
+        .cs-future-callout {
+          border-radius: 32px !important;
+          padding: 32px !important;
+        }
+
+        .sol-section-title,
+        .cs-industry-h2,
+        .cs-why-title,
+        .cs-hero-title,
+        .sol-hero-title {
+          font-size: 36px !important;
+        }
+      }
+
+
+      /* ----------------------------------------------------
+         HERO & SHOWCASE AESTHETICS (Purple Gradient Mockups)
+         ---------------------------------------------------- */
+      .cs-new-hero {
+        background: linear-gradient(180deg, #A48BBE 0%, #403250 100%);
+        border-radius: 48px;
+        padding: 80px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+      }
+      .cs-hero-title {
+        font-family: 'Editorial New', 'DM Sans', serif; /* Or matching font */
+        font-size: 64px !important;
+        font-weight: 500 !important;
+        letter-spacing: -0.02em !important;
+        line-height: 1.1 !important;
+        margin-bottom: 48px;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      }
+      .cs-hero-icon-container {
+        background: linear-gradient(135deg, #E6E1F0, #A48BBE);
+        border: 4px solid rgba(255,255,255,0.2);
+        border-radius: 24px;
+        padding: 24px;
+        margin-bottom: 48px;
+        box-shadow: 0 16px 32px rgba(0,0,0,0.3);
+      }
+      .cs-hero-icon {
+        color: #302640;
+        transform: scale(1.5);
+      }
+      .cs-hero-logo {
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 24px;
+        color: #FFFFFF;
+      }
+      .cs-hero-subtitle {
+        font-size: 18px !important;
+        line-height: 1.6 !important;
+        font-weight: 400 !important;
+        color: rgba(255,255,255,0.85) !important;
+        max-width: 800px;
+        margin-bottom: 40px;
+      }
+      .cs-hero-tags {
+        display: flex;
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+      }
+      .cs-hero-tags li {
+        background: #F0EEFF;
+        color: #6B21A8;
+        padding: 8px 24px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: lowercase;
+        letter-spacing: 0.02em;
+      }
+
+      /* Showcase / Prototype Holder */
+      .cs-prototype-container {
+        /* User asked to "remove the background and keep a placeholder image" */
+        background: transparent;
+        border: 2px dashed rgba(0,0,0,0.1);
+        border-radius: 48px;
+        padding: 24px;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+      .cs-prototype-placeholder {
+        background: #F8F9FA;
+        border-radius: 32px;
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .cs-prototype-text {
+        font-size: 16px;
+        color: var(--Color-neutral-text_3);
+        font-weight: 500;
+      }
+
+      /* Clean out old .page-wrapper top padding if any to fit the new massive hero */
+      .page-wrapper {
+        padding-top: 40px !important;
+      }
+
+</style>
+  </head>
+  <body>
+    <main class="page-wrapper">
+
+      <!-- ============================================================
+           SECTION 1 — Hero
+           ============================================================ -->
+      <section id="hero" class="cs-new-hero" aria-label="KYC Redesign Case Study">
+        <h1 class="cs-hero-title">Verification<br/>Revamp</h1>
+        
+        <div class="cs-hero-icon-container">
+          <img src="https://raw.githubusercontent.com/Bhavika-Maloo/case-study-assets/main/sheild.png" alt="Shield icon" class="cs-hero-icon" width="48" height="48" />
+        </div>
+
+        <div class="cs-hero-logo">
+          Dream11
+        </div>
+
+        <p class="cs-hero-subtitle">
+          Redesigning verification for 200M+ users at Dream11<br/>
+          Transforming fragmented KYC touch points into a unified, compliant experience.
+        </p>
+
+        <ul class="cs-hero-tags" aria-label="Key attributes">
+          <li>secure</li>
+          <li>compliant</li>
+          <li>frictionless</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================
+           SECTION 2 — Project Meta
+           ============================================================ -->
+      <section id="project-meta">
+      <div class="cs-meta">
+        <div class="cs-meta-col">
+          <div class="cs-meta-label">Project Type</div>
+          <div class="cs-meta-value">Redesign of KYC &amp; withdrawal verification for a fintech product</div>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-label">My Role</div>
+          <div class="cs-meta-value">Product Design</div>
+        </div>
+        <div class="cs-meta-col">
+          <div class="cs-meta-label">Cross Collaboration</div>
+          <div class="cs-meta-value">Product, Engineering, Research, Content, Data, Illustrations, Legal</div>
+        </div>
+      </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 3 — Dark Slide: Phone Mockups
+           ============================================================ -->
+      <section id="showcase">
+        <div class="cs-prototype-container">
+          <!-- Placeholder for working prototype -->
+          <div class="cs-prototype-placeholder">
+            <span class="cs-prototype-text">Drop your Figma / Framer prototype here</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 04 — Key Contributions & Impact
+           ============================================================ -->
+      <section id="contributions">
+
+      <div class="cs-contributions">
+        <div class="cs-contributions-col">
+          <div class="cs-col-label">Key Contributions</div>
+          <div class="cs-items">
+            <div>
+              <div class="cs-item-title">Recognized for business impact</div>
+              <div class="cs-item-body">Design directly drove verification completions and revenue.</div>
+            </div>
+            <div>
+              <div class="cs-item-title">User-first lens to compliance</div>
+              <div class="cs-item-body">Aligned product, engineering, and legal on a regulation-ready KYC flow.</div>
+            </div>
+            <div>
+              <div class="cs-item-title">Owned the design end-to-end</div>
+              <div class="cs-item-body">Highlighted internally for balancing RBI/UIDAI norms with a user-first approach.</div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-contributions-col">
+          <div class="cs-col-label">Impact</div>
+          <div class="cs-items">
+            <div>
+              <div class="cs-item-title">10M+ users enabled</div>
+              <div class="cs-item-body">Higher success rates let millions complete KYC smoothly and start playing.</div>
+            </div>
+            <div>
+              <div class="cs-item-title">Made KYC less painful</div>
+              <div class="cs-item-body">Reduced drop-offs and gave users more confidence in deposits and withdrawals.</div>
+            </div>
+            <div>
+              <div class="cs-item-title">Increased annual revenue</div>
+              <div class="cs-item-body">Fewer drop-offs → more deposits and withdrawals, while staying compliant.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 05 — Problem Space
+           ============================================================ -->
+      <section id="problem-space">
+
+        <!-- Header -->
+        <div class="sol-section-header" style="margin-bottom:32px;">
+          <div class="sol-section-num">01</div>
+          <div class="sol-section-meta">
+            <div class="sol-section-label">THE PROBLEM</div>
+            <div class="sol-section-title">The cost of friction</div>
+            <div class="sol-section-desc">15% of support tickets were KYC or withdrawal related. Users didn't just struggle — they felt the friction was deliberate.</div>
+          </div>
+        </div>
+
+        <!-- 3-col stats card -->
+        <div class="ch-stats-card">
+          <div class="ch-stat-col">
+            <p class="ch-stat-num">35 min</p>
+            <p class="ch-stat-primary">First withdrawal TAT (p90)</p>
+            <p class="ch-stat-secondary">Before redesign</p>
+          </div>
+          <div class="ch-stat-col">
+            <p class="ch-stat-num">15%</p>
+            <p class="ch-stat-primary">Of all support tickets</p>
+            <p class="ch-stat-secondary">KYC + withdrawal</p>
+          </div>
+          <div class="ch-stat-col">
+            <p class="ch-stat-num">~9,000</p>
+            <p class="ch-stat-primary">Tickets per week</p>
+            <p class="ch-stat-secondary">At peak load</p>
+          </div>
+        </div>
+
+        <!-- Pull quote -->
+        <blockquote class="ch-pull-quote">
+          <p><em>It's 7:20pm. IPL starts in 10 minutes. You've built your team, you tap "Join Contest" — and a verification screen appears. Five options. You don't know if you need one or all. You close the app.</em></p>
+          <footer>— What using the old flow felt like</footer>
+        </blockquote>
+
+        <!-- Journey map -->
+        <div class="ch-journey-outer">
+          <div class="ch-journey-steps">
+
+            <div class="ch-j-col">
+              <div class="ch-j-node neutral">Reg</div>
+              <div class="ch-phone-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label">Entry</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node neutral">Home</div>
+              <div class="ch-phone-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label">Browse</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node neutral">Contest</div>
+              <div class="ch-phone-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label">Explore</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node pain">KYC gate</div>
+              <div class="ch-phone-frame pain-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label pain">Drop-off</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node neutral">Gameplay</div>
+              <div class="ch-phone-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label">Play</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node pain">Location</div>
+              <div class="ch-phone-frame pain-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label pain">2nd gate</p>
+            </div>
+
+            <div class="ch-j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+            <div class="ch-j-col">
+              <div class="ch-j-node neutral">Withdraw</div>
+              <div class="ch-phone-frame">
+                <div class="ch-phone-screen">
+                  <div class="ch-ph-icon"></div>
+                </div>
+              </div>
+              <p class="ch-j-step-label">Convert</p>
+            </div>
+
+          </div>
+          <div class="ch-j-legend">
+            <div class="ch-j-legend-item"><span class="ch-leg-dot n"></span>Standard</div>
+            <div class="ch-j-legend-item"><span class="ch-leg-dot p"></span>Friction / drop-off</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================
+           SECTION 06 — Background
+           ============================================================ -->
+      <section id="background">
+      <div class="sol-section-header" style="margin-bottom:8px;">
+        <div class="sol-section-num">03</div>
+        <div class="sol-section-meta">
+          <div class="sol-section-label">BACKGROUND</div>
+          <div class="sol-section-title">The verification landscape</div>
+          <div class="sol-section-desc">Three distribution channels, three different compliance requirements — unification was necessary.</div>
+        </div>
+      </div>
+
+      <!-- Platform comparison: PlayStore / iOS / APK -->
+      <div class="cs-platform-grid">
+
+        <!-- PlayStore -->
+        <div class="cs-platform-card">
+          <div class="cs-platform-header">
+            <!-- Google Play icon -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="8" fill="#F5F5F5"/>
+              <path d="M8.5 7.27L19.6 13.87L16.92 16.55L8.5 7.27Z" fill="#EA4335"/>
+              <path d="M6.5 8.1C6.19 8.42 6 8.9 6 9.52V22.48C6 23.1 6.19 23.58 6.5 23.9L6.58 23.97L13.82 16.73V16.27L6.58 9.03L6.5 8.1Z" fill="#4285F4"/>
+              <path d="M16.27 19.18L13.82 16.73V16.27L16.27 13.82L16.36 13.87L19.27 15.55C20.1 16.02 20.1 16.78 19.27 17.25L16.36 18.93L16.27 19.18Z" fill="#FBBC05"/>
+              <path d="M16.36 18.93L13.82 16.39L6.5 23.9C6.77 24.18 7.22 24.21 7.73 23.93L16.36 18.93Z" fill="#34A853"/>
+            </svg>
+            <span class="cs-platform-name">PlayStore</span>
+          </div>
+
+          <div class="cs-platform-phone">
+            <img src="https://placehold.co/360x640" alt="PlayStore KYC verification screen — Verify Aadhaar via OTP with document options" />
+          </div>
+
+          <div class="cs-platform-footer">
+            <span class="cs-platform-label">Partial KYC</span>
+            <p class="cs-platform-desc"><strong>State</strong> and <strong>Age</strong> verification<br/>with Govt ID</p>
+          </div>
+        </div>
+
+        <!-- iOS -->
+        <div class="cs-platform-card">
+          <div class="cs-platform-header">
+            <!-- App Store icon -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="8" fill="#1A8FE3"/>
+              <path d="M20.5 10.5C19.44 11.7 17.93 12.5 16.27 12.5C16.12 11.07 16.75 9.57 17.7 8.5C18.76 7.3 20.31 6.53 21.75 6.5C21.87 7.97 21.3 9.44 20.5 10.5Z" fill="white"/>
+              <path d="M21.74 12.77C19.9 12.67 18.34 13.77 17.44 13.77C16.54 13.77 15.2 12.82 13.72 12.85C11.82 12.88 10.07 13.93 9.12 15.6C7.17 18.94 8.62 23.88 10.5 26.6C11.42 27.95 12.54 29.44 14.02 29.39C15.44 29.34 15.99 28.51 17.72 28.51C19.45 28.51 19.95 29.39 21.47 29.36C23.0 29.33 23.97 27.98 24.89 26.63C25.97 25.1 26.41 23.6 26.43 23.52C26.39 23.5 23.38 22.35 23.34 18.9C23.31 16.0 25.67 14.61 25.77 14.55C24.38 12.53 22.24 12.3 21.74 12.77Z" fill="white"/>
+            </svg>
+            <span class="cs-platform-name">iOS</span>
+          </div>
+
+          <div class="cs-platform-phone">
+            <img src="https://placehold.co/360x640" alt="iOS KYC verification screen — Verify in 2 Easy Steps with Date of Birth and Location fields" />
+          </div>
+
+          <div class="cs-platform-footer">
+            <span class="cs-platform-label geo">Geo-consent only</span>
+            <p class="cs-platform-desc"><strong>State</strong> and <strong>Age</strong> with Self<br/>declared by user</p>
+          </div>
+        </div>
+
+        <!-- APK -->
+        <div class="cs-platform-card">
+          <div class="cs-platform-header">
+            <!-- Android / APK icon -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="8" fill="#E8F5E9"/>
+              <path d="M10 18C10 14.69 12.69 12 16 12C19.31 12 22 14.69 22 18V22H10V18Z" fill="#3DDC84"/>
+              <circle cx="13" cy="17" r="1" fill="white"/>
+              <circle cx="19" cy="17" r="1" fill="white"/>
+              <line x1="12" y1="10" x2="10" y2="8" stroke="#3DDC84" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="20" y1="10" x2="22" y2="8" stroke="#3DDC84" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="8" y="22" width="16" height="2" rx="1" fill="#3DDC84"/>
+            </svg>
+            <span class="cs-platform-name">APK</span>
+          </div>
+
+          <div class="cs-platform-phone">
+            <img src="https://placehold.co/360x640" alt="APK KYC verification screen — Verify in 2 Easy Steps with Date of Birth and Location fields" />
+          </div>
+
+          <div class="cs-platform-footer">
+            <span class="cs-platform-label geo">Geo-consent only</span>
+            <p class="cs-platform-desc"><strong>State</strong> and <strong>Age</strong> with Self<br/>declared by user</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================================
+           SECTION 07 — Future Callout
+           ============================================================ -->
+      <div class="cs-future-callout">
+        <div class="cs-future-title">We wanted to be ready for the future</div>
+        <div class="cs-future-sub">Compliance expanding → all users need full KYC</div>
+        <div class="cs-future-highlight">Full KYC → Name + Age + State + Photo → From Govt. verified source</div>
+      </div>
+
+      <!-- India scale context (condensed) -->
+      <div class="sol-metric-bar" style="border-radius:20px;border:1px solid #E8ECF2;padding:28px 32px;background:#F8FBFF;gap:32px;">
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center;flex:1;">
+          <span style="font-size:clamp(24px,3vw,36px);font-weight:700;color:#1A1A2E;letter-spacing:-0.03em;font-family:'DM Sans',sans-serif;">1.4B</span>
+          <span class="sol-metric-label">population — fragmented IDs</span>
+        </div>
+        <div style="width:1px;background:#E8ECF2;align-self:stretch;"></div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center;flex:1;">
+          <span style="font-size:clamp(24px,3vw,36px);font-weight:700;color:#1A1A2E;letter-spacing:-0.03em;font-family:'DM Sans',sans-serif;">1.2B</span>
+          <span class="sol-metric-label">Aadhaar registrations — not universal</span>
+        </div>
+        <div style="width:1px;background:#E8ECF2;align-self:stretch;"></div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center;flex:1;">
+          <span style="font-size:clamp(24px,3vw,36px);font-weight:700;color:#1A1A2E;letter-spacing:-0.03em;font-family:'DM Sans',sans-serif;">700M+</span>
+          <span class="sol-metric-label">internet users — mobile-first, low-bandwidth</span>
+        </div>
+      </div>
+
+      </section>
+
+      <!-- ============================================================
+           SECTION 12 — Design Strategy: Principles
+           ============================================================ -->
+      <section id="design-principles">
+      <div style="display:flex;flex-direction:column;gap:48px;width:100%;">
+        <div class="sol-section-header" style="margin-bottom:8px;">
+          <div class="sol-section-num">04</div>
+          <div class="sol-section-meta">
+            <div class="sol-section-label">DESIGN STRATEGY</div>
+            <div class="sol-section-title">Principles That Guided the Redesign</div>
+          </div>
+        </div>
+        <div class="cs-principle-slides">
+          <div class="cs-principle-slide"><span class="cs-principle-label">Intuitive</span></div>
+          <div class="cs-principle-slide"><span class="cs-principle-label">Visual-first</span></div>
+          <div class="cs-principle-slide"><span class="cs-principle-label">Progressive</span></div>
+          <div class="cs-principle-slide"><span class="cs-principle-label">Scalable</span></div>
+          <div class="cs-principle-slide"><span class="cs-principle-label">Transparent</span></div>
+        </div>
+        <div class="cs-regulatory-callout">
+          <div class="cs-regulatory-title">The Regulatory Reality</div>
+          <p class="cs-regulatory-body">In regulated industries, design flexibility isn't nice-to-have — it's survival. Our component-based system let us pivot when laws changed without rebuilding from scratch.</p>
+        </div>
+      </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 13 — Final Solution: From Fragmented to Unified
+           ============================================================ -->
+      <section id="solution">
+
+        <!-- Hero -->
+        <div class="sol-hero">
+          <p class="sol-hero-eyebrow">Solution design</p>
+          <h2 class="sol-hero-title">From fragmented to unified</h2>
+        </div>
+
+        <!-- Framework nav -->
+        <div class="sol-framework-nav">
+          <div class="sol-fnav-item"><span class="sol-fnav-dot p1"></span>01 — Guided onboarding</div>
+          <div class="sol-fnav-item"><span class="sol-fnav-dot p2"></span>02 — Cash add flow</div>
+          <div class="sol-fnav-item"><span class="sol-fnav-dot p3"></span>03 — Retry flows</div>
+          <div class="sol-fnav-item"><span class="sol-fnav-dot p4"></span>04 — Withdrawals</div>
+        </div>
+
+        <!-- ─── 01: Guided Onboarding ─── -->
+        <div class="sol-section-header">
+          <div class="sol-section-num">01</div>
+          <div class="sol-section-meta">
+            <p class="sol-section-label">Step-by-step guidance</p>
+            <h3 class="sol-section-title">Onboarding redesign</h3>
+            <p class="sol-section-desc">KYC surfaced at peak user intent — after team creation, not at entry.</p>
+          </div>
+        </div>
+
+        <div class="sol-block">
+          <div class="sol-metric-bar">
+            <span class="sol-tag ux">UX</span>
+            <span class="sol-metric-label">Progressive disclosure — reveal steps only when the previous is complete</span>
+          </div>
+
+          <div class="sol-step-list">
+            <div class="sol-step-item">
+              <div class="sol-step-dot-col">
+                <div class="sol-step-dot active">1</div>
+                <div class="sol-step-connector"></div>
+              </div>
+              <div class="sol-step-body">
+                <p class="sol-step-title">Browse &amp; social connect</p>
+                <p class="sol-step-sub">Lowest friction entry — user explores without commitment.</p>
+              </div>
+            </div>
+            <div class="sol-step-item">
+              <div class="sol-step-dot-col">
+                <div class="sol-step-dot active">2</div>
+                <div class="sol-step-connector"></div>
+              </div>
+              <div class="sol-step-body">
+                <p class="sol-step-title">Create team</p>
+                <p class="sol-step-sub">Team creation anchors intent — user is invested before any gate.</p>
+              </div>
+            </div>
+            <div class="sol-step-item">
+              <div class="sol-step-dot-col">
+                <div class="sol-step-dot active">3</div>
+                <div class="sol-step-connector"></div>
+              </div>
+              <div class="sol-step-body">
+                <p class="sol-step-title">KYC + verified (gated)</p>
+                <p class="sol-step-sub">Gate at peak motivation — user has already built their team.</p>
+              </div>
+            </div>
+            <div class="sol-step-item">
+              <div class="sol-step-dot-col">
+                <div class="sol-step-dot">4</div>
+              </div>
+              <div class="sol-step-body">
+                <p class="sol-step-title">Add cash &amp; play</p>
+                <p class="sol-step-sub">Transaction intent at its highest — users arrive primed, not cold.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sol-screen-grid three">
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Browse state</p>
+              <p class="sol-screen-label">Before commitment</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">KYC gate</p>
+              <p class="sol-screen-label">At peak intent</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Cash add</p>
+              <p class="sol-screen-label">Post-verification</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 02: Cash Add Flow ─── -->
+        <div class="sol-section-header">
+          <div class="sol-section-num">02</div>
+          <div class="sol-section-meta">
+            <p class="sol-section-label">Option overload → guided completion</p>
+            <h3 class="sol-section-title">Cash add page</h3>
+            <p class="sol-section-desc">Smart routing replaced option overload — one recommended path, secondary options hidden until needed.</p>
+          </div>
+        </div>
+
+        <div class="sol-block">
+          <div class="sol-metric-bar">
+            <span class="sol-metric-pill green">+30% funnel uplift</span>
+            <span class="sol-metric-label">TG vs CG — user reg → Cash add page load</span>
+          </div>
+
+          <div class="sol-ps-row">
+            <div class="sol-ps-card">
+              <p class="sol-ps-label problem">Before</p>
+              <p class="sol-ps-text">All ID options visible at once — Aadhaar, PAN, Voter ID, DL presented simultaneously with no hierarchy</p>
+            </div>
+            <div class="sol-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="sol-ps-card">
+              <p class="sol-ps-label solution">After</p>
+              <p class="sol-ps-text">Smart routing: recommended ID surfaced first; secondary options progressively revealed</p>
+            </div>
+          </div>
+
+          <div class="sol-screen-grid two">
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Option overload (before)</p>
+              <p class="sol-screen-label">All ID methods shown</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Guided selection (after)</p>
+              <p class="sol-screen-label">Contextual + ranked</p>
+            </div>
+          </div>
+
+          <div class="sol-stat-row">
+            <div class="sol-stat-card">
+              <p class="sol-stat-label">Funnel uplift</p>
+              <p class="sol-stat-number">+30%</p>
+              <span class="sol-stat-delta up">Reg → Cash add</span>
+            </div>
+            <div class="sol-stat-card">
+              <p class="sol-stat-label">Verification drop-off</p>
+              <p class="sol-stat-number">−18%</p>
+              <span class="sol-stat-delta up">Measured post-launch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 03: Retry Flows ─── -->
+        <div class="sol-section-header">
+          <div class="sol-section-num">03</div>
+          <div class="sol-section-meta">
+            <p class="sol-section-label">Clear retry flows</p>
+            <h3 class="sol-section-title">Verification failure recovery</h3>
+            <p class="sol-section-desc">No dead ends — explicit retry CTAs and automatic fallback ID suggestions on every failure.</p>
+          </div>
+        </div>
+
+        <div class="sol-block">
+          <div class="sol-metric-bar">
+            <span class="sol-tag flow">Flow</span>
+            <span class="sol-metric-label">Retry path redesign with progressive fallback — no dead ends</span>
+          </div>
+
+          <div class="sol-ps-row">
+            <div class="sol-ps-card">
+              <p class="sol-ps-label problem">Before</p>
+              <p class="sol-ps-text">Failure screen with no clear next step — users abandoned after first failed KYC attempt</p>
+            </div>
+            <div class="sol-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="sol-ps-card">
+              <p class="sol-ps-label solution">After</p>
+              <p class="sol-ps-text">Explicit retry CTA + automatic suggestion of alternative ID method on failure</p>
+            </div>
+          </div>
+
+          <div class="sol-screen-grid three">
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Failure state</p>
+              <p class="sol-screen-label">Clear error context</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Retry CTA</p>
+              <p class="sol-screen-label">Primary action surfaced</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Fallback method</p>
+              <p class="sol-screen-label">Auto-suggested alt ID</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 04: Withdrawals ─── -->
+        <div class="sol-section-header">
+          <div class="sol-section-num">04</div>
+          <div class="sol-section-meta">
+            <p class="sol-section-label">Faster withdrawals</p>
+            <h3 class="sol-section-title">Removing withdrawal friction</h3>
+            <p class="sol-section-desc">PAN collected upfront at KYC; bank details auto-fetched via linked mobile — withdrawal flow became a single tap.</p>
+          </div>
+        </div>
+
+        <div class="sol-block">
+          <div class="sol-metric-bar">
+            <span class="sol-metric-pill green">55% → 72%</span>
+            <span class="sol-metric-label">Withdrawal success rate after friction removal</span>
+          </div>
+
+          <p class="sol-sub-label">A — Removed PAN uploads</p>
+          <div class="sol-ps-row" style="padding-top:8px;">
+            <div class="sol-ps-card">
+              <p class="sol-ps-label problem">Before</p>
+              <p class="sol-ps-text">PAN document upload required at withdrawal — high drop-off on mobile keyboards</p>
+            </div>
+            <div class="sol-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="sol-ps-card">
+              <p class="sol-ps-label solution">After</p>
+              <p class="sol-ps-text">PAN collected upfront at KYC — withdrawal flow skips document step entirely</p>
+            </div>
+          </div>
+
+          <p class="sol-sub-label">B — Smart details fetch</p>
+          <div class="sol-ps-row" style="padding-top:8px;">
+            <div class="sol-ps-card">
+              <p class="sol-ps-label problem">Before</p>
+              <p class="sol-ps-text">Users manually typed IFSC + account number — high error rate on mobile</p>
+            </div>
+            <div class="sol-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="sol-ps-card">
+              <p class="sol-ps-label solution">After</p>
+              <p class="sol-ps-text">Bank details auto-fetched from linked mobile — single-tap verification, no manual entry</p>
+            </div>
+          </div>
+
+          <div class="sol-screen-grid two" style="margin-top:8px;">
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">PAN removed flow</p>
+              <p class="sol-screen-label">Streamlined withdrawal</p>
+            </div>
+            <div class="sol-screen-slot">
+              <div class="sol-screen-icon"></div>
+              <p class="sol-screen-caption">Auto-fetch bank details</p>
+              <p class="sol-screen-label">Linked mobile verification</p>
+            </div>
+          </div>
+
+          <div class="sol-stat-row">
+            <div class="sol-stat-card">
+              <p class="sol-stat-label">Withdrawal success</p>
+              <p class="sol-stat-number">72%</p>
+              <span class="sol-stat-delta up">Up from 55%</span>
+            </div>
+            <div class="sol-stat-card">
+              <p class="sol-stat-label">Manual entry eliminated</p>
+              <p class="sol-stat-number">100%</p>
+              <span class="sol-stat-delta up">Via smart fetch</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 14 — Navigating Uncertainty
+           ============================================================ -->
+      <section id="research">
+      <div style="display:flex;flex-direction:column;gap:48px;width:100%;">
+        <div class="sol-section-header" style="margin-bottom:8px;">
+          <div class="sol-section-num">05</div>
+          <div class="sol-section-meta">
+            <div class="sol-section-label">NAVIGATING UNCERTAINTY</div>
+            <div class="sol-section-title">Adapting to Rapid Regulation Changes</div>
+            <div class="sol-section-desc">Laws shifted mid-project — modular design meant we could pivot without rebuilding.</div>
+          </div>
+        </div>
+        <div class="cs-phase-cards">
+          <div class="cs-phase-card">
+            <div class="cs-phase-title">Phase 1: Withdrawals Only</div>
+            <p class="cs-phase-body">Optimised PAN and Bank flows — reduced TAT from 12 minutes to seconds.</p>
+            <div class="cs-phase-badges">
+              <span class="cs-phase-badge">Baseline flows completed</span>
+              <span class="cs-phase-badge">Ops panel ready</span>
+            </div>
+          </div>
+          <div class="cs-phase-card">
+            <div class="cs-phase-title">Tamil Nadu Law Changes</div>
+            <p class="cs-phase-body">KYC expanded to pre-deposit — reused existing screens for emergency geo-targeted rollout.</p>
+            <div class="cs-phase-badges">
+              <span class="cs-phase-badge">⚡ Emergency deployment</span>
+              <span class="cs-phase-badge">Reused existing screens</span>
+              <span class="cs-phase-badge">🎯 Geo-targeted rollout</span>
+            </div>
+          </div>
+          <div class="cs-phase-card">
+            <div class="cs-phase-title">Phase 2: Deposit &amp; Withdrawal Revamp</div>
+            <p class="cs-phase-body">Built a central KYC system covering pre-contest and pre-deposit scenarios with modular, reusable screens.</p>
+            <div class="cs-phase-badges">
+              <span class="cs-phase-badge">Reused existing screens</span>
+              <span class="cs-phase-badge">Fast adaptation possible due to modular design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
+    </main>
+    <script>
+      /* Scale each .cs-phone-frame-inner to fit its .cs-phone-frame parent */
+      function scalePhones() {
+        document.querySelectorAll('.cs-phone-frame').forEach(function(frame) {
+          var inner = frame.querySelector('.cs-phone-frame-inner');
+          if (!inner) return;
+          inner.style.transform = 'scale(' + (frame.offsetWidth / 360) + ')';
+        });
+      }
+      scalePhones();
+      window.addEventListener('resize', scalePhones);
+    </script>
+  </body>
+</html>

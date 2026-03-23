@@ -1,0 +1,335 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.pg{padding:40px 0 56px;max-width:680px}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:10px}
+.headline{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.25;margin-bottom:10px}
+.lede{font-size:14px;color:var(--color-text-secondary);line-height:1.65;max-width:520px;margin-bottom:32px}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:36px 0}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:16px}
+
+/* ── Journey map ── */
+.journey-outer{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:20px 16px 16px;overflow-x:auto}
+.journey-steps{display:flex;align-items:flex-start;gap:0;min-width:600px}
+.j-col{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1}
+.j-node{height:28px;padding:0 10px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;white-space:nowrap}
+.j-node.neutral{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.j-node.pain{background:#FCEBEB;border:.5px solid #F09595;color:#791F1F}
+@media(prefers-color-scheme:dark){.j-node.pain{background:#501313;border-color:#A32D2D;color:#F7C1C1}}
+.j-connector{display:flex;align-items:center;padding-top:14px;flex-shrink:0}
+.j-connector svg{width:12px;height:12px;color:var(--color-text-tertiary)}
+
+/* phone frame */
+.phone-frame{width:56px;height:96px;border-radius:8px;border:1.5px solid var(--color-border-secondary);background:var(--color-background-primary);overflow:hidden;position:relative;flex-shrink:0}
+.phone-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.phone-screen-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--color-background-secondary)}
+.ph-label{font-size:8px;color:var(--color-text-tertiary);text-align:center;line-height:1.3;padding:0 3px}
+.ph-icon{width:16px;height:16px;border-radius:2px;border:.5px solid var(--color-border-tertiary)}
+
+/* pain frame highlight */
+.phone-frame.pain-frame{border-color:#E24B4A;border-width:1.5px}
+.phone-frame.pain-frame .phone-screen-placeholder{background:#FCEBEB}
+@media(prefers-color-scheme:dark){.phone-frame.pain-frame .phone-screen-placeholder{background:#501313}}
+
+.j-step-label{font-size:10px;color:var(--color-text-tertiary);text-align:center}
+
+.j-legend{display:flex;gap:16px;margin-top:14px;padding-top:12px;border-top:.5px solid var(--color-border-tertiary)}
+.j-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--color-text-secondary)}
+.leg-dot{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+.leg-dot.n{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary)}
+.leg-dot.p{background:#FCEBEB;border:.5px solid #F09595}
+@media(prefers-color-scheme:dark){.leg-dot.p{background:#501313;border-color:#A32D2D}}
+
+/* ── Insight cards ── */
+.insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.i-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;display:flex;flex-direction:column}
+
+.screen-evidence{background:var(--color-background-secondary);height:148px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;position:relative;border-bottom:.5px solid var(--color-border-tertiary)}
+.screen-evidence.two-screens{gap:10px}
+.evidence-phone{width:60px;height:108px;border-radius:7px;border:1.5px solid var(--color-border-secondary);background:var(--color-background-primary);overflow:hidden;flex-shrink:0}
+.evidence-phone img{width:100%;height:100%;object-fit:cover}
+.evidence-phone .ep-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--color-background-tertiary)}
+.ep-label{font-size:7px;color:var(--color-text-tertiary);text-align:center;line-height:1.3;padding:0 4px}
+.ep-bar{height:2px;width:32px;border-radius:1px;background:var(--color-border-secondary)}
+
+.screen-caption{position:absolute;bottom:8px;right:8px;font-size:9px;font-weight:500;padding:2px 6px;border-radius:3px;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary)}
+
+.i-card-body{padding:14px 14px 0}
+.i-flag{display:inline-flex;font-size:9px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-bottom:8px}
+.flag-r{background:#FCEBEB;color:#791F1F;border:.5px solid #F7C1C1}
+.flag-o{background:#FAEEDA;color:#633806;border:.5px solid #FAC775}
+.flag-b{background:#E6F1FB;color:#0C447C;border:.5px solid #B5D4F4}
+@media(prefers-color-scheme:dark){
+  .flag-r{background:#501313;color:#F7C1C1;border-color:#A32D2D}
+  .flag-o{background:#412402;color:#FAC775;border-color:#BA7517}
+  .flag-b{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+}
+.i-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:5px;line-height:1.3}
+.i-body{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.i-footer{margin-top:12px;padding:9px 14px;background:var(--color-background-secondary);border-top:.5px solid var(--color-border-tertiary);font-size:11px;color:var(--color-text-tertiary)}
+.i-footer span{font-weight:500;color:var(--color-text-secondary)}
+
+/* ── Impact ── */
+.impact-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.impact-hero{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:20px 22px}
+.impact-num{font-size:44px;font-weight:500;line-height:1;color:#A32D2D;margin-bottom:4px}
+@media(prefers-color-scheme:dark){.impact-num{color:#F09595}}
+.impact-lbl{font-size:13px;color:var(--color-text-secondary);line-height:1.55;margin-bottom:16px}
+.impact-sub{font-size:11px;color:var(--color-text-tertiary)}
+.impact-chart{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:18px 22px;display:flex;flex-direction:column;justify-content:center}
+.brow{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.brow:last-child{border-bottom:none}
+.brow-lbl{font-size:12px;color:var(--color-text-secondary)}
+.brow-right{display:flex;align-items:center;gap:8px}
+.bbar-bg{width:80px;height:3px;background:var(--color-border-tertiary);border-radius:2px}
+.bbar-fill{height:3px;border-radius:2px;background:#E24B4A}
+.brow-pct{font-size:12px;font-weight:500;color:var(--color-text-primary);min-width:28px;text-align:right}
+</style>
+
+<div class="pg">
+
+  <p class="eyebrow">Problem space</p>
+  <h1 class="headline">The verification challenge</h1>
+  <p class="lede">KYC is mandatory for cash contests in India — but the existing experience was fragmented, confusing and costly. Four distinct failure modes, one broken funnel.</p>
+
+  <p class="section-label">The broken journey</p>
+
+  <div class="journey-outer">
+    <div class="journey-steps">
+
+      <div class="j-col">
+        <div class="j-node neutral">Reg</div>
+        <div class="phone-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon"></div>
+            <p class="ph-label">Reg screen</p>
+          </div>
+        </div>
+        <p class="j-step-label">Entry</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node neutral">Home</div>
+        <div class="phone-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon"></div>
+            <p class="ph-label">Home screen</p>
+          </div>
+        </div>
+        <p class="j-step-label">Browse</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node neutral">Contests</div>
+        <div class="phone-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon"></div>
+            <p class="ph-label">Contest list</p>
+          </div>
+        </div>
+        <p class="j-step-label">Explore</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node pain">KYC</div>
+        <div class="phone-frame pain-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon" style="border-color:#F09595"></div>
+            <p class="ph-label" style="color:#A32D2D">KYC gate</p>
+          </div>
+        </div>
+        <p class="j-step-label" style="color:#E24B4A;font-weight:500">Drop-off</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node neutral">Gameplay</div>
+        <div class="phone-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon"></div>
+            <p class="ph-label">Team select</p>
+          </div>
+        </div>
+        <p class="j-step-label">Play</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node pain">Location</div>
+        <div class="phone-frame pain-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon" style="border-color:#F09595"></div>
+            <p class="ph-label" style="color:#A32D2D">Location gate</p>
+          </div>
+        </div>
+        <p class="j-step-label" style="color:#E24B4A;font-weight:500">2nd gate</p>
+      </div>
+
+      <div class="j-connector"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="j-col">
+        <div class="j-node neutral">Payment</div>
+        <div class="phone-frame">
+          <div class="phone-screen-placeholder">
+            <div class="ph-icon"></div>
+            <p class="ph-label">Pay screen</p>
+          </div>
+        </div>
+        <p class="j-step-label">Convert</p>
+      </div>
+
+    </div>
+
+    <div class="j-legend">
+      <div class="j-legend-item"><span class="leg-dot n"></span>Standard step</div>
+      <div class="j-legend-item"><span class="leg-dot p"></span>Friction / drop-off point</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <p class="section-label">Four failure modes — with evidence</p>
+
+  <div class="insight-grid">
+
+    <div class="i-card">
+      <div class="screen-evidence">
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">KYC timing screen</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <span class="screen-caption">1 screen</span>
+      </div>
+      <div class="i-card-body">
+        <span class="i-flag flag-r">High impact</span>
+        <p class="i-title">Poor KYC timing</p>
+        <p class="i-body">Verification prompt appeared before users committed to joining — asking for trust before value was demonstrated</p>
+      </div>
+      <div class="i-footer">Drop-off: <span>before team creation</span></div>
+    </div>
+
+    <div class="i-card">
+      <div class="screen-evidence two-screens">
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">KYC interrupt</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">Location interrupt</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <span class="screen-caption">2 screens</span>
+      </div>
+      <div class="i-card-body">
+        <span class="i-flag flag-r">High friction</span>
+        <p class="i-title">Fragmented flow</p>
+        <p class="i-body">KYC, location, and payment checks at different stages — repeated interruptions eroded momentum at every gate</p>
+      </div>
+      <div class="i-footer">Pattern: <span>3 separate gate points</span></div>
+    </div>
+
+    <div class="i-card">
+      <div class="screen-evidence">
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">No progress screen</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <span class="screen-caption">1 screen</span>
+      </div>
+      <div class="i-card-body">
+        <span class="i-flag flag-b">Trust gap</span>
+        <p class="i-title">Weak guidance</p>
+        <p class="i-body">No rationale for why verification is required. No progress indicator, no time estimate — users flew blind</p>
+      </div>
+      <div class="i-footer">Abandonment: <span>step 2 of 4</span></div>
+    </div>
+
+    <div class="i-card">
+      <div class="screen-evidence two-screens">
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">Option overload</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <div class="evidence-phone">
+          <div class="ep-inner">
+            <div class="ep-bar"></div>
+            <p class="ep-label">Error state</p>
+            <div class="ep-bar" style="width:22px"></div>
+          </div>
+        </div>
+        <span class="screen-caption">2 screens</span>
+      </div>
+      <div class="i-card-body">
+        <span class="i-flag flag-o">Decision paralysis</span>
+        <p class="i-title">Option overload + broken errors</p>
+        <p class="i-body">4 ID types shown at once with no guidance. Failures had no actionable path — users hit dead ends with no recovery</p>
+      </div>
+      <div class="i-footer">Result: <span>support tickets spike</span></div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+  <p class="section-label">Cost of the problem</p>
+
+  <div class="impact-row">
+    <div class="impact-hero">
+      <p class="impact-num">15%</p>
+      <p class="impact-lbl">of all support tickets were KYC or withdrawal-related</p>
+      <p class="impact-sub">~9,000 tickets per week at peak load</p>
+    </div>
+    <div class="impact-chart">
+      <div class="brow" style="padding-top:0">
+        <span class="brow-lbl">KYC failures</span>
+        <div class="brow-right">
+          <div class="bbar-bg"><div class="bbar-fill" style="width:80px"></div></div>
+          <span class="brow-pct">35%</span>
+        </div>
+      </div>
+      <div class="brow">
+        <span class="brow-lbl">Withdrawal issues</span>
+        <div class="brow-right">
+          <div class="bbar-bg"><div class="bbar-fill" style="width:64px"></div></div>
+          <span class="brow-pct">28%</span>
+        </div>
+      </div>
+      <div class="brow">
+        <span class="brow-lbl">Doc rejections</span>
+        <div class="brow-right">
+          <div class="bbar-bg"><div class="bbar-fill" style="width:50px"></div></div>
+          <span class="brow-pct">22%</span>
+        </div>
+      </div>
+      <div class="brow">
+        <span class="brow-lbl">Other</span>
+        <div class="brow-right">
+          <div class="bbar-bg"><div class="bbar-fill" style="width:34px"></div></div>
+          <span class="brow-pct">15%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
