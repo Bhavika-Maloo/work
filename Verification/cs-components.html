@@ -2752,6 +2752,19 @@
   </main>
 
   <script>
+    /* Ensure mobile viewport in embed runtimes that strip <head> meta tags */
+    (function ensureViewportMeta() {
+      var head = document.head || document.getElementsByTagName('head')[0];
+      if (!head) return;
+      var viewport = document.querySelector('meta[name="viewport"]');
+      if (!viewport) {
+        viewport = document.createElement('meta');
+        viewport.setAttribute('name', 'viewport');
+        head.appendChild(viewport);
+      }
+      viewport.setAttribute('content', 'width=device-width, initial-scale=1');
+    })();
+
     /* Scale each .c-phone__inner to fit its .c-phone parent */
     function scalePhones() {
       document.querySelectorAll('.c-phone').forEach(function(frame) {

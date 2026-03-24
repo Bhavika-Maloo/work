@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OBSIDIAN | UX Case Study: The Friction Point</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#575656",
+              "tertiary-container": "#edeaea",
+              "primary-dim": "#ffa086",
+              "tertiary-fixed-dim": "#e8e5e4",
+              "tertiary-dim": "#edeaea",
+              "on-tertiary-fixed-variant": "#676666",
+              "error-dim": "#bb5551",
+              "surface": "#0e0e0e",
+              "outline-variant": "#484848",
+              "on-surface-variant": "#acabaa",
+              "on-primary-fixed": "#7a1c00",
+              "on-secondary-fixed": "#3f3f3f",
+              "surface-container-lowest": "#000000",
+              "surface-container-highest": "#252626",
+              "secondary-fixed": "#e4e2e1",
+              "primary-fixed": "#ffdbd1",
+              "on-error": "#490106",
+              "on-surface": "#e7e5e5",
+              "tertiary-fixed": "#f6f3f2",
+              "surface-container-low": "#131313",
+              "inverse-on-surface": "#565555",
+              "inverse-surface": "#fcf9f8",
+              "secondary-container": "#3b3b3b",
+              "surface-container-high": "#1f2020",
+              "on-primary": "#7c1d00",
+              "background": "#0e0e0e",
+              "on-primary-fixed-variant": "#ac2c00",
+              "primary": "#ffb5a0",
+              "on-secondary": "#202020",
+              "surface-tint": "#ffb5a0",
+              "primary-container": "#872000",
+              "primary-fixed-dim": "#ffc8b9",
+              "secondary-fixed-dim": "#d6d4d3",
+              "surface-variant": "#252626",
+              "on-primary-container": "#ffc2b2",
+              "surface-dim": "#0e0e0e",
+              "surface-bright": "#2b2c2c",
+              "inverse-primary": "#b22e00",
+              "on-tertiary": "#605f5e",
+              "secondary-dim": "#9f9d9d",
+              "on-error-container": "#ff9993",
+              "error": "#ee7d77",
+              "on-secondary-container": "#c1bfbe",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "on-tertiary-fixed": "#4a4949",
+              "tertiary": "#fcf9f8",
+              "secondary": "#9f9d9d",
+              "outline": "#767575",
+              "on-background": "#e7e5e5",
+              "surface-container": "#191a1a",
+              "error-container": "#7f2927"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(37, 38, 38, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .inner-glow {
+        box-shadow: inset 0 1px 0 0 rgba(231, 229, 229, 0.05);
+      }
+      .step-line {
+        background: linear-gradient(to bottom, #484848 0%, #484848 50%, transparent 50%);
+        background-size: 1px 12px;
+      }
+      .condensed-timeline {
+        max-width: 600px;
+      }
+      .editorial-blur {
+        backdrop-filter: blur(20px);
+        background: rgba(37, 38, 38, 0.6);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .gradient-cta {
+        background: linear-gradient(135deg, #ffb5a0 0%, #872000 100%);
+      }
+      body {
+        background-color: #0e0e0e;
+        color: #e7e5e5;
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-primary selection:text-on-primary">
+<main>
+<!-- Section 1: Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6">
+<!-- Background Glow -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px]"></div>
+</div>
+<div class="relative z-10 max-w-5xl text-center space-y-8">
+<p class="font-label text-primary font-medium tracking-[0.2em] uppercase text-xs">The Problem Definition</p>
+<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.9] text-on-surface">
+                    We didn’t lose users.<br/>
+<span class="text-primary-dim">We lost them right before they cared most.</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto font-light leading-relaxed">
+                    Users didn’t drop off randomly — they were blocked at the exact moment of intent.
+                </p>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
+<span class="font-label text-[10px] tracking-widest uppercase">Scroll to explore</span>
+<div class="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+</section>
+<!-- Section 2: Story Card -->
+<section class="py-24 px-6 md:px-20 lg:px-40">
+<div class="max-w-6xl mx-auto">
+<div class="glass-card rounded-xl p-12 md:p-24 shadow-[0_40px_80px_rgba(231,229,229,0.04)] relative overflow-hidden">
+<!-- Subtle Light Hit -->
+<div class="absolute top-0 left-0 right-0 h-[1px] bg-surface-bright/50"></div>
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="space-y-10">
+<h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tight text-on-surface">7:20 PM.<br/>The match is about to start.</h2>
+<div class="font-body text-xl md:text-2xl leading-[1.8] text-on-surface-variant space-y-4">
+<p>You’ve built your team.</p>
+<p>You tap '<span class="text-primary font-semibold">Join Contest</span>'.</p>
+<p>A <span class="text-error font-semibold">verification screen</span> appears.</p>
+<p>Five options. No clarity.</p>
+<p class="text-on-surface font-medium">You close the app.</p>
+</div>
+</div>
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img class="object-cover w-full h-full opacity-60" data-alt="dramatic close up of a stadium spotlight in the dark night with smoke and intense lighting atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_lNHC0FIwqp4E9sq7BdKxbE02iw0Iq9JAC8sBW0fYLa5v9NmAvF7wthKjTrF1NF3TAbZ9pw0kSCPvvWt-3PdCcgt5dOyBCNjsrriYwGvwu9WOpE5vf_AJrAA-4PpMfjSoM1tfs1HLhrtdHM_SUX36vtGtwSfTPb63WNeID5APZwAhEkwP8Rgfa6iaoVvgXDXO3PiMTHEEH3QQPMzf7dpFcpcDQA4loKNLilk3cgIXfxvN7Y7YQOcSGt03y0pnsC8Lq9gY4MDYtAg"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Journey Visualization -->
+<section class="py-24 px-6 bg-surface-container-low">
+<div class="max-w-6xl mx-auto space-y-20">
+<div class="text-center space-y-4">
+<h3 class="font-headline text-3xl font-bold tracking-tight">The Friction Journey</h3>
+<p class="font-body text-on-surface-variant">Visualizing the break in narrative flow</p>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-center gap-8 px-12">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant/30 -translate-y-1/2 hidden md:block">
+<div class="absolute left-0 top-0 h-full w-[60%] bg-primary"></div>
+<div class="absolute left-[60%] top-0 h-full w-[10%] bg-error"></div>
+</div>
+<!-- Step: Browse -->
+<div class="relative z-10 flex flex-col items-center gap-4 group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface">search</span>
+</div>
+<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Browse</span>
+</div>
+<!-- Step: Join -->
+<div class="relative z-10 flex flex-col items-center gap-4 group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface">ads_click</span>
+</div>
+<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Join</span>
+</div>
+<!-- Step: KYC Wall (Friction Point) -->
+<div class="relative z-10 flex flex-col items-center gap-6">
+<div class="relative">
+<!-- Blurred UI Thumbnails -->
+<div class="absolute -top-12 -left-12 w-20 h-28 bg-surface-container-highest rounded shadow-2xl rotate-[-15deg] opacity-40 blur-[2px] border border-outline-variant/20"></div>
+<div class="absolute -top-8 -right-12 w-20 h-28 bg-surface-container-highest rounded shadow-2xl rotate-[10deg] opacity-60 blur-[1px] border border-outline-variant/20"></div>
+<div class="w-24 h-24 rounded-full bg-error/10 flex items-center justify-center border-2 border-error animate-pulse shadow-[0_0_40px_rgba(238,125,119,0.3)]">
+<span class="material-symbols-outlined text-error text-4xl" data-weight="fill">warning</span>
+</div>
+</div>
+<div class="px-4 py-1 bg-error/10 border border-error/20 rounded-full">
+<span class="font-label text-xs font-bold tracking-widest text-error uppercase">KYC Wall</span>
+</div>
+</div>
+<!-- Step: Drop-off -->
+<div class="relative z-10 flex flex-col items-center gap-4 group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-error transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">logout</span>
+</div>
+<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Drop-off</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Impact Metrics -->
+<section class="py-24 px-6 relative">
+<!-- Asymmetric Metric Grid -->
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Metric 1 -->
+<div class="md:col-span-5 glass-card p-10 rounded-xl space-y-6 md:mt-16 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20">
+<span class="font-headline text-8xl font-black text-primary tracking-tighter italic">15%</span>
+<p class="font-body text-on-surface-variant text-lg leading-snug">Support tickets directly related to <span class="text-on-surface font-medium">KYC friction</span> and failed withdrawals.</p>
+</div>
+<!-- Metric 2 -->
+<div class="md:col-start-7 md:col-span-6 glass-card p-16 rounded-xl space-y-6 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20 z-10">
+<span class="font-headline text-9xl font-black text-on-surface tracking-tighter">35 min</span>
+<p class="font-body text-on-surface-variant text-xl leading-relaxed">Average time for a new user to complete their <span class="text-primary font-medium">first successful withdrawal</span> during peak events.</p>
+</div>
+<!-- Metric 3 -->
+<div class="md:col-start-2 md:col-span-5 glass-card p-12 rounded-xl space-y-6 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20">
+<span class="font-headline text-7xl font-black text-error/80 tracking-tighter">~9K</span>
+<p class="font-body text-on-surface-variant text-lg leading-snug">Weekly support tickets handled during <span class="text-on-surface font-medium">major tournament peaks</span>.</p>
+</div>
+</div>
+</section>
+<!-- Section 5: Constraints -->
+<section class="py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col items-center">
+<!-- Hero Header -->
+<header class="text-center mb-20 space-y-6 max-w-3xl">
+<h2 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter text-on-surface">
+        Why this was hard
+      </h2>
+<p class="font-headline text-lg md:text-xl text-on-surface-variant leading-relaxed opacity-80">
+        Constraints compounded each other. Understanding all six shaped every design decision.
+      </p>
+</header>
+<!-- Constraint Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+<!-- Card 1: Fragmented Flow -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">alt_route</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
+              High impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Fragmented Flow</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+            KYC, location, and payment checks appear at different stages, causing repeated interruptions.
+          </p>
+</div>
+</article>
+<!-- Card 2: IPL rush -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
+              High impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">IPL rush</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+            Drop-off peaks when intent is highest. At 7:25pm on match day, patience is zero.
+          </p>
+</div>
+</article>
+<!-- Card 3: Poor KYC timing -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">timer_off</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
+              High impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Poor KYC timing</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+            Verification prompt appeared before users committed to joining.
+          </p>
+</div>
+</article>
+<!-- Card 4: Low Aadhaar-mobile linkage -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">link_off</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-high text-on-surface-variant border border-outline-variant/30">
+              Medium impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Low Aadhaar-mobile linkage</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+            Most users hadn't linked mobile to Aadhaar — ruling out OTP and forcing document fallbacks.
+          </p>
+</div>
+</article>
+<!-- Card 5: State-level geo-gating -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">distance</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-high text-on-surface-variant border border-outline-variant/30">
+              Medium impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">State-level geo-gating</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+          , Telangana, TN and others required location checks at every contest entry — not once at reg.
+          </p>
+</div>
+</article>
+<!-- Card 6: Weak onboarding guidance -->
+<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-outline text-3xl">help_center</span>
+<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-low text-outline border border-outline-variant/20">
+              Low impact
+            </span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Weak onboarding guidance</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+            First-time users are not clearly told why verification is required.
+          </p>
+</div>
+</article>
+</div>
+<!-- Background Accents -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-primary-container/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+</div>
+</section>
+<!-- Section 6: Final Solution -->
+<section class="py-20 px-6 md:px-12 lg:px-24">
+<div class="max-w-7xl mx-auto">
+<!-- Header -->
+<header class="mb-16">
+<div class="inline-flex items-center px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/15 mb-6">
+<span class="text-[10px] font-label font-bold tracking-[0.2em] uppercase text-primary">Final Solution</span>
+</div>
+<h2 class="font-headline text-4xl md:text-6xl font-bold tracking-tight text-on-surface mb-4 leading-tight">Retime the ask</h2>
+<div class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary-dim/60"><br/></span>
+<h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface-variant">Move KYC to after team creation — when intent is real, not assumed.</h3>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+<!-- Condensed Timeline -->
+<div class="lg:col-span-7 condensed-timeline">
+<div class="space-y-1 relative">
+<!-- Vertical Line -->
+<div class="absolute left-3 top-4 bottom-4 w-px bg-outline-variant/30"></div>
+<!-- Step 1 -->
+<div class="relative pl-10 py-3 group">
+<div class="absolute left-2.5 top-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-headline text-base font-bold text-on-surface">1 - Browse &amp; select contest</span>
+<span class="font-body text-xs text-secondary-dim/60 italic">commit intent first</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative pl-10 py-3 group">
+<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-headline text-base font-bold text-on-surface">2 - Create team</span>
+<span class="font-body text-xs text-secondary-dim/60 italic">KYC triggered post-save</span>
+</div>
+</div>
+<!-- Step 3 (HIGHLIGHTED) -->
+<div class="relative pl-10 py-4 -mx-4 px-4 rounded-lg bg-primary/5 border border-primary/10">
+<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,181,160,0.6)]"></div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline text-base font-bold text-primary">3 - KYC + Location (grouped)</span>
+<span class="font-body text-xs text-on-surface/70 font-medium">all steps at once</span>
+</div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative pl-10 py-3 group">
+<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-headline text-base font-bold text-on-surface">4 - Join contest &amp; pay</span>
+<span class="font-body text-xs text-secondary-dim/60 italic">final transactional step</span>
+</div>
+</div>
+</div>
+<!-- Impact -->
+<div class="mt-12 pt-10 border-t border-outline-variant/10">
+<h3 class="font-headline text-2xl md:text-3xl font-bold text-on-surface mb-4 leading-tight">
+                    Improved top-of-funnel cash conversion by 30%
+                </h3>
+<p class="font-body text-base md:text-lg leading-relaxed text-on-surface-variant/90">
+                    Placing KYC immediately after team creation improved top-of-funnel cash conversion by 30%, without negatively impacting paid contest joins.
+                </p>
+
+</div>
+</div>
+<!-- Metric Side -->
+<div class="lg:col-span-5 pt-4">
+<div class="rounded-2xl overflow-hidden bg-surface-container-lowest border border-outline-variant/10 aspect-square relative group">
+<img alt="Data visualization showing growth" class="w-full h-full object-cover opacity-30 grayscale group-hover:opacity-40 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4gjQPwBKlQuhMlPhZoruwhLY_o5YK_4OUPVjCey9tB69g5DIpIF_AJxqSaVgE9_r4Mbm5J3w_bXdhxfS-8oOwMKLIIECuYKD1tssHXErUMuoTUwJjaZDJ3wqyLwImhi7CPVAPKeAlUU4piBl9cXDKmbhSB3TEc4xQWidzyMN24ozbsi_HemL3vKn7leO_Mwadq-Mfgw9O765BrdOKnXPT4b9JBPVcgHoSeibBuF-OBeo-py75a6WvoH_J39VCTcNXVq4X8gSk2I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+<div class="absolute bottom-10 left-10 right-10">
+<div class="flex items-baseline gap-4">
+<span class="font-headline text-6xl md:text-7xl font-bold text-primary">+30%</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary-dim/80">Conversion Lift</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Step-by-step guidance -->
+<section class="py-20 px-6 md:px-12 lg:px-24">
+<div class="max-w-7xl mx-auto">
+<!-- Header -->
+<header class="mb-20 max-w-3xl">
+<span class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-4 block">Case Study: FinTech Onboarding</span>
+<h2 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        Step-by-step guidance
+      </h2>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed">
+        Restructuring the journey so verification happens at the moment of highest user commitment.
+      </p>
+</header>
+<!-- Split Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left: Mobile Screens -->
+<div class="lg:col-span-7 bg-surface-container-low rounded-xl p-4 md:p-8 flex items-center justify-center overflow-hidden">
+<div class="flex items-center -space-x-4 md:-space-x-12 translate-y-4">
+<!-- Screen 1 -->
+<div class="relative z-20 w-[280px] md:w-[340px] aspect-[9/19] rounded-[3rem] border-[8px] border-surface-container-highest shadow-2xl overflow-hidden bg-black">
+<img alt="Mobile Screen Verification UI" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfjNRKlVHkQ11YZvzaO3fKKqN4hCZPXcqD6mRLQxPN5v3z7HGo5HTOti1FYgrfrfevUqW6IaeM4ow7U-QEOCn2lYj0HQHf4yop6RyKBjqm6OYsgVik5_7KMS9E0_s7HJ1dXloP75f32JW2XW05uZnPLAbSM_IVdC1kppl35dkNde86VvGiwPVG4OK6jlZHenXRhQ9T7VLP6RJCiL9KxwNJYocLN4iDPeghtdTuNFyPBzR3PAw6A3MgUmeuV2yjISyfGQAJQHRQ0_c"/>
+</div>
+<!-- Screen 2 -->
+<div class="relative z-10 w-[280px] md:w-[340px] aspect-[9/19] rounded-[3rem] border-[8px] border-surface-container-highest shadow-xl overflow-hidden bg-black opacity-90 scale-95 -rotate-2">
+<img alt="Mobile Screen Dashboard UI" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGzACbRqdfsczXx12bsAQzpOqoOELTbKHNtEFLcoIQ_zdfcgjjArEAZ1vAeGYk6x6DvLoItzJUVCJxw1DH2w66LFkp2pGWGldGwJlUtVKksVpnU1cxSJ7iqOxgUn8YJocuhKef1vpFqlL7rjJ6VCXoz2eTO6tzrpOs2YrMtecbdkrzdC13YLUt6vvBA-EWQ-d4o3JSIhofjxU57ptldtGTOmKAy2TDQYSbou-Lzc1DRvGIbwmaoIQosUwiljCZxZcuRNTHFAoFa1w"/>
+</div>
+</div>
+</div>
+<!-- Right: Insight Cards -->
+<div class="lg:col-span-5 flex flex-col space-y-4">
+<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-primary">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Trust before commitment</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Reducing initial friction by establishing brand authority before requesting sensitive PII data.</p>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Clarity upfront</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Explicitly outlining the documentation needed before the user enters the secure flow.</p>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">layers</span>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Grouped compliance</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Batching regulatory requirements into logical thematic clusters to reduce perceived effort.</p>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">speed</span>
+<div>
+<h3 class="font-headline font-bold text-lg mb-1">Upfront rationale cuts abandonment</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Explaining the 'why' behind each data request saw a 24% lift in completion rates.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
