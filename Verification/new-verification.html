@@ -68,6 +68,60 @@ img { display: block; max-width: 100%; }
 }
 
 /* ==============================
+   SECTION COVER: VERIFICATION REVAMP
+============================== */
+.s-cover {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 80px 24px 128px; overflow: hidden;
+}
+.s-cover-glow {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 56rem; height: 384px;
+  background: rgba(135,32,0,0.2); filter: blur(120px); border-radius: 9999px; pointer-events: none;
+}
+.s-cover-content {
+  position: relative; z-index: 10; max-width: 56rem; width: 100%;
+  text-align: center; display: flex; flex-direction: column; gap: 32px;
+}
+.s-cover-icon { display: flex; justify-content: center; }
+.s-cover-icon-wrap { position: relative; }
+.s-cover-icon-glow {
+  position: absolute; inset: 0; background: rgba(255,181,160,0.2);
+  filter: blur(48px); border-radius: 9999px; transform: scale(1.5); transition: background 0.7s;
+}
+.s-cover-icon-wrap:hover .s-cover-icon-glow { background: rgba(255,181,160,0.3); }
+.s-cover-icon-box {
+  position: relative; background: var(--surface-container-highest);
+  padding: 24px; border-radius: 1.5rem; border: 1px solid rgba(72,72,72,0.1);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.s-cover-icon-box .material-symbols-outlined { font-size: 3.75rem; color: var(--primary); font-variation-settings: 'FILL' 1; }
+.s-cover-headlines { display: flex; flex-direction: column; gap: 16px; }
+.s-cover-headlines h1 { font-family: 'Manrope', sans-serif; font-size: 3rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
+.s-cover-headlines p { font-size: 1.125rem; color: var(--on-surface-variant); max-width: 42rem; margin: 0 auto; line-height: 1.75; }
+.s-cover-pills { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.s-cover-pill {
+  padding: 6px 16px; border-radius: 9999px;
+  background: var(--surface-container-high); border: 1px solid rgba(72,72,72,0.2);
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary-dim);
+}
+.s-cover-meta { padding-top: 64px; border-top: 1px solid rgba(72,72,72,0.1); }
+.s-cover-meta-grid { display: grid; grid-template-columns: 1fr; gap: 32px; text-align: left; }
+.s-cover-meta-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--on-surface-variant); margin-bottom: 8px; display: block; }
+.s-cover-meta-value { font-weight: 600; font-size: 1rem; line-height: 1.4; transition: color 0.2s; }
+.s-cover-meta-item:hover .s-cover-meta-value { color: var(--primary); }
+.s-cover-rule { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(72,72,72,0.3), transparent); }
+
+@media (min-width: 768px) {
+  .s-cover { padding: 80px 48px 128px; }
+  .s-cover-headlines h1 { font-size: 5rem; }
+  .s-cover-headlines p { font-size: 1.25rem; }
+  .s-cover-meta { padding-top: 96px; }
+  .s-cover-meta-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* ==============================
    SECTION 0: PHONE SHOWCASE
 ============================== */
 .s0 {
@@ -1052,13 +1106,13 @@ img { display: block; max-width: 100%; }
 .s10-overlay-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 .s10-overlay-row span { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .s10-overlay p { font-size: 0.6875rem; color: var(--on-surface-variant); line-height: 1.6; }
-.s10-artifact-note { display: flex; align-items: flex-start; gap: 16px; margin-top: 32px; padding: 0 8px; }
+.s10-artifact-note { display: none; align-items: flex-start; gap: 16px; margin-top: 32px; padding: 0 8px; } /*display:flex*/
 .s10-artifact-note .material-symbols-outlined { color: var(--on-surface-variant); font-size: 1rem; flex-shrink: 0; margin-top: 2px; transform: scale(0.75); }
 .s10-artifact-note p { font-size: 0.875rem; font-style: italic; color: rgba(172,171,170,0.8); line-height: 1.6; }
 
 /* Footer CTA */
 .s10-footer {
-  display: flex; flex-direction: column; gap: 24px;
+  display: none; flex-direction: column; gap: 24px;
   padding-top: 48px; border-top: 1px solid rgba(72,72,72,0.1);
 }
 .s10-footer-meta { display: flex; flex-direction: column; gap: 4px; }
@@ -1191,7 +1245,7 @@ img { display: block; max-width: 100%; }
 .s9-divider-line { height: 48px; width: 1px; background: linear-gradient(to bottom, rgba(72,72,72,0.3), rgba(255,181,160,0.4)); }
 
 /* Metric summary footer */
-.s9-metrics { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-top: 1px solid rgba(72,72,72,0.15); }
+.s9-metrics { display: none; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-top: 1px solid rgba(72,72,72,0.15); }
 .s9-metric-item { display: flex; flex-direction: column; gap: 8px; }
 .s9-metric-item-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); font-weight: 700; }
 .s9-metric-item-value { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 700; }
@@ -1286,6 +1340,56 @@ img { display: block; max-width: 100%; }
 <body>
 <main>
 
+<!-- Section Cover: Verification Revamp -->
+<section class="s-cover">
+  <div class="s-cover-glow"></div>
+  <div class="s-cover-content">
+
+    <!-- Lock icon -->
+    <div class="s-cover-icon">
+      <div class="s-cover-icon-wrap">
+        <div class="s-cover-icon-glow"></div>
+        <div class="s-cover-icon-box">
+          <span class="material-symbols-outlined">lock</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Headlines -->
+    <div class="s-cover-headlines">
+      <h1>Verification Revamp</h1>
+      <p>Redesigning verification for 200M+ users at Dream11. Transforming fragmented KYC touchpoints into a unified, compliant experience.</p>
+    </div>
+
+    <!-- Pills -->
+    <div class="s-cover-pills">
+      <span class="s-cover-pill">secure</span>
+      <span class="s-cover-pill">compliant</span>
+      <span class="s-cover-pill">frictionless</span>
+    </div>
+
+    <!-- Metadata -->
+    <div class="s-cover-meta">
+      <div class="s-cover-meta-grid">
+        <div class="s-cover-meta-item">
+          <span class="s-cover-meta-label">Project Type</span>
+          <span class="s-cover-meta-value">Redesign of KYC &amp; withdrawal verification</span>
+        </div>
+        <div class="s-cover-meta-item">
+          <span class="s-cover-meta-label">My Role</span>
+          <span class="s-cover-meta-value">Product Design</span>
+        </div>
+        <div class="s-cover-meta-item">
+          <span class="s-cover-meta-label">Cross Collaboration</span>
+          <span class="s-cover-meta-value">Product, Engineering, Research, Content, Data, Illustrations, Legal.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="s-cover-rule"></div>
+</section>
+
 <!-- Section 0: Phone Showcase -->
 <section class="s0">
   <div class="s0-glow-editorial"></div>
@@ -1297,7 +1401,7 @@ img { display: block; max-width: 100%; }
       <div class="s0-phone-side s0-phone-left">
         <div class="s0-shell-side">
           <div class="s0-screen-side">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChFN4V0MGBQwLyqI_5AOxhaaUrmdAyyBVJB_gWRrswTzUPC46_vJs_MxoBXziSwcVtayVd30cW0WNXXm3PWov84v0LKXBzF9jsF0CoF3F2ds11CXS8cGlv9DDCgCIX6ejVXaIK5dq9qTvgaaAFWBjbHJ_SXvSeWrwDnVGcnygmHYH5gOIdGCQ8e6BNqzpgtbgUaFnoFTa_2y9SIT1C6-RmfkdIjZ5y4v7HPjpFFB9Npscpw9nMENGeEzJRENsvXHBXspcR36t732U" alt="Mobile App Interface"/>
+            <img src="https://github.com/Bhavika-Maloo/work/blob/main/Verification/assests/Intro-1.png" alt="Mobile App Interface"/>
           </div>
         </div>
       </div>
@@ -1306,7 +1410,7 @@ img { display: block; max-width: 100%; }
       <div class="s0-phone-center">
         <div class="s0-shell-center">
           <div class="s0-screen-center">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYWfj7V1Duu08_v3TI7pXkBP-PtYPDDtNuj4BlVLm2o30W0xWxI2p9XqrPZYV_b-r0uoX6SaQo9NScwYG_u9KIWenlUhUEXtqUXN94Q6nHodPLW1r6_H62wCxV29k6Wn38P74ikUox8OiRQGB-V_acml5NDAr0ok_GKvSVFRY3GIqQI32xdrB7QWoOVvq6LvtJ0UAONItAv7o0pXcijM_2BYZLP-62eSFSCrQKROpqv2_xkRg5T-c0wcW3cNPnLqQis4yqkUaTdF4" alt="Primary App View"/>
+            <img src="https://github.com/Bhavika-Maloo/work/blob/main/Verification/assests/Intro-2.png" alt="Primary App View"/>
             <div class="s0-screen-center-fade"></div>
           </div>
         </div>
@@ -1316,7 +1420,7 @@ img { display: block; max-width: 100%; }
       <div class="s0-phone-side s0-phone-right">
         <div class="s0-shell-side">
           <div class="s0-screen-side">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuASR6wiuokWixPaAljHovPHPyDxsFtbkjReRQo3SRK3P6RQEhOcsSHmTO1CjJl9CGYVb1qKyMWhfxTetCYq0Ke6xIi63Ei-5JCElZ_jCsPOCNynfGMfw5Z9V1d-WNgdG8h-DR8Dn47FHbIhF1vxBw0y_DVfgIfLR7d1qQ1n4OQgo3AriE-HN_dtI3_yiBEy-NX0SuBMhgsLGTGQeQW4vHgBdjEtgGTiHA8XkJzNXWvTmAbR5YcG1vweRjezE64u0VnUrTsL2_L6DDo" alt="Secondary App View"/>
+            <img src="https://github.com/Bhavika-Maloo/work/blob/mainVerification/assests/Intro-3.png" alt="Secondary App View"/>
           </div>
         </div>
       </div>
