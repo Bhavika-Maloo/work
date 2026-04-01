@@ -1,497 +1,2189 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>OBSIDIAN | UX Case Study: The Friction Point</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-tertiary-container": "#575656",
-              "tertiary-container": "#edeaea",
-              "primary-dim": "#ffa086",
-              "tertiary-fixed-dim": "#e8e5e4",
-              "tertiary-dim": "#edeaea",
-              "on-tertiary-fixed-variant": "#676666",
-              "error-dim": "#bb5551",
-              "surface": "#0e0e0e",
-              "outline-variant": "#484848",
-              "on-surface-variant": "#acabaa",
-              "on-primary-fixed": "#7a1c00",
-              "on-secondary-fixed": "#3f3f3f",
-              "surface-container-lowest": "#000000",
-              "surface-container-highest": "#252626",
-              "secondary-fixed": "#e4e2e1",
-              "primary-fixed": "#ffdbd1",
-              "on-error": "#490106",
-              "on-surface": "#e7e5e5",
-              "tertiary-fixed": "#f6f3f2",
-              "surface-container-low": "#131313",
-              "inverse-on-surface": "#565555",
-              "inverse-surface": "#fcf9f8",
-              "secondary-container": "#3b3b3b",
-              "surface-container-high": "#1f2020",
-              "on-primary": "#7c1d00",
-              "background": "#0e0e0e",
-              "on-primary-fixed-variant": "#ac2c00",
-              "primary": "#ffb5a0",
-              "on-secondary": "#202020",
-              "surface-tint": "#ffb5a0",
-              "primary-container": "#872000",
-              "primary-fixed-dim": "#ffc8b9",
-              "secondary-fixed-dim": "#d6d4d3",
-              "surface-variant": "#252626",
-              "on-primary-container": "#ffc2b2",
-              "surface-dim": "#0e0e0e",
-              "surface-bright": "#2b2c2c",
-              "inverse-primary": "#b22e00",
-              "on-tertiary": "#605f5e",
-              "secondary-dim": "#9f9d9d",
-              "on-error-container": "#ff9993",
-              "error": "#ee7d77",
-              "on-secondary-container": "#c1bfbe",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "on-tertiary-fixed": "#4a4949",
-              "tertiary": "#fcf9f8",
-              "secondary": "#9f9d9d",
-              "outline": "#767575",
-              "on-background": "#e7e5e5",
-              "surface-container": "#191a1a",
-              "error-container": "#7f2927"
-            },
-            fontFamily: {
-              "headline": ["Manrope"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      .glass-card {
-        background: rgba(37, 38, 38, 0.6);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-      .inner-glow {
-        box-shadow: inset 0 1px 0 0 rgba(231, 229, 229, 0.05);
-      }
-      .step-line {
-        background: linear-gradient(to bottom, #484848 0%, #484848 50%, transparent 50%);
-        background-size: 1px 12px;
-      }
-      .condensed-timeline {
-        max-width: 600px;
-      }
-      .editorial-blur {
-        backdrop-filter: blur(20px);
-        background: rgba(37, 38, 38, 0.6);
-      }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .gradient-cta {
-        background: linear-gradient(135deg, #ffb5a0 0%, #872000 100%);
-      }
-      body {
-        background-color: #0e0e0e;
-        color: #e7e5e5;
-      }
-    </style>
-</head>
-<body class="font-body selection:bg-primary selection:text-on-primary">
-<main>
-<!-- Section 1: Hero Section -->
-<section class="relative min-h-screen flex flex-col items-center justify-center px-6">
-<!-- Background Glow -->
-<div class="absolute inset-0 z-0">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px]"></div>
-</div>
-<div class="relative z-10 max-w-5xl text-center space-y-8">
-<p class="font-label text-primary font-medium tracking-[0.2em] uppercase text-xs">The Problem Definition</p>
-<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.9] text-on-surface">
-                    We didn’t lose users.<br/>
-<span class="text-primary-dim">We lost them right before they cared most.</span>
-</h1>
-<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto font-light leading-relaxed">
-                    Users didn’t drop off randomly — they were blocked at the exact moment of intent.
-                </p>
-</div>
-<!-- Scroll Indicator -->
-<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
-<span class="font-label text-[10px] tracking-widest uppercase">Scroll to explore</span>
-<div class="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent"></div>
-</div>
-</section>
-<!-- Section 2: Story Card -->
-<section class="py-24 px-6 md:px-20 lg:px-40">
-<div class="max-w-6xl mx-auto">
-<div class="glass-card rounded-xl p-12 md:p-24 shadow-[0_40px_80px_rgba(231,229,229,0.04)] relative overflow-hidden">
-<!-- Subtle Light Hit -->
-<div class="absolute top-0 left-0 right-0 h-[1px] bg-surface-bright/50"></div>
-<div class="grid md:grid-cols-2 gap-16 items-center">
-<div class="space-y-10">
-<h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tight text-on-surface">7:20 PM.<br/>The match is about to start.</h2>
-<div class="font-body text-xl md:text-2xl leading-[1.8] text-on-surface-variant space-y-4">
-<p>You’ve built your team.</p>
-<p>You tap '<span class="text-primary font-semibold">Join Contest</span>'.</p>
-<p>A <span class="text-error font-semibold">verification screen</span> appears.</p>
-<p>Five options. No clarity.</p>
-<p class="text-on-surface font-medium">You close the app.</p>
-</div>
-</div>
-<div class="relative aspect-[4/5] rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-<img class="object-cover w-full h-full opacity-60" data-alt="dramatic close up of a stadium spotlight in the dark night with smoke and intense lighting atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_lNHC0FIwqp4E9sq7BdKxbE02iw0Iq9JAC8sBW0fYLa5v9NmAvF7wthKjTrF1NF3TAbZ9pw0kSCPvvWt-3PdCcgt5dOyBCNjsrriYwGvwu9WOpE5vf_AJrAA-4PpMfjSoM1tfs1HLhrtdHM_SUX36vtGtwSfTPb63WNeID5APZwAhEkwP8Rgfa6iaoVvgXDXO3PiMTHEEH3QQPMzf7dpFcpcDQA4loKNLilk3cgIXfxvN7Y7YQOcSGt03y0pnsC8Lq9gY4MDYtAg"/>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 3: Journey Visualization -->
-<section class="py-24 px-6 bg-surface-container-low">
-<div class="max-w-6xl mx-auto space-y-20">
-<div class="text-center space-y-4">
-<h3 class="font-headline text-3xl font-bold tracking-tight">The Friction Journey</h3>
-<p class="font-body text-on-surface-variant">Visualizing the break in narrative flow</p>
-</div>
-<div class="relative flex flex-col md:flex-row justify-between items-center gap-8 px-12">
-<!-- Progress Line -->
-<div class="absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant/30 -translate-y-1/2 hidden md:block">
-<div class="absolute left-0 top-0 h-full w-[60%] bg-primary"></div>
-<div class="absolute left-[60%] top-0 h-full w-[10%] bg-error"></div>
-</div>
-<!-- Step: Browse -->
-<div class="relative z-10 flex flex-col items-center gap-4 group">
-<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-primary transition-colors">
-<span class="material-symbols-outlined text-on-surface">search</span>
-</div>
-<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Browse</span>
-</div>
-<!-- Step: Join -->
-<div class="relative z-10 flex flex-col items-center gap-4 group">
-<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-primary transition-colors">
-<span class="material-symbols-outlined text-on-surface">ads_click</span>
-</div>
-<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Join</span>
-</div>
-<!-- Step: KYC Wall (Friction Point) -->
-<div class="relative z-10 flex flex-col items-center gap-6">
-<div class="relative">
-<!-- Blurred UI Thumbnails -->
-<div class="absolute -top-12 -left-12 w-20 h-28 bg-surface-container-highest rounded shadow-2xl rotate-[-15deg] opacity-40 blur-[2px] border border-outline-variant/20"></div>
-<div class="absolute -top-8 -right-12 w-20 h-28 bg-surface-container-highest rounded shadow-2xl rotate-[10deg] opacity-60 blur-[1px] border border-outline-variant/20"></div>
-<div class="w-24 h-24 rounded-full bg-error/10 flex items-center justify-center border-2 border-error animate-pulse shadow-[0_0_40px_rgba(238,125,119,0.3)]">
-<span class="material-symbols-outlined text-error text-4xl" data-weight="fill">warning</span>
-</div>
-</div>
-<div class="px-4 py-1 bg-error/10 border border-error/20 rounded-full">
-<span class="font-label text-xs font-bold tracking-widest text-error uppercase">KYC Wall</span>
-</div>
-</div>
-<!-- Step: Drop-off -->
-<div class="relative z-10 flex flex-col items-center gap-4 group">
-<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/15 group-hover:border-error transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">logout</span>
-</div>
-<span class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Drop-off</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 4: Impact Metrics -->
-<section class="py-24 px-6 relative">
-<!-- Asymmetric Metric Grid -->
-<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-<!-- Metric 1 -->
-<div class="md:col-span-5 glass-card p-10 rounded-xl space-y-6 md:mt-16 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20">
-<span class="font-headline text-8xl font-black text-primary tracking-tighter italic">15%</span>
-<p class="font-body text-on-surface-variant text-lg leading-snug">Support tickets directly related to <span class="text-on-surface font-medium">KYC friction</span> and failed withdrawals.</p>
-</div>
-<!-- Metric 2 -->
-<div class="md:col-start-7 md:col-span-6 glass-card p-16 rounded-xl space-y-6 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20 z-10">
-<span class="font-headline text-9xl font-black text-on-surface tracking-tighter">35 min</span>
-<p class="font-body text-on-surface-variant text-xl leading-relaxed">Average time for a new user to complete their <span class="text-primary font-medium">first successful withdrawal</span> during peak events.</p>
-</div>
-<!-- Metric 3 -->
-<div class="md:col-start-2 md:col-span-5 glass-card p-12 rounded-xl space-y-6 shadow-[0_40px_80px_rgba(231,229,229,0.02)] border-t border-surface-bright/20">
-<span class="font-headline text-7xl font-black text-error/80 tracking-tighter">~9K</span>
-<p class="font-body text-on-surface-variant text-lg leading-snug">Weekly support tickets handled during <span class="text-on-surface font-medium">major tournament peaks</span>.</p>
-</div>
-</div>
-</section>
-<!-- Section 5: Constraints -->
-<section class="py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
-<div class="max-w-7xl mx-auto flex flex-col items-center">
-<!-- Hero Header -->
-<header class="text-center mb-20 space-y-6 max-w-3xl">
-<h2 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter text-on-surface">
-        Why this was hard
-      </h2>
-<p class="font-headline text-lg md:text-xl text-on-surface-variant leading-relaxed opacity-80">
-        Constraints compounded each other. Understanding all six shaped every design decision.
-      </p>
-</header>
-<!-- Constraint Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-<!-- Card 1: Fragmented Flow -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary text-3xl">alt_route</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
-              High impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Fragmented Flow</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-            KYC, location, and payment checks appear at different stages, causing repeated interruptions.
-          </p>
-</div>
-</article>
-<!-- Card 2: IPL rush -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
-              High impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">IPL rush</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-            Drop-off peaks when intent is highest. At 7:25pm on match day, patience is zero.
-          </p>
-</div>
-</article>
-<!-- Card 3: Poor KYC timing -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary text-3xl">timer_off</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#872000] text-[#ffb5a0] border border-primary/20">
-              High impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Poor KYC timing</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-            Verification prompt appeared before users committed to joining.
-          </p>
-</div>
-</article>
-<!-- Card 4: Low Aadhaar-mobile linkage -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-on-surface-variant text-3xl">link_off</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-high text-on-surface-variant border border-outline-variant/30">
-              Medium impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Low Aadhaar-mobile linkage</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-            Most users hadn't linked mobile to Aadhaar — ruling out OTP and forcing document fallbacks.
-          </p>
-</div>
-</article>
-<!-- Card 5: State-level geo-gating -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-on-surface-variant text-3xl">distance</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-high text-on-surface-variant border border-outline-variant/30">
-              Medium impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">State-level geo-gating</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-          , Telangana, TN and others required location checks at every contest entry — not once at reg.
-          </p>
-</div>
-</article>
-<!-- Card 6: Weak onboarding guidance -->
-<article class="glass-card inner-glow p-8 rounded-xl flex flex-col justify-between transition-all hover:bg-surface-container-highest border border-outline-variant/10">
-<div>
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-outline text-3xl">help_center</span>
-<span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-surface-container-low text-outline border border-outline-variant/20">
-              Low impact
-            </span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Weak onboarding guidance</h3>
-<p class="text-on-surface-variant leading-relaxed font-body">
-            First-time users are not clearly told why verification is required.
-          </p>
-</div>
-</article>
-</div>
-<!-- Background Accents -->
-<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
-<div class="fixed bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-primary-container/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
-</div>
-</section>
-<!-- Section 6: Final Solution -->
-<section class="py-20 px-6 md:px-12 lg:px-24">
-<div class="max-w-7xl mx-auto">
-<!-- Header -->
-<header class="mb-16">
-<div class="inline-flex items-center px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/15 mb-6">
-<span class="text-[10px] font-label font-bold tracking-[0.2em] uppercase text-primary">Final Solution</span>
-</div>
-<h2 class="font-headline text-4xl md:text-6xl font-bold tracking-tight text-on-surface mb-4 leading-tight">Retime the ask</h2>
-<div class="flex flex-col gap-1">
-<span class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary-dim/60"><br/></span>
-<h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface-variant">Move KYC to after team creation — when intent is real, not assumed.</h3>
-</div>
-</header>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-<!-- Condensed Timeline -->
-<div class="lg:col-span-7 condensed-timeline">
-<div class="space-y-1 relative">
-<!-- Vertical Line -->
-<div class="absolute left-3 top-4 bottom-4 w-px bg-outline-variant/30"></div>
-<!-- Step 1 -->
-<div class="relative pl-10 py-3 group">
-<div class="absolute left-2.5 top-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
-<div class="flex flex-col">
-<span class="font-headline text-base font-bold text-on-surface">1 - Browse &amp; select contest</span>
-<span class="font-body text-xs text-secondary-dim/60 italic">commit intent first</span>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="relative pl-10 py-3 group">
-<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
-<div class="flex flex-col">
-<span class="font-headline text-base font-bold text-on-surface">2 - Create team</span>
-<span class="font-body text-xs text-secondary-dim/60 italic">KYC triggered post-save</span>
-</div>
-</div>
-<!-- Step 3 (HIGHLIGHTED) -->
-<div class="relative pl-10 py-4 -mx-4 px-4 rounded-lg bg-primary/5 border border-primary/10">
-<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,181,160,0.6)]"></div>
-<div class="flex items-center justify-between">
-<div class="flex flex-col">
-<span class="font-headline text-base font-bold text-primary">3 - KYC + Location (grouped)</span>
-<span class="font-body text-xs text-on-surface/70 font-medium">all steps at once</span>
-</div>
-</div>
-</div>
-<!-- Step 4 -->
-<div class="relative pl-10 py-3 group">
-<div class="absolute left-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
-<div class="flex flex-col">
-<span class="font-headline text-base font-bold text-on-surface">4 - Join contest &amp; pay</span>
-<span class="font-body text-xs text-secondary-dim/60 italic">final transactional step</span>
-</div>
-</div>
-</div>
-<!-- Impact -->
-<div class="mt-12 pt-10 border-t border-outline-variant/10">
-<h3 class="font-headline text-2xl md:text-3xl font-bold text-on-surface mb-4 leading-tight">
-                    Improved top-of-funnel cash conversion by 30%
-                </h3>
-<p class="font-body text-base md:text-lg leading-relaxed text-on-surface-variant/90">
-                    Placing KYC immediately after team creation improved top-of-funnel cash conversion by 30%, without negatively impacting paid contest joins.
-                </p>
+/* === Design Tokens === */
+:root {
+  --primary: #ffb5a0;
+  --primary-dim: #ffa086;
+  --primary-container: #872000;
+  --on-primary: #7c1d00;
+  --background: #0e0e0e;
+  --surface-container: #191a1a;
+  --surface-container-low: #131313;
+  --surface-container-high: #1f2020;
+  --surface-container-highest: #252626;
+  --surface-container-lowest: #000000;
+  --surface-bright: #2b2c2c;
+  --on-surface: #e7e5e5;
+  --on-surface-variant: #acabaa;
+  --outline: #767575;
+  --outline-variant: #484848;
+  --error: #ee7d77;
+  --secondary: #9f9d9d;
+}
 
-</div>
-</div>
-<!-- Metric Side -->
-<div class="lg:col-span-5 pt-4">
-<div class="rounded-2xl overflow-hidden bg-surface-container-lowest border border-outline-variant/10 aspect-square relative group">
-<img alt="Data visualization showing growth" class="w-full h-full object-cover opacity-30 grayscale group-hover:opacity-40 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4gjQPwBKlQuhMlPhZoruwhLY_o5YK_4OUPVjCey9tB69g5DIpIF_AJxqSaVgE9_r4Mbm5J3w_bXdhxfS-8oOwMKLIIECuYKD1tssHXErUMuoTUwJjaZDJ3wqyLwImhi7CPVAPKeAlUU4piBl9cXDKmbhSB3TEc4xQWidzyMN24ozbsi_HemL3vKn7leO_Mwadq-Mfgw9O765BrdOKnXPT4b9JBPVcgHoSeibBuF-OBeo-py75a6WvoH_J39VCTcNXVq4X8gSk2I"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
-<div class="absolute bottom-10 left-10 right-10">
-<div class="flex items-baseline gap-4">
-<span class="font-headline text-6xl md:text-7xl font-bold text-primary">+30%</span>
-<span class="font-label text-[10px] uppercase tracking-widest text-secondary-dim/80">Conversion Lift</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body ::selection { background: rgba(255,181,160,0.3); }
+h1,h2,h3,h4,h5 { font-family: 'Manrope', sans-serif; }
+img { display: block; max-width: 100%; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Shared color helpers */
+.c-primary { color: var(--primary); }
+.c-primary-dim { color: var(--primary-dim); }
+.c-error { color: var(--error); }
+.c-surface { color: var(--on-surface); }
+
+/* Shared glass */
+.glass-card {
+  background: rgba(37,38,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ==============================
+   SECTION 0: PHONE SHOWCASE
+============================== */
+.s0 {
+  position: relative; width: 100%; min-height: 600px;
+  display: flex; justify-content: center; overflow: hidden;
+  background: var(--background); padding: 96px 24px;
+}
+.s0-glow-editorial {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at center, rgba(135,32,0,0.15) 0%, rgba(14,14,14,0) 70%);
+}
+.s0-glow-purple {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(147,51,234,0.08) 0%, rgba(14,14,14,0) 50%);
+}
+.s0-inner {
+  position: relative; z-index: 10; width: 100%; max-width: 80rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+.s0-phones {
+  position: relative; width: 100%;
+  display: flex; justify-content: center; align-items: center;
+}
+/* Side phones */
+.s0-phone-side {
+  position: relative; z-index: 20;
+  transform-origin: center bottom;
+  opacity: 0.8; transition: transform 0.7s, opacity 0.7s;
+}
+.s0-phone-left {
+  margin-right: -64px;
+  transform: rotate(-6deg) translateY(32px) scale(0.85);
+}
+.s0-phone-left:hover { transform: rotate(0deg) translateY(0) scale(0.85); }
+.s0-phone-right {
+  margin-left: -64px;
+  transform: rotate(6deg) translateY(32px) scale(0.85);
+}
+.s0-phone-right:hover { transform: rotate(0deg) translateY(0) scale(0.85); }
+/* Center phone */
+.s0-phone-center {
+  position: relative; z-index: 30;
+  box-shadow: 0 40px 100px rgba(255,181,160,0.1);
+}
+/* Phone shells */
+.s0-shell-side {
+  background: var(--surface-container-highest); border-radius: 2.5rem;
+  padding: 12px; border: 1px solid rgba(72,72,72,0.1); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.s0-shell-center {
+  background: var(--surface-container-highest); border-radius: 3rem;
+  padding: 12px; border: 1px solid rgba(72,72,72,0.2);
+}
+/* Phone screens */
+.s0-screen-side {
+  background: #000; border-radius: 2rem; overflow: hidden;
+  width: 260px; height: 540px;
+}
+.s0-screen-center {
+  background: #000; border-radius: 2.5rem; overflow: hidden;
+  width: 300px; height: 620px; position: relative;
+}
+.s0-screen-side img,
+.s0-screen-center img { width: 100%; height: 100%; object-fit: cover; }
+.s0-screen-center-fade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent, transparent);
+}
+
+@media (min-width: 768px) {
+  .s0 { padding: 96px 48px; }
+}
+
+/* ==============================
+   SECTION 1: HERO
+============================== */
+.s1 {
+  position: relative;
+  padding: 128px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.s1-glow-wrap { position: absolute; inset: 0; z-index: 0;  }
+.s1-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 800px; height: 800px;
+  background: rgba(255,181,160,0.1);
+  border-radius: 9999px;
+  filter: blur(160px);
+}
+.s1-content {
+  position: relative;
+  z-index: 10;
+  max-width: 64rem;
+  text-align: center;
+}
+.s1-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 32px;
+}
+.s1-headline {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--on-surface);
+  margin-bottom: 32px;
+}
+.s1-body {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--on-surface-variant);
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.625;
+}
+.s1-scroll {
+  position: absolute;
+  bottom: 48px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0.4;
+}
+.s1-scroll-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+.s1-scroll-line {
+  width: 1px; height: 64px;
+  background: linear-gradient(to bottom, var(--primary), transparent);
+}
+
+/* ==============================
+   SECTION 2: STORY CARD
+============================== */
+.s2 { padding: 96px 24px; }
+.s2-inner { max-width: 72rem; margin: 0 auto; }
+.s2-card {
+  background: rgba(37,38,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 3rem;
+  padding: 48px;
+  box-shadow: 0 40px 80px rgba(231,229,229,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.s2-card-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(43,44,44,0.5);
+}
+.s2-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.s2-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--on-surface);
+  margin-bottom: 40px;
+  line-height: 1.3;
+}
+.s2-narrative { font-size: 1.25rem; line-height: 1.8; color: var(--on-surface-variant); }
+.s2-narrative p { margin-bottom: 16px; }
+.s2-narrative p:last-child { margin-bottom: 0; }
+.s2-image-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 2rem;
+  overflow: hidden;
+  filter: grayscale(1);
+  transition: filter 0.7s;
+}
+.s2-image-wrap:hover { filter: grayscale(0); }
+.s2-image-wrap img { object-fit: cover; width: 100%; height: 100%; opacity: 0.6; }
+
+/* ==============================
+   SECTION 3: JOURNEY
+============================== */
+.s3 { padding: 96px 24px; background: var(--surface-container-low); }
+.s3-inner { max-width: 72rem; margin: 0 auto; }
+.s3-title { text-align: center; margin-bottom: 80px; }
+.s3-title h3 { font-size: 1.875rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 16px; }
+.s3-title p { color: var(--on-surface-variant); }
+.s3-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 0 24px;
+}
+.s3-line {
+  display: none;
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 1px;
+  transform: translateY(-50%);
+  background: rgba(72,72,72,0.3);
+}
+.s3-line-primary {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%; width: 60%;
+  background: var(--primary);
+}
+.s3-line-error {
+  position: absolute;
+  left: 60%; top: 0;
+  height: 100%; width: 10%;
+  background: var(--error);
+}
+.s3-step {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.s3-step-icon {
+  width: 64px; height: 64px;
+  border-radius: 9999px;
+  background: var(--surface-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(72,72,72,0.15);
+  transition: border-color 0.2s;
+}
+.s3-step:hover .s3-step-icon { border-color: var(--primary); }
+.s3-step.drop-off:hover .s3-step-icon { border-color: var(--error); }
+.s3-step-label { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--on-surface-variant); text-transform: uppercase; }
+.s3-kyc { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.s3-kyc-inner { position: relative; }
+.s3-kyc-thumb {
+  position: absolute;
+  width: 80px; height: 112px;
+  background: var(--surface-container-highest);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  border: 1px solid rgba(72,72,72,0.2);
+}
+.s3-kyc-thumb-1 { top: -48px; left: -48px; transform: rotate(-15deg); opacity: 0.4; filter: blur(2px); }
+.s3-kyc-thumb-2 { top: -32px; right: -48px; transform: rotate(10deg); opacity: 0.6; filter: blur(1px); }
+.s3-kyc-icon {
+  position: relative;
+  width: 96px; height: 96px;
+  border-radius: 9999px;
+  background: rgba(238,125,119,0.1);
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--error);
+  box-shadow: 0 0 40px rgba(238,125,119,0.3);
+  animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+.s3-kyc-icon .material-symbols-outlined { color: var(--error); font-size: 2.25rem; }
+.s3-kyc-badge {
+  padding: 4px 16px;
+  background: rgba(238,125,119,0.1);
+  border: 1px solid rgba(238,125,119,0.2);
+  border-radius: 9999px;
+}
+.s3-kyc-badge span {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--error);
+}
+
+/* ==============================
+   SECTION 4: IMPACT METRICS
+============================== */
+.s4 { padding: 96px 24px; position: relative; }
+.s4-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.s4-card {
+  background: rgba(37,38,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 3rem;
+  border-top: 1px solid rgba(43,44,44,0.2);
+  box-shadow: 0 40px 80px rgba(231,229,229,0.02);
+}
+.s4-card-1 { padding: 40px; }
+.s4-card-2 { padding: 64px; }
+.s4-card-3 { padding: 48px; }
+.s4-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  display: block;
+  margin-bottom: 24px;
+}
+.s4-num-1 { font-size: 5rem; color: var(--primary); font-style: italic; }
+.s4-num-2 { font-size: 6rem; color: var(--on-surface); }
+.s4-num-3 { font-size: 4.5rem; color: rgba(238,125,119,0.8); }
+.s4-text { color: var(--on-surface-variant); line-height: 1.375; }
+.s4-card-1 .s4-text, .s4-card-3 .s4-text { font-size: 1.125rem; }
+.s4-card-2 .s4-text { font-size: 1.25rem; line-height: 1.625; }
+.s4-text .hl { color: var(--on-surface); font-weight: 500; }
+.s4-text .hl-p { color: var(--primary); font-weight: 500; }
+
+/* ==============================
+   SECTION 5: CONSTRAINTS
+============================== */
+.s5 { padding: 96px 24px; position: relative; overflow: hidden; }
+.s5-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.s5-header { text-align: center; margin-bottom: 80px; max-width: 48rem; }
+.s5-header h2 { font-size: 3rem; font-weight: 800; letter-spacing: -0.05em; color: var(--on-surface); margin-bottom: 24px; }
+.s5-header p { font-family: 'Manrope', sans-serif; font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.625; opacity: 0.8; }
+.s5-grid { display: grid; grid-template-columns: 1fr; gap: 32px; width: 100%; }
+.s5-card {
+  background: rgba(37,38,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 0 rgba(231,229,229,0.05);
+  padding: 32px;
+  border-radius: 3rem;
+  border: 1px solid rgba(72,72,72,0.1);
+  transition: background 0.2s;
+}
+.s5-card:hover { background: rgba(37,38,38,0.95); }
+.s5-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.icon-high { color: var(--primary); font-size: 1.875rem; }
+.icon-mid  { color: var(--on-surface-variant); font-size: 1.875rem; }
+.icon-low  { color: var(--outline); font-size: 1.875rem; }
+.badge {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.badge-high { background: #872000; color: #ffb5a0; border: 1px solid rgba(255,181,160,0.2); }
+.badge-mid  { background: var(--surface-container-high); color: var(--on-surface-variant); border: 1px solid rgba(72,72,72,0.3); }
+.badge-low  { background: var(--surface-container-low); color: var(--outline); border: 1px solid rgba(72,72,72,0.2); }
+.s5-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+.s5-card p  { color: var(--on-surface-variant); line-height: 1.625; }
+.s5-accent {
+  position: fixed;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: -1;
+}
+.s5-accent-1 { top: -10%; left: -10%; width: 40%; height: 40%; background: rgba(255,181,160,0.05); filter: blur(120px); }
+.s5-accent-2 { bottom: -5%; right: -5%; width: 30%; height: 30%; background: rgba(135,32,0,0.1); filter: blur(100px); }
+
+/* ==============================
+   SECTION 7: FINAL SOLUTION
+============================== */
+.s7 { padding: 80px 24px; }
+.s7-inner { max-width: 80rem; margin: 0 auto; }
+.s7-badge-wrap {
+  display: inline-flex; align-items: center;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: var(--surface-container-highest);
+  border: 1px solid rgba(72,72,72,0.15);
+  margin-bottom: 24px;
+}
+.s7-badge-wrap span { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--primary); }
+.s7-header { margin-bottom: 64px; }
+.s7-header h2 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; color: var(--on-surface); margin-bottom: 16px; line-height: 1.25; }
+.s7-header h3 { font-size: 1.25rem; font-weight: 600; color: var(--on-surface-variant); }
+.s7-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+.s7-timeline-col { max-width: 600px; }
+.s7-steps { position: relative; }
+.s7-steps::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 16px; bottom: 16px;
+  width: 1px;
+  background: rgba(72,72,72,0.3);
+}
+.s7-step { position: relative; padding: 12px 16px 12px 40px; }
+.s7-step-dot {
+  position: absolute;
+  left: 10px; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 9999px;
+  background: var(--outline-variant);
+}
+.s7-step-title { font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; color: var(--on-surface); display: block; }
+.s7-step-sub { font-size: 0.75rem; color: rgba(159,157,157,0.6); font-style: italic; display: block; margin-top: 2px; }
+.s7-step-hl {
+  padding: 16px 16px 16px 40px;
+  border-radius: 1rem;
+  background: rgba(255,181,160,0.05);
+  border: 1px solid rgba(255,181,160,0.1);
+}
+.s7-step-hl .s7-step-dot { width: 8px; height: 8px; background: var(--primary); box-shadow: 0 0 8px rgba(255,181,160,0.6); left: 9px; }
+.s7-step-hl .s7-step-title { color: var(--primary); }
+.s7-step-hl .s7-step-sub { color: rgba(231,229,229,0.7); font-style: normal; font-weight: 500; }
+.s7-impact { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(72,72,72,0.1); }
+.s7-impact h3 { font-size: 1.5rem; font-weight: 700; color: var(--on-surface); margin-bottom: 16px; line-height: 1.25; }
+.s7-impact p { font-size: 1rem; line-height: 1.625; color: rgba(172,171,170,0.9); }
+.s7-metric-col { padding-top: 16px; }
+.s7-metric-box {
+  border-radius: 1.5rem; overflow: hidden;
+  background: var(--surface-container-lowest);
+  border: 1px solid rgba(72,72,72,0.1);
+  aspect-ratio: 1/1;
+  position: relative;
+}
+.s7-metric-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(1); transition: opacity 0.7s; }
+.s7-metric-box:hover img { opacity: 0.4; }
+.s7-metric-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0e0e0e, rgba(14,14,14,0.2), transparent); }
+.s7-metric-label { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; align-items: baseline; gap: 16px; }
+.s7-metric-num { font-family: 'Manrope', sans-serif; font-size: 3.75rem; font-weight: 700; color: var(--primary); }
+.s7-metric-text { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(159,157,157,0.8); }
+
+/* ==============================
+   SECTION 6: DISCOVERY
+============================== */
+.s6 { padding: 80px 24px; }
+.s6-inner { max-width: 56rem; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.s6-header-group { display: flex; flex-direction: column; gap: 16px; }
+.s6-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--surface-container-highest);
+  color: var(--primary);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+.s6-headline { font-size: 3rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: var(--on-surface); }
+.s6-main-card {
+  background: var(--surface-container-low);
+  padding: 32px;
+  border-radius: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.s6-main-card-glow {
+  position: absolute;
+  top: 0; right: 0;
+  width: 256px; height: 256px;
+  background: rgba(255,181,160,0.05);
+  filter: blur(100px);
+  pointer-events: none;
+}
+.s6-insights { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
+.s6-insight { display: flex; flex-direction: column; gap: 8px; }
+.s6-insight-title { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.25rem; line-height: 1.25; color: var(--primary); }
+.s6-insight-bar {
+  height: 4px; width: 32px;
+  background: var(--outline-variant);
+  transition: background 0.5s;
+}
+.s6-main-card:hover .s6-insight-bar { background: var(--primary); }
+.s6-insight-text { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.625; }
+.s6-research-note { max-width: 42rem; }
+.s6-research-note p { font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.625; font-style: italic; }
+.s6-image-strip { display: flex; justify-content: center; width: 100%; }
+.s6-image-wrap { width: 100%; overflow: hidden; border-radius: 2rem; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+.s6-image-wrap img { width: 100%; height: auto; object-fit: cover; filter: grayscale(1); opacity: 0.8; transition: filter 0.7s; }
+.s6-image-wrap:hover img { filter: grayscale(0); }
+.s6-pivot-card {
+  background: linear-gradient(135deg, #872000, var(--surface-container-highest));
+  padding: 40px;
+  border-radius: 3rem;
+  text-align: center;
+  box-shadow: 0 40px 80px rgba(255,181,160,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.s6-pivot-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--on-surface-variant); display: block; margin-bottom: 16px; }
+.s6-pivot-heading { font-size: 1.5rem; font-weight: 800; color: var(--on-surface); letter-spacing: -0.025em; }
+.s6-pivot-heading .accent { color: var(--primary); }
+
+/* ==============================
+   SECTION 8: STEP-BY-STEP
+============================== */
+.s8 { padding: 80px 24px; }
+.s8-inner { max-width: 56rem; margin: 0 auto; }
+.s8-header { margin-bottom: 64px; }
+.s8-tag {
+  display: inline-block; padding: 4px 12px; margin-bottom: 24px;
+  border-radius: 9999px; border: 1px solid rgba(72,72,72,0.15);
+  font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 700; color: var(--primary);
+}
+.s8-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px; }
+.s8-header h2 span { color: var(--primary-dim); }
+.s8-header p { font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.625; max-width: 42rem; }
+.s8-rows { display: flex; flex-direction: column; gap: 80px; }
+.s8-row { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+.s8-phone-col { display: flex; justify-content: center; }
+.s8-phone-wrap { position: relative; width: 100%; max-width: 280px; }
+.s8-phone-glow {
+  position: absolute; inset: -16px;
+  background: rgba(255,181,160,0.05); filter: blur(48px);
+  border-radius: 9999px; opacity: 0; transition: opacity 0.7s;
+}
+.s8-phone-wrap:hover .s8-phone-glow { opacity: 1; }
+.s8-phone-frame {
+  position: relative; aspect-ratio: 9/19; border-radius: 2.5rem;
+  overflow: hidden; background: #000;
+  border: 1px solid rgba(72,72,72,0.1); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.s8-phone-frame img { width: 100%; height: 100%; object-fit: cover; transform: scale(0.85); }
+.s8-phone-notch {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  width: 64px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 9999px;
+}
+.s8-phone-label { margin-top: 24px; text-align: center; }
+.s8-phone-label span {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #5c5b5b;
+}
+.s8-info-col {}
+.s8-info-card {
+  background: var(--surface-container-low); padding: 40px;
+  border-radius: 2rem; border-top: 1px solid rgba(255,255,255,0.05);
+  position: relative; overflow: hidden;
+}
+.s8-info-card-glow {
+  position: absolute; top: 0; right: 0; width: 128px; height: 128px;
+  background: rgba(255,181,160,0.05); filter: blur(60px); border-radius: 9999px;
+  transform: translate(50%, -50%);
+}
+.s8-icon-wrap {
+  width: 48px; height: 48px; border-radius: 0.75rem;
+  background: var(--surface-container-highest);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px; border: 1px solid rgba(72,72,72,0.1);
+}
+.s8-icon-wrap .material-symbols-outlined { color: var(--primary); font-variation-settings: 'FILL' 1; }
+.s8-info-card h3 { font-size: 1.375rem; font-weight: 700; margin-bottom: 16px; }
+.s8-info-card p { color: var(--on-surface-variant); line-height: 1.75; font-size: 1.0625rem; }
+.s8-insight-cards { display: flex; flex-direction: column; gap: 12px; }
+.s8-insight-card {
+  background: var(--surface-container); padding: 24px; border-radius: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+.s8-insight-card:hover { background: var(--surface-variant); }
+.s8-insight-body { display: flex; gap: 24px; align-items: flex-start; }
+.s8-insight-num { color: var(--primary); font-weight: 700; font-size: 1.125rem; padding-top: 4px; flex-shrink: 0; }
+.s8-insight-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.s8-insight-card:hover h4 { color: var(--primary); }
+.s8-insight-card p { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.625; }
+
+/* ==============================
+   SECTION 14: EARNED LESSONS
+============================== */
+.s14 { padding: 96px 24px; position: relative; overflow: hidden; }
+.s14::before {
+  content: ''; position: absolute; top: -10%; right: -5%; width: 40%; height: 40%;
+  background: rgba(255,181,160,0.05); filter: blur(120px); border-radius: 9999px; pointer-events: none;
+}
+.s14::after {
+  content: ''; position: absolute; bottom: -10%; left: -5%; width: 30%; height: 30%;
+  background: rgba(135,32,0,0.1); filter: blur(100px); border-radius: 9999px; pointer-events: none;
+}
+.s14-inner { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+.s14-header { text-align: center; margin-bottom: 64px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.s14-eyebrow { font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--primary); }
+.s14-header h2 { font-family: 'Manrope', sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+.s14-rule { width: 48px; height: 4px; background: rgba(255,181,160,0.3); border-radius: 9999px; margin-top: 16px; }
+.s14-cards { display: grid; grid-template-columns: 1fr; gap: 32px; width: 100%; }
+.s14-card {
+  background: rgba(25,26,26,0.6); backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(231,229,229,0.05); border-radius: 2rem;
+  padding: 40px; display: flex; flex-direction: column; height: 100%;
+  transition: background 0.5s;
+}
+.s14-card:hover { background: var(--surface-container-highest); }
+.s14-card .material-symbols-outlined { font-size: 1.875rem; color: var(--primary); opacity: 0.8; margin-bottom: 32px; transition: opacity 0.3s; }
+.s14-card:hover .material-symbols-outlined { opacity: 1; }
+.s14-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.375rem; font-weight: 700; line-height: 1.3; margin-bottom: 24px; transition: color 0.3s; }
+.s14-card:hover h3 { color: var(--primary); }
+.s14-card p { color: var(--on-surface-variant); line-height: 1.75; font-size: 1.0625rem; margin-top: auto; }
+.s14-divider { margin-top: 96px; width: 100%; max-width: 56rem; height: 1px; background: linear-gradient(to right, transparent, var(--outline-variant), transparent); opacity: 0.2; }
+
+@media (min-width: 768px) {
+  .s14-header h2 { font-size: 5rem; }
+  .s14-header { margin-bottom: 96px; }
+  .s14-cards { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .s14 { padding: 96px 96px; }
+}
+
+/* ==============================
+   SECTION 13: REGULATION CHANGES
+============================== */
+.s13 { padding: 64px 24px; }
+.s13-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+
+.s13-header { max-width: 56rem; display: flex; flex-direction: column; gap: 16px; }
+.s13-tag {
+  display: inline-block; padding: 6px 16px; border-radius: 9999px;
+  background: var(--surface-container); border: 1px solid rgba(72,72,72,0.15);
+}
+.s13-tag span { font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--primary); }
+.s13-header h2 { font-family: 'Manrope', sans-serif; font-size: 2.75rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+.s13-header p { font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.75; max-width: 40rem; }
+
+/* Phase grid */
+.s13-phases { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.s13-phase {
+  position: relative; overflow: hidden; background: var(--surface-container);
+  border-radius: 0.75rem; padding: 24px;
+  border-top: 1px solid rgba(255,255,255,0.05); transition: background 0.5s;
+}
+.s13-phase:hover { background: var(--surface-container-highest); }
+.s13-phase-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.s13-phase-top .material-symbols-outlined { color: var(--primary-dim); opacity: 0.5; }
+.s13-phase-badge {
+  font-size: 0.625rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--outline-variant);
+}
+.s13-phase h3 { font-family: 'Manrope', sans-serif; font-size: 1.0625rem; font-weight: 700; margin-bottom: 8px; }
+.s13-phase p { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.6; }
+
+/* Highlight block */
+.s13-highlight {
+  position: relative; overflow: hidden; background: var(--surface-container);
+  border-radius: 1.5rem; padding: 40px; border: 1px solid rgba(255,181,160,0.1);
+}
+.s13-highlight-icon {
+  position: absolute; top: 0; right: 0; padding: 32px; opacity: 0.1; pointer-events: none;
+}
+.s13-highlight-icon .material-symbols-outlined { font-size: 6rem; }
+.s13-highlight-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; position: relative; z-index: 1; }
+.s13-highlight-bar { width: 6px; height: 64px; border-radius: 9999px; background: linear-gradient(to bottom, var(--primary), var(--primary-container)); }
+.s13-highlight-eyebrow { font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
+.s13-highlight-quote { font-family: 'Manrope', sans-serif; font-size: 1.375rem; font-weight: 700; line-height: 1.4; }
+.s13-highlight-quote span { color: var(--primary); font-style: italic; }
+.s13-highlight-note { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.75; font-style: italic; }
+
+/* Image grid */
+.s13-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: 256px; opacity: 0.4; }
+.s13-image { border-radius: 0.75rem; overflow: hidden; filter: grayscale(1) contrast(1.25); transition: filter 0.7s; }
+.s13-image:hover { filter: grayscale(0) contrast(1); }
+.s13-image img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 768px) {
+  .s13 { padding: 96px 48px; }
+  .s13-header h2 { font-size: 4.5rem; }
+  .s13-phases { grid-template-columns: 1fr 1fr 1fr; }
+  .s13-highlight-grid { grid-template-columns: auto 7fr 4fr; }
+}
+
+@media (min-width: 1024px) {
+  .s13 { padding: 96px 96px; }
+}
+
+/* ==============================
+   SECTION 12: DESIGNING FOR HONESTY
+============================== */
+.s12 { padding: 64px 24px; }
+.s12-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+
+/* Header */
+.s12-header h2 { font-family: 'Manrope', sans-serif; font-size: 2.75rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 24px; }
+.s12-header h2 em { color: var(--primary); font-style: italic; }
+.s12-header-rule { height: 4px; width: 96px; border-radius: 9999px; background: linear-gradient(135deg, #ffb5a0, #872000); }
+
+/* Transformation flow */
+.s12-flow { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+.s12-old { display: flex; flex-direction: column; gap: 16px; opacity: 0.4; }
+.s12-old-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-surface-variant); }
+.s12-old-frame {
+  aspect-ratio: 3/4; border-radius: 2rem; background: var(--surface-container-low);
+  border: 1px solid rgba(72,72,72,0.1); overflow: hidden; position: relative;
+}
+.s12-old-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: 0.5; }
+.s12-old-badge {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.s12-old-badge span {
+  font-size: 0.875rem; font-weight: 600; background: rgba(0,0,0,0.8); padding: 8px 16px;
+  border-radius: 9999px; border: 1px solid rgba(72,72,72,0.2); text-align: center;
+}
+.s12-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 0; position: relative; }
+.s12-arrow-label {
+  position: absolute; top: 0; font-size: 0.625rem; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--primary); white-space: nowrap;
+}
+.s12-arrow .material-symbols-outlined { font-size: 4rem; color: var(--primary); font-variation-settings: 'wght' 200; }
+.s12-new { display: flex; flex-direction: column; gap: 24px; }
+.s12-new-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); font-weight: 700; }
+.s12-screens { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.s12-screen { display: flex; flex-direction: column; gap: 12px; }
+.s12-screen-frame {
+  aspect-ratio: 9/16; border-radius: 0.75rem; background: var(--surface-container);
+  border: 1px solid rgba(72,72,72,0.2); overflow: hidden; position: relative;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.s12-screen-frame img { width: 100%; height: 100%; object-fit: cover; }
+.s12-screen-cap {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 12px;
+  background: rgba(37,38,38,0.9); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(72,72,72,0.1);
+}
+.s12-screen-cap p { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.3; }
+
+/* Content grid */
+.s12-content { display: grid; grid-template-columns: 1fr; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(72,72,72,0.1); }
+.s12-content-item { display: flex; flex-direction: column; gap: 16px; }
+.s12-content-item-head { display: flex; align-items: center; gap: 12px; }
+.s12-content-item-head .material-symbols-outlined { color: var(--primary); font-size: 1.25rem; }
+.s12-content-item-head h3 { font-family: 'Manrope', sans-serif; font-size: 1.0625rem; font-weight: 700; }
+.s12-content-item ul { display: flex; flex-direction: column; gap: 8px; border-left: 1px solid rgba(72,72,72,0.3); padding-left: 16px; transition: border-color 0.5s; }
+.s12-content-item:hover ul { border-color: var(--primary); }
+.s12-content-item li { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.75; list-style: none; }
+
+/* Footer */
+.s12-footer { display: flex; flex-direction: column; gap: 32px; padding-top: 64px; border-top: 1px solid rgba(72,72,72,0.1); }
+.s12-behavior-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-surface-variant); margin-bottom: 8px; }
+.s12-behavior-text { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+.s12-behavior-text span { text-decoration: underline; text-decoration-color: rgba(255,181,160,0.3); text-underline-offset: 8px; }
+.s12-closing { font-style: italic; color: rgba(231,229,229,0.6); font-size: 1.0625rem; line-height: 1.6; }
+.s12-closing span { color: var(--on-surface); font-weight: 600; font-style: normal; }
+
+@media (min-width: 768px) {
+  .s12 { padding: 96px 48px; }
+  .s12-header h2 { font-size: 4.5rem; }
+  .s12-screens { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .s12-content { grid-template-columns: 1fr 1fr; }
+  .s12-footer { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+  .s12-closing { text-align: right; }
+}
+
+@media (min-width: 1024px) {
+  .s12 { padding: 96px 96px; }
+  .s12-header h2 { font-size: 5rem; }
+  .s12-flow { grid-template-columns: 1fr auto 2fr; }
+  .s12-arrow { padding: 0 48px; }
+  .s12-arrow .material-symbols-outlined { font-size: 6rem; }
+  .s12-content { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+
+/* ==============================
+   SECTION 11: THE PROBLEM
+============================== */
+.s11 { padding: 0; }
+.s11-inner { display: flex; flex-direction: column; min-height: 600px; }
+
+/* Visual panel (left) */
+.s11-visual {
+  width: 100%; min-height: 480px;
+  background: var(--surface-container-low);
+  position: relative; display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.s11-visual-bg {
+  position: absolute; inset: 0; opacity: 0.2; pointer-events: none;
+  background: radial-gradient(circle at 30% 50%, #1f2020 0%, transparent 70%);
+}
+.s11-screens { position: relative; width: 100%; height: 480px; }
+.s11-label {
+  position: absolute; top: 48px; left: 48px; z-index: 0;
+  font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--on-surface-variant); opacity: 0.4;
+}
+/* Individual screen cards */
+.s11-card {
+  position: absolute; top: 50%; left: 50%;
+  background: var(--surface-container); border-radius: 0.75rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5); border: 1px solid rgba(72,72,72,0.1);
+  display: flex; flex-direction: column; padding: 24px;
+}
+.s11-card-1 {
+  width: 256px; height: 384px;
+  transform: translate(calc(-50% - 192px), calc(-50% - 96px)) rotate(-2deg);
+  z-index: 0; transition: transform 0.5s;
+}
+.s11-card-1:hover { transform: translate(calc(-50% - 192px), calc(-50% - 96px)) rotate(-2deg) scale(1.05); }
+.s11-card-2 {
+  width: 256px; height: 384px;
+  transform: translate(calc(-50% - 80px), calc(-50% + 48px)) rotate(1deg);
+  z-index: 10;
+}
+.s11-card-3 {
+  width: 256px; height: 384px;
+  transform: translate(calc(-50% + 128px), calc(-50% - 64px)) rotate(-1deg);
+  z-index: 20;
+}
+.s11-card-4 {
+  width: 256px; height: 384px;
+  transform: translate(calc(-50% + 256px), calc(-50% + 96px)) rotate(2deg);
+  z-index: 10; opacity: 0.6;
+}
+.s11-card-5 {
+  width: 288px; height: 448px;
+  transform: translate(calc(-50% + 32px), calc(-50% + 16px)) rotate(-3deg) scale(1.1);
+  z-index: 40; background: var(--surface-container-highest);
+  border: 2px solid rgba(238,125,119,0.4);
+  box-shadow: 0 40px 80px rgba(238,125,119,0.15);
+}
+/* Card internals */
+.s11-card-top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
+.s11-avatar { width: 32px; height: 32px; border-radius: 9999px; background: var(--surface-container-highest); }
+.s11-bar { height: 16px; border-radius: 9999px; background: var(--surface-container-highest); }
+.s11-bar-3-4 { width: 75%; }
+.s11-bar-1-2 { width: 50%; }
+.s11-bar-full { width: 100%; }
+.s11-bar-2-3 { width: 66%; }
+.s11-bar-sm { height: 12px; border-radius: 9999px; background: var(--surface-container-high); }
+.s11-entry-item {
+  height: 48px; width: 100%; background: var(--surface-container-highest);
+  border-radius: 0.75rem; border: 1px solid rgba(72,72,72,0.2);
+  display: flex; align-items: center; padding: 0 16px; margin-bottom: 16px;
+}
+.s11-entry-item span { font-size: 0.5625rem; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; }
+.s11-input {
+  height: 40px; width: 100%; background: var(--surface-container-lowest);
+  border-radius: 0.375rem; border: 1px solid rgba(72,72,72,0.2); margin-bottom: 12px;
+  display: flex; align-items: center; padding: 0 12px;
+}
+.s11-input span { font-size: 0.5625rem; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; }
+.s11-upload {
+  height: 128px; width: 100%; background: var(--surface-container-lowest);
+  border-radius: 0.75rem; border: 2px dashed rgba(72,72,72,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.s11-upload .material-symbols-outlined { color: var(--outline-variant); }
+.s11-cta {
+  height: 40px; width: 100%; border-radius: 9999px;
+  background: rgba(255,181,160,0.2); border: 1px solid rgba(255,181,160,0.3); margin-top: auto;
+}
+.s11-success-icon {
+  width: 64px; height: 64px; border-radius: 9999px; background: rgba(255,181,160,0.1);
+  display: flex; align-items: center; justify-content: center; margin: 32px auto 16px;
+}
+.s11-success-icon .material-symbols-outlined { color: var(--primary); }
+.s11-success-text { font-size: 0.5625rem; color: rgba(255,181,160,0.6); display: block; text-align: center; margin-top: 16px; }
+/* Failure card */
+.s11-failure-icon {
+  width: 80px; height: 80px; border-radius: 9999px;
+  background: rgba(127,41,39,0.3); display: flex; align-items: center; justify-content: center;
+  margin: 32px auto 24px; animation: pulse 2s infinite;
+}
+.s11-failure-icon .material-symbols-outlined {
+  color: var(--error); font-size: 2.25rem;
+  font-variation-settings: 'FILL' 1;
+}
+.s11-failure-title { color: var(--error); font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 12px; }
+.s11-failure-bar { height: 8px; border-radius: 9999px; background: rgba(238,125,119,0.2); margin-bottom: 8px; }
+.s11-failure-bar-short { width: 83%; margin: 0 auto 8px; }
+.s11-failure-note {
+  padding: 16px; background: rgba(127,41,39,0.1); border-radius: 0.75rem;
+  border: 1px solid rgba(238,125,119,0.2); margin-bottom: 16px;
+}
+.s11-failure-note span { font-size: 0.5625rem; color: var(--error); line-height: 1.6; display: block; }
+.s11-retry-btn {
+  width: 100%; padding: 16px; background: var(--error); color: #490106;
+  font-weight: 700; border-radius: 9999px; font-size: 0.875rem;
+  letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer;
+}
+
+/* Content panel (right) */
+.s11-content {
+  width: 100%; background: var(--background);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 64px 24px;
+}
+.s11-content-inner { display: flex; flex-direction: column; gap: 64px; }
+.s11-eyebrow {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 16px;
+}
+.s11-content h2 { font-family: 'Manrope', sans-serif; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+.s11-content h2 .arrow { color: var(--primary-dim); }
+.s11-articles { display: flex; flex-direction: column; gap: 48px; }
+.s11-article h3 {
+  font-family: 'Manrope', sans-serif; font-size: 1.125rem; font-weight: 700;
+  margin-bottom: 16px; transition: color 0.3s;
+}
+.s11-article:hover h3 { color: var(--primary); }
+.s11-article ul { display: flex; flex-direction: column; gap: 12px; list-style: none; }
+.s11-article li { display: flex; align-items: flex-start; gap: 16px; }
+.s11-article li .material-symbols-outlined { color: var(--primary); font-size: 1.125rem; flex-shrink: 0; margin-top: 2px; }
+.s11-article li p { color: var(--on-surface-variant); line-height: 1.75; }
+.s11-quote {
+  padding: 40px; border-radius: 2rem; margin-top: auto;
+  background: linear-gradient(135deg, var(--surface-container), var(--surface-container-low));
+  border-left: 4px solid var(--primary); position: relative; overflow: hidden;
+}
+.s11-quote-glow {
+  position: absolute; right: -40px; bottom: -40px; width: 128px; height: 128px;
+  background: rgba(255,181,160,0.1); filter: blur(60px); border-radius: 9999px;
+}
+.s11-quote p {
+  font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 700;
+  font-style: italic; line-height: 1.5; position: relative; z-index: 1;
+}
+.s11-quote p span { color: var(--primary); }
+
+@media (min-width: 768px) {
+  .s11-inner { flex-direction: row; min-height: 700px; }
+  .s11-visual { width: 60%; min-height: unset; }
+  .s11-screens { height: 100%; }
+  .s11-content { width: 40%; padding: 96px 64px; }
+  .s11-content h2 { font-size: 3rem; }
+}
+
+/* ==============================
+   SECTION 10: REDUCE CHOICE
+============================== */
+.s10 { padding: 80px 24px; }
+.s10-inner { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; gap: 80px; }
+.s10-header { max-width: 48rem; display: flex; flex-direction: column; gap: 24px; }
+.s10-tag {
+  display: inline-block; padding: 4px 16px; border-radius: 9999px;
+  border: 1px solid rgba(72,72,72,0.15); background: var(--surface-container-low);
+}
+.s10-tag span { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--primary); }
+.s10-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+.s10-header p { font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.75; font-weight: 300; }
+
+/* Bento grid */
+.s10-bento { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.s10-card {
+  position: relative; padding: 32px; border-radius: 2rem;
+  background: var(--surface-container-low); border: 1px solid rgba(72,72,72,0.05);
+  overflow: hidden; transition: background 0.5s;
+}
+.s10-card:hover { background: var(--surface-container); }
+.s10-card-glow {
+  position: absolute; top: -48px; right: -48px; width: 128px; height: 128px;
+  background: rgba(255,181,160,0.05); border-radius: 9999px; filter: blur(48px);
+  transition: background 0.5s; pointer-events: none;
+}
+.s10-card:hover .s10-card-glow { background: rgba(255,181,160,0.1); }
+.s10-card-icon {
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  border-radius: 0.75rem; background: var(--surface-container-highest);
+  border: 1px solid rgba(72,72,72,0.15); margin-bottom: 32px;
+}
+.s10-card-icon .material-symbols-outlined { color: var(--primary); }
+.s10-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.0625rem; font-weight: 700; margin-bottom: 12px; }
+.s10-card p { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.75; }
+
+/* Artifact */
+.s10-artifact-wrap { position: relative; }
+.s10-artifact-label {
+  position: absolute; top: -16px; left: 32px; z-index: 10;
+  padding: 6px 16px; border-radius: 9999px;
+  background: rgba(37,38,38,0.6); backdrop-filter: blur(20px);
+  border: 1px solid rgba(72,72,72,0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.s10-artifact-label span { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: rgba(231,229,229,0.6); }
+.s10-artifact {
+  width: 100%; aspect-ratio: 16/9; border-radius: 2rem; overflow: hidden;
+  background: var(--surface-container-lowest); border: 1px solid rgba(72,72,72,0.1);
+  box-shadow: 0 40px 80px rgba(231,229,229,0.04); position: relative;
+}
+.s10-artifact img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.7s ease-in-out; }
+.s10-artifact-wrap:hover .s10-artifact img { transform: scale(1.02); }
+.s10-artifact-fade { position: absolute; inset: 0; background: linear-gradient(to top, #0e0e0e, transparent, transparent); opacity: 0.6; }
+.s10-artifact-overlay {
+  position: absolute; bottom: 24px; right: 24px; padding: 16px; border-radius: 0.75rem;
+  background: rgba(37,38,38,0.6); backdrop-filter: blur(20px);
+  border: 1px solid rgba(72,72,72,0.1); max-width: 320px; display: none;
+}
+.s10-overlay-dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--primary); animation: pulse 2s infinite; flex-shrink: 0; }
+.s10-overlay-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.s10-overlay-row span { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.s10-overlay p { font-size: 0.6875rem; color: var(--on-surface-variant); line-height: 1.6; }
+.s10-artifact-note { display: flex; align-items: flex-start; gap: 16px; margin-top: 32px; padding: 0 8px; }
+.s10-artifact-note .material-symbols-outlined { color: var(--on-surface-variant); font-size: 1rem; flex-shrink: 0; margin-top: 2px; transform: scale(0.75); }
+.s10-artifact-note p { font-size: 0.875rem; font-style: italic; color: rgba(172,171,170,0.8); line-height: 1.6; }
+
+/* Footer CTA */
+.s10-footer {
+  display: flex; flex-direction: column; gap: 24px;
+  padding-top: 48px; border-top: 1px solid rgba(72,72,72,0.1);
+}
+.s10-footer-meta { display: flex; flex-direction: column; gap: 4px; }
+.s10-footer-meta p:first-child { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-surface-variant); }
+.s10-footer-meta p:last-child { font-size: 0.75rem; color: rgba(172,171,170,0.5); }
+.s10-footer-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.s10-btn-outline {
+  padding: 12px 32px; border-radius: 0.75rem; border: 1px solid rgba(72,72,72,0.15);
+  font-size: 0.875rem; font-weight: 600; cursor: pointer;
+  transition: background 0.2s; background: transparent; color: var(--on-surface);
+}
+.s10-btn-outline:hover { background: var(--surface-container-high); }
+.s10-btn-primary {
+  padding: 12px 32px; border-radius: 0.75rem; border: none; cursor: pointer;
+  font-size: 0.875rem; font-weight: 700; color: #7c1d00;
+  background: linear-gradient(135deg, #ffb5a0, #872000);
+  box-shadow: 0 8px 24px rgba(135,32,0,0.2); transition: opacity 0.2s;
+}
+.s10-btn-primary:hover { opacity: 0.9; }
+
+@media (min-width: 768px) {
+  .s10-artifact-overlay { display: block; }
+  .s10-footer { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+/* ==============================
+   SECTION 9: EVOLUTION ANALYSIS
+============================== */
+.s9 { padding: 80px 24px; }
+.s9-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+.s9-header { max-width: 48rem; display: flex; flex-direction: column; gap: 24px; }
+.s9-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 12px; border-radius: 9999px;
+  background: var(--surface-container-high); border: 1px solid rgba(72,72,72,0.15);
+}
+.s9-tag .material-symbols-outlined { font-size: 1rem; color: var(--primary); }
+.s9-tag span { font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--on-surface-variant); }
+.s9-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; }
+.s9-header h2 .arrow { color: var(--primary-dim); }
+.s9-header p { font-size: 1.0625rem; color: var(--on-surface-variant); line-height: 1.75; }
+.s9-comparison { display: flex; flex-direction: column; gap: 12px; }
+
+/* Before/After panels */
+.s9-panel { padding: 32px; border-radius: 2rem; position: relative; overflow: hidden; }
+.s9-panel-before { background: var(--surface-container-low); }
+.s9-panel-after { background: var(--surface-container-high); box-shadow: 0 40px 80px rgba(231,229,229,0.04); }
+.s9-panel-watermark {
+  position: absolute; top: 0; right: 0; padding: 24px;
+  font-family: 'Manrope', sans-serif; font-size: 5rem; font-weight: 900;
+  letter-spacing: -0.04em; opacity: 0.2; pointer-events: none; user-select: none; line-height: 1;
+}
+.s9-panel-after .s9-panel-watermark { color: var(--primary); opacity: 0.1; }
+
+/* Panel inner row */
+.s9-row { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+/* Insight cards */
+.s9-cards-left, .s9-cards-right { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.s9-card {
+  padding: 24px; border-radius: 1rem;
+  border: 1px solid rgba(72,72,72,0.1);
+  box-shadow: inset 0 1px 0 0 rgba(43,44,44,1);
+}
+.s9-card-before { background: var(--surface-container); }
+.s9-card-after {
+  background: rgba(37,38,38,0.6); backdrop-filter: blur(20px);
+  border-color: rgba(255,181,160,0.1);
+  transition: border-color 0.2s;
+}
+.s9-card-after:hover { border-color: rgba(255,181,160,0.3); }
+.s9-card h4 { font-weight: 700; margin-bottom: 8px; }
+.s9-card p { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.6; }
+.s9-card-icon-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.s9-card-icon-row .material-symbols-outlined { font-size: 1rem; color: var(--primary); font-variation-settings: 'FILL' 1; }
+.s9-card-offset { transform: translateX(0); }
+.s9-card-neg-offset { transform: translateX(0); }
+.s9-drop { display: flex; align-items: center; gap: 16px; padding: 16px 24px; opacity: 0.4; }
+.s9-drop .material-symbols-outlined { color: var(--error); }
+.s9-drop span { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.s9-metric { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px; }
+.s9-metric-num { font-family: 'Manrope', sans-serif; font-size: 1.875rem; font-weight: 900; color: var(--primary); }
+.s9-metric-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-surface-variant); }
+
+/* Phone mockup */
+.s9-phone-wrap { position: relative; flex-shrink: 0; }
+.s9-phone-glow {
+  position: absolute; inset: -16px;
+  background: rgba(255,181,160,0.1); filter: blur(48px); border-radius: 9999px;
+  opacity: 0.5; transition: opacity 0.3s; pointer-events: none;
+}
+.s9-phone-wrap:hover .s9-phone-glow { opacity: 0.7; }
+.s9-phone-frame {
+  width: 280px; aspect-ratio: 9/19; border-radius: 2.5rem;
+  background: #000; border: 6px solid var(--surface-container-highest);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5); overflow: hidden;
+  position: relative;
+}
+.s9-phone-frame-before { box-shadow: 0 25px 50px rgba(0,0,0,0.5); outline: 1px solid rgba(72,72,72,0.2); }
+.s9-phone-frame-after { border-color: var(--surface-bright); box-shadow: 0 0 40px rgba(255,181,160,0.1); outline: 1px solid rgba(255,181,160,0.2); }
+.s9-phone-frame img { width: 100%; height: 100%; object-fit: cover; }
+.s9-phone-frame-before img { filter: grayscale(1); opacity: 0.8; }
+.s9-phone-notch-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 48px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+  display: flex; align-items: center; justify-content: center; padding-top: 8px;
+}
+.s9-phone-notch-bar { width: 64px; height: 4px; background: rgba(255,181,160,0.4); border-radius: 9999px; }
+.s9-phone-cta {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  width: 85%; height: 48px; border-radius: 9999px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(135,32,0,0.4);
+}
+.s9-phone-cta span { font-family: 'Manrope', sans-serif; font-weight: 700; color: #7c1d00; font-size: 0.875rem; }
+.s9-phone-error-bar { position: absolute; bottom: 24px; left: 24px; width: 48px; height: 4px; background: var(--error); border-radius: 9999px; }
+.s9-phone-corner { position: absolute; bottom: -16px; right: -16px; width: 96px; height: 96px; border-bottom: 2px solid rgba(238,125,119,0.4); border-right: 2px solid rgba(238,125,119,0.4); border-radius: 0 0 12px 0; }
+.s9-badge {
+  position: absolute; top: -16px; right: -16px; width: 64px; height: 64px;
+  background: var(--surface-container-highest); border-radius: 9999px;
+  border: 1px solid rgba(255,181,160,0.2);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 40px 80px rgba(231,229,229,0.04);
+}
+.s9-badge .material-symbols-outlined { font-size: 1.875rem; color: var(--primary); font-variation-settings: 'FILL' 1; }
+
+/* Divider */
+.s9-divider { display: flex; justify-content: center; padding: 8px 0; }
+.s9-divider-line { height: 48px; width: 1px; background: linear-gradient(to bottom, rgba(72,72,72,0.3), rgba(255,181,160,0.4)); }
+
+/* Metric summary footer */
+.s9-metrics { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-top: 1px solid rgba(72,72,72,0.15); }
+.s9-metric-item { display: flex; flex-direction: column; gap: 8px; }
+.s9-metric-item-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); font-weight: 700; }
+.s9-metric-item-value { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 700; }
+.s9-metric-item-value em { font-size: 0.875rem; font-weight: 400; font-style: normal; color: var(--on-surface-variant); font-family: 'Inter', sans-serif; }
+
+/* ==============================
+   RESPONSIVE: 768px
+============================== */
+@media (min-width: 768px) {
+  .s1 { padding: 192px 24px; }
+  .s1-headline { font-size: 4.5rem; }
+  .s1-body { font-size: 1.5rem; }
+
+  .s2 { padding: 96px 80px; }
+  .s2-card { padding: 96px; }
+  .s2-grid { grid-template-columns: 1fr 1fr; }
+  .s2-heading { font-size: 2.25rem; }
+  .s2-narrative { font-size: 1.5rem; }
+
+  .s3-track { flex-direction: row; justify-content: space-between; padding: 80px 48px; }
+  .s3-line { display: block; }
+
+  .s4-grid { grid-template-columns: repeat(12, 1fr); }
+  .s4-card-1 { grid-column: span 5; margin-top: 64px; }
+  .s4-card-2 { grid-column: 7 / span 6; }
+  .s4-card-3 { grid-column: 2 / span 5; }
+  .s4-num-1 { font-size: 6rem; }
+  .s4-num-2 { font-size: 8rem; }
+
+  .s5 { padding: 96px 48px; }
+  .s5-header h2 { font-size: 3.75rem; }
+  .s5-grid { grid-template-columns: 1fr 1fr; }
+
+  .s7 { padding: 80px 48px; }
+  .s7-header h2 { font-size: 3rem; }
+
+  .s6 { padding: 80px 48px; }
+  .s6-headline { font-size: 3.75rem; }
+  .s6-main-card { padding: 48px; }
+  .s6-insights { grid-template-columns: 1fr 1fr 1fr; }
+  .s6-image-wrap { width: 66.666%; }
+  .s6-pivot-card { padding: 56px; }
+  .s6-pivot-heading { font-size: 2.25rem; }
+
+  .s8 { padding: 80px 48px; }
+  .s8-header h2 { font-size: 3.5rem; }
+  .s8-header p { font-size: 1.25rem; }
+  .s8-rows { gap: 128px; }
+  .s8-row { grid-template-columns: 5fr 7fr; }
+  .s8-row-reverse .s8-phone-col { order: 2; }
+  .s8-row-reverse .s8-insight-cards { order: 1; }
+
+  .s9-panel { padding: 48px; }
+  .s9-row { flex-direction: row; gap: 80px; }
+  .s9-cards-left, .s9-cards-right { width: 288px; flex-shrink: 0; }
+  .s9-card-offset { transform: translateX(16px); }
+  .s9-card-neg-offset { transform: translateX(-16px); }
+  .s9-metrics { grid-template-columns: 1fr 1fr 1fr; }
+  .s10-bento { grid-template-columns: 1fr 1fr 1fr; }
+  .s10-artifact { aspect-ratio: 21/9; }
+}
+
+/* ==============================
+   RESPONSIVE: 1024px
+============================== */
+@media (min-width: 1024px) {
+  .s2 { padding: 96px 160px; }
+
+  .s5 { padding: 96px 96px; }
+  .s5-grid { grid-template-columns: 1fr 1fr 1fr; }
+
+  .s7 { padding: 80px 96px; }
+  .s7-grid { grid-template-columns: 7fr 5fr; gap: 96px; }
+  .s7-header h2 { font-size: 3.75rem; }
+  .s7-metric-num { font-size: 4.5rem; }
+
+  .s6 { padding: 80px 96px; }
+  .s8 { padding: 80px 96px; }
+  .s8-header h2 { font-size: 4rem; }
+  .s9 { padding: 80px 96px; }
+  .s9-header h2 { font-size: 4.5rem; }
+  .s9-header p { font-size: 1.25rem; }
+  .s9-comparison { gap: 16px; }
+  .s9-panel { padding: 48px; }
+  .s9-row { flex-direction: row; gap: 80px; }
+  .s9-cards-left, .s9-cards-right { width: 288px; flex-shrink: 0; }
+  .s9-card-offset { transform: translateX(16px); }
+  .s9-card-neg-offset { transform: translateX(-16px); }
+}
+</style>
+</head>
+<body>
+<main>
+
+<!-- Section 0: Phone Showcase -->
+<section class="s0">
+  <div class="s0-glow-editorial"></div>
+  <div class="s0-glow-purple"></div>
+  <div class="s0-inner">
+    <div class="s0-phones">
+
+      <!-- Left device -->
+      <div class="s0-phone-side s0-phone-left">
+        <div class="s0-shell-side">
+          <div class="s0-screen-side">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChFN4V0MGBQwLyqI_5AOxhaaUrmdAyyBVJB_gWRrswTzUPC46_vJs_MxoBXziSwcVtayVd30cW0WNXXm3PWov84v0LKXBzF9jsF0CoF3F2ds11CXS8cGlv9DDCgCIX6ejVXaIK5dq9qTvgaaAFWBjbHJ_SXvSeWrwDnVGcnygmHYH5gOIdGCQ8e6BNqzpgtbgUaFnoFTa_2y9SIT1C6-RmfkdIjZ5y4v7HPjpFFB9Npscpw9nMENGeEzJRENsvXHBXspcR36t732U" alt="Mobile App Interface"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center device -->
+      <div class="s0-phone-center">
+        <div class="s0-shell-center">
+          <div class="s0-screen-center">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYWfj7V1Duu08_v3TI7pXkBP-PtYPDDtNuj4BlVLm2o30W0xWxI2p9XqrPZYV_b-r0uoX6SaQo9NScwYG_u9KIWenlUhUEXtqUXN94Q6nHodPLW1r6_H62wCxV29k6Wn38P74ikUox8OiRQGB-V_acml5NDAr0ok_GKvSVFRY3GIqQI32xdrB7QWoOVvq6LvtJ0UAONItAv7o0pXcijM_2BYZLP-62eSFSCrQKROpqv2_xkRg5T-c0wcW3cNPnLqQis4yqkUaTdF4" alt="Primary App View"/>
+            <div class="s0-screen-center-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right device -->
+      <div class="s0-phone-side s0-phone-right">
+        <div class="s0-shell-side">
+          <div class="s0-screen-side">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuASR6wiuokWixPaAljHovPHPyDxsFtbkjReRQo3SRK3P6RQEhOcsSHmTO1CjJl9CGYVb1qKyMWhfxTetCYq0Ke6xIi63Ei-5JCElZ_jCsPOCNynfGMfw5Z9V1d-WNgdG8h-DR8Dn47FHbIhF1vxBw0y_DVfgIfLR7d1qQ1n4OQgo3AriE-HN_dtI3_yiBEy-NX0SuBMhgsLGTGQeQW4vHgBdjEtgGTiHA8XkJzNXWvTmAbR5YcG1vweRjezE64u0VnUrTsL2_L6DDo" alt="Secondary App View"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
-<!-- Section 7: Step-by-step guidance -->
-<section class="py-20 px-6 md:px-12 lg:px-24">
-<div class="max-w-7xl mx-auto">
-<!-- Header -->
-<header class="mb-20 max-w-3xl">
-<span class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-4 block">Case Study: FinTech Onboarding</span>
-<h2 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
-        Step-by-step guidance
-      </h2>
-<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed">
-        Restructuring the journey so verification happens at the moment of highest user commitment.
+
+<!-- Section 1: Hero -->
+<section class="s1">
+  <div class="s1-glow-wrap"><div class="s1-glow"></div></div>
+  <div class="s1-content">
+    <span class="s1-label">The Problem Definition</span>
+    <h1 class="s1-headline">
+      We didn't lose users.<br/>
+      <span class="c-primary-dim">We lost them right before they cared most.</span>
+    </h1>
+    <p class="s1-body">Users didn't drop off randomly — they were blocked at the exact moment of intent.</p>
+  </div>
+  <div class="s1-scroll">
+    <span class="s1-scroll-label">Scroll to explore</span>
+    <div class="s1-scroll-line"></div>
+  </div>
+</section>
+
+<!-- Section 2: Story Card -->
+<section class="s2">
+  <div class="s2-inner">
+    <div class="s2-card">
+      <div class="s2-card-line"></div>
+      <div class="s2-grid">
+        <div>
+          <h2 class="s2-heading">7:20 PM.<br/>The match is about to start.</h2>
+          <div class="s2-narrative">
+            <p>You've built your team.</p>
+            <p>You tap '<span class="c-primary" style="font-weight:600">Join Contest</span>'.</p>
+            <p>A <span class="c-error" style="font-weight:600">verification screen</span> appears.</p>
+            <p>Five options. No clarity.</p>
+            <p style="color:var(--on-surface);font-weight:500">You close the app.</p>
+          </div>
+        </div>
+        <div class="s2-image-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_lNHC0FIwqp4E9sq7BdKxbE02iw0Iq9JAC8sBW0fYLa5v9NmAvF7wthKjTrF1NF3TAbZ9pw0kSCPvvWt-3PdCcgt5dOyBCNjsrriYwGvwu9WOpE5vf_AJrAA-4PpMfjSoM1tfs1HLhrtdHM_SUX36vtGtwSfTPb63WNeID5APZwAhEkwP8Rgfa6iaoVvgXDXO3PiMTHEEH3QQPMzf7dpFcpcDQA4loKNLilk3cgIXfxvN7Y7YQOcSGt03y0pnsC8Lq9gY4MDYtAg" alt="Stadium spotlight"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Journey Visualization -->
+<section class="s3">
+  <div class="s3-inner">
+    <div class="s3-title">
+      <h3>The Friction Journey</h3>
+      <p>Visualizing the break in narrative flow</p>
+    </div>
+    <div class="s3-track">
+      <div class="s3-line">
+        <div class="s3-line-primary"></div>
+        <div class="s3-line-error"></div>
+      </div>
+      <div class="s3-step">
+        <div class="s3-step-icon"><span class="material-symbols-outlined" style="color:var(--on-surface)">search</span></div>
+        <span class="s3-step-label">Browse</span>
+      </div>
+      <div class="s3-step">
+        <div class="s3-step-icon"><span class="material-symbols-outlined" style="color:var(--on-surface)">ads_click</span></div>
+        <span class="s3-step-label">Join</span>
+      </div>
+      <div class="s3-kyc">
+        <div class="s3-kyc-inner">
+          <div class="s3-kyc-thumb s3-kyc-thumb-1"></div>
+          <div class="s3-kyc-thumb s3-kyc-thumb-2"></div>
+          <div class="s3-kyc-icon"><span class="material-symbols-outlined">warning</span></div>
+        </div>
+        <div class="s3-kyc-badge"><span>KYC Wall</span></div>
+      </div>
+      <div class="s3-step drop-off">
+        <div class="s3-step-icon"><span class="material-symbols-outlined" style="color:var(--on-surface-variant)">logout</span></div>
+        <span class="s3-step-label">Drop-off</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Impact Metrics -->
+<section class="s4">
+  <div class="s4-grid">
+    <div class="s4-card s4-card-1">
+      <span class="s4-num s4-num-1">15%</span>
+      <p class="s4-text">Support tickets directly related to <span class="hl">KYC friction</span> and failed withdrawals.</p>
+    </div>
+    <div class="s4-card s4-card-2">
+      <span class="s4-num s4-num-2">35 min</span>
+      <p class="s4-text">Average time for a new user to complete their <span class="hl-p">first successful withdrawal</span> during peak events.</p>
+    </div>
+    <div class="s4-card s4-card-3">
+      <span class="s4-num s4-num-3">~9K</span>
+      <p class="s4-text">Weekly support tickets handled during <span class="hl">major tournament peaks</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Constraints -->
+<section class="s5">
+  <div class="s5-inner">
+    <header class="s5-header">
+      <h2>Why this was hard</h2>
+      <p>Constraints compounded each other. Understanding all six shaped every design decision.</p>
+    </header>
+    <div class="s5-grid">
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-high">alt_route</span>
+          <span class="badge badge-high">High impact</span>
+        </div>
+        <h3>Fragmented Flow</h3>
+        <p>KYC, location, and payment checks appear at different stages, causing repeated interruptions.</p>
+      </article>
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-high">bolt</span>
+          <span class="badge badge-high">High impact</span>
+        </div>
+        <h3>IPL rush</h3>
+        <p>Drop-off peaks when intent is highest. At 7:25pm on match day, patience is zero.</p>
+      </article>
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-high">timer_off</span>
+          <span class="badge badge-high">High impact</span>
+        </div>
+        <h3>Poor KYC timing</h3>
+        <p>Verification prompt appeared before users committed to joining.</p>
+      </article>
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-mid">link_off</span>
+          <span class="badge badge-mid">Medium impact</span>
+        </div>
+        <h3>Low Aadhaar-mobile linkage</h3>
+        <p>Most users hadn't linked mobile to Aadhaar — ruling out OTP and forcing document fallbacks.</p>
+      </article>
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-mid">distance</span>
+          <span class="badge badge-mid">Medium impact</span>
+        </div>
+        <h3>State-level geo-gating</h3>
+        <p>Assam, Telangana, TN and others required location checks at every contest entry — not once at reg.</p>
+      </article>
+      <article class="s5-card">
+        <div class="s5-card-top">
+          <span class="material-symbols-outlined icon-low">help_center</span>
+          <span class="badge badge-low">Low impact</span>
+        </div>
+        <h3>Weak onboarding guidance</h3>
+        <p>First-time users are not clearly told why verification is required.</p>
+      </article>
+    </div>
+    <div class="s5-accent s5-accent-1"></div>
+    <div class="s5-accent s5-accent-2"></div>
+  </div>
+</section>
+
+<!-- Section 6: Discovery -->
+<section class="s6">
+  <div class="s6-inner">
+    <div class="s6-header-group">
+      <span class="s6-badge">Discovery</span>
+      <h2 class="s6-headline">What we learned</h2>
+    </div>
+    <div class="s6-main-card">
+      <div class="s6-main-card-glow"></div>
+      <div class="s6-insights">
+        <div class="s6-insight">
+          <p class="s6-insight-title">Timing kills intent</p>
+          <div class="s6-insight-bar"></div>
+          <p class="s6-insight-text">Verification before team creation asks for trust before delivering value.</p>
+        </div>
+        <div class="s6-insight">
+          <p class="s6-insight-title">Choice reads as obligation</p>
+          <div class="s6-insight-bar"></div>
+          <p class="s6-insight-text">Too many paths paralyze the user's forward momentum.</p>
+        </div>
+        <div class="s6-insight">
+          <p class="s6-insight-title">Aadhaar mistrust is real</p>
+          <div class="s6-insight-bar"></div>
+          <p class="s6-insight-text">Verification feels like surveillance without clear value.</p>
+        </div>
+      </div>
+    </div>
+    <div class="s6-research-note">
+      <p>I also ran 15 to 16 interviews to understand which documents users actually carry and in what order.</p>
+    </div>
+    <div class="s6-image-strip">
+      <div class="s6-image-wrap">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTJcdlsVZ6A22FQF_jjQIQqHZgOSQpoV5QOETqTAuN9PSJrGsnXcqQ7DDkrUyFExxCZ2v8iXdEyNTq4ApHOckaj5CvOLfG5WJwGBL1SDvwN_29vD4fqQuIHjoKe-TfcW1RbAOZcWWToRn4ijlNBSe9n0aLXP-FlofIXHPYpA4rNPj3fRKNJz3CW88eRV-wdO5aZASXfiKnP4NFeIiSegimGgJC7HHdFSsJcFC0EPFsEaLORyVAgC0no4Jzl_5Ys_fq7qDCb5f_Eo" alt="Research artifacts and interview sticky notes"/>
+      </div>
+    </div>
+    <div class="s6-pivot-card">
+      <span class="s6-pivot-label">The Pivot</span>
+      <h3 class="s6-pivot-heading">From collecting documents <span class="accent">→</span> protecting user momentum</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Section 7: Final Solution -->
+<section class="s7">
+  <div class="s7-inner">
+    <header class="s7-header">
+      <div class="s7-badge-wrap"><span>Final Solution</span></div>
+      <h2>Retime the ask</h2>
+      <h3>Move KYC to after team creation — when intent is real, not assumed.</h3>
+    </header>
+    <div class="s7-grid">
+      <div class="s7-timeline-col">
+        <div class="s7-steps">
+          <div class="s7-step">
+            <div class="s7-step-dot"></div>
+            <span class="s7-step-title">1 - Browse &amp; select contest</span>
+            <span class="s7-step-sub">commit intent first</span>
+          </div>
+          <div class="s7-step">
+            <div class="s7-step-dot"></div>
+            <span class="s7-step-title">2 - Create team</span>
+            <span class="s7-step-sub">KYC triggered post-save</span>
+          </div>
+          <div class="s7-step s7-step-hl">
+            <div class="s7-step-dot"></div>
+            <span class="s7-step-title">3 - KYC + Location (grouped)</span>
+            <span class="s7-step-sub">all steps at once</span>
+          </div>
+          <div class="s7-step">
+            <div class="s7-step-dot"></div>
+            <span class="s7-step-title">4 - Join contest &amp; pay</span>
+            <span class="s7-step-sub">final transactional step</span>
+          </div>
+        </div>
+        <div class="s7-impact">
+          <h3>Improved top-of-funnel cash conversion by 30%</h3>
+          <p>Placing KYC immediately after team creation improved top-of-funnel cash conversion by 30%, without negatively impacting paid contest joins.</p>
+        </div>
+      </div>
+      <div class="s7-metric-col">
+        <div class="s7-metric-box">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4gjQPwBKlQuhMlPhZoruwhLY_o5YK_4OUPVjCey9tB69g5DIpIF_AJxqSaVgE9_r4Mbm5J3w_bXdhxfS-8oOwMKLIIECuYKD1tssHXErUMuoTUwJjaZDJ3wqyLwImhi7CPVAPKeAlUU4piBl9cXDKmbhSB3TEc4xQWidzyMN24ozbsi_HemL3vKn7leO_Mwadq-Mfgw9O765BrdOKnXPT4b9JBPVcgHoSeibBuF-OBeo-py75a6WvoH_J39VCTcNXVq4X8gSk2I" alt="Data visualization"/>
+          <div class="s7-metric-overlay"></div>
+          <div class="s7-metric-label">
+            <span class="s7-metric-num">+30%</span>
+            <span class="s7-metric-text">Conversion Lift</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 8: Step-by-step guidance -->
+<section class="s8">
+  <div class="s8-inner">
+    <header class="s8-header">
+      <span class="s8-tag">UX Strategy &amp; Product Design</span>
+      <h2>Step-by-step <span>guidance</span></h2>
+      <p>Restructuring the journey so verification happens at the moment of highest user commitment.</p>
+    </header>
+    <div class="s8-rows">
+
+      <!-- Row 1: Entry Point -->
+      <div class="s8-row">
+        <div class="s8-phone-col">
+          <div class="s8-phone-wrap">
+            <div class="s8-phone-glow"></div>
+            <div class="s8-phone-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO19RI-v_R6lDVFTa7CljfX3cG828hqn7oLW-0CblrAvx9EAOKxEyRUE9Y2ETIqdIDJrZ7_xhhd8hO1HBcNrlU4vGnYrq1OlIFA8EyepRj8OfDR9rmayWQ6r9kxJuxr7_JAxf-eBJEh01863-UGqvqYUo_yVVglKXft0g8I3293LNipx1u9YAHplrU6Q8HIW0eLHd9nD72yoCYDcxANtlemXiyRGA0mRUKe-1rRWy-AKpTbSARoXQh2k070kmvT1xY9cv22tyx0W0" alt="Entry Point UI"/>
+              <div class="s8-phone-notch"></div>
+            </div>
+            <div class="s8-phone-label">
+              <span>Before: Entry Point</span>
+            </div>
+          </div>
+        </div>
+        <div class="s8-info-col">
+          <div class="s8-info-card">
+            <div class="s8-info-card-glow"></div>
+            <div class="s8-icon-wrap">
+              <span class="material-symbols-outlined">verified_user</span>
+            </div>
+            <h3>Trust before commitment</h3>
+            <p>Users see contest value and build intent before any verification is requested. By delaying friction, we increase the psychological "sunk cost" in a positive way.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Verification Flow -->
+      <div class="s8-row s8-row-reverse">
+        <div class="s8-phone-col">
+          <div class="s8-phone-wrap">
+            <div class="s8-phone-glow"></div>
+            <div class="s8-phone-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCaH5bYMi7hn6kecrm7WITCRfpQDjhj3lQaUP7piAncw-1YP0A7FNSH5L8cCWPos8qDn8UhQ53ObJhX5STFRRI44VAhL9rNrLVQK_fxPIeVg85c4wbcFG0UoF1dwlED_IPz5R1tXDWwRz58jImEr-J1qix_Dg1cfMvxQvrJRGNoNd99pJkhtX1i8uXBI5XoCgAR_6PPeEGWblb8-iOUAhkq23dxwqoTqlqQG64SrD7yufeRn9rC5bcWkBzRYq-yjNdEABIIRPpP_4" alt="Verification Flow UI"/>
+              <div class="s8-phone-notch"></div>
+            </div>
+            <div class="s8-phone-label">
+              <span>After: Verification Flow</span>
+            </div>
+          </div>
+        </div>
+        <div class="s8-insight-cards">
+          <div class="s8-insight-card">
+            <div class="s8-insight-body">
+              <div class="s8-insight-num">01</div>
+              <div>
+                <h4>Clarity upfront</h4>
+                <p>Step counter (Step 1 of 3) shown at the start so users know exactly what to expect from the process.</p>
+              </div>
+            </div>
+          </div>
+          <div class="s8-insight-card">
+            <div class="s8-insight-body">
+              <div class="s8-insight-num">02</div>
+              <div>
+                <h4>Grouped compliance</h4>
+                <p>Location, age declaration, and ID verification consolidated into one seamless checkpoint to reduce fatigue.</p>
+              </div>
+            </div>
+          </div>
+          <div class="s8-insight-card">
+            <div class="s8-insight-body">
+              <div class="s8-insight-num">03</div>
+              <div>
+                <h4>Upfront rationale cuts abandonment</h4>
+                <p>'Verify to continue playing for cash — ensures you're not from a restricted state' shown clearly on the entry screen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Section 9: Evolution Analysis -->
+<section class="s9">
+  <div class="s9-inner">
+    <header class="s9-header">
+      <div class="s9-tag">
+        <span class="material-symbols-outlined">clinical_notes</span>
+        <span>Evolution Analysis</span>
+      </div>
+      <h2>Option overload <span class="arrow">→</span> to guided completion</h2>
+      <p>Reducing cognitive load through progressive disclosure and smart ID path routing.</p>
+    </header>
+
+    <div class="s9-comparison">
+      <!-- BEFORE -->
+      <section class="s9-panel s9-panel-before">
+        <div class="s9-panel-watermark">BEFORE</div>
+        <div class="s9-row">
+          <div class="s9-cards-left">
+            <div class="s9-card s9-card-before">
+              <h4>Option overload</h4>
+              <p>Presenting 12+ identity document types simultaneously caused immediate user fatigue.</p>
+            </div>
+            <div class="s9-card s9-card-before s9-card-offset">
+              <h4>No explanation</h4>
+              <p>Technical jargon without context left users unsure which document met security tiers.</p>
+            </div>
+          </div>
+          <div class="s9-phone-wrap">
+            <div class="s9-phone-frame s9-phone-frame-before">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRB_E-Us7w4EL0_oenbnA4A7ANDX2tLStpUzbPG9AR_ilKF82m61CiFCxJ83mLF9YYIWSgTiWrm1c0fYOPNmsb9U_MLfMedNMoTjd86hFuHgdXAknnEM_V_rWteJbAlPUjf-rbyXJB7Z3VD78s4-JszXYxdMcjSBPm9sT4pNqS60yo7i6wbMAWrnbfq9UvNrbbi7LnDMi6buRIBDEHWz3TEaIU5MbbvNRBwJDXhT43n9FY4Lk4sa3cNb-VhN0RRIjpqRRFVJk1BRs" alt="Legacy mobile UI showing cluttered document options"/>
+              <div class="s9-phone-error-bar"></div>
+            </div>
+            <div class="s9-phone-corner"></div>
+          </div>
+          <div class="s9-cards-right">
+            <div class="s9-card s9-card-before s9-card-neg-offset">
+              <h4>Fragmented flow</h4>
+              <p>Verification steps were siloed, requiring repetitive manual data entry across different screens.</p>
+            </div>
+            <div class="s9-drop">
+              <span class="material-symbols-outlined">warning</span>
+              <span>Drop-off: 42%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <div class="s9-divider">
+        <div class="s9-divider-line"></div>
+      </div>
+
+      <!-- AFTER -->
+      <section class="s9-panel s9-panel-after">
+        <div class="s9-panel-watermark">AFTER</div>
+        <div class="s9-row">
+          <div class="s9-cards-left">
+            <div class="s9-card s9-card-after">
+              <div class="s9-card-icon-row">
+                <span class="material-symbols-outlined">check_circle</span>
+                <h4>Visual choices</h4>
+              </div>
+              <p>High-fidelity document iconography replaced text blocks for faster visual recognition.</p>
+            </div>
+            <div class="s9-card s9-card-after s9-card-offset">
+              <div class="s9-card-icon-row">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <h4>Smart routing</h4>
+              </div>
+              <p>Backend checks automatically filtered ineligible documents based on user geo-data.</p>
+            </div>
+          </div>
+          <div class="s9-phone-wrap">
+            <div class="s9-phone-glow"></div>
+            <div class="s9-phone-frame s9-phone-frame-after">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO9jHPR0bdj7tviqSq5mF0q3_0rjXWPyfBUY0ClCwnIPq2c04-mq5YfQpsZiNWpsoRnrayDm8w9mubevUAsxPA4Of7Oxv3Wk56cx1ReWzEFy7k3Fv7IhFCBmpdB6U-8KSnWXZwkyguZjPuXp-7xR9F4VyVIiF65reQ92y4EFme0WW0a2ZH1RPNYtnmQwRlc3uPcw4kPJ7IpQDc3oUVUB63TF8YPq-2kuxuzl_mvJ5oG5E_6-cKIKbX-iZjCDcJ8QjgPvelUqbd7TY" alt="Modern minimal mobile app UI with guided document selection"/>
+              <div class="s9-phone-notch-top"><div class="s9-phone-notch-bar"></div></div>
+              <div class="s9-phone-cta"><span>Continue Verification</span></div>
+            </div>
+            <div class="s9-badge">
+              <span class="material-symbols-outlined">verified</span>
+            </div>
+          </div>
+          <div class="s9-cards-right">
+            <div class="s9-card s9-card-after s9-card-neg-offset">
+              <div class="s9-card-icon-row">
+                <span class="material-symbols-outlined">layers</span>
+                <h4>Nested flows</h4>
+              </div>
+              <p>Progressive disclosure hides complex sub-tasks until they are contextually relevant to the user.</p>
+            </div>
+            <div class="s9-metric">
+              <span class="s9-metric-num">94%</span>
+              <span class="s9-metric-label">Completion Rate</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Metric Summary -->
+    <div class="s9-metrics">
+      <div class="s9-metric-item">
+        <span class="s9-metric-item-label">Time to Task</span>
+        <p class="s9-metric-item-value">-18s <em>avg reduction</em></p>
+      </div>
+      <div class="s9-metric-item">
+        <span class="s9-metric-item-label">Error Rate</span>
+        <p class="s9-metric-item-value">0.4% <em>critical failures</em></p>
+      </div>
+      <div class="s9-metric-item">
+        <span class="s9-metric-item-label">User Sentiment</span>
+        <p class="s9-metric-item-value">4.8/5 <em>ease of use</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 10: Reduce Choice -->
+<section class="s10">
+  <div class="s10-inner">
+    <header class="s10-header">
+      <div class="s10-tag"><span>User Experience Strategy</span></div>
+      <h2>Reduce choice, route on failure</h2>
+      <p>Rather than presenting all options upfront, the flow surfaces the highest-SR path first and routes intelligently on failure — using backend success rates, not guesswork.</p>
+    </header>
+
+    <div class="s10-bento">
+      <div class="s10-card">
+        <div class="s10-card-glow"></div>
+        <div class="s10-card-icon"><span class="material-symbols-outlined">trending_up</span></div>
+        <h3>Highest success-rate path surfaced first</h3>
+        <p>Prioritizing the primary flow based on success rate of the instruments.</p>
+      </div>
+      <div class="s10-card">
+        <div class="s10-card-glow"></div>
+        <div class="s10-card-icon"><span class="material-symbols-outlined">alt_route</span></div>
+        <h3>Failure triggers smart fallback, not restart</h3>
+        <p>Instead of blocking the user, the system intelligently shifts to the next viable verification path.</p>
+      </div>
+      <div class="s10-card">
+        <div class="s10-card-glow"></div>
+        <div class="s10-card-icon"><span class="material-symbols-outlined">auto_fix_high</span></div>
+        <h3>Progress preserved across attempts</h3>
+        <p>State management ensures that shared metadata is carried over between primary and fallback routes.</p>
+      </div>
+    </div>
+
+    <div class="s10-artifact-wrap">
+      <div class="s10-artifact-label"><span>Tightened KYC Journey Canvas</span></div>
+      <div class="s10-artifact">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe4s5HZqKOl3rPS8UYzAAIbqp5svpr89W5MyLl5k7O3nW-SPWiJILwz9VO0DxEvRa49b5vY2jsj8SPnY1GgO0CZanKyYYoZ98DsFAdqwgOT0QMMKymqo1xn3G4zQm3ZhB0VCin6v4qna73wFot5uxphgVQxSxFFxg7PVCwLnO8aX5lRFuqtmFC7FZMpDsCm3BidS5HkeUbmX41d4G1rORX8TXg6JzFEoEW9Gn6Jnj4faP1xtHfmSXluM_XuvRY03lcXZGuz_bobJQ" alt="KYC journey flow diagram showing branching paths for verification failure and fallback routing"/>
+        <div class="s10-artifact-fade"></div>
+        <div class="s10-artifact-overlay s10-overlay">
+          <div class="s10-overlay-row">
+            <div class="s10-overlay-dot"></div>
+            <span>Active Logic</span>
+          </div>
+          <p>The Aadhaar fallback logic (Path B) is triggered automatically upon three failed biometric attempts without session termination.</p>
+        </div>
+      </div>
+      <div class="s10-artifact-note">
+        <span class="material-symbols-outlined">info</span>
+        <p>Full Aadhaar decision tree also available in project archives.</p>
+      </div>
+    </div>
+
+    <div class="s10-footer">
+      <div class="s10-footer-meta">
+        <p>Confidential Documentation</p>
+        <p>Project Obsidian Narrative • 2024 Design Audit</p>
+      </div>
+      <div class="s10-footer-actions">
+        <button class="s10-btn-outline">View Full Case Study</button>
+        <button class="s10-btn-primary">Download Artifacts</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 11: The Problem -->
+<section class="s11">
+  <div class="s11-inner">
+
+    <!-- Left: Visual panel -->
+    <section class="s11-visual">
+      <div class="s11-visual-bg"></div>
+      <div class="s11-screens">
+        <span class="s11-label">[Problem Screens]</span>
+
+        <!-- Card 1: Entry Point -->
+        <div class="s11-card s11-card-1">
+          <div class="s11-card-top-row">
+            <div class="s11-avatar"></div>
+            <span class="material-symbols-outlined" style="color:var(--on-surface-variant)">notifications</span>
+          </div>
+          <div class="s11-bar s11-bar-3-4" style="margin-bottom:16px"></div>
+          <div class="s11-entry-item"><span>Entry Point: Balance / Withdraw CTA</span></div>
+        </div>
+
+        <!-- Card 2: Old KYC screen -->
+        <div class="s11-card s11-card-2">
+          <div class="s11-bar s11-bar-1-2" style="margin-bottom:32px"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+            <div style="height:80px;background:var(--surface-container-lowest);border-radius:0.75rem;border:1px solid rgba(72,72,72,0.1);display:flex;align-items:center;justify-content:center;padding:0 16px">
+              <span style="font-size:0.5625rem;color:var(--on-surface-variant);text-align:center">Old KYC screen: unclear requirements</span>
+            </div>
+            <div class="s11-bar-sm s11-bar-full"></div>
+            <div class="s11-bar-sm s11-bar-2-3"></div>
+          </div>
+          <div class="s11-cta"></div>
+        </div>
+
+        <!-- Card 3: ID/PAN input -->
+        <div class="s11-card s11-card-3">
+          <span class="material-symbols-outlined" style="color:var(--primary);margin-bottom:24px">id_card</span>
+          <div class="s11-input"><span>ID/PAN input: no name-match awareness</span></div>
+          <div class="s11-input"></div>
+          <div class="s11-upload"><span class="material-symbols-outlined">cloud_upload</span></div>
+        </div>
+
+        <!-- Card 4: Partial success -->
+        <div class="s11-card s11-card-4">
+          <div class="s11-success-icon">
+            <span class="material-symbols-outlined">check_circle</span>
+          </div>
+          <div class="s11-bar s11-bar-3-4" style="background:rgba(255,181,160,0.4);margin:0 auto 8px"></div>
+          <span class="s11-success-text">Optional: partial success state giving false confidence</span>
+        </div>
+
+        <!-- Card 5: Failure (dominant) -->
+        <div class="s11-card s11-card-5">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+            <div class="s11-failure-icon">
+              <span class="material-symbols-outlined">error</span>
+            </div>
+            <h4 class="s11-failure-title">Withdrawal Failed</h4>
+            <div class="s11-failure-bar s11-bar-full"></div>
+            <div class="s11-failure-bar s11-failure-bar-short"></div>
+          </div>
+          <div style="margin-top:auto">
+            <div class="s11-failure-note">
+              <span>Failure state: verification failed / name mismatch</span>
+            </div>
+            <button class="s11-retry-btn">Retry Verification</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Content panel -->
+    <section class="s11-content">
+      <div class="s11-content-inner">
+        <header>
+          <span class="s11-eyebrow">The Problem</span>
+          <h2>High intent, low clarity <span class="arrow">→</span> Broken withdrawals</h2>
+        </header>
+        <div class="s11-articles">
+          <article class="s11-article">
+            <h3>Users optimized for speed, not correctness</h3>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Uploaded any document just to proceed</p>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Assumed verification was just a step to unlock features</p>
+              </li>
+            </ul>
+          </article>
+          <article class="s11-article">
+            <h3>Truth appeared at the worst moment</h3>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Verification triggered only at withdrawal (peak intent)</p>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Users encountered failure when they were most motivated</p>
+              </li>
+            </ul>
+          </article>
+          <article class="s11-article">
+            <h3>False sense of completion</h3>
+            <ul>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Partial KYC created illusion of being verified</p>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">remove</span>
+                <p>Users believed they were eligible to withdraw</p>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+      <div class="s11-quote">
+        <div class="s11-quote-glow"></div>
+        <p>"We optimized for completion. Users optimized for shortcuts. <span>Reality hit at withdrawal.</span>"</p>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<!-- Section 12: Designing for Honesty -->
+<section class="s12">
+  <div class="s12-inner">
+
+    <header class="s12-header">
+      <h2>Designing for <em>honesty</em> before friction</h2>
+      <div class="s12-header-rule"></div>
+    </header>
+
+    <!-- Transformation Flow -->
+    <div class="s12-flow">
+      <!-- Old flow (muted) -->
+      <div class="s12-old">
+        <span class="s12-old-label">Past Context</span>
+        <div class="s12-old-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4IVqr3z8ykl6_0CiA351zt9GScoPE7F1rh3CM2tlfUGNa6Jxu2A-SdZeMNT_TXkPUzNIzLEJbN3jCpA2nwdYCYPwoz84HYru-4UlMvlcvmtqylAkun7CoryriqA-0Jz8H06dSnfAVHepYGLTBwsDkO77nRVk5HhIlwHy0DraucMfJOdGEzKyBoHZqMRYDmalM3tQmokuu7pU_FFZAbuqjBNrzDAMFC1rORROp_b8e0HbCrEkTe64eCw54ku5X0_dj-m_CbnAqHSY" alt="Old Flow Snapshot"/>
+          <div class="s12-old-badge"><span>Old Flow Snapshot</span></div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="s12-arrow">
+        <div class="s12-arrow-label">Transition</div>
+        <span class="material-symbols-outlined">trending_flat</span>
+      </div>
+
+      <!-- New flow (screens) -->
+      <div class="s12-new">
+        <span class="s12-new-label">The Improved KYC Flow</span>
+        <div class="s12-screens">
+          <div class="s12-screen">
+            <div class="s12-screen-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnHK28zRAr9EDUiVAmw2NmPtJXkUjxWah-k2dfssfDBOSrIpYti_wKjpNKV8a2_v6gJPhIfhDmRysSP_0z_PTw1X9afY0du8jWD_8VlJimTxQlzzVsArwtE83Bwtz7aejMSJBuO6vLEt5hOi6TqZOzjMTqwyms_ec6ETFgUBxrXgWHZLr2h6I_xBBb2ZIQR1DBC9uGveHltu2eRyy9KF1Oz-K_iZh66KbBtI3TBeepvxtsBoqji0mcmzjtBXQOnSom0UP0fmp98SA" alt="Step 1"/>
+              <div class="s12-screen-cap"><p>1. Name Match Rule</p></div>
+            </div>
+          </div>
+          <div class="s12-screen">
+            <div class="s12-screen-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuClibSEMD9UuhunH_mcQLB3WHWlWi9Pqtfj_VPf5A0zAr3x0iKTkS2qdTUsYEfouFkqwNE8zlGyQpDT0sMCkkRcTneyBfRtC4dl-zoUPbJX02KJfT_yfX0-lF_qLXCOiT90VuIf-igQiCBNTByzMtReu8gDLCZ8KekLqFfCVB9NckEBvoAXHBGY0a5oyA1wEuf7p5gN8sYodU7QDdajpm_JZyir56rTl_-e-CqbNlyNKwseaHkegeXUK5yrBREoS3jizGv6Qrn_CZs" alt="Step 2"/>
+              <div class="s12-screen-cap"><p>2. Lite to Full Journey</p></div>
+            </div>
+          </div>
+          <div class="s12-screen">
+            <div class="s12-screen-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb4u598hP8qBvzb4hcsEjsqB3ff8W32pRQCXWQp8-egBjjTs8YwKqxXgSU-aoC8LenSAlOtVuj37ADqsDAWeg3uU2y69tbCUpsmSzhY9TF_TH1yka0zxKeHy6bDBtUkGLMKo8jM7UmN2oc2nPYESaDtMIKuHYdPEiTjMxAbUw9Affd1mn1n2XCQuIGYS2GeajjluLYqYMkg5a_cOGNdRQi8SNJt_zhPKsni3QtVuSheTMQKukvoamOgKkb4RCoypN0p0jtO1g8dxg" alt="Step 3"/>
+              <div class="s12-screen-cap"><p>3. Auto-Fetch UPI</p></div>
+            </div>
+          </div>
+          <div class="s12-screen">
+            <div class="s12-screen-frame">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4B0ogZkUrq--k3Fd-5248KLymD8V-JIAAxx6TADedMUpYi_hbBSNLaUFUOoBmdvS3FoyMKx4e2BJ0SwzI1ZRNQBJ4v66JKQ_0gojd7sd6C9PFLoK_EEqinSCmcqs8paNoxzOqGh3-RehdWKFAGZ4m61mc4qxlDpLLy90XInu8uukeeP9ax8u5dXKOfy1K7tau7c-0G6LcyKtvmgw_pQmTe-i5CfVMQoyDZjiR7R46r1ZWtBYte2x50IxZx7i9zo22fvGMGHWG-c" alt="Step 4"/>
+              <div class="s12-screen-cap"><p>4. Failure Recovery</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-column content -->
+    <div class="s12-content">
+      <div class="s12-content-item">
+        <div class="s12-content-item-head">
+          <span class="material-symbols-outlined">visibility</span>
+          <h3>Set expectations upfront</h3>
+        </div>
+        <ul>
+          <li>Withdrawals only to same-name accounts</li>
+          <li>Final verification step made explicit</li>
+        </ul>
+      </div>
+      <div class="s12-content-item">
+        <div class="s12-content-item-head">
+          <span class="material-symbols-outlined">auto_fix_high</span>
+          <h3>Removed guesswork</h3>
+        </div>
+        <ul>
+          <li>Auto-fetch UPI IDs via mobile number</li>
+          <li>Eliminated manual input friction</li>
+        </ul>
+      </div>
+      <div class="s12-content-item">
+        <div class="s12-content-item-head">
+          <span class="material-symbols-outlined">layers</span>
+          <h3>Progressive flow</h3>
+        </div>
+        <ul>
+          <li>Email → GovID → PAN → Bank/UPI</li>
+          <li>Distinction between lite and full KYC</li>
+        </ul>
+      </div>
+      <div class="s12-content-item">
+        <div class="s12-content-item-head">
+          <span class="material-symbols-outlined">rebase_edit</span>
+          <h3>Design for failure</h3>
+        </div>
+        <ul>
+          <li>Bank proof upload only after failure</li>
+          <li>Clear, actionable error messaging</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="s12-footer">
+      <div>
+        <p class="s12-behavior-label">Behavior Shift</p>
+        <p class="s12-behavior-text">Users now verify with <span>intent</span>, not urgency.</p>
+      </div>
+      <p class="s12-closing">
+        "We turned KYC from a compliance task<br/>
+        into a <span>decision-making moment</span>."
       </p>
-</header>
-<!-- Split Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-<!-- Left: Mobile Screens -->
-<div class="lg:col-span-7 bg-surface-container-low rounded-xl p-4 md:p-8 flex items-center justify-center overflow-hidden">
-<div class="flex items-center -space-x-4 md:-space-x-12 translate-y-4">
-<!-- Screen 1 -->
-<div class="relative z-20 w-[280px] md:w-[340px] aspect-[9/19] rounded-[3rem] border-[8px] border-surface-container-highest shadow-2xl overflow-hidden bg-black">
-<img alt="Mobile Screen Verification UI" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfjNRKlVHkQ11YZvzaO3fKKqN4hCZPXcqD6mRLQxPN5v3z7HGo5HTOti1FYgrfrfevUqW6IaeM4ow7U-QEOCn2lYj0HQHf4yop6RyKBjqm6OYsgVik5_7KMS9E0_s7HJ1dXloP75f32JW2XW05uZnPLAbSM_IVdC1kppl35dkNde86VvGiwPVG4OK6jlZHenXRhQ9T7VLP6RJCiL9KxwNJYocLN4iDPeghtdTuNFyPBzR3PAw6A3MgUmeuV2yjISyfGQAJQHRQ0_c"/>
-</div>
-<!-- Screen 2 -->
-<div class="relative z-10 w-[280px] md:w-[340px] aspect-[9/19] rounded-[3rem] border-[8px] border-surface-container-highest shadow-xl overflow-hidden bg-black opacity-90 scale-95 -rotate-2">
-<img alt="Mobile Screen Dashboard UI" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGzACbRqdfsczXx12bsAQzpOqoOELTbKHNtEFLcoIQ_zdfcgjjArEAZ1vAeGYk6x6DvLoItzJUVCJxw1DH2w66LFkp2pGWGldGwJlUtVKksVpnU1cxSJ7iqOxgUn8YJocuhKef1vpFqlL7rjJ6VCXoz2eTO6tzrpOs2YrMtecbdkrzdC13YLUt6vvBA-EWQ-d4o3JSIhofjxU57ptldtGTOmKAy2TDQYSbou-Lzc1DRvGIbwmaoIQosUwiljCZxZcuRNTHFAoFa1w"/>
-</div>
-</div>
-</div>
-<!-- Right: Insight Cards -->
-<div class="lg:col-span-5 flex flex-col space-y-4">
-<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-primary">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary">verified_user</span>
-<div>
-<h3 class="font-headline font-bold text-lg mb-1">Trust before commitment</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Reducing initial friction by establishing brand authority before requesting sensitive PII data.</p>
-</div>
-</div>
-</div>
-<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">visibility</span>
-<div>
-<h3 class="font-headline font-bold text-lg mb-1">Clarity upfront</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Explicitly outlining the documentation needed before the user enters the secure flow.</p>
-</div>
-</div>
-</div>
-<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">layers</span>
-<div>
-<h3 class="font-headline font-bold text-lg mb-1">Grouped compliance</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Batching regulatory requirements into logical thematic clusters to reduce perceived effort.</p>
-</div>
-</div>
-</div>
-<div class="group bg-surface-container p-6 rounded-lg transition-all duration-300 hover:bg-surface-bright border-l-2 border-transparent hover:border-primary-dim">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-secondary">speed</span>
-<div>
-<h3 class="font-headline font-bold text-lg mb-1">Upfront rationale cuts abandonment</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">Explaining the 'why' behind each data request saw a 24% lift in completion rates.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </div>
+
+  </div>
 </section>
+
+<!-- Section 13: Adapting to Regulation Changes -->
+<section class="s13">
+  <div class="s13-inner">
+
+    <header class="s13-header">
+      <div class="s13-tag"><span>Navigating Uncertainty</span></div>
+      <h2>Adapting to Rapid<br/>Regulation Changes</h2>
+      <p>The regulatory landscape shifted multiple times during development, requiring flexible design solutions.</p>
+    </header>
+
+    <!-- Phase grid -->
+    <div class="s13-phases">
+      <div class="s13-phase">
+        <div class="s13-phase-top">
+          <span class="material-symbols-outlined">remove</span>
+          <span class="s13-phase-badge">Initial</span>
+        </div>
+        <h3>Withdrawals Only</h3>
+        <p>Focused exclusively on user exit strategies prior to the expansion of fiscal mechanisms.</p>
+      </div>
+      <div class="s13-phase">
+        <div class="s13-phase-top">
+          <span class="material-symbols-outlined">gavel</span>
+          <span class="s13-phase-badge">Pivot</span>
+        </div>
+        <h3>Tamil Nadu Law Changes</h3>
+        <p>Rapid compliance adjustments triggered by localized legislative shifts in the Southern region.</p>
+      </div>
+      <div class="s13-phase">
+        <div class="s13-phase-top">
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+          <span class="s13-phase-badge">Final</span>
+        </div>
+        <h3>Deposit and Withdrawal Revamp</h3>
+        <p>Holistic restructuring of the wallet ecosystem to accommodate new multi-layered verification.</p>
+      </div>
+    </div>
+
+    <!-- Regulatory Reality highlight -->
+    <div class="s13-highlight">
+      <div class="s13-highlight-icon">
+        <span class="material-symbols-outlined">shield_lock</span>
+      </div>
+      <div class="s13-highlight-grid">
+        <div class="s13-highlight-bar"></div>
+        <div>
+          <span class="s13-highlight-eyebrow">Regulatory Reality</span>
+          <p class="s13-highlight-quote">"In regulated industries, design flexibility isn't nice-to-have—it's <span>survival</span>."</p>
+        </div>
+        <p class="s13-highlight-note">Component-based approach enabled rapid pivots while maintaining UX continuity through every legislative hurdle.</p>
+      </div>
+    </div>
+
+    <!-- Image grid -->
+    <div class="s13-images">
+      <div class="s13-image">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOzJ7edZkTlHipTbA_KtU4aB1a2Gi4FsjW4ek0lvAHllZPra_QDTPSxbP8dmGpgOS30si36C4MAxFy-KQeC9ggmc1KKon402cSWvqd5YiSLwyIZUgqADaR8wkMmejcBJdiwuXoMJM_NOxyXSui_otX7WOCuMrXT4YzfXw7vcXOrQ2gV77TsCVwWYnFCKBqmeZWSn3GxFBlCyx126T98NZskVnht4RO0clWkgrc1cPklTh17l6ekkFNmzrBjmFe6C74rQv3g_TOrkc" alt="Complex legal documents and architectural blueprints"/>
+      </div>
+      <div class="s13-image">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA9k1ttrBhytxNcZM_JFVn0XrkWLyM0nPYU9jQtUKRSGOSAG_gWJZAMbZ0-mnZTLKp2IcpAXi_nfJzRh-dMWbyB_jcDftm52KgBS7m43fU_yClkCPymQ3MPJSb-vRkJAI9FD20DqbvgBE6QsKJD92Pv-I1n6GwdWLCJZCzJFJE94768XMEvbOCw3T_oBGfLEZs7aHGoASItff7gYtIqxJW_lD0CnZOrQES1lSqI4lnlfD9IPgE67hcV6byjzl-p5owL2-hVSEvmmw" alt="Digital network connections and data nodes"/>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Section 14: Earned Lessons -->
+<section class="s14">
+  <div class="s14-inner">
+
+    <header class="s14-header">
+      <span class="s14-eyebrow">Reflection</span>
+      <h2>Earned lessons</h2>
+      <div class="s14-rule"></div>
+    </header>
+
+    <div class="s14-cards">
+      <div class="s14-card">
+        <span class="material-symbols-outlined">visibility</span>
+        <h3>Show and tell beats tell alone</h3>
+        <p>The 'more steps = more friction' pushback only resolved when I mapped the flow visually — showing the click count staying the same.</p>
+      </div>
+      <div class="s14-card">
+        <span class="material-symbols-outlined">architecture</span>
+        <h3>Design work can be made obsolete by external factors</h3>
+        <p>Two flows — the TN location design and the full PAN-at-KYC flow — didn't ship as intended due to RMG ban and regulatory changes.</p>
+      </div>
+      <div class="s14-card">
+        <span class="material-symbols-outlined">insights</span>
+        <h3>Track the 28% who still fail</h3>
+        <p>55% → 72% real progress. But 28% still hit a wall. We didn't instrument follow-through on those users post-launch.</p>
+      </div>
+    </div>
+
+    <div class="s14-divider"></div>
+
+  </div>
+</section>
+
 </main>
-</body></html>
+</body>
+</html>
