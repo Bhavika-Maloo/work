@@ -73,7 +73,7 @@ img { display: block; max-width: 100%; }
 .s-cover {
   position: relative; min-height: 100vh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 80px 24px 128px; overflow: hidden;
+  padding: 80px 24px 48px; overflow: hidden;
 }
 .s-cover-glow {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -127,7 +127,7 @@ img { display: block; max-width: 100%; }
 .s0 {
   position: relative; width: 100%; min-height: 600px;
   display: flex; justify-content: center; overflow: hidden;
-  background: var(--background); padding: 96px 24px;
+  background: var(--background); padding: 32px 24px 96px;
 }
 .s0-glow-editorial {
   position: absolute; inset: 0; pointer-events: none;
@@ -200,7 +200,7 @@ img { display: block; max-width: 100%; }
 ============================== */
 .s1 {
   position: relative;
-  padding: 128px 24px;
+  padding: 32px 24px 128px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1255,7 +1255,7 @@ img { display: block; max-width: 100%; }
    RESPONSIVE: 768px
 ============================== */
 @media (min-width: 768px) {
-  .s1 { padding: 192px 24px; }
+  .s1 { padding: 64px 24px 192px; }
   .s1-headline { font-size: 4.5rem; }
   .s1-body { font-size: 1.5rem; }
 
@@ -1387,7 +1387,6 @@ img { display: block; max-width: 100%; }
     </div>
 
   </div>
-  <div class="s-cover-rule"></div>
 </section>
 
 <!-- Section 0: Phone Showcase -->
