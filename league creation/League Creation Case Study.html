@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>League Creation Redesign Case Study</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed-dim": "#aac7ff",
+            "on-primary-fixed": "#001b3e",
+            "inverse-on-surface": "#303032",
+            "on-surface-variant": "#c0c6d6",
+            "error-container": "#93000a",
+            "surface-container-highest": "#353437",
+            "on-tertiary-container": "#4c3e00",
+            "tertiary-fixed-dim": "#e9c400",
+            "on-surface": "#e5e1e4",
+            "on-tertiary": "#3b2f00",
+            "on-secondary-container": "#ffd2cc",
+            "surface-container-lowest": "#0e0e10",
+            "on-secondary-fixed-variant": "#930005",
+            "tertiary-container": "#c9a800",
+            "surface-variant": "#353437",
+            "secondary-fixed-dim": "#ffb4aa",
+            "secondary-container": "#c5020b",
+            "surface-bright": "#39393b",
+            "tertiary-fixed": "#ffe171",
+            "error": "#ffb4ab",
+            "surface": "#131315",
+            "inverse-surface": "#e5e1e4",
+            "outline-variant": "#414754",
+            "background": "#131315",
+            "surface-container": "#201f21",
+            "inverse-primary": "#005db8",
+            "surface-container-low": "#1b1b1d",
+            "secondary": "#ffb4aa",
+            "outline": "#8b91a0",
+            "on-tertiary-fixed": "#221b00",
+            "on-primary-fixed-variant": "#00468d",
+            "on-secondary-fixed": "#410001",
+            "on-primary": "#003064",
+            "primary": "#aac7ff",
+            "on-error": "#690005",
+            "on-background": "#e5e1e4",
+            "surface-dim": "#131315",
+            "surface-container-high": "#2a2a2c",
+            "secondary-fixed": "#ffdad5",
+            "on-secondary": "#690003",
+            "surface-tint": "#aac7ff",
+            "on-tertiary-fixed-variant": "#554600",
+            "tertiary": "#e9c400",
+            "primary-fixed": "#d6e3ff",
+            "on-primary-container": "#002957",
+            "primary-container": "#3e90ff",
+            "on-error-container": "#ffdad6"
+          },
+          fontFamily: {
+            "headline": ["Lexend"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-panel {
+      background: rgba(27, 27, 29, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .lego-shadow {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .snap-line::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      width: 2px;
+      height: 16px;
+      background: #414754;
+      opacity: 0.15;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .phone-shadow { box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8); }
+    .bento-inner-shadow { box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary-container overflow-x-hidden">
+<main class="max-w-6xl mx-auto px-6 md:px-12 py-12 flex flex-col gap-16">
+<!-- 1. Visual Entry (Hero Grid) -->
+<section class="w-full">
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 grid-rows-4 lg:grid-rows-3 gap-4 h-auto lg:h-[600px]">
+<!-- Large Anchor Tile 1 -->
+<div class="md:col-span-2 lg:col-span-3 row-span-2 bg-surface-container rounded-xl overflow-hidden relative group p-8 flex flex-col justify-end lego-shadow">
+<div class="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+<img class="w-full h-full object-cover" data-alt="Close up of high-end mechanical gaming hardware with vibrant blue and cyan neon lighting, futuristic industrial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOOkNrEx-h26dNm3ony9EvYh0nDu3zN_7mGiC8Hk4Pw1DWn4uit1QsmC7E2V4S5l1v3RpvMjeBXY3VU0gi3U8LlOYz8eJVVqfH7tV9ik4rQqzjuQEt8WFbuJMHyCaCfmVAwj68-egyVyw9hCyU3_4LW70CWAECvqMlGKRhPn_WsqidtwN2csiPIcOzo7HgqjHv3aH_nShi_NGkCle2-oBOV6fvyaqspcz_REd8Tj0tY1Ude7xivmqe4-Il1YD6qmj257Y8pCZ4gzoZ">
+</div>
+<div class="relative z-10">
+<h1 class="font-headline font-extrabold text-5xl leading-none tracking-tight text-white mb-2">MY GAME<br>MY RULES.</h1>
+<p class="font-label text-xs text-primary-fixed-dim">Foundation Alpha v2.0</p>
+</div>
+</div>
+<!-- UI Snippet Tile -->
+<div class="md:col-span-2 lg:col-span-2 row-span-1 bg-surface-container-high rounded-xl p-6 flex flex-col justify-between border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">settings_input_component</span>
+</div>
+<div>
+<p class="font-headline font-bold text-lg">Logic Engine</p>
+<p class="text-xs text-on-surface-variant font-label">Rule definitions v1.4</p>
+</div>
+</div>
+<div class="space-y-2 mt-4">
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[70%] bg-primary"></div>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[45%] bg-secondary"></div>
+</div>
+</div>
+</div>
+<!-- Avatar/Illustration Tile -->
+<div class="md:col-span-1 lg:col-span-1 row-span-1 bg-surface-container-low rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Stylish abstract portrait of a player in silhouette against a vibrant blue and red gradient backdrop, digital art style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIF6-s8OFPj5CwgZfw5soMfbwcqoWCYkkEjXLDampgwB8ZgePP5S3jWDA7WyTjABF-2ygjPn7JSwIcC0Aevdh6mBy0wrQ1SkME3x1cyHVsW4VHQInBBeU8ZKKdwsiLeCSM-aZwGowrU93pRwk21neAykvUNheFbt4Zq1Jjtul7nY5Dc7zgWXhLYuOsGPgIGvIHq6iLgnzkmIzrrKSHaSWhGEsSndmDR-x0IA8pFyuqov9ltocQAxTUNgHKiYcj2RaAY1bVFQAYtkWd">
+</div>
+<!-- Metric Tile -->
+<div class="md:col-span-1 lg:col-span-1 row-span-1 bg-tertiary-container rounded-xl p-4 flex flex-col items-center justify-center text-on-tertiary-container">
+<span class="font-headline font-black text-4xl">98%</span>
+<span class="text-[10px] font-bold uppercase tracking-widest opacity-80">Clarity Rating</span>
+</div>
+<!-- Large Anchor Tile 2 (Drafting/Rules) -->
+<div class="md:col-span-2 lg:col-span-2 row-span-2 bg-surface-container rounded-xl p-8 flex flex-col gap-6 relative overflow-hidden border border-outline-variant/10">
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
+<span class="material-symbols-outlined text-4xl text-primary">account_tree</span>
+<div>
+<h2 class="font-headline font-bold text-2xl text-white">Modular Architecture</h2>
+<p class="text-sm text-on-surface-variant mt-2">Redesigning the core league creation loop using interlocking rule blocks.</p>
+</div>
+<div class="mt-auto flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-surface" data-alt="Professional male headshot portrait with clean lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0JAUlGeMgDRvdq7pHm8lbWyHP2zEvPLuCHdsnA36TH6d_Jhu1vvSMiJj-6L30DLUO-0R27fC0ZQ-UjQ4f7IUQssP4kODiZV63VnTWfWELwypnFxzm_jWqi9szfuHzkQiuP8p8EP19iANrEH42WzxjClF1p4CBub0ZBVM1ruqn-IUnoO_nLfq_18_UZYNV0B5gxG6jzAyrx9vHHVECUDZZ9sxUOXEK6mlB55HtHMag5Qo_hRafLclg79zPwFJONYj1YFZQEpASrWc">
+<img class="w-10 h-10 rounded-full border-2 border-surface" data-alt="Professional female headshot portrait with soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqAd0_xbxaQVXu6LFG7pzIxjH_AZJdxGZBAad-g_Ss8RpwJynVP6k-erO8W-CsJEyqYEhX8Lb60EvAsDgp2wnzCYgvfR9cYsf3O6FkSnn0PvfTw9ToJnATYYLElslZJPmLkiMjrhGjYpILrbYHvsLcvU8xZkspQDo89yZ2tb62Hj5HlkfKF9zFtnlk3oObGyTToabWiRlAaGBVT1ygSjc08lI_M3wSGqcKfwBbXXcGLfT4G1sOMoRA1HkoKiQoNOIKp-5H9kOF3XxW">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+</div>
+<!-- Small Detail Tile -->
+<div class="md:col-span-1 lg:col-span-1 row-span-1 bg-surface-container-highest rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">grid_view</span>
+</div>
+</div>
+</section>
+<!-- 2. Project Context (Structured) -->
+<section class="w-full space-y-12">
+<div class="space-y-4">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight text-white">League Creation for Classic Fantasy &amp; Auction</h2>
+<p class="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-3xl">
+          Redesigning league creation to improve rule clarity and using the same foundation to launch Auction Fantasy under real constraints.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-outline-variant/15">
+<!-- Project Type -->
+<div class="space-y-3">
+<h4 class="font-label font-black text-[10px] uppercase tracking-[0.2em] text-primary">Project Type</h4>
+<p class="text-sm font-medium text-white leading-snug">
+            League Creation for Classic Fantasy &amp; Auction</p>
+</div>
+<!-- My Role -->
+<div class="space-y-3">
+<h4 class="font-label font-black text-[10px] uppercase tracking-[0.2em] text-secondary">My Role</h4>
+<p class="text-sm font-medium text-white">
+            Product Design
+          </p>
+</div>
+<!-- Cross Collaboration -->
+<div class="space-y-3">
+<h4 class="font-label font-black text-[10px] uppercase tracking-[0.2em] text-tertiary">Cross Collaboration</h4>
+<p class="text-sm font-medium text-white">
+            Product, Engineering, Content, Data, Illustrations,&nbsp;</p>
+</div>
+</div>
+</section>
+<!-- 3. Product Preview (Mockups) -->
+<section class="w-full pt-8 pb-24">
+<div class="relative flex justify-center items-center h-[500px] lg:h-[700px]">
+<!-- Left Screen -->
+<div class="absolute left-1/2 -translate-x-[110%] md:-translate-x-[130%] scale-90 rotate-[-4deg] z-10 transition-transform duration-500 hover:rotate-0 hover:z-30">
+<div class="w-[240px] md:w-[280px] aspect-[9/19] bg-surface-container-lowest rounded-[2.5rem] border-8 border-surface-container-highest overflow-hidden lego-shadow">
+<div class="w-full h-full p-4 flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<span class="material-symbols-outlined text-lg">close</span>
+<span class="font-bold text-xs">Rule Set</span>
+<span class="w-4"></span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl space-y-3">
+<div class="w-full h-24 rounded-lg bg-surface-container-high animate-pulse"></div>
+<div class="h-4 w-3/4 bg-surface-container-highest rounded"></div>
+<div class="h-4 w-1/2 bg-surface-container-highest rounded"></div>
+</div>
+<div class="mt-auto space-y-2">
+<div class="h-10 w-full bg-primary-container rounded-lg"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Screen -->
+<div class="absolute left-1/2 translate-x-[10%] md:translate-x-[30%] scale-90 rotate-[4deg] z-10 transition-transform duration-500 hover:rotate-0 hover:z-30">
+<div class="w-[240px] md:w-[280px] aspect-[9/19] bg-surface-container-lowest rounded-[2.5rem] border-8 border-surface-container-highest overflow-hidden lego-shadow">
+<div class="w-full h-full p-4 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">verified</span>
+</div>
+<div>
+<div class="h-3 w-20 bg-surface-container-highest rounded mb-1"></div>
+<div class="h-2 w-12 bg-surface-container-high rounded"></div>
+</div>
+</div>
+<div class="flex-1 border-t border-outline-variant/10 pt-4 space-y-4">
+<div class="grid grid-cols-2 gap-2">
+<div class="h-16 bg-surface-container rounded-lg"></div>
+<div class="h-16 bg-surface-container rounded-lg"></div>
+<div class="h-16 bg-surface-container rounded-lg"></div>
+<div class="h-16 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Center Dominant Screen -->
+<div class="relative z-20 scale-100 lg:scale-110">
+<div class="w-[260px] md:w-[320px] aspect-[9/19] bg-surface-container-lowest rounded-[3rem] border-8 border-surface-container-high overflow-hidden lego-shadow shadow-primary/20">
+<div class="w-full h-full relative">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="Abstract colorful fluid waves in blue and purple, smooth gradients with high end professional photography lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt4De5wxKfTzPk-aj4gNJUS2yfsEQv0y7PIdHFogyB09Fuo9_TharxrlM0VtvRIUSzKG8N0mLFIUPjrT_6C8XUFzcw_VpRjUvYCGSXlR5kyzl2kYUK_R-KJ8-xFXXgmXtPhtShdjD6wsemX0xxlR371GRy1Rb48ZyDlq-c5Qn6Nr2VIq3bSoP5tPCFm8frRLLOVoTVcg5tm3FUd6GZ-l6Q47WeatDADfMxpKgu4ZPWv4X-gjasuOkVInDQY1N6qJ9VpowU6Bq9VGKv">
+<div class="relative z-10 h-full flex flex-col p-6">
+<div class="flex justify-between items-center mb-10">
+<span class="material-symbols-outlined">menu</span>
+<div class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold tracking-widest text-primary uppercase">Auction Live</div>
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<div class="space-y-6">
+<h3 class="font-headline font-bold text-3xl leading-tight">Create Your<br>Dream League</h3>
+<div class="p-5 rounded-2xl bg-surface-container-high/80 glass-panel border border-outline-variant/20 space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-label">Entry Fee</span>
+<span class="text-primary font-headline font-bold">$250</span>
+</div>
+<div class="h-px bg-outline-variant/10 w-full"></div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-label">Draft Type</span>
+<span class="text-white font-headline font-bold">Auction</span>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full py-4 bg-primary text-on-primary font-headline font-extrabold rounded-2xl flex items-center justify-center gap-2 group transition-transform active:scale-95">
+                    START CREATING
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Product Context, Key Shifts, Constraints -->
+<div class="py-16 space-y-16 w-full">
+<section class="flex flex-col gap-8">
+<div class="flex flex-col gap-3 border-b border-outline-variant/30 pb-6">
+<div class="flex items-center gap-3">
+<span class="w-8 h-[2px] bg-primary-container"></span>
+<span class="font-label text-[11px] uppercase tracking-[0.3em] font-bold text-primary">Genesis</span>
+</div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white">Product Context</h2>
+</div>
+<div class="space-y-10">
+<p class="font-body text-base leading-6 text-on-surface-variant max-w-3xl">Fantasy sports is supposed to be about glory, trash talk, and proving you're smarter than your friends. But before any of that happens, someone has to actually create the league. Classic Fantasy League Creation already allowed users to deeply customise leagues across team size, scoring, transfers, and updates. Over time, this flexibility turned league creation into a powerful but complex surface, primarily used by experienced creators.</p>
+<div class="bg-surface-container rounded-xl p-8 border border-outline-variant/10">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-2xl">architecture</span>
+<h4 class="font-headline font-bold text-base tracking-wide text-white">Powerful but complex creation system</h4>
+</div>
+<p class="text-sm text-on-surface-variant/80 leading-relaxed font-normal">Highly flexible league setup evolved into a dense, hard-to-navigate experience</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-2xl">hub</span>
+<h4 class="font-headline font-bold text-base tracking-wide text-white">Feature density</h4>
+</div>
+<p class="text-sm text-on-surface-variant/80 leading-relaxed font-normal">High-utility tools buried across multiple steps and deep navigation</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-8">
+<div class="flex flex-col gap-3 border-b border-outline-variant/30 pb-6">
+<div class="flex items-center gap-3">
+<span class="w-8 h-[2px] bg-primary-container"></span>
+<span class="font-label text-[11px] uppercase tracking-[0.3em] font-bold text-primary">Evolution</span>
+</div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white">Key Shifts</h2>
+</div>
+<div class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-high p-8 rounded-xl space-y-4 border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1">payments</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-white">Dream Bucks</h3>
+</div>
+<p class="text-base text-on-surface-variant leading-relaxed">Introduction of Dream Bucks as a pay-and-play monetisation layer on top of free-to-play fantasy.</p>
+</div>
+<div class="bg-surface-container-high p-8 rounded-xl space-y-4 border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-2xl" style="font-variation-settings: 'FILL' 1">gavel</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-white">Auction Mode</h3>
+</div>
+<p class="text-base text-on-surface-variant leading-relaxed">Auction Fantasy introduced as a new game mode with bidding, budgets, and higher fairness sensitivity.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 bg-primary/5 p-6 rounded-xl border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl mt-1">info</span>
+<p class="text-base text-on-surface-variant leading-relaxed">Both shifts required league creation to support greater clarity and explainability without breaking existing user behaviour or backend architecture.</p>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-8">
+<div class="flex flex-col gap-3 border-b border-outline-variant/30 pb-6">
+<div class="flex items-center gap-3">
+<span class="w-8 h-[2px] bg-primary-container"></span>
+<span class="font-label text-[11px] uppercase tracking-[0.3em] font-bold text-primary">Parameters</span>
+</div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white">Constraints</h2>
+</div>
+<div class="space-y-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-error shadow-[0_0_8px_rgba(255,180,171,0.4)]"></span>
+<h4 class="font-headline font-bold text-white text-sm">The Sports Clock</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">You can't ask the IPL or the Premier League to delay their season. We had fixed deadlines tied to real-world kickoffs.</p>
+</div>
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(170,199,255,0.4)]"></span>
+<h4 class="font-headline font-bold text-white text-sm">Dark Theme</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">We had to reuse the current backend architecture and make it feel new without changing the plumbing.</p>
+</div>
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(233,196,0,0.4)]"></span>
+<h4 class="font-headline font-bold text-white text-sm">The Dream Bucks Pivot</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Halfway through, leadership pulled the plug on the monetization layer. The system had to survive that pivot with minimal rework.</p>
+</div>
+</div>
+<div class="overflow-hidden rounded-2xl bg-surface-container-lowest border border-outline-variant/10 h-64 relative group">
+<img alt="Technical UI Workspace" class="w-full h-full object-cover opacity-25 grayscale group-hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgkT0M8QUz-qOpPImI1urwr388dR8pS_nYr8TcMNmn2oDmVZrNQmMdLQJiR6E4Pimv1fG485_fL4RP680DxyYyEtaqVgi5dof2_zmt-3cRWvt-eKf5hLIHFJ8kY64d0Hv71BmHnrAQe98dOjWokDrO27OHjQIFr8Z-r9b9tz0yptBQApCVpzezrykWOp3lxFdQ6AwjroPRd_OTBmVOBhtnMu_wg9l05iElJ1vUYJP6WShsk_4LxiGpgQOiZCSNvswEwzC6Yd2kV6h6">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-2xl">
+<p class="text-[10px] font-label uppercase tracking-[0.4em] text-primary mb-3 font-bold">Design Philosophy</p>
+<p class="font-headline text-2xl font-medium text-white leading-tight">Striking the balance between technical complexity and user-centric simplicity.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant/30 text-5xl">terminal</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Section 3: The Two-Headed User Problem -->
+<div class="py-20 w-full">
+<div class="max-w-6xl w-full">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-center gap-4 mb-6">
+<span class="h-[2px] w-12 bg-primary"></span>
+<span class="text-primary font-label text-[0.6875rem] uppercase tracking-widest font-bold">USERS</span>
+</div>
+<h1 class="font-headline text-5xl font-extrabold tracking-tight mb-8 leading-none">The Two-Headed User Problem: <br/>
+<span class="text-primary">A Social Contract</span>
+</h1>
+<p class="max-w-3xl text-on-surface-variant text-base leading-6">
+Designing a league creation flow isn't like designing a solo checkout experience. It's more like drafting a legal contract between friends, but with more swearing and higher stakes. I realized early on that we weren't just designing for one person; we were designing a <span class="text-on-surface font-semibold">handshake</span> between two very different mindsets. If either side felt the deal was "unfair" or too confusing, the whole thing would collapse.
+</p>
+</header>
+<!-- Interactive Handshake Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-1 px-1 bg-outline-variant/10 rounded-xl overflow-hidden">
+<!-- Block 1: The Commissioner -->
+<div class="lg:col-span-5 bg-surface-container p-8 md:p-12 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300 group">
+<div>
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">psychology</span>
+</div>
+<span class="font-headline font-bold text-sm tracking-tight uppercase">The Power User</span>
+</div>
+<h2 class="font-headline text-2xl font-bold mb-6 text-primary">The "Commissioner"</h2>
+<div class="space-y-8">
+<div>
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-outline mb-2">Their Vibe</h3>
+<p class="text-on-surface italic font-medium leading-snug">"I want to create a league so specific and tactical that my friends will talk about it for years."</p>
+</div>
+<div>
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-outline mb-2">Their Problem</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">They had all the power but no clarity. They were terrified of accidentally setting a rule that would "break" the league three weeks into the season.</p>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/15">
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-primary mb-4">What they needed</h3>
+<div class="flex items-center gap-3 bg-primary-fixed/5 p-4 rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">bolt</span>
+<p class="text-sm font-semibold">Control without the "Am I an idiot?" factor.</p>
+</div>
+</div>
+</div>
+<!-- Central Visual Divider -->
+<div class="lg:col-span-2 relative h-[300px] lg:h-auto overflow-hidden bg-surface-container-low flex items-center justify-center">
+<div class="absolute inset-0 z-0 opacity-20 lg:opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" alt="Abstract cinematic composition of two distinct personas in profile silhouette facing each other in high contrast lighting with subtle tech interface elements between them" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDko0TapNdRFsrbRkVZP-aivPaidG_Yrr9OvkMp5dgDBt1gf2uromxUhbykFWlesTGGcXmAOrufv0obefzxaqdVg_s9y0CKVz1ZBa8ZNKLIKQueoRzOof8PrAqnvFBJkd0LcS7YF2SvYsIzy-gvddjkpKuDWKPQ1uAQFQXAHCdyg8QFxSBtTDQZqOhiCKp1P_mDdwmfTjoSFQOTwKZi-klqnBr1d7Q79BxR1LATwN62sji58J9Ueq5zrHU-yNvhw2ObZbK1XMzwure0"/>
+</div>
+<div class="relative z-10 hidden lg:flex flex-col items-center gap-4">
+<div class="w-[1px] h-32 bg-gradient-to-b from-transparent via-outline-variant to-transparent"></div>
+<div class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-surface backdrop-blur-xl">
+<span class="material-symbols-outlined text-outline">handshake</span>
+</div>
+<div class="w-[1px] h-32 bg-gradient-to-b from-transparent via-outline-variant to-transparent"></div>
+</div>
+</div>
+<!-- Block 2: The Invitee -->
+<div class="lg:col-span-5 bg-surface-container p-8 md:p-12 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="text-right flex flex-col items-end">
+<div class="flex items-center gap-3 mb-8">
+<span class="font-headline font-bold text-sm tracking-tight uppercase">The Skeptical Friend</span>
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">group_off</span>
+</div>
+</div>
+<h2 class="font-headline text-2xl font-bold mb-6 text-secondary">The "Invitee"</h2>
+<div class="space-y-8 w-full">
+<div>
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-outline mb-2">Their Vibe</h3>
+<p class="text-on-surface italic font-medium leading-snug">"Is this going to take up too much of my time? Is the scoring rigged? Do I have to pay Dave five bucks?"</p>
+</div>
+<div>
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-outline mb-2">Their Problem</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">They were landing on a "Review" page that looked like a wall of data. They couldn't find the "fun" because it was buried under "system logic."</p>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/15 text-right w-full">
+<h3 class="font-label text-[0.6875rem] uppercase tracking-widest text-secondary mb-4">What they needed</h3>
+<div class="flex items-center justify-end gap-3 bg-secondary-fixed/5 p-4 rounded-lg border border-secondary/20">
+<p class="text-sm font-semibold">Instant trust and a clear sense of the commitment.</p>
+<span class="material-symbols-outlined text-secondary text-sm">verified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Logic Connector -->
+<div class="mt-16 flex flex-col items-center">
+<div class="flex items-center gap-4">
+<div class="h-[2px] w-24 bg-gradient-to-r from-transparent to-outline-variant/30"></div>
+<div class="flex items-center gap-2 px-6 py-3 rounded-full border border-outline-variant/20 bg-surface-container-low">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-[0.6875rem] font-label uppercase tracking-tighter text-on-surface-variant">Conclusion: Design for the Middle Ground</span>
+</div>
+<div class="h-[2px] w-24 bg-gradient-to-l from-transparent to-outline-variant/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Auditing the Chaos -->
+<div class="py-20 w-full">
+<!-- Header -->
+<header class="mb-16 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="w-8 h-[2px] bg-primary-container"></span>
+<span class="font-label text-[11px] uppercase tracking-[0.3em] font-bold text-primary">Audit</span>
+</div>
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface">Auditing the Chaos</h1>
+<p class="max-w-2xl font-body text-base leading-6 text-on-surface-variant">
+Before redesigning the experience, we audited the existing system to understand where it was breaking. The issue wasn't a lack of features — it was a lack of structure, clarity, and feedback.
+</p>
+</header>
+<!-- Findings -->
+<div class="divide-y divide-outline-variant/10">
+<!-- Finding 01 -->
+<div class="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="font-label text-tertiary text-xs font-bold tracking-[0.2em] uppercase">01</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-2">No Sense of Progression</h3>
+</div>
+<div class="md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-outline font-bold">What's happening</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">League creation was structured as independent tabs: Basic Info, Team Rules, and League Rules.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-error font-bold">Why it's broken</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Tabs work for navigation, not sequential decision-making. Users had no sense of where they were or what remained.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-primary font-bold">Impact</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users skipped steps, missed critical inputs, and treated creation as optional exploration instead of a guided flow.</p>
+</div>
+</div>
+</div>
+<!-- Finding 02 -->
+<div class="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="font-label text-secondary text-xs font-bold tracking-[0.2em] uppercase">02</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-2">Duration Did Not Match Mental Models</h3>
+</div>
+<div class="md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-outline font-bold">What's happening</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users were asked to define duration using match ranges (e.g. Match 4–72).</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-error font-bold">Why it's broken</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users think in real-world timeframes ("this week", "full season"), not abstract match indices.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-primary font-bold">Impact</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users were forced into mental calculations early in the flow, preventing meaningful engagement with the rest of setup.</p>
+</div>
+</div>
+</div>
+<!-- Finding 03 -->
+<div class="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="font-label text-primary text-xs font-bold tracking-[0.2em] uppercase">03</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-2">Fragmented Rule System</h3>
+</div>
+<div class="md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-outline font-bold">What's happening</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Core gameplay rules and modifiers were distributed across multiple screens.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-error font-bold">Why it's broken</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Related decisions were separated, making it difficult to understand how rules interact with each other.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-primary font-bold">Impact</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users made isolated decisions without understanding downstream effects, leading to suboptimal or unintended league setups.</p>
+</div>
+</div>
+</div>
+<!-- Finding 04 -->
+<div class="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="font-label text-tertiary text-xs font-bold tracking-[0.2em] uppercase">04</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-2">Gameplay Logic Was Opaque</h3>
+</div>
+<div class="md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-outline font-bold">What's happening</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Rule effects (e.g. boosters, multipliers) were not clearly explained within the creation flow.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-error font-bold">Why it's broken</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">The system hid critical logic behind configuration, rather than making it visible at the point of decision.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-primary font-bold">Impact</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users could not predict outcomes, reducing trust and limiting strategic play.</p>
+</div>
+</div>
+</div>
+<!-- Finding 05 -->
+<div class="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="font-label text-secondary text-xs font-bold tracking-[0.2em] uppercase">05</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-2">Review Step Lacked Meaning</h3>
+</div>
+<div class="md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-outline font-bold">What's happening</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">The final review screen presented a dense summary of configurations.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-error font-bold">Why it's broken</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">The summary reflected system inputs, not user intent or league setup — leaving creators with no clear sense of what they had built.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label text-[10px] uppercase tracking-wider text-primary font-bold">Impact</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Users struggled to validate what they had created and often had to explain the league manually to others.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Takeaway -->
+<div class="mt-16 p-8 bg-surface-container-highest rounded-xl border border-outline-variant/10">
+<span class="font-label text-[11px] uppercase tracking-[0.3em] text-primary font-bold block mb-4">Key Takeaway</span>
+<p class="font-headline text-xl font-bold text-on-surface">The system was powerful, but not legible.</p>
+<p class="font-body text-base leading-6 text-on-surface-variant mt-4">Users weren't struggling because of complexity — they were struggling because the system failed to communicate that complexity clearly.</p>
+</div>
+</div>
+<!-- Section 5: From Forms to Guidance (Solution) -->
+<div class="py-20 w-full">
+<!-- Header Section -->
+<header class="mb-16 space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container border border-outline-variant/15">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary font-headline">SOLUTION</span>
+</div>
+<h1 class="text-5xl font-extrabold font-headline tracking-tight max-w-4xl text-on-surface">From Forms to Guidance</h1>
+<p class="text-base leading-6 text-on-surface-variant max-w-2xl font-body">
+                League creation was redesigned from a form-based setup into a guided system where users make clear decisions step-by-step.
+            </p>
+</header>
+<!-- Step 1 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<div class="space-y-10 order-2 lg:order-1">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Step 01</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">"What am I signing up for?" (The Time Tax)</h2>
+</div>
+<div class="pl-6 border-l-2 border-primary/30 py-3 bg-primary/5 rounded-r-lg">
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed">Insight: Users couldn't understand the time commitment of a league.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<p class="text-on-surface-variant font-medium">Duration expressed as matches/timeline</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">flag</span>
+<p class="text-on-surface-variant font-medium">Defined start/end — killed the "mental math" friction</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Dashboard showing league timeline" class="w-full h-full object-cover rounded-[2rem] brightness-90 grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV4dzk-8AfPpz4Dh-OBlXnkf_73_3Ep7_GB2T4IzPWrgqjib6JkEnI-F3sRcW_6tWkvgp05CeyT1AiqK2knU552guvUvnNSf5YENNVppOFtKP03m2KBKQCsLAqGK3GcJG5cN3tuDY54vllDKb8dMRnRvcCKT9NTcU4RM76I8lBhmPTWXAA663a7WdRHKqZUS-GULD-2NY17K_CVxHwrJERYVJbu7lnxiGnhddXz9yH0dMIMjTK-WTX_eKtC31YUeblVp7fFfZg02CW">
+<div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+<div class="h-1.5 w-12 bg-white/20 rounded-full mx-auto mb-4"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<div class="flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Friend list in league setup" class="w-full h-full object-cover rounded-[2rem] brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNud5swQke1CqdnMfmrkqTv-a_a0mbkkclUBF3nxCv0JkBNbeW37I5fL14YNppWTmJ5JhlKxbNHaFII2jMoVi2QLHEjG1aLhpbgjhK09SNA1BJMpYAVH1Lk5Jfj9F1WtQZnj28Djid8U-41YgcibfEdMPF1ve5N0UU3BsUYqzVSB6fhcKAw8p2daroZWIRUvZAGzchieIwcfOeUHdVWzkvDvtzywI4l2VJswyv9uXKpr5vR2IFGSMPdJzv9YNk8K3ctqb7RxjguPwA">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-1/2 glass-panel border border-white/10 rounded-2xl p-4 flex flex-col justify-center gap-3">
+<div class="h-2 w-1/2 bg-primary/40 rounded-full"></div>
+<div class="h-2 w-full bg-white/10 rounded-full"></div>
+<div class="h-2 w-3/4 bg-white/10 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="space-y-10">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-secondary">Step 02</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">Who is playing?</h2>
+</div>
+<div class="pl-6 border-l-2 border-secondary/30 py-3 bg-secondary/5 rounded-r-lg">
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed">Insight: Participation felt like an input, not part of the system.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary">group</span>
+<p class="text-on-surface-variant font-medium">Spots clearly defined</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+<p class="text-on-surface-variant font-medium">Friends visible in context makes the league feel real. It's not just "10 spots"; it's "Me and 9 of my loudest friends."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<div class="space-y-10 order-2 lg:order-1">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-tertiary">Step 03</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">How does the game work?</h2>
+</div>
+<div class="pl-6 border-l-2 border-tertiary/30 py-3 bg-tertiary/5 rounded-r-lg">
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed">Insight: Team setup and gameplay rules used to feel like strangers.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary">account_tree</span>
+<p class="text-on-surface-variant font-medium">Grouped roles and gameplay rules into logical clusters</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary">sports_esports</span>
+<p class="text-on-surface-variant font-medium">By grouping them, we helped creators see how a "Wicket-Keeper only" rule would actually affect the competition.</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Rule configuration screen" class="w-full h-full object-cover rounded-[2rem] brightness-75" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Q5PqSm2kFjBddZSCX6B3PX4KvDtaJr5gHfSCS_z64boOjVJPM3b0xJnnJo8UySxmTaoLi6Ik9C0La2LHX5Roqq0U9l5H6WrmCE0x-7KeHEXzI7Cj2diSAhN7hSrjjcuaXBh2iHhCx7Wrs8c6JSGguxaP0UHsHngoYyBBc1wTtHQcMwrOds9xw7EMqkH0rxUuDRd1khpd0pV4JnPL9Oliz49qqa1ZpPsWd_AWuad3f8-x7VwQKZhjlzJIz5ff9ovIHA1NYnJouxlO">
+<div class="absolute inset-0 flex flex-col justify-end p-8">
+<div class="space-y-3">
+<div class="h-12 w-full glass-panel rounded-xl border border-white/5"></div>
+<div class="h-12 w-full glass-panel rounded-xl border border-white/5"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 4 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16">
+<div class="flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Contextual rule application UI" class="w-full h-full object-cover rounded-[2rem] brightness-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALUcUYYE-qOVBcKq1kuafTq1s_5wgBfhfeE_kipwri9s7FulDH9tHtdkiwwnkqEh13i5yy5jaFsxaCvD1pFKwIWoUJlHPk5cBUSAGbhhz64a4RswpBff5VO3TpvlvBf2c_srlglPCp5WchbjhZvCoh7eSTa5oI4uGqMo5OtjmS3IB9DNbczX8Qghvcfo5TiQjRnujTKburza5w_pE4Ez2wc485FJx8oVhViE9ZTxji6voyZ1pH0l7LgIw05-_WiURChcLfRI5qfe2r">
+<div class="absolute top-10 right-10 flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full border-2 border-primary/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">history</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-10">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Step 04</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">How do rules behave?</h2>
+</div>
+<div class="pl-6 border-l-2 border-primary/30 py-3 bg-primary/5 rounded-r-lg">
+<p class="text-base text-on-surface-variant leading-relaxed">Insight: Users couldn't predict rule application.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary-container">preview</span>
+<p class="text-on-surface-variant font-medium">Visibility of application context</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary-container">sync</span>
+<p class="text-on-surface-variant font-medium">Clear frequency/reset behavior</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Conclusion -->
+<footer class="text-center pt-16 border-t border-outline-variant/10">
+<div class="max-w-3xl mx-auto space-y-12">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: 'FILL' 1">verified</span>
+<h3 class="text-2xl font-bold font-headline leading-tight tracking-tight text-on-surface">
+                    The result is a setup experience where users understand the game they are creating before committing.
+                </h3>
+<div class="pt-8 flex justify-center items-center gap-6">
+<div class="h-[1px] w-24 bg-outline-variant/30"></div>
+<div class="w-2 h-2 rounded-full bg-primary/40"></div>
+<div class="h-[1px] w-24 bg-outline-variant/30"></div>
+</div>
+</div>
+</footer>
+</div>
+<!-- Section 6: Designing Auctions / Tradeoffs -->
+<div class="py-48 w-full">
+<div class="max-w-5xl mx-auto px-6 md:px-12">
+<!-- Header -->
+<header class="mb-32">
+<div class="flex items-center gap-3 mb-8">
+<span class="w-8 h-[2px] bg-primary-container"></span>
+<span class="font-label text-[11px] uppercase tracking-[0.3em] font-bold text-primary">Auction Design</span>
+</div>
+<h1 class="font-headline font-extrabold text-4xl tracking-tight text-on-surface">
+Designing auctions is about <span class="text-primary italic">choosing tradeoffs</span>
+</h1>
+<p class="text-base leading-6 text-on-surface-variant mt-8 max-w-2xl">
+The "Auction feel" must prioritize the visceral energy of a high-stakes arena while maintaining mechanical integrity.
+</p>
+</header>
+<!-- Tradeoffs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Tradeoff 1 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<span class="font-label text-xs uppercase tracking-wide text-outline">Balance 01</span>
+<h3 class="font-headline font-bold text-xl text-on-surface mt-12">Live <span class="text-outline font-light mx-2">vs</span> Silent</h3>
+<p class="text-base leading-6 text-on-surface-variant mt-8">We went with <strong>Live</strong>. We wanted the chaotic energy of real-time psychological warfare, not the "strategic precision" of a sealed envelope.</p>
+</div>
+<!-- Tradeoff 2 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<span class="font-label text-xs uppercase tracking-wide text-outline">Balance 02</span>
+<h3 class="font-headline font-bold text-xl text-on-surface mt-12">Open <span class="text-outline font-light mx-2">vs</span> Hidden</h3>
+<p class="text-base leading-6 text-on-surface-variant mt-8">We chose <strong>Open Competition</strong>. If you can't see your opponent's budget, the "excitement" turns into "frustration" real fast.</p>
+</div>
+<!-- Tradeoff 3 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<span class="font-label text-xs uppercase tracking-wide text-outline">Balance 03</span>
+<h3 class="font-headline font-bold text-xl text-on-surface mt-12">Excitement <span class="text-outline font-light mx-2">vs</span> Speed</h3>
+<p class="text-base leading-6 text-on-surface-variant mt-8">The clock is a weapon. We had to find the sweet spot where a timer builds narrative tension without making the draft last five hours.</p>
+</div>
+<!-- Tradeoff 4 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<span class="font-label text-xs uppercase tracking-wide text-outline">Balance 04</span>
+<h3 class="font-headline font-bold text-xl text-on-surface mt-12">Fairness <span class="text-outline font-light mx-2">vs</span> Flexibility</h3>
+<p class="text-base leading-6 text-on-surface-variant mt-8">We chose <strong>Strict Guardrails</strong>. In a high-stakes arena, "human deals" lead to "human arguments." We needed the system to be the unbiased referee.</p>
+</div>
+</div>
+<!-- Final Decisions -->
+<div class="mt-32">
+<div class="flex items-center gap-4 mb-12">
+<h2 class="font-headline font-bold text-2xl text-on-surface">Final Decisions</h2>
+<div class="flex-grow h-px bg-outline-variant/20"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Decision Card 1 -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">bolt</span>
+<h4 class="font-headline font-bold text-sm text-on-surface">Live Bidding</h4>
+</div>
+<p class="text-base leading-6 text-on-surface-variant mt-8">Prioritizing real-time psychological warfare. Every bid is visible, every second counts.</p>
+</div>
+<!-- Decision Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1">groups</span>
+<h4 class="font-headline font-bold text-sm text-on-surface">Open Competition</h4>
+</div>
+<p class="text-base leading-6 text-on-surface-variant mt-8">Total transparency. Managers see who is bidding and how much remains in their budget.</p>
+</div>
+<!-- Decision Card 3 -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1">account_balance_wallet</span>
+<h4 class="font-headline font-bold text-sm text-on-surface">Fixed Budget</h4>
+</div>
+<p class="text-base leading-6 text-on-surface-variant mt-8">Standardized currency pools ensure no user is priced out before the auction begins.</p>
+</div>
+<!-- Decision Card 4 -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1">view_module</span>
+<h4 class="font-headline font-bold text-sm text-on-surface">Clear Player Pool</h4>
+</div>
+<p class="text-base leading-6 text-on-surface-variant mt-8">Eliminating ambiguity. A predefined roster of assets ensures consistent value evaluation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 7: Mapping the Flow -->
+<div class="py-20 flex flex-col gap-16 w-full">
+<!-- Header & Insight Section -->
+<section class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-12 flex items-center gap-4 mb-4">
+<span class="h-[2px] w-12 bg-primary"></span>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-primary font-bold">Strategic Mapping</span>
+</div>
+<div class="lg:col-span-7 space-y-8">
+<div class="space-y-4">
+<h2 class="font-headline text-4xl font-bold leading-tight tracking-tight text-on-surface">
+                        Auction is not linear — it's a <span class="text-primary italic">repeatable loop</span> with multiple states
+                    </h2>
+</div>
+</div>
+<div class="lg:col-span-5 pt-2">
+<div class="bg-surface-container rounded-xl p-8 border border-outline-variant/15 bento-inner-shadow h-full flex flex-col justify-center">
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-6 font-bold">Core Explorations</p>
+<ul class="space-y-6">
+<li class="flex gap-4 group">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+</div>
+<p class="text-on-surface-variant text-lg leading-snug">What happens before, during, after bidding?</p>
+</li>
+<li class="flex gap-4 group">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-[18px]">balance</span>
+</div>
+<p class="text-on-surface-variant text-lg leading-snug">Where does fairness matter most?</p>
+</li>
+<li class="flex gap-4 group">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-all duration-300">
+<span class="material-symbols-outlined text-[18px]">architecture</span>
+</div>
+<p class="text-on-surface-variant text-lg leading-snug">Which rules are foundational vs optional?</p>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Artifact Display -->
+<section class="w-full">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 blur-3xl rounded-[3rem] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/20 shadow-2xl">
+<!-- Chrome Mockup Bar -->
+<div class="w-full bg-surface-container-high/50 px-6 py-4 flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-label font-bold text-outline uppercase tracking-widest">Artifact v2.4 — Journey Map</span>
+<span class="material-symbols-outlined text-[16px] text-outline">zoom_in</span>
+</div>
+</div>
+<!-- Journey Map Image -->
+<div class="p-4 md:p-8 lg:p-12 bg-gradient-to-br from-surface to-surface-container">
+<div class="aspect-[16/9] w-full rounded-lg overflow-hidden relative group/img cursor-zoom-in">
+<img alt="Comprehensive user journey map showing interconnected auction states with high-contrast UI flow diagrams on a dark technical background" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500 scale-100 group-hover/img:scale-[1.02]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQTj3BE_DdPEhXar2pU5QdRZAuR8Bp6kSVc1ge_UzlfSTNzbcN7iiPyHPOq1tIgO3FU42YGE17DHt_bNN6PG8ooZac4ljJ_RuZwU6hkUA1Revi9QbECSBPqik4UaKL5yWiVRYZ3uDoebZcVcuZBbyx8nvB9vS_1c-ejB4i3-8ZuNfkFyW6Yc6IiFj_4AsLnxN7W0jvUqDq4XraPHfN-2wEMF_uFrLcFvy8JbpvAJvcCa8Eta5eIssi01t6n9KdPS92lk5G4d6LQn">
+<div class="absolute top-6 left-6 flex flex-col gap-2 pointer-events-none">
+<div class="glass-panel px-3 py-1.5 rounded-md border border-white/5 shadow-lg">
+<span class="text-[10px] font-mono text-primary-fixed-dim uppercase tracking-tighter">Coord: 44.92 / 12.01</span>
+</div>
+<div class="glass-panel px-3 py-1.5 rounded-md border border-white/5 shadow-lg">
+<span class="text-[10px] font-mono text-secondary uppercase tracking-tighter">State: Multi-Loop Validation</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Caption -->
+<div class="p-8 border-t border-outline-variant/10 bg-surface-container/30 flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-2xl">
+<p class="font-headline text-xl text-on-surface font-semibold mb-2">The Strategic Proof</p>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                                This map serves as the backbone of our architectural modularity. By breaking down the auction into non-linear cycles, we identified 14 critical "fairness checkpoints" where the user's perception of value was most vulnerable to latency or rule ambiguity.
+                            </p>
+</div>
+<div class="flex-none">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary-container text-on-primary-container rounded-lg font-label text-sm font-bold hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                FULL ANALYSIS PDF
+                            </button>
+</div>
+</div>
+</div>
+<!-- Connector Decoration -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center">
+<div class="w-[2px] h-12 bg-gradient-to-b from-primary/0 to-primary"></div>
+<div class="w-3 h-3 rounded-full border-2 border-primary bg-background"></div>
+</div>
+</div>
+</section>
+<!-- Dynamic Modular Grid -->
+<section class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
+<span class="text-primary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">01</span>
+<h4 class="font-headline font-bold text-on-surface mb-2">Pre-Auction Friction</h4>
+<p class="text-sm text-outline">Identifying cognitive load during registration and asset vetting.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
+<span class="text-secondary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">02</span>
+<h4 class="font-headline font-bold text-on-surface mb-2">Live Loop Integrity</h4>
+<p class="text-sm text-outline">Mapping real-time feedback loops and synchronous bidder states.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
+<span class="text-tertiary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">03</span>
+<h4 class="font-headline font-bold text-on-surface mb-2">Post-Event Settlement</h4>
+<p class="text-sm text-outline">Closing the loop with automated compliance and history logging.</p>
+</div>
+</section>
+</div>
+<!-- Section 8: Auction League Creation -->
+<div class="py-20 space-y-16 w-full">
+<!-- Hero Section -->
+<header class="max-w-4xl">
+<div class="inline-flex items-center gap-2 mb-6">
+<span class="w-12 h-[2px] bg-primary"></span>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-primary font-bold">Case Study: Phase 2</span>
+</div>
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface leading-none mb-8">Auction League Creation</h1>
+<p class="font-body text-base leading-6 text-on-surface-variant font-light mb-12 max-w-2xl border-l-4 border-outline-variant pl-6">
+            Building a New Mode on a Familiar System
+        </p>
+<div class="p-8 bg-surface-container rounded-xl">
+<p class="font-body text-lg text-on-surface leading-relaxed max-w-3xl">
+                Auction league creation was built from scratch to support bidding-based gameplay. The challenge wasn't just adding auction mechanics, it was introducing them without breaking how league creation already works.
+            </p>
+</div>
+</header>
+<!-- Guided Steps -->
+<!-- Step 1 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<div class="space-y-6 order-2 lg:order-1">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Step 01</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">The "Don't Make Me Relearn" Rule</h2>
+</div>
+<div class="pl-6 border-l-2 border-primary/30 py-3 bg-primary/5 rounded-r-lg">
+<p class="text-base text-on-surface-variant leading-relaxed">Insight: A new mode shouldn't force users to relearn how to create a league.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">route</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Kept the same step sequence (Duration → Participants → Rules) — Classic league creators felt an immediate sense of "I know where I am."</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Reused familiar interaction patterns — no relearning required to start an Auction league.</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<div class="w-full h-full bg-surface rounded-[2rem] overflow-hidden flex flex-col relative">
+<div class="h-12 bg-surface flex items-center px-6 justify-between border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">arrow_back</span>
+<span class="font-headline text-[10px] font-bold tracking-widest uppercase">League Setup</span>
+<span class="w-4"></span>
+</div>
+<div class="p-6 space-y-4">
+<div class="h-2 w-1/3 bg-primary-container/20 rounded-full"></div>
+<div class="h-8 w-full bg-surface-container rounded-lg"></div>
+<div class="grid grid-cols-2 gap-3">
+<div class="h-24 bg-surface-container-high border-2 border-primary rounded-xl flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="text-[8px] font-bold">Draft</span>
+</div>
+<div class="h-24 bg-surface-container-high rounded-xl flex flex-col items-center justify-center gap-2 opacity-50">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-[8px] font-bold">Auction</span>
+</div>
+</div>
+<div class="space-y-2 mt-8">
+<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
+<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
+<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<div class="h-10 w-full bg-primary-container text-on-primary-container rounded-full flex items-center justify-center font-bold text-xs">Next Step</div>
+</div>
+<img alt="minimal abstract geometric pattern" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-10 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0hPA2lugIC4lAGZ6TspAU43_iAwvzjGUW5aTTaBJqQAsAwCWqSTwTwcc94tNlciI6dqnzV_6_fBHxLK16ymf8yJkgOM17xvpzE5priH6LeJuOec-U2_64gbKoK9qFg5PVcJJp1cDrEo31pkmfPI2fsOR4tB9IosmDPN6r_2MEtLbAQ7Te0HXTAccT7nmGTBD3rJ-RCZ-gVdOr0jLWkqJN5nPSu99ko5e01X1lvkzygS5VuF63Cfg_yeH-egW2D0lcSu2H5l9UwET0">
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2 -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16">
+<div class="flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<div class="w-full h-full bg-surface rounded-[2rem] overflow-hidden flex flex-col relative">
+<div class="h-12 bg-surface flex items-center px-6 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">close</span>
+<span class="ml-4 font-headline text-[10px] font-bold tracking-widest uppercase">Timing Controls</span>
+</div>
+<div class="p-6 space-y-8">
+<div class="text-center py-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-container/20 rounded-full text-tertiary text-[10px] font-bold">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">schedule</span>
+Real-time Dynamic
+</div>
+</div>
+<div class="space-y-6">
+<div class="relative h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-2/3 bg-tertiary rounded-full"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant">
+<span>Bid Clock</span>
+<span class="text-tertiary">30 Seconds</span>
+</div>
+<div class="p-4 bg-surface-container-high rounded-xl border border-tertiary/20 flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="text-[9px] uppercase tracking-widest opacity-60">Reset trigger</span>
+<span class="text-[10px] font-black">10s</span>
+</div>
+<p class="text-[8px] leading-relaxed text-on-surface-variant">Bids placed within the final 10 seconds will reset the clock to ensure everyone has a fair chance to react.</p>
+</div>
+</div>
+</div>
+<img alt="abstract flowing particles" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-10 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL11WEtxFNRj7y4fh1UKkttlbJ049tKSt6aB3Lx9aW4TjGXhI59XojZND0lwt4k1uphIrQq4Nd6wlt9tcxkQyvMvntkrlrZ3X1izIrvB8-D_u_Bz1H5WT8WBhHA8ro1xyec9EupuPxQ-_wAcLwgFb6yEHGt6uN1lm7JtWQAzRFjDvmfIKFq0TGwE0oK2phG46FCeKy7vf6JyNcZtLv2xBuS_JiS2Q8QMXO7emn8wCo_ZOl1N0wBJQmIk1OPIbgy6J6MxjexwX-CpO4">
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-4">
+<span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-secondary">Step 02</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-white leading-tight">Introduce auction without overloading setup</h2>
+</div>
+<div class="pl-6 border-l-2 border-secondary/30 py-3 bg-secondary/5 rounded-r-lg">
+<p class="text-base text-on-surface-variant leading-relaxed">Insight: Auction adds complexity, but setup should stay understandable.</p>
+</div>
+<div class="grid gap-6">
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary">tune</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Introduced only auction-critical inputs — bid timing and auction duration — nothing more.</p>
+</div>
+<div class="flex items-start gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+<p class="text-sm leading-relaxed text-on-surface-variant">Made auction behavior clear before entering gameplay — no surprises mid-session.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Closing Statement -->
+<footer class="text-center pt-16 pb-24">
+<div class="max-w-2xl mx-auto space-y-8">
+<div class="material-symbols-outlined text-6xl text-primary-container">architecture</div>
+<h3 class="font-headline text-2xl font-extrabold text-on-surface">
+                Auction adds a new layer of gameplay without increasing the cognitive load of setup. Users can adopt the new mode without having to relearn the system.
+            </h3>
+<div class="w-24 h-1 bg-outline-variant/30 mx-auto"></div>
+<p class="font-label text-xs uppercase tracking-[0.4em] text-outline">Project Terminal • 2024</p>
+</div>
+</footer>
+</div>
+<!-- Section 9: Learnings & Growth -->
+<div class="py-20 w-full">
+<!-- Header -->
+<header class="mb-16 md:flex md:items-end md:justify-between border-b border-outline-variant/15 pb-12">
+<div class="max-w-2xl">
+<span class="font-label text-primary uppercase tracking-[0.2em] text-[0.6875rem] font-bold mb-4 block">Case Study Retrospective</span>
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface uppercase leading-none">
+                    Learnings <br/>&amp; Growth
+                </h1>
+</div>
+<div class="mt-8 md:mt-0 md:text-right">
+<p class="font-headline text-lg md:text-xl text-on-surface-variant font-medium max-w-xs ml-auto">
+                    What this project taught me about the intersection of logic and interface.
+                </p>
+</div>
+</header>
+<!-- Core Learnings Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+<!-- Learning Block 01 -->
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-primary font-headline font-bold text-sm tracking-widest">01</span>
+<div class="h-px flex-grow bg-outline-variant/20"></div>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface leading-tight mb-4">Designing for clarity, not completeness</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Earlier, I equated good design with covering every possible case. This project forced me to prioritise clarity over completeness.</p>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span class="text-xs font-medium uppercase tracking-wide">Users need better understanding</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span class="text-xs font-medium uppercase tracking-wide">Reducing confusion &gt; Flexibility</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span class="text-xs font-medium uppercase tracking-wide">Ease of explanation as success</span>
+</li>
+</ul>
+</div>
+<!-- Learning Block 02 -->
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-secondary font-headline font-bold text-sm tracking-widest">02</span>
+<div class="h-px flex-grow bg-outline-variant/20"></div>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface leading-tight mb-4">Structuring info is more powerful than UI</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">This shifted my approach from "designing screens" to designing mental models based on how users think.</p>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<span class="font-label text-[0.625rem] text-secondary uppercase tracking-widest block mb-1">Intent-based</span>
+<p class="text-sm font-semibold">Re-grouping info by user intent</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<span class="font-label text-[0.625rem] text-secondary uppercase tracking-widest block mb-1">Decision point</span>
+<p class="text-sm font-semibold">Contextual data placement</p>
+</div>
+</div>
+</div>
+<!-- Learning Block 03 -->
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-tertiary font-headline font-bold text-sm tracking-widest">03</span>
+<div class="h-px flex-grow bg-outline-variant/20"></div>
+</div>
+<h3 class="font-headline text-2xl font-bold text-on-surface leading-tight mb-4">Designing for users without context</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Identify where I was skipping explanations. Treat understanding as a core UX outcome for first-time visitors.</p>
+</div>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[0.6875rem] font-bold uppercase tracking-tighter border border-outline-variant/30">First-Time Experience</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[0.6875rem] font-bold uppercase tracking-tighter border border-outline-variant/30">Zero Assumptions</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[0.6875rem] font-bold uppercase tracking-tighter border border-outline-variant/30">Cognitive Load</span>
+</div>
+</div>
+</section>
+<!-- Final Takeaway -->
+<section class="mt-24 bg-surface-container-highest p-12 md:p-20 rounded-2xl text-center relative overflow-hidden">
+<div class="absolute left-1/2 top-0 -translate-x-1/2 h-12 w-0.5 bg-primary"></div>
+<div class="absolute left-1/2 top-12 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-primary bg-surface-container-highest"></div>
+<span class="font-label text-primary uppercase tracking-[0.3em] text-xs font-bold mb-8 block">Key Takeaway</span>
+<blockquote class="max-w-4xl mx-auto">
+<p class="font-headline text-2xl md:text-3xl font-extrabold text-on-surface leading-tight tracking-tight">
+                    Design is not about simplifying the product. It's about making complexity <span class="text-primary">understandable</span>, <span class="text-secondary">intentional</span>, and <span class="text-tertiary">usable</span>.
+                </p>
+</blockquote>
+<div class="absolute left-1/2 bottom-12 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-primary bg-surface-container-highest"></div>
+<div class="absolute left-1/2 bottom-0 -translate-x-1/2 h-12 w-0.5 bg-primary"></div>
+</section>
+</div>
+<!-- Additional sections will be added here -->
+</main>
+</body></html>
