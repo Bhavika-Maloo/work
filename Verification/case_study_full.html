@@ -19,7 +19,7 @@
   --r:10px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+.wrap{max-width:680px;margin:0 auto;padding:0 17px}
 
 nav{border-bottom:.5px solid var(--line2);padding:16px 0;position:sticky;top:0;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);z-index:100}
 .nav-i{display:flex;align-items:center;justify-content:space-between;max-width:680px;margin:0 auto;padding:0 24px}
@@ -173,7 +173,7 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
 .prd{background:var(--bl);border:.5px solid var(--bb);border-radius:6px;padding:8px 12px;margin-top:10px}
 .prd-k{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:2px}
 .prd-t{font-size:12px;color:#0c447c;line-height:1.6}
-.adapt{background:var(--al);border:.5px solid var(--ab);border-radius:6px;padding:8px 12px;margin-bottom:10px;display:flex;gap:7px}
+.adapt{background:var(--al);border:.5px solid var(--ab);border-radius:6px;padding:8px 12px;margin-bottom:14px;display:flex;gap:7px}
 .adapt svg{flex-shrink:0;margin-top:2px}
 .adapt-k{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--at);margin-bottom:2px}
 .adapt-t{font-size:12px;color:var(--at);line-height:1.6}
@@ -284,19 +284,19 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
 
   <!-- ══ HERO ══ -->
   <div class="hero">
-    <p class="hook">Dream11 had 100 million users. Getting your own money out took <em>35 minutes</em>. Every week, 9,000 people wrote in to say so.</p>
+    <p class="hook">100M users. 7:20pm. You're ready to play. Withdrawing your own money took <em>35 minutes</em>. I redesigned verification to bring it down to <em>under 2 minutes</em>.</p>
     <div class="kicker">Dream11 · Payments &amp; Trust · 2022–23</div>
     <h1>Verification Revamp</h1>
     <p class="hero-sub">Redesigning PAN, KYC, UPI, bank and email verification to bring the first-withdrawal TAT from 35 minutes to under 2.</p>
-    <p class="hero-role">Sole designer · 2 PMs · 12-person eng team · ~4 months · iOS &amp; Android</p>
+    <p class="hero-role">Sole designer · 2 PMs · 12 engineers · 4 months · iOS &amp; Android</p>
   </div>
 
 
   <!-- ══ 01 — PROBLEM ══ -->
   <div class="sec">
     <div class="sec-k">01 — The problem</div>
-    <h2>The cost of friction</h2>
-    <p class="lede">15% of support tickets were KYC or withdrawal related. Users didn't just struggle — they felt the friction was deliberate.</p>
+    <h2>We didn't lose users. We lost them right before they cared most.</h2>
+    <p class="lede">15% of all support tickets were about KYC and withdrawals. Users weren't confused; they felt blocked at the exact moment they wanted to play.</p>
 
     <div class="stats">
       <div class="sc"><div class="sn r">35 min</div><div class="sl">First withdrawal TAT (p90)</div><div class="sm">Before redesign</div></div>
@@ -407,7 +407,7 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
       </div>
       <div style="flex:1">
         <p style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:8px">Three sharp findings</p>
-        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px">
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px">
           <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Timing kills intent</strong> — verification before team creation asked for trust before delivering value</p></div>
           <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Choice reads as obligation</strong> — users read a list of 5 options as a checklist. Only ONE was needed.</p></div>
           <div style="display:flex;gap:7px;align-items:flex-start"><div style="width:4px;height:4px;border-radius:50%;background:var(--ink3);margin-top:5px;flex-shrink:0"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong>Aadhaar mistrust is real</strong> — privacy fears around OTP misuse, not just UI confusion</p></div>
@@ -416,16 +416,7 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
       </div>
     </div>
 
-    <div class="pq">
-      <p class="pq-t"><span class="hi">"I feel as if Dream11 is enforcing a lot of steps, purposely adding friction to not allow me to place my first withdrawal."</span></p>
-      <p class="pq-a">— User interview</p>
-    </div>
 
-    <div class="hq">
-      <p class="hq-t">"Agar financially kuch zaruri hai toh AADHAR diya jaa sakta hai, lekin zamana kharab hai, AADHAR OTP misuse ho sakta hai (camera access karke) to main jaldi se nahi dena chahunga apna AADHAR."</p>
-      <p class="hq-tr"><strong>Translation:</strong> "If financially necessary I can give Aadhaar — but times are bad, OTP can be misused through camera access, so I wouldn't give it quickly."</p>
-      <p class="hq-a">— P4, Male, Jaunpur</p>
-    </div>
 
     <!-- Strategy shift -->
     <div class="strategy-shift">
@@ -456,13 +447,209 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
           <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">KYC gated at cash add — only after team creation</p></div>
         </div>
         <div class="flow">
-          <div class="fstep"><div class="fdot dn">1</div><div><p class="ft">Browse &amp; social connect</p><p class="fd">Entry. No commitment required.</p></div></div>
-          <div class="fstep"><div class="fdot dn">2</div><div><p class="ft">Create team</p><p class="fd">Intent anchored. User is invested.</p></div></div>
-          <div class="fstep"><div class="fdot on">3</div><div><p class="ft">KYC + verification &larr; gated here</p><p class="fd">Compliance at peak motivation — not at the door.</p></div></div>
-          <div class="fstep"><div class="fdot">4</div><div><p class="ft">Add cash &amp; play</p></div></div>
+          <div class="fstep"><div class="fdot dn">1</div><div><p class="ft">Browse &amp; select contest</p><p class="fd">commit intent first</p></div></div>
+          <div class="fstep"><div class="fdot dn">2</div><div><p class="ft">Create team</p><p class="fd">↓ KYC triggered post-save</p></div></div>
+          <div class="fstep"><div class="fdot on">3</div><div><p class="ft">KYC + Location (grouped)</p><p class="fd">all steps at once</p></div></div>
+          <div class="fstep"><div class="fdot">4</div><div><p class="ft">Join contest &amp; pay</p></div></div>
         </div>
       </div>
       <div class="cf"><span class="chip g">+30% funnel uplift</span><span>Reg → cash add · TG vs CG</span></div>
+    </div>
+
+    <!-- Step-by-step guidance -->
+    <div style="margin-bottom:40px">
+      <h3 style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-bottom:5px">Step-by-step guidance</h3>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:18px">Restructuring the journey so verification happens at the moment of highest user commitment</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+        <!-- Left: Add Cash screen -->
+        <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:14px">
+          <div style="display:flex;gap:12px">
+            <div class="ssp" style="width:130px;flex-shrink:0">
+              <div class="ssp-h"><span class="ssp-l">Screen 1</span><span class="ssp-s">Add Cash</span></div>
+              <div class="ssp-b tall" style="min-height:260px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Add Cash screen — contest entry with "Verify to Add" CTA</p></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Trust before commitment</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Users see contest value and build intent before any verification is requested</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Verify screen -->
+        <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:14px">
+          <div style="display:flex;gap:12px">
+            <div class="ssp" style="width:130px;flex-shrink:0">
+              <div class="ssp-h"><span class="ssp-l">Screen 2</span><span class="ssp-s">Verify</span></div>
+              <div class="ssp-b tall" style="min-height:260px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Verify to get full access — step counter + grouped compliance</p></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Clarity upfront</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Step counter ("Step 1 of 3") shown at the start of KYC so users know what to expect</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Grouped compliance</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Location, age declaration, and ID verification consolidated into one seamless checkpoint</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Upfront rationale cuts abandonment</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">"Verify to continue playing for cash — ensures you're not from a restricted state" shown on entry screen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Option overload → guided completion -->
+    <div style="margin-bottom:40px">
+      <h3 style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-bottom:5px">Option overload → to guided completion</h3>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:18px">Reducing cognitive load through progressive disclosure and smart ID path routing</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+        <!-- Before -->
+        <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:14px">
+          <div style="display:flex;gap:12px">
+            <div class="ssp" style="width:130px;flex-shrink:0">
+              <div class="ssp-h"><span class="ssp-l">Before</span><span class="ssp-s">Screen</span></div>
+              <div class="ssp-b tall" style="min-height:260px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Before — KYC document selection screen</p></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">4 ID options shown simultaneously</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Aadhaar OTP, Aadhaar upload, PAN, Passport, Voter ID, Driving License — all visible at once with no guidance</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">No explanation of why KYC is needed</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Users hit a verification wall with no context about what it unlocks or why it's legally required</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Aadhaar OTP + upload shown together</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Users with linked Aadhaar were still shown the manual upload path, causing confusion</p>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);margin-top:10px;text-align:center">Before</p>
+        </div>
+
+        <!-- After -->
+        <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:14px">
+          <div style="display:flex;gap:12px">
+            <div class="ssp" style="width:130px;flex-shrink:0">
+              <div class="ssp-h"><span class="ssp-l">After</span><span class="ssp-s">Screen</span></div>
+              <div class="ssp-b tall" style="min-height:260px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">After — Redesigned Verify Govt ID screen</p></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:4px">
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Visual ID options make choices quicker</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Icons + short labels surface only the 2 most relevant paths based on Aadhaar linkage status detection</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Nested Aadhaar flows reduce duplication</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">OTP and upload paths are nested — users with linked Aadhaar no longer see irrelevant options</p>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Document priority driven by field research</p>
+                <p style="font-size:11px;color:var(--ink2);line-height:1.5">Aadhaar first, DL second, Voter ID third</p>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);margin-top:10px;text-align:center">After</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Clear Retry Flows -->
+    <div style="margin-bottom:40px">
+      <h3 style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-bottom:18px">Clear Retry Flows</h3>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+
+        <!-- Before screen -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">Before</span><span class="ssp-s">Screen</span></div>
+            <div class="ssp-b tall" style="min-height:300px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Before — generic error with no recovery path ("Oh... something seems wrong here")</p></div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);text-align:center">Before</p>
+        </div>
+
+        <!-- After screen -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">After</span><span class="ssp-s">Screen</span></div>
+            <div class="ssp-b tall" style="min-height:300px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">After — "This record is already in use" with prioritised retry options + "Need help?" CTA</p></div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);text-align:center">After</p>
+        </div>
+
+        <!-- Annotations -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <!-- Card 1 -->
+          <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:12px">
+            <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Alternative method suggestions</p>
+            <p style="font-size:11px;color:var(--ink2);line-height:1.5;margin-bottom:8px">When primary method fails, system suggests next best path automatically</p>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="background:var(--pl);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--pt)">Aadhaar OTP fails → suggest manual upload</div>
+              <div style="background:var(--pl);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--pt)">Digilocker fails → suggest PAN or Passport</div>
+              <div style="background:var(--pl);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--pt)">Retry options shown in priority order</div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:12px">
+            <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Support escalation path</p>
+            <p style="font-size:11px;color:var(--ink2);line-height:1.5;margin-bottom:8px">For complex cases that self-service cannot resolve</p>
+            <div style="background:var(--pl);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--pt)">Persistent "Need help?" CTA after 2nd failure</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Faster withdrawals -->
+    <div style="margin-bottom:40px">
+      <h3 style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-bottom:18px">Faster withdrawals by removing unnecessary friction</h3>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+
+        <!-- Before screen -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">Before</span><span class="ssp-s">Screen</span></div>
+            <div class="ssp-b tall" style="min-height:300px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Before — Verify Bank Account with manual IFSC + account entry and doc upload on failure</p></div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);text-align:center">Before</p>
+        </div>
+
+        <!-- After screen -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ssp">
+            <div class="ssp-h"><span class="ssp-l">After</span><span class="ssp-s">Screen</span></div>
+            <div class="ssp-b tall" style="min-height:300px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">After — Payment Options with UPI IDs auto-detected from linked mobile number</p></div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);text-align:center">After</p>
+        </div>
+
+        <!-- Annotations -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:12px">
+            <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Manual entry</p>
+            <p style="font-size:11px;color:var(--ink2);line-height:1.5">Manual IFSC + account entry + doc upload on failure</p>
+          </div>
+          <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:12px">
+            <p style="font-size:12px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px">Bank details auto-fetched</p>
+            <p style="font-size:11px;color:var(--ink2);line-height:1.5">Bank details auto-fetched from linked mobile for quicker verification</p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Beat 2 -->
@@ -473,39 +660,7 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
 
     <div class="stack" style="margin-bottom:40px">
 
-      <!-- Option overload fix -->
-      <div class="card">
-        <div class="cb">
-          <span class="tag tp" style="margin-bottom:9px;display:inline-flex">Document selection</span>
-          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">"Select any one" — direct fix to the overload finding</p>
-          <div class="ba">
-            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">5 options shown simultaneously — read as a checklist</p></div>
-            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">Best option surfaced first. "Select any one." Others revealed progressively.</p></div>
-          </div>
-        </div>
-        <div class="cf">Document priority driven by field research — Aadhaar first, DL second, Voter ID third</div>
-      </div>
 
-      <!-- Smart retry -->
-      <div class="card">
-        <div class="cb">
-          <span class="tag tp" style="margin-bottom:9px;display:inline-flex">Adaptive retry</span>
-          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Aadhaar lite + OTP — route on failure, not upfront choice</p>
-          <div class="retry" style="margin-bottom:10px">
-            <div class="rnode p"><div class="rn-t">Aadhaar OTP</div><div class="rn-s">Highest SR · shown first</div></div>
-            <div class="r-conn"><div class="r-line"></div><span class="r-lbl" style="margin-left:8px">OTP fails / mobile not linked</span></div>
-            <div class="rnode f"><div class="rn-t">Aadhaar Lite (OCR)</div><div class="rn-s">Auto-suggested · no recall needed</div></div>
-            <div class="r-conn"><div class="r-line"></div><span class="r-lbl" style="margin-left:8px">OCR fails / poor image</span></div>
-            <div class="rnode l"><div class="rn-t">DigiLocker</div><div class="rn-s">Third option · govt-verified</div></div>
-          </div>
-          <div class="ssp">
-            <div class="ssp-h"><span class="ssp-l">Aadhaar retry + DigiLocker flow</span><span class="ssp-s">Image 5</span></div>
-            <div class="ssp-b"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">Retry nudging: not linked → upload / DL / PAN + full DigiLocker sign-up and OTP screens</p><span class="ssp-t">Image 5</span></div>
-          </div>
-        </div>
-        <div class="cf">Click count unchanged · TAT nudge shown at method selection (Bank 5 min vs UPI 7 sec)</div>
-      </div>
 
       <!-- Full flow -->
       <div class="card">
@@ -522,40 +677,6 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
 
     </div>
 
-    <!-- Beat 3 -->
-    <div class="beat" style="margin-bottom:14px">
-      <div class="beat-n">3</div>
-      <div><div class="beat-title">Remove the friction</div><div class="beat-sub">Two removals at withdrawal. One outcome.</div></div>
-    </div>
-
-    <div class="stack">
-      <div class="card">
-        <div class="cb">
-          <span class="tag ta" style="margin-bottom:9px;display:inline-flex">Withdrawal — PAN</span>
-          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">PAN upload removed from withdrawal</p>
-          <div class="ba">
-            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">PAN form + upload triggered at withdrawal</p></div>
-            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">PAN collected at KYC — withdrawal skips it</p></div>
-          </div>
-        </div>
-        <div class="cf">Worst-moment friction eliminated</div>
-      </div>
-
-      <div class="card">
-        <div class="cb">
-          <span class="tag ta" style="margin-bottom:9px;display:inline-flex">Withdrawal — Bank</span>
-          <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Smart bank details fetch</p>
-          <div class="pq sm"><p class="pq-t">"<span class="hi">A real friction — the documents needed to verify my bank.</span>"</p><p class="pq-a">— User interview</p></div>
-          <div class="ba">
-            <div class="ba-c"><p class="ba-l b">Before</p><p class="ba-t">Manual IFSC + account entry · doc upload on failure</p></div>
-            <div class="ba-arr"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 5l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ba-c"><p class="ba-l a">After</p><p class="ba-t">Auto-fetched from linked mobile · upload deferred to X failed attempts</p></div>
-          </div>
-        </div>
-        <div class="cf"><span class="chip g">55% → 72% success rate</span></div>
-      </div>
-    </div>
   </div>
 
   <hr style="margin-top:72px">
@@ -582,68 +703,48 @@ hr{border:none;border-top:.5px solid var(--line);margin:0}
   <hr style="margin-top:72px">
 
 
-  <!-- ══ 06 — TRADEOFFS ══ -->
+  <!-- ══ Adapting to Rapid Regulation Changes ══ -->
   <div class="sec">
-    <div class="sec-k">06 — Tradeoffs &amp; reality</div>
-    <h2>Where the ground moved</h2>
-    <p class="lede">Two decisions that shaped this project weren't design decisions at all — they were regulatory ones. How we handled them mattered.</p>
-
-    <!-- TN flow -->
-    <div class="card" style="margin-bottom:8px">
-      <div class="cb">
-        <div style="display:flex;gap:7px;align-items:center;margin-bottom:9px;flex-wrap:wrap">
-          <span class="tag ta">Tamil Nadu</span>
-          <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:var(--surf2);border:.5px solid var(--line2);color:var(--ink3)">Mid-project rule change</span>
-        </div>
-        <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">Location-first — and the design that didn't ship</p>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:14px">TN's RMG law changed mid-project. We moved location check to step 1 — filtering banned-state users before KYC, so they don't complete a flow that will reject them anyway. A smart product decision that also reduced wasted user time.</p>
-
-        <div class="tn-grid">
-          <div class="tn-col interim">
-            <div class="tn-head interim"><span class="tn-hl interim">Interim — shipped</span><span class="tn-badge old">Old system</span></div>
-            <div class="ssp" style="border:none;border-radius:0">
-              <div class="ssp-h" style="background:transparent;border:none;padding:6px 12px 3px"><span class="ssp-l">Interim TN screens</span><span class="ssp-s">Image 1</span></div>
-              <div class="ssp-b" style="min-height:110px"><div class="ssp-ic"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d">2-step: Location (active) → Govt ID (locked)</p><span class="ssp-t">2 screens</span></div>
-            </div>
-            <div class="tn-note interim">Built by another team. I contributed UX direction — didn't own end-to-end.</div>
-          </div>
-          <div class="tn-col mine">
-            <div class="tn-head mine"><span class="tn-hl mine">My design</span><span class="tn-badge new">New system</span></div>
-            <div class="ssp" style="border:none;border-radius:0;background:var(--gl)">
-              <div class="ssp-h" style="background:transparent;border:none;padding:6px 12px 3px"><span class="ssp-l" style="color:var(--gt)">Final design</span><span class="ssp-s" style="border-color:var(--gb);color:var(--gt)">Image 4</span></div>
-              <div class="ssp-b" style="min-height:110px"><div class="ssp-ic" style="background:var(--white)"><svg viewBox="0 0 16 16" fill="none"><rect x="4" y="1" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg></div><p class="ssp-d" style="color:var(--gt)">Value-prop screen + doc tabs + input method tabs</p><span class="ssp-t" style="border-color:var(--gb);color:var(--gt)">2 screens</span></div>
-            </div>
-            <div class="tn-note mine">Not shipped — RMG ban hit during development. Migration planned.</div>
-          </div>
-        </div>
-
-        <p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin-bottom:7px">What the new design added</p>
-        <div class="adds">
-          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">Value first</strong> — benefits grid before any verification ask</p></div>
-          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">"Select any one document"</strong> — direct fix to the overload finding</p></div>
-          <div class="add-row"><div class="add-dot"></div><p style="font-size:12px;color:var(--ink2);line-height:1.5"><strong style="color:var(--ink)">Input method per doc</strong> — Number / Image / Digilocker tabs per document type</p></div>
-        </div>
-      </div>
-      <div class="cf">Location-first protects user time and platform SR for non-banned-state users</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--surf2);border:.5px solid var(--line2);font-size:11px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:center;flex-shrink:0">05</div>
+      <span class="sec-k" style="margin-bottom:0">Navigating uncertainty</span>
     </div>
+    <h2 style="font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px">Adapting to Rapid Regulation Changes</h2>
+    <p class="lede">Laws shifted mid-project — modular design meant we could pivot without rebuilding.</p>
 
-    <!-- PAN pivot -->
-    <div class="card">
-      <div class="cb">
-        <div class="adapt">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#b87015" stroke-width="1.2"/><path d="M7 4.5V7.5" stroke="#b87015" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".6" fill="#b87015"/></svg>
-          <div><p class="adapt-k">Mid-project pivot</p><p class="adapt-t">PAN verification at KYC was removed after a regulatory change — but the PRD wasn't updated. I'd designed the full flow and had to rethink placement without an updated brief.</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px">
+
+      <!-- Phase 1 -->
+      <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:20px">
+        <p style="font-size:16px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:10px">Phase 1: Withdrawals Only</p>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:16px">Optimised PAN and Bank flows — reduced TAT from 12 minutes to seconds.</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">Baseline flows completed</span>
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">Ops panel ready</span>
         </div>
-        <span class="tag tp" style="margin-bottom:9px;display:inline-flex">PAN verification</span>
-        <p style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px">Net winner / loser routing</p>
-        <div style="background:var(--surf);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:7px">
-          <div style="display:flex;align-items:flex-start;gap:7px"><span class="tag tr" style="flex-shrink:0;margin-top:1px">Net loser</span><p style="font-size:12px;color:var(--ink2)">PAN skipped — no winnings to comply against.</p></div>
-          <div style="height:.5px;background:var(--line)"></div>
-          <div style="display:flex;align-items:flex-start;gap:7px"><span class="tag tg" style="flex-shrink:0;margin-top:1px">Net winner</span><p style="font-size:12px;color:var(--ink2)">PAN required — compliance triggered only when earnings are present.</p></div>
-        </div>
-        <div class="prd"><p class="prd-k">From the PRD</p><p class="prd-t">Lifetime deposits &gt; ₹50k → PAN mandatory regardless. Configurable via feature flag.</p></div>
       </div>
-      <div class="cf">A stale PRD is a silent design risk — regulatory changes need to reach the design brief, not just engineering</div>
+
+      <!-- Tamil Nadu -->
+      <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:20px">
+        <p style="font-size:16px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:10px">Tamil Nadu Law Changes</p>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:16px">KYC expanded to pre-deposit — reused existing screens for emergency geo-targeted rollout.</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">⚡ Emergency deployment</span>
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">Reused existing screens</span>
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">🎯 Geo-targeted rollout</span>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div style="background:var(--surf);border:.5px solid var(--line2);border-radius:var(--r);padding:20px">
+        <p style="font-size:16px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:10px">Phase 2: Deposit &amp; Withdrawal Revamp</p>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:16px">Built a central KYC system covering pre-contest and pre-deposit scenarios with modular, reusable screens.</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">Reused existing screens</span>
+          <span style="font-size:11px;color:var(--ink2);background:var(--white);border:.5px solid var(--line2);border-radius:20px;padding:4px 10px;display:inline-block">Fast adaptation possible due to modular design</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
