@@ -605,16 +605,15 @@ img { display: block; max-width: 100%; }
 .s6-note-photo {
   aspect-ratio: 4/5; border-radius: 1rem;
   border: 1px solid rgba(72,72,72,0.2); background-color: var(--surface-container-low);
-  background-image: url('original/What-we-learned.png');
-  background-repeat: no-repeat; background-size: 520% auto; background-position-y: 2%;
+  background-repeat: no-repeat; background-size: cover; background-position: center;
   filter: grayscale(0.6) contrast(1.05); opacity: 0.9;
   transition: filter 0.5s, opacity 0.5s;
 }
 .s6-note-photo:hover { filter: grayscale(0) contrast(1); opacity: 1; }
-.s6-note-1 { background-position-x: 0%; }
-.s6-note-2 { background-position-x: 25%; }
-.s6-note-3 { background-position-x: 50%; }
-.s6-note-4 { background-position-x: 75%; }
+.s6-note-1 { background-image: url('original/what-we-learned-1.jpg'); }
+.s6-note-2 { background-image: url('original/what-we-learned-2.jpg'); }
+.s6-note-3 { background-image: url('original/what-we-learned-3.jpg'); }
+.s6-note-4 { background-image: url('original/what-we-learned-4.jpg'); }
 
 /* Insights label */
 .s6-insights-label {
@@ -1417,6 +1416,18 @@ img { display: block; max-width: 100%; }
   .s9-card-offset { transform: translateX(16px); }
   .s9-card-neg-offset { transform: translateX(-16px); }
 }
+
+/* === Scroll Fade + Slide === */
+section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  will-change: opacity, transform;
+}
+section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
@@ -1936,7 +1947,7 @@ img { display: block; max-width: 100%; }
           <div class="s8-phone-wrap">
             <div class="s8-phone-glow"></div>
             <div class="s8-phone-frame">
-              <img src="original/Step-by-step guidance -1.jpg" alt="Entry Point UI"/>
+              <img src="original/Step-by-step guidance -1.png" alt="Entry Point UI"/>
               <div class="s8-phone-notch"></div>
             </div>
             <div class="s8-phone-label">
@@ -2156,7 +2167,7 @@ img { display: block; max-width: 100%; }
     <div class="s10-artifact-wrap">
       <div class="s10-artifact-label"><span>Tightened KYC Journey Canvas</span></div>
       <div class="s10-artifact">
-        <img src="original/Reduce-choice.png" alt="KYC journey flow diagram showing branching paths for verification failure and fallback routing"/>
+        <img src="original/Reduce choice.jpg" alt="KYC journey flow diagram showing branching paths for verification failure and fallback routing"/>
         <div class="s10-artifact-fade"></div>
         <div class="s10-artifact-overlay s10-overlay">
           <div class="s10-overlay-row">
@@ -2514,5 +2525,22 @@ img { display: block; max-width: 100%; }
 </section>
 
 </main>
+<script>
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
+      }
+    });
+  }, { rootMargin: '0px 0px -25% 0px', threshold: 0 });
+
+  document.querySelectorAll('section').forEach(function (s) {
+    io.observe(s);
+  });
+}());
+</script>
 </body>
 </html>
