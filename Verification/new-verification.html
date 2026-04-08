@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color:#0e0e0e;">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -31,12 +31,23 @@
 /* === Reset === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+main {
+  background-color: #0e0e0e;
+  min-height: 100vh;
+  width: 100%;
+}
+
+html {
+  background-color: #0e0e0e !important;
+}
+
 body {
-  background-color: var(--background);
+  background-color: #0e0e0e !important;
   color: var(--on-surface);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body ::selection { background: rgba(255,181,160,0.3); }
@@ -62,11 +73,6 @@ img { display: block; max-width: 100%; }
   -webkit-backdrop-filter: blur(20px);
 }
 
-@keyframes pulse {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
 /* ==============================
    SECTION COVER: VERIFICATION REVAMP
 ============================== */
@@ -88,7 +94,7 @@ img { display: block; max-width: 100%; }
 .s-cover-icon-wrap { position: relative; }
 .s-cover-icon-glow {
   position: absolute; inset: 0; background: rgba(255,181,160,0.2);
-  filter: blur(48px); border-radius: 9999px; transform: scale(1.5); transition: background 0.7s;
+  filter: blur(48px); border-radius: 9999px; transform: scale(1.5); 
 }
 .s-cover-icon-wrap:hover .s-cover-icon-glow { background: rgba(255,181,160,0.3); }
 .s-cover-icon-box {
@@ -109,16 +115,101 @@ img { display: block; max-width: 100%; }
 .s-cover-meta { padding-top: 64px; border-top: 1px solid rgba(72,72,72,0.1); }
 .s-cover-meta-grid { display: grid; grid-template-columns: 1fr; gap: 32px; text-align: left; }
 .s-cover-meta-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--on-surface-variant); margin-bottom: 8px; display: block; }
-.s-cover-meta-value { font-weight: 600; font-size: 1rem; line-height: 1.4; transition: color 0.2s; }
+.s-cover-meta-value { font-weight: 600; font-size: 1rem; line-height: 1.4;  }
 .s-cover-meta-item:hover .s-cover-meta-value { color: var(--primary); }
 .s-cover-rule { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(72,72,72,0.3), transparent); }
 
-@media (min-width: 768px) {
+/* ==============================
+   PHONE: max 809px
+============================== */
+@media (max-width: 809px) {
+  /* Cover */
+  .s-cover { padding: 64px 16px 48px; min-height: unset; }
+  .s-cover-headlines h1 { font-size: 2rem; }
+  .s-cover-headlines p { font-size: 1rem; }
+  .s-cover-meta { padding-top: 40px; }
+  .s-cover-meta-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Section padding — reduce all sections */
+  section { padding-left: 16px; padding-right: 16px; }
+
+  /* Phone showcase (s0) */
+  .s0 { padding: 48px 16px 64px; }
+  .s0-screen-side { width: 180px; }
+  .s0-screen-center { width: 200px; }
+  .s0-phone-left { margin-right: -40px; }
+  .s0-phone-right { margin-left: -40px; }
+
+  /* Hero headline (s1) */
+  .s1 { padding: 48px 16px 80px; }
+  .s1-headline { font-size: 1.75rem; }
+  .s1-body { font-size: 1rem; }
+  .s1-glow { width: 300px; height: 300px; }
+
+  /* Story (s2) */
+  .s2 { padding: 64px 16px; }
+  .s2-card { padding: 24px; }
+
+  /* Journey (s3) */
+  .s3 { padding: 64px 16px; }
+  .s3-title h3 { font-size: 1.75rem; }
+  .s3-track { padding: 0 8px; }
+
+  /* Metrics (s4) */
+  .s4 { padding: 64px 16px; }
+  .s4-num-1 { font-size: 2.5rem; }
+  .s4-num-2 { font-size: 3rem; }
+  .s4-num-3 { font-size: 2rem; }
+  .s4-card { padding: 24px; }
+
+  /* Constraints (s5) */
+  .s5 { padding: 64px 16px; }
+  .s5-header h2 { font-size: 1.75rem; }
+  .s5-card { padding: 24px; }
+
+  /* Research (s6) */
+  .s6 { padding: 64px 16px; }
+  .s6-headline { font-size: 1.75rem; }
+  .s6-image-wrap { width: 180px; height: 180px; }
+
+  /* Solution (s7) */
+  .s7 { padding: 64px 16px; }
+  .s7-header h2 { font-size: 1.75rem; }
+
+  /* All other sections — reduce heading and padding */
+  .s8, .s9, .s10, .s11, .s12, .s13 { padding: 64px 16px; }
+  .s8 h2, .s9 h2, .s10 h2, .s11 h2, .s12 h2, .s13 h2 { font-size: 1.75rem; }
+
+  /* Cards general */
+  .glass-card { padding: 20px; }
+
+  /* Reduce any section inner padding */
+  [class*="-inner"] { padding-left: 0; padding-right: 0; }
+}
+
+/* ==============================
+   TABLET: 810px – 1199px
+============================== */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .s-cover { padding: 80px 40px 96px; }
+  .s-cover-headlines h1 { font-size: 3.5rem; }
+  .s-cover-meta-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* ==============================
+   DESKTOP: 1200px+
+============================== */
+@media (min-width: 1200px) {
   .s-cover { padding: 80px 48px 128px; }
   .s-cover-headlines h1 { font-size: 5rem; }
   .s-cover-headlines p { font-size: 1.25rem; }
   .s-cover-meta { padding-top: 96px; }
   .s-cover-meta-grid { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* Multi-column desktop grids */
+  .s4-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .s5-grid { grid-template-columns: 1fr 1fr; }
+  .s7-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
 }
 
 /* ==============================
@@ -149,7 +240,7 @@ img { display: block; max-width: 100%; }
 .s0-phone-side {
   position: relative; z-index: 20;
   transform-origin: center bottom;
-  opacity: 0.8; transition: transform 0.7s, opacity 0.7s;
+  opacity: 0.8; 
 }
 .s0-phone-left {
   margin-right: -64px;
@@ -178,11 +269,11 @@ img { display: block; max-width: 100%; }
 /* Phone screens */
 .s0-screen-side {
   background: #000; border-radius: 1rem; overflow: hidden;
-  width: 260px; aspect-ratio: 1/2;
+  width: 100%; max-width: 260px; aspect-ratio: 1/2;
 }
 .s0-screen-center {
   background: #000; border-radius: 1.5rem; overflow: hidden;
-  width: 300px; aspect-ratio: 1/2; position: relative;
+  width: 100%; max-width: 300px; aspect-ratio: 1/2; position: relative;
 }
 .s0-screen-side img,
 .s0-screen-center img { width: 100%; height: 100%; object-fit: cover; }
@@ -306,7 +397,6 @@ img { display: block; max-width: 100%; }
   border-radius: 2rem;
   overflow: hidden;
   filter: grayscale(1);
-  transition: filter 0.7s;
 }
 .s2-image-wrap:hover { filter: grayscale(0); }
 .s2-image-wrap img { object-fit: cover; width: 100%; height: 100%; opacity: 0.6; }
@@ -363,7 +453,6 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(72,72,72,0.15);
-  transition: border-color 0.2s;
 }
 .s3-step:hover .s3-step-icon { border-color: var(--primary); }
 .s3-step.drop-off:hover .s3-step-icon { border-color: var(--error); }
@@ -388,7 +477,6 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center;
   border: 2px solid var(--error);
   box-shadow: 0 0 40px rgba(238,125,119,0.3);
-  animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
 }
 .s3-kyc-icon .material-symbols-outlined { color: var(--error); font-size: 2.25rem; }
 .s3-kyc-badge {
@@ -459,7 +547,6 @@ img { display: block; max-width: 100%; }
   padding: 32px;
   border-radius: 3rem;
   border: 1px solid rgba(72,72,72,0.1);
-  transition: background 0.2s;
 }
 .s5-card:hover { background: rgba(37,38,38,0.95); }
 .s5-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
@@ -544,7 +631,7 @@ img { display: block; max-width: 100%; }
   aspect-ratio: 1/1;
   position: relative;
 }
-.s7-metric-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(1); transition: opacity 0.7s; }
+.s7-metric-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(1);  }
 .s7-metric-box:hover img { opacity: 0.4; }
 .s7-metric-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0e0e0e, rgba(14,14,14,0.2), transparent); }
 .s7-metric-label { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; align-items: baseline; gap: 16px; }
@@ -589,7 +676,6 @@ img { display: block; max-width: 100%; }
 .s6-insight-bar {
   height: 4px; width: 32px;
   background: var(--outline-variant);
-  transition: background 0.5s;
 }
 .s6-main-card:hover .s6-insight-bar { background: var(--primary); }
 .s6-insight-text { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.625; }
@@ -605,13 +691,12 @@ img { display: block; max-width: 100%; }
   border: 1px solid rgba(72,72,72,0.2); background-color: var(--surface-container-low);
   background-repeat: no-repeat; background-size: cover; background-position: center;
   filter: grayscale(0.6) contrast(1.05); opacity: 0.9;
-  transition: filter 0.5s, opacity 0.5s;
 }
 .s6-note-photo:hover { filter: grayscale(0) contrast(1); opacity: 1; }
-.s6-note-1 { background-image: url('original/what-we-learned-1.jpg'); }
-.s6-note-2 { background-image: url('original/what-we-learned-2.jpg'); }
-.s6-note-3 { background-image: url('original/what-we-learned-3.jpg'); }
-.s6-note-4 { background-image: url('original/what-we-learned-4.jpg'); }
+.s6-note-1 { background-image: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/what-we-learned-1.jpg'); }
+.s6-note-2 { background-image: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/what-we-learned-2.jpg'); }
+.s6-note-3 { background-image: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/what-we-learned-3.jpg'); }
+.s6-note-4 { background-image: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/what-we-learned-4.jpg'); }
 
 /* Insights label */
 .s6-insights-label {
@@ -625,7 +710,7 @@ img { display: block; max-width: 100%; }
 .s6-table-fade {
   position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
   background: linear-gradient(to top, var(--background), transparent);
-  pointer-events: none; transition: opacity 0.4s;
+  pointer-events: none; 
 }
 .s6-table-outer.s6-expanded .s6-table-fade { opacity: 0; }
 .s6-row-hidden { display: none; }
@@ -658,7 +743,7 @@ img { display: block; max-width: 100%; }
   padding: 10px 24px; border-radius: 9999px;
   background: transparent; border: 1px solid rgba(72,72,72,0.4);
   color: var(--on-surface-variant); font-size: 0.8125rem; font-weight: 600;
-  cursor: pointer; transition: border-color 0.3s, color 0.3s;
+  cursor: pointer; 
 }
 .s6-view-more:hover { border-color: var(--primary); color: var(--primary); }
 
@@ -699,7 +784,7 @@ img { display: block; max-width: 100%; }
 .s8-phone-glow {
   position: absolute; inset: -16px;
   background: rgba(255,181,160,0.05); filter: blur(48px);
-  border-radius: 9999px; opacity: 0; transition: opacity 0.7s;
+  border-radius: 9999px; opacity: 0; 
 }
 .s8-phone-wrap:hover .s8-phone-glow { opacity: 1; }
 .s8-phone-frame {
@@ -741,7 +826,6 @@ img { display: block; max-width: 100%; }
 .s8-insight-card {
   background: var(--surface-container); padding: 24px; border-radius: 1rem;
   border-top: 1px solid rgba(255,255,255,0.05);
-  transition: background 0.2s;
 }
 .s8-insight-card:hover { background: var(--surface-variant); }
 .s8-insight-body { display: flex; gap: 24px; align-items: flex-start; }
@@ -772,12 +856,11 @@ img { display: block; max-width: 100%; }
   background: rgba(25,26,26,0.6); backdrop-filter: blur(20px);
   border-top: 1px solid rgba(231,229,229,0.05); border-radius: 2rem;
   padding: 40px; display: flex; flex-direction: column; height: 100%;
-  transition: background 0.5s;
 }
 .s14-card:hover { background: var(--surface-container-highest); }
-.s14-card .material-symbols-outlined { font-size: 1.875rem; color: var(--primary); opacity: 0.8; margin-bottom: 32px; transition: opacity 0.3s; }
+.s14-card .material-symbols-outlined { font-size: 1.875rem; color: var(--primary); opacity: 0.8; margin-bottom: 32px;  }
 .s14-card:hover .material-symbols-outlined { opacity: 1; }
-.s14-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.375rem; font-weight: 700; line-height: 1.3; margin-bottom: 24px; transition: color 0.3s; }
+.s14-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.375rem; font-weight: 700; line-height: 1.3; margin-bottom: 24px;  }
 .s14-card:hover h3 { color: var(--primary); }
 .s14-card p { color: var(--on-surface-variant); line-height: 1.75; font-size: 1.0625rem; margin-top: auto; }
 .s14-divider { margin-top: 96px; width: 100%; max-width: 56rem; height: 1px; background: linear-gradient(to right, transparent, var(--outline-variant), transparent); opacity: 0.2; }
@@ -811,7 +894,7 @@ img { display: block; max-width: 100%; }
 .s13-phase {
   position: relative; overflow: hidden; background: var(--surface-container);
   border-radius: 0.75rem; padding: 24px;
-  border-top: 1px solid rgba(255,255,255,0.05); transition: background 0.5s;
+  border-top: 1px solid rgba(255,255,255,0.05); 
 }
 .s13-phase:hover { background: var(--surface-container-highest); }
 .s13-phase-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
@@ -841,7 +924,7 @@ img { display: block; max-width: 100%; }
 
 /* Image grid */
 .s13-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: 256px; opacity: 0.4; display: none;}
-.s13-image { border-radius: 0.75rem; overflow: hidden; filter: grayscale(1) contrast(1.25); transition: filter 0.7s; }
+.s13-image { border-radius: 0.75rem; overflow: hidden; filter: grayscale(1) contrast(1.25);  }
 .s13-image:hover { filter: grayscale(0) contrast(1); }
 .s13-image img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -884,7 +967,7 @@ img { display: block; max-width: 100%; }
 .s12-screen-frame {
   aspect-ratio: 1/2; border-radius: 0.75rem; background: var(--surface-container-low);
   border: 1px solid rgba(72,72,72,0.2); overflow: hidden; position: relative;
-  box-shadow: 0 24px 48px rgba(231,229,229,0.04); transition: transform 0.5s;
+  box-shadow: 0 24px 48px rgba(231,229,229,0.04); 
 }
 .s12-screen-frame:hover { transform: scale(1.02); }
 .s12-screen-frame img { width: 100%; height: 100%; object-fit: cover; }
@@ -907,7 +990,7 @@ img { display: block; max-width: 100%; }
 .s12-content-item-head h3 { font-family: 'Manrope', sans-serif; font-size: 1.0625rem; font-weight: 700; }
 .s12-content-item ul {
   display: flex; flex-direction: column; gap: 8px; list-style: none;
-  border-left: 1px solid rgba(72,72,72,0.3); padding-left: 16px; transition: border-color 0.5s;
+  border-left: 1px solid rgba(72,72,72,0.3); padding-left: 16px; 
 }
 .s12-content-item:hover ul { border-color: var(--primary); }
 .s12-content-item li { font-size: 0.875rem; color: var(--on-surface-variant); line-height: 1.75; }
@@ -951,7 +1034,7 @@ img { display: block; max-width: 100%; }
    SECTION 11: THE PROBLEM
 ============================== */
 .s11 { padding: 0; }
-.s11-inner { display: flex; flex-direction: column; min-height: 100vh; }
+.s11-inner { display: flex; flex-direction: column;  }
 
 /* Visual panel (left) */
 .s11-visual {
@@ -978,7 +1061,6 @@ img { display: block; max-width: 100%; }
   width: 220px; height: 440px; border-radius: 2rem; overflow: hidden; flex-shrink: 0;
   border: 2px solid rgba(72,72,72,0.2);
   box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-  transition: border-color 0.5s, transform 0.5s;
 }
 .s11-img-frame:hover { border-color: rgba(255,181,160,0.3); transform: scale(1.02); }
 .s11-img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -999,7 +1081,7 @@ img { display: block; max-width: 100%; }
 .s11-articles { display: flex; flex-direction: column; gap: 48px; }
 .s11-article h3 {
   font-family: 'Manrope', sans-serif; font-size: 1.125rem; font-weight: 700;
-  margin-bottom: 16px; transition: color 0.3s;
+  margin-bottom: 16px; 
 }
 .s11-article:hover h3 { color: var(--primary); }
 .s11-article ul { display: flex; flex-direction: column; gap: 12px; list-style: none; }
@@ -1022,7 +1104,7 @@ img { display: block; max-width: 100%; }
 .s11-quote p span { color: var(--primary); }
 
 @media (min-width: 768px) {
-  .s11-inner { flex-direction: row; min-height: 100vh; }
+  .s11-inner { flex-direction: row;  }
   .s11-visual { width: 60%; min-height: unset; }
   .s11-content { width: 40%; padding: 96px 64px; }
 }
@@ -1047,13 +1129,12 @@ img { display: block; max-width: 100%; }
 .s10-card {
   position: relative; padding: 32px; border-radius: 2rem;
   background: var(--surface-container-low); border: 1px solid rgba(72,72,72,0.05);
-  overflow: hidden; transition: background 0.5s;
+  overflow: hidden; 
 }
 .s10-card:hover { background: var(--surface-container); }
 .s10-card-glow {
   position: absolute; top: -48px; right: -48px; width: 128px; height: 128px;
   background: rgba(255,181,160,0.05); border-radius: 9999px; filter: blur(48px);
-  transition: background 0.5s; pointer-events: none;
 }
 .s10-card:hover .s10-card-glow { background: rgba(255,181,160,0.1); }
 .s10-card-icon {
@@ -1079,7 +1160,7 @@ img { display: block; max-width: 100%; }
   background: var(--surface-container-lowest); border: 1px solid rgba(72,72,72,0.1);
   box-shadow: 0 40px 80px rgba(231,229,229,0.04); position: relative;
 }
-.s10-artifact img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.7s ease-in-out; }
+.s10-artifact img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8;  }
 .s10-artifact-wrap:hover .s10-artifact img { transform: scale(1.02); }
 .s10-artifact-fade { position: absolute; inset: 0; background: linear-gradient(to top, #0e0e0e, transparent, transparent); opacity: 0.6; }
 .s10-artifact-overlay {
@@ -1087,7 +1168,7 @@ img { display: block; max-width: 100%; }
   background: rgba(37,38,38,0.6); backdrop-filter: blur(20px);
   border: 1px solid rgba(72,72,72,0.1); max-width: 320px; display: none;
 }
-.s10-overlay-dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--primary); animation: pulse 2s infinite; flex-shrink: 0; }
+.s10-overlay-dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--primary);  flex-shrink: 0; }
 .s10-overlay-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 .s10-overlay-row span { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .s10-overlay p { font-size: 0.6875rem; color: var(--on-surface-variant); line-height: 1.6; }
@@ -1107,14 +1188,13 @@ img { display: block; max-width: 100%; }
 .s10-btn-outline {
   padding: 12px 32px; border-radius: 0.75rem; border: 1px solid rgba(72,72,72,0.15);
   font-size: 0.875rem; font-weight: 600; cursor: pointer;
-  transition: background 0.2s; background: transparent; color: var(--on-surface);
 }
 .s10-btn-outline:hover { background: var(--surface-container-high); }
 .s10-btn-primary {
   padding: 12px 32px; border-radius: 0.75rem; border: none; cursor: pointer;
   font-size: 0.875rem; font-weight: 700; color: #7c1d00;
   background: linear-gradient(135deg, #ffb5a0, #872000);
-  box-shadow: 0 8px 24px rgba(135,32,0,0.2); transition: opacity 0.2s;
+  box-shadow: 0 8px 24px rgba(135,32,0,0.2); 
 }
 .s10-btn-primary:hover { opacity: 0.9; }
 
@@ -1167,7 +1247,6 @@ img { display: block; max-width: 100%; }
 .s9-card-after {
   background: rgba(37,38,38,0.6); backdrop-filter: blur(20px);
   border-color: rgba(255,181,160,0.1);
-  transition: border-color 0.2s;
 }
 .s9-card-after:hover { border-color: rgba(255,181,160,0.3); }
 .s9-card h4 { font-weight: 700; margin-bottom: 8px; }
@@ -1188,11 +1267,11 @@ img { display: block; max-width: 100%; }
 .s9-phone-glow {
   position: absolute; inset: -16px;
   background: rgba(255,181,160,0.1); filter: blur(48px); border-radius: 9999px;
-  opacity: 0.5; transition: opacity 0.3s; pointer-events: none;
+  opacity: 0.5;  pointer-events: none;
 }
 .s9-phone-wrap:hover .s9-phone-glow { opacity: 0.7; }
 .s9-phone-frame {
-  width: 280px; aspect-ratio: 1/2; border-radius: 1.5rem;
+  width: 100%; max-width: 280px; aspect-ratio: 1/2; border-radius: 1.5rem;
   background: #000; border: 6px solid var(--surface-container-highest);
   box-shadow: 0 25px 50px rgba(0,0,0,0.5); overflow: hidden;
   position: relative;
@@ -1324,20 +1403,9 @@ img { display: block; max-width: 100%; }
   .s9-card-neg-offset { transform: translateX(-16px); }
 }
 
-/* === Scroll Fade + Slide === */
-section {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
-  will-change: opacity, transform;
-}
-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 </style>
 </head>
-<body>
+<body style="background-color:#0e0e0e;">
 <main>
 
 <!-- Section Cover: Verification Revamp -->
@@ -1400,7 +1468,7 @@ section.is-visible {
       <div class="s0-phone-side s0-phone-left">
         <div class="s0-shell-side">
           <div class="s0-screen-side">
-            <img src="original/intro 1.png" alt="Mobile App Interface"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/intro%201.png" alt="Mobile App Interface"/>
           </div>
         </div>
       </div>
@@ -1409,7 +1477,7 @@ section.is-visible {
       <div class="s0-phone-center">
         <div class="s0-shell-center">
           <div class="s0-screen-center">
-            <img src="original/intro 2.png" alt="Primary App View"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/intro%202.png" alt="Primary App View"/>
             <div class="s0-screen-center-fade"></div>
           </div>
         </div>
@@ -1419,7 +1487,7 @@ section.is-visible {
       <div class="s0-phone-side s0-phone-right">
         <div class="s0-shell-side">
           <div class="s0-screen-side">
-            <img src="original/intro 3.png" alt="Secondary App View"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/intro%203.png" alt="Secondary App View"/>
           </div>
         </div>
       </div>
@@ -1854,7 +1922,7 @@ section.is-visible {
           <div class="s8-phone-wrap">
             <div class="s8-phone-glow"></div>
             <div class="s8-phone-frame">
-              <img src="original/Step-by-step guidance -1.png" alt="Entry Point UI"/>
+              <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Step-by-step%20guidance%20-1.png" alt="Entry Point UI"/>
               <div class="s8-phone-notch"></div>
             </div>
             <div class="s8-phone-label">
@@ -1880,7 +1948,7 @@ section.is-visible {
           <div class="s8-phone-wrap">
             <div class="s8-phone-glow"></div>
             <div class="s8-phone-frame">
-              <img src="original/Step-by-step guidance -2.png" alt="Verification Flow UI"/>
+              <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Step-by-step%20guidance%20-2.png" alt="Verification Flow UI"/>
               <div class="s8-phone-notch"></div>
             </div>
             <div class="s8-phone-label">
@@ -1952,7 +2020,7 @@ section.is-visible {
           </div>
           <div class="s9-phone-wrap">
             <div class="s9-phone-frame s9-phone-frame-before">
-              <img src="original/Option overload → to guided completion-1.png" alt="Legacy mobile UI showing cluttered document options"/>
+              <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Option%20overload%20%E2%86%92%20to%20guided%20completion-1.png" alt="Legacy mobile UI showing cluttered document options"/>
               <!-- <div class="s9-phone-error-bar"></div> -->
             </div>
             <div class="s9-phone-corner"></div>
@@ -1998,7 +2066,7 @@ section.is-visible {
           <div class="s9-phone-wrap">
             <div class="s9-phone-glow"></div>
             <div class="s9-phone-frame s9-phone-frame-after">
-              <img src="original/Option overload → to guided completion-2.png" alt="Modern minimal mobile app UI with guided document selection"/>
+              <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Option%20overload%20%E2%86%92%20to%20guided%20completion-2.png" alt="Modern minimal mobile app UI with guided document selection"/>
               <div class="s9-phone-notch-top"><div class="s9-phone-notch-bar"></div></div>
               <div class="s9-phone-cta"><span>Continue Verification</span></div>
             </div>
@@ -2074,7 +2142,7 @@ section.is-visible {
     <div class="s10-artifact-wrap">
       <div class="s10-artifact-label"><span>Tightened KYC Journey Canvas</span></div>
       <div class="s10-artifact">
-        <img src="original/Reduce choice.jpg" alt="KYC journey flow diagram showing branching paths for verification failure and fallback routing"/>
+        <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Reduce%20choice.jpg" alt="KYC journey flow diagram showing branching paths for verification failure and fallback routing"/>
         <div class="s10-artifact-fade"></div>
         <div class="s10-artifact-overlay s10-overlay">
           <div class="s10-overlay-row">
@@ -2115,12 +2183,12 @@ section.is-visible {
 
         <!-- Card 1: High Intent 1 -->
         <div class="s11-img-frame">
-          <img src="original/High intent 1.jpg" alt="Entry point — balance and withdraw CTA"/>
+          <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/High%20intent%201.jpg" alt="Entry point — balance and withdraw CTA"/>
         </div>
 
         <!-- Card 2: High Intent 2 -->
         <div class="s11-img-frame">
-          <img src="original/High intent 2.png" alt="Old KYC screen — unclear requirements"/>
+          <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/High%20intent%202.png" alt="Old KYC screen — unclear requirements"/>
         </div>
       </div>
     </section>
@@ -2201,25 +2269,25 @@ section.is-visible {
       <div class="s12-screens">
         <div class="s12-screen">
           <div class="s12-screen-frame">
-            <img src="original/Designing for 1.png" alt="Step 1"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Designing%20for%201.png" alt="Step 1"/>
           </div>
           <div class="s12-screen-cap"><p>1. Lite to Full Journey</p></div>
         </div>
         <div class="s12-screen">
           <div class="s12-screen-frame">
-            <img src="original/Designing for 2.png" alt="Step 2"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Designing%20for%202.png" alt="Step 2"/>
           </div>
           <div class="s12-screen-cap"><p>2. Name Match Rule</p></div>
         </div>
         <div class="s12-screen">
           <div class="s12-screen-frame">
-            <img src="original/Designing for 3.png" alt="Step 3"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Designing%20for%203.png" alt="Step 3"/>
           </div>
           <div class="s12-screen-cap"><p>3. Auto-Fetch UPI</p></div>
         </div>
         <div class="s12-screen">
           <div class="s12-screen-frame">
-            <img src="original/Designing for 4.png" alt="Step 4"/>
+            <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Designing%20for%204.png" alt="Step 4"/>
           </div>
           <div class="s12-screen-cap"><p>4. Failure Recovery</p></div>
         </div>
@@ -2340,10 +2408,10 @@ section.is-visible {
     <!-- Image grid -->
     <div class="s13-images">
       <div class="s13-image">
-        <img src="original/High intent 2.png" alt="Complex legal documents and architectural blueprints"/>
+        <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/High%20intent%202.png" alt="Complex legal documents and architectural blueprints"/>
       </div>
       <div class="s13-image">
-        <img src="original/High intent 3.png" alt="Digital network connections and data nodes"/>
+        <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/High%20intent%203.png" alt="Digital network connections and data nodes"/>
       </div>
     </div>
 
@@ -2384,22 +2452,6 @@ section.is-visible {
 </section>
 
 </main>
-<script>
-(function () {
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      } else {
-        entry.target.classList.remove('is-visible');
-      }
-    });
-  }, { rootMargin: '0px 0px -25% 0px', threshold: 0 });
 
-  document.querySelectorAll('section').forEach(function (s) {
-    io.observe(s);
-  });
-}());
-</script>
 </body>
 </html>

@@ -71,6 +71,11 @@
     }
   </script>
 <style>
+html, body {
+  background-color: #131315 !important;
+  width: 100%;
+}
+
 /* ==============================
    SECTION 0: VISUAL ENTRY (HERO GRID)
 ============================== */
@@ -152,16 +157,28 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .phone-shadow { box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8); }
     .bento-inner-shadow { box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05); }
+    .page-root { background-color: #131315; min-height: 100vh; width: 100%; }
+
+/* Responsive: phone <809px */
+@media (max-width: 809px) {
+  .phone-shadow { box-shadow: 0 10px 30px -5px rgba(0,0,0,0.8); }
+}
+
+/* Responsive: make main container full width on all sizes */
+@media (max-width: 809px) {
+  main { padding-left: 16px !important; padding-right: 16px !important; }
+}
   </style>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary-container overflow-x-hidden">
-<main class="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-16">
+<div class="page-root">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12 py-12 flex flex-col gap-16">
 <!-- 1. Visual Entry (Hero Grid) -->
 <section class="w-full">
 <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 grid-rows-none gap-4 h-auto lg:h-[640px]">
 <!-- Large Anchor Tile 1: Hero Update -->
 <div class="md:col-span-4 lg:col-span-8 row-span-2 bg-surface-container rounded-lg overflow-hidden relative group p-10 flex flex-col justify-end lego-shadow"><div class="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent z-[5]"></div>
-<div class="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500 bg-surface-container-highest">
+<div class="absolute inset-0 opacity-40 group-hover:opacity-60 bg-surface-container-highest">
 <img class="w-full h-full object-cover" data-alt="UI composite showing blurred layered screens of league setup steps and a flow diagram" src="https://lh3.googleusercontent.com/aida/ADBb0uhUm2zqMO5Nb4pwiBc_b9dM1uL7r6zHm3CrKfkhqwPq_0SnCB1YjWIdx9_kfaXYHM0OkxTgY9ZxrNWZePVK1wOgi9Jg7_WjSlzH23tZwnSN7RDz7suK2S31cYMynOyO4zr1tBilZpFGp9NsR5BL6RJ8beIJKZg_SVL-b2_m1CCJVTlHTH6CMW-h1JiOaTXVqRjtmClT2pBASjWML7UIG4NgUNUDZTk4Demba36lXddkz45EamclDtvcXmstNikc7M_vCl1jVdQsqsI" style="">
 </div>
 <div class="relative z-10">
@@ -251,12 +268,12 @@
 <!-- 2. Project Context (Structured) -->
 <section class="s1 w-full space-y-12">
 <div class="space-y-4">
-<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight text-white">League Creation for Classic Fantasy &amp; Auction</h2>
+<h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">League Creation for Classic Fantasy &amp; Auction</h2>
 <p class="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-3xl">
           Redesigning league creation to improve rule clarity and using the same foundation to launch Auction Fantasy under real constraints.
         </p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-outline-variant/15">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-outline-variant/15">
 <!-- Project Type -->
 <div class="space-y-3">
 <h4 class="font-label font-black text-[10px] uppercase tracking-[0.2em] text-primary">Project Type</h4>
@@ -282,21 +299,21 @@
 <section class="s2 w-full pt-8 pb-24">
 <div class="relative flex justify-center items-center h-[500px] lg:h-[700px]">
 <!-- Left Screen -->
-<div class="absolute left-1/2 -translate-x-[110%] md:-translate-x-[130%] scale-90 rotate-[-4deg] z-10 transition-transform duration-500 hover:rotate-0 hover:z-30">
+<div class="absolute left-1/2 -translate-x-[110%] md:-translate-x-[130%] scale-90 rotate-[-4deg] z-10 hover:z-30">
 <div class="w-[240px] md:w-[280px] aspect-[1/2] bg-surface-container-lowest rounded-[2.5rem] border-8 border-surface-container-highest overflow-hidden lego-shadow">
-<img class="w-full h-full object-cover" alt="Intro screen left" src="league%20assests/Intro%202.jpg">
+<img class="w-full h-full object-cover" alt="Intro screen left" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Intro%202.jpg">
 </div>
 </div>
 <!-- Right Screen -->
-<div class="absolute left-1/2 translate-x-[10%] md:translate-x-[30%] scale-90 rotate-[4deg] z-10 transition-transform duration-500 hover:rotate-0 hover:z-30">
+<div class="absolute left-1/2 translate-x-[10%] md:translate-x-[30%] scale-90 rotate-[4deg] z-10 hover:z-30">
 <div class="w-[240px] md:w-[280px] aspect-[1/2] bg-surface-container-lowest rounded-[2.5rem] border-8 border-surface-container-highest overflow-hidden lego-shadow">
-<img class="w-full h-full object-cover" alt="Intro screen right" src="league%20assests/Intro%203.jpg">
+<img class="w-full h-full object-cover" alt="Intro screen right" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Intro%203.jpg">
 </div>
 </div>
 <!-- Center Dominant Screen -->
 <div class="relative z-20 scale-100 lg:scale-110">
 <div class="w-[260px] md:w-[320px] aspect-[1/2] bg-surface-container-lowest rounded-[3rem] border-8 border-surface-container-high overflow-hidden lego-shadow shadow-primary/20">
-<img class="w-full h-full object-cover" alt="Intro screen centre" src="league%20assests/Intro.jpg">
+<img class="w-full h-full object-cover" alt="Intro screen centre" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Intro.jpg">
 </div>
 </div>
 </div>
@@ -377,7 +394,7 @@
 <h2 class="font-headline text-4xl font-extrabold tracking-tight text-white">Constraints</h2>
 </div>
 <div class="space-y-12">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 <div class="p-6 bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col gap-3">
 <div class="flex items-center gap-3">
 <span class="w-2.5 h-2.5 rounded-full bg-error shadow-[0_0_8px_rgba(255,180,171,0.4)]"></span>
@@ -401,7 +418,7 @@
 </div>
 </div>
 <div class="overflow-hidden rounded-2xl bg-surface-container-lowest border border-outline-variant/10 h-64 relative group">
-<img alt="Technical UI Workspace" class="w-full h-full object-cover opacity-25 grayscale group-hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgkT0M8QUz-qOpPImI1urwr388dR8pS_nYr8TcMNmn2oDmVZrNQmMdLQJiR6E4Pimv1fG485_fL4RP680DxyYyEtaqVgi5dof2_zmt-3cRWvt-eKf5hLIHFJ8kY64d0Hv71BmHnrAQe98dOjWokDrO27OHjQIFr8Z-r9b9tz0yptBQApCVpzezrykWOp3lxFdQ6AwjroPRd_OTBmVOBhtnMu_wg9l05iElJ1vUYJP6WShsk_4LxiGpgQOiZCSNvswEwzC6Yd2kV6h6">
+<img alt="Technical UI Workspace" class="w-full h-full object-cover opacity-25 grayscale group-hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgkT0M8QUz-qOpPImI1urwr388dR8pS_nYr8TcMNmn2oDmVZrNQmMdLQJiR6E4Pimv1fG485_fL4RP680DxyYyEtaqVgi5dof2_zmt-3cRWvt-eKf5hLIHFJ8kY64d0Hv71BmHnrAQe98dOjWokDrO27OHjQIFr8Z-r9b9tz0yptBQApCVpzezrykWOp3lxFdQ6AwjroPRd_OTBmVOBhtnMu_wg9l05iElJ1vUYJP6WShsk_4LxiGpgQOiZCSNvswEwzC6Yd2kV6h6">
 <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
 <div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row justify-between items-end gap-6">
 <div class="max-w-2xl">
@@ -433,7 +450,7 @@ Designing a league creation flow isn't like designing a solo checkout experience
 <!-- Interactive Handshake Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-1 px-1 bg-outline-variant/10 rounded-xl overflow-hidden">
 <!-- Block 1: The Commissioner -->
-<div class="lg:col-span-5 bg-surface-container p-8 md:p-12 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="lg:col-span-6 bg-surface-container p-5 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-between hover:bg-surface-container-high group">
 <div>
 <div class="flex items-center gap-3 mb-8">
 <div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
@@ -461,21 +478,8 @@ Designing a league creation flow isn't like designing a solo checkout experience
 </div>
 </div>
 </div>
-<!-- Central Visual Divider -->
-<div class="lg:col-span-2 relative h-[300px] lg:h-auto overflow-hidden bg-surface-container-low flex items-center justify-center">
-<div class="absolute inset-0 z-0 opacity-20 lg:opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700">
-<img class="w-full h-full object-cover" alt="Abstract cinematic composition of two distinct personas in profile silhouette facing each other in high contrast lighting with subtle tech interface elements between them" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDko0TapNdRFsrbRkVZP-aivPaidG_Yrr9OvkMp5dgDBt1gf2uromxUhbykFWlesTGGcXmAOrufv0obefzxaqdVg_s9y0CKVz1ZBa8ZNKLIKQueoRzOof8PrAqnvFBJkd0LcS7YF2SvYsIzy-gvddjkpKuDWKPQ1uAQFQXAHCdyg8QFxSBtTDQZqOhiCKp1P_mDdwmfTjoSFQOTwKZi-klqnBr1d7Q79BxR1LATwN62sji58J9Ueq5zrHU-yNvhw2ObZbK1XMzwure0"/>
-</div>
-<div class="relative z-10 hidden lg:flex flex-col items-center gap-4">
-<div class="w-[1px] h-32 bg-gradient-to-b from-transparent via-outline-variant to-transparent"></div>
-<div class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-surface backdrop-blur-xl">
-<span class="material-symbols-outlined text-outline">handshake</span>
-</div>
-<div class="w-[1px] h-32 bg-gradient-to-b from-transparent via-outline-variant to-transparent"></div>
-</div>
-</div>
 <!-- Block 2: The Invitee -->
-<div class="lg:col-span-5 bg-surface-container p-8 md:p-12 flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="lg:col-span-6 bg-surface-container p-5 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-between hover:bg-surface-container-high group">
 <div class="text-right flex flex-col items-end">
 <div class="flex items-center gap-3 mb-8">
 <span class="font-headline font-bold text-sm tracking-tight uppercase">The Skeptical Friend</span>
@@ -534,9 +538,9 @@ Before we could build a better version, I had to spend some quality time with th
 </header>
 <!-- Horizontal Scroll Container -->
 <div class="-mx-6 md:-mx-12 relative overflow-hidden">
-<div class="flex gap-8 overflow-x-auto no-scrollbar snap-x px-6 md:px-12 pb-12" style="scroll-snap-type: x mandatory;">
+<div class="flex gap-8 overflow-x-auto no-scrollbar snap-x px-4 sm:px-6 md:px-10 lg:px-12 pb-12" style="scroll-snap-type: x mandatory;">
 <!-- Panel 01: No Sense of Progression -->
-<article class="flex-shrink-0 w-[78vw] md:w-[48vw] lg:w-[36vw]" style="scroll-snap-align: center;">
+<article class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[52vw] lg:w-[38vw]" style="scroll-snap-align: center;">
 <div class="bg-surface-container rounded-xl p-6 h-full flex flex-col gap-4 shadow-2xl relative overflow-hidden">
 <div class="flex flex-col gap-2">
 <span class="font-label text-primary text-xs font-bold tracking-[0.2em] uppercase">Issue 01</span>
@@ -545,30 +549,24 @@ Before we could build a better version, I had to spend some quality time with th
 <div class="flex flex-col gap-3 text-sm">
 <div class="space-y-1">
 <p class="font-bold text-primary-fixed uppercase text-[10px] tracking-wider">What's happening</p>
-<p class="text-on-surface-variant leading-relaxed">Setup used static tabs for "Basic Info," "Team Rules," and "League Rules."</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Setup used static tabs for "Basic Info," "Team Rules," and "League Rules."</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-primary-fixed uppercase text-[10px] tracking-wider">Why it's broken</p>
-<p class="text-on-surface-variant leading-relaxed">Tabs work for settings, but fail for sequential creation flows requiring a start and end.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Tabs work for settings, but fail for sequential creation flows requiring a start and end.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-primary-fixed uppercase text-[10px] tracking-wider">Impact</p>
-<p class="text-on-surface-variant leading-relaxed">Users skipped critical steps or felt no sense of completion as they navigated blindly.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Users skipped critical steps or felt no sense of completion as they navigated blindly.</p>
 </div>
 </div>
-<div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-white border border-outline-variant/10 mt-4">
-<img alt="Tab based navigation crop" class="w-full h-full object-cover object-top" src="league%20assests/Chaos%201.jpg"/>
-<div class="absolute top-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
-<div class="w-3 h-3 rounded-full bg-error animate-pulse ring-4 ring-error/20"></div>
-<div class="mt-2 bg-surface-container-highest/95 backdrop-blur-sm p-2 rounded border border-outline-variant shadow-xl">
-<p class="text-[10px] font-bold text-on-surface uppercase">No Progress Feedback</p>
-</div>
-</div>
+<div class="relative rounded-lg overflow-hidden mt-4">
+<img alt="Tab based navigation crop" class="w-full h-auto block" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Chaos%201.jpg"/>
 </div>
 </div>
 </article>
 <!-- Panel 02: Duration Mismatch -->
-<article class="flex-shrink-0 w-[78vw] md:w-[48vw] lg:w-[36vw]" style="scroll-snap-align: center;">
+<article class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[52vw] lg:w-[38vw]" style="scroll-snap-align: center;">
 <div class="bg-surface-container rounded-xl p-6 h-full flex flex-col gap-4 shadow-2xl relative overflow-hidden">
 <div class="flex flex-col gap-2">
 <span class="font-label text-secondary text-xs font-bold tracking-[0.2em] uppercase">Issue 02</span>
@@ -577,30 +575,24 @@ Before we could build a better version, I had to spend some quality time with th
 <div class="flex flex-col gap-3 text-sm">
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">What's happening</p>
-<p class="text-on-surface-variant leading-relaxed">Duration picker used technical match numbers like "Match 4-72" as primary labels.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Duration picker used technical match numbers like "Match 4-72" as primary labels.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">Why it's broken</p>
-<p class="text-on-surface-variant leading-relaxed">Users think in timeframes ("This Weekend") or season phases, not arbitrary match indices.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Users think in timeframes ("This Weekend") or season phases, not arbitrary match indices.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">Impact</p>
-<p class="text-on-surface-variant leading-relaxed">Forced mental math at the point of entry, creating immediate cognitive friction.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Forced mental math at the point of entry, creating immediate cognitive friction.</p>
 </div>
 </div>
-<div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-white border border-outline-variant/10 mt-4">
-<img alt="Match duration picker crop" class="w-full h-full object-cover object-bottom" src="league%20assests/Chaos%202.jpg"/>
-<div class="absolute bottom-24 right-12 flex flex-col items-end">
-<div class="bg-surface-container-highest/95 backdrop-blur-sm p-2 rounded border border-outline-variant shadow-xl">
-<p class="text-[10px] font-bold text-on-surface uppercase">Mental Model Mismatch</p>
-</div>
-<div class="mt-2 w-3 h-3 rounded-full bg-secondary animate-pulse ring-4 ring-secondary/20"></div>
-</div>
+<div class="relative rounded-lg overflow-hidden mt-4">
+<img alt="Match duration picker crop" class="w-full h-auto block" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Chaos%202.jpg"/>
 </div>
 </div>
 </article>
 <!-- Panel 03: Fragmented Rule System -->
-<article class="flex-shrink-0 w-[78vw] md:w-[48vw] lg:w-[36vw]" style="scroll-snap-align: center;">
+<article class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[52vw] lg:w-[38vw]" style="scroll-snap-align: center;">
 <div class="bg-surface-container rounded-xl p-6 h-full flex flex-col gap-4 shadow-2xl relative overflow-hidden">
 <div class="flex flex-col gap-2">
 <span class="font-label text-tertiary text-xs font-bold tracking-[0.2em] uppercase">Issue 03</span>
@@ -609,30 +601,24 @@ Before we could build a better version, I had to spend some quality time with th
 <div class="flex flex-col gap-3 text-sm">
 <div class="space-y-1">
 <p class="font-bold text-tertiary uppercase text-[10px] tracking-wider">What's happening</p>
-<p class="text-on-surface-variant leading-relaxed">Game rules were scattered across multiple disjointed tabs without clear hierarchy.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Game rules were scattered across multiple disjointed tabs without clear hierarchy.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-tertiary uppercase text-[10px] tracking-wider">Why it's broken</p>
-<p class="text-on-surface-variant leading-relaxed">Context is lost when user-facing rules are separated from the league structure they define.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Context is lost when user-facing rules are separated from the league structure they define.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-tertiary uppercase text-[10px] tracking-wider">Impact</p>
-<p class="text-on-surface-variant leading-relaxed">Information siloization led to user confusion and "tab-hopping" to verify logic.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">Information siloization led to user confusion and "tab-hopping" to verify logic.</p>
 </div>
 </div>
-<div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-white border border-outline-variant/10 mt-4">
-<img alt="Rule tabs crop" class="w-full h-full object-cover" src="league%20assests/Chaos%203.jpg" style="object-position: 50% 10%"/>
-<div class="absolute top-12 left-1/4 flex flex-col items-start">
-<div class="w-3 h-3 rounded-full bg-tertiary animate-pulse ring-4 ring-tertiary/20"></div>
-<div class="mt-2 bg-surface-container-highest/95 backdrop-blur-sm p-2 rounded border border-outline-variant shadow-xl">
-<p class="text-[10px] font-bold text-on-surface uppercase">Siloed Context</p>
-</div>
-</div>
+<div class="relative rounded-lg overflow-hidden mt-4">
+<img alt="Rule tabs crop" class="w-full h-auto block" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Chaos%203.jpg"/>
 </div>
 </div>
 </article>
 <!-- Panel 04: Review Step Failure -->
-<article class="flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] mr-6 md:mr-12" style="scroll-snap-align: center;">
+<article class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[52vw] lg:w-[38vw]" style="scroll-snap-align: center;">
 <div class="bg-surface-container rounded-xl p-6 h-full flex flex-col gap-4 shadow-2xl relative overflow-hidden">
 <div class="flex flex-col gap-2">
 <span class="font-label text-secondary text-xs font-bold tracking-[0.2em] uppercase">Issue 04</span>
@@ -641,44 +627,33 @@ Before we could build a better version, I had to spend some quality time with th
 <div class="flex flex-col gap-3 text-sm">
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">What's happening</p>
-<p class="text-on-surface-variant leading-relaxed">The final confirmation was a technical "data dump" summary screen.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">The final confirmation was a technical "data dump" summary screen.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">Why it's broken</p>
-<p class="text-on-surface-variant leading-relaxed">It lacked visual storytelling or a "vibe check" of what the created league would feel like.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">It lacked visual storytelling or a "vibe check" of what the created league would feel like.</p>
 </div>
 <div class="space-y-1">
 <p class="font-bold text-secondary uppercase text-[10px] tracking-wider">Impact</p>
-<p class="text-on-surface-variant leading-relaxed">High abandonment rate at the final step due to lack of emotional payoff or reassurance.</p>
+<p class="text-on-surface-variant leading-relaxed h-[3.25em] overflow-hidden">High abandonment rate at the final step due to lack of emotional payoff or reassurance.</p>
 </div>
 </div>
-<div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-white border border-outline-variant/10 mt-4">
-<img alt="Opaque gameplay logic crop" class="w-full h-full object-cover" src="league%20assests/Chaos%204.jpg"/>
+<div class="relative rounded-lg overflow-hidden mt-4">
+<img alt="Opaque gameplay logic crop" class="w-full h-auto block" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Chaos%204.jpg"/>
 </div>
 </div>
 </article>
 </div>
 </div>
 <!-- Footer Counter -->
-<div class="mt-8 flex justify-between items-center border-t border-outline-variant/20 pt-8">
-<div class="flex items-baseline gap-4">
-<span class="font-headline text-2xl font-bold text-outline-variant/30">04</span>
-<span class="font-label text-[10px] text-outline uppercase tracking-[0.3em]">Critical Issues Identified</span>
-</div>
-<div class="hidden md:flex gap-1">
-<div class="w-8 h-1 bg-primary rounded-full"></div>
-<div class="w-4 h-1 bg-outline-variant/20 rounded-full"></div>
-<div class="w-4 h-1 bg-outline-variant/20 rounded-full"></div>
-<div class="w-4 h-1 bg-outline-variant/20 rounded-full"></div>
-</div>
-</div>
+
 </section>
 <!-- Section 5: From Forms to Guidance (Solution) -->
 <section class="s6 py-10 w-full">
 <!-- Header Section -->
 <header class="mb-16 space-y-8">
 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container border border-outline-variant/15">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
 <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary font-headline">CASE STUDY</span>
 </div>
 <h1 class="text-5xl font-extrabold font-headline tracking-tight max-w-4xl text-on-surface">League Setup &amp; Commitment</h1>
@@ -687,7 +662,7 @@ Before we could build a better version, I had to spend some quality time with th
             </p>
 </header>
 <!-- Step 1 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16 border-b border-outline-variant/10">
 <div class="space-y-10 order-2 lg:order-1">
 <div class="space-y-4">
 <span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Step 01 — Define the Commitment</span>
@@ -708,24 +683,16 @@ Before we could build a better version, I had to spend some quality time with th
 </div>
 </div>
 <div class="order-1 lg:order-2 flex justify-center">
-<div class="relative w-full max-w-[320px] aspect-[1/2] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
-<img alt="Mobile mockup of the duration/timeline screen" class="w-full h-full object-cover rounded-[2rem] brightness-90 grayscale-[0.2]" src="league%20assests/Solution%201.jpg">
-<div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
-<div class="h-1.5 w-12 bg-white/20 rounded-full mx-auto mb-4"></div>
-</div>
+<div class="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[1/2] bg-surface-container-high rounded-[3rem] border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Mobile mockup of the duration/timeline screen" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Solution%201.jpg">
 </div>
 </div>
 </section>
 <!-- Step 2 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16 border-b border-outline-variant/10">
 <div class="flex justify-center">
-<div class="relative w-full max-w-[320px] aspect-[1/2] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
-<img alt="Mobile mockup of the spots/participation screen" class="w-full h-full object-cover rounded-[2rem] brightness-75" src="league%20assests/Solution%202.jpg">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-1/2 glass-panel border border-white/10 rounded-2xl p-4 flex flex-col justify-center gap-3">
-<div class="h-2 w-1/2 bg-primary/40 rounded-full"></div>
-<div class="h-2 w-full bg-white/10 rounded-full"></div>
-<div class="h-2 w-3/4 bg-white/10 rounded-full"></div>
-</div>
+<div class="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[1/2] bg-surface-container-high rounded-[3rem] border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Mobile mockup of the spots/participation screen" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Solution%202.jpg">
 </div>
 </div>
 <div class="space-y-10">
@@ -749,7 +716,7 @@ Before we could build a better version, I had to spend some quality time with th
 </div>
 </section>
 <!-- Step 3 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16 border-b border-outline-variant/10">
 <div class="space-y-10 order-2 lg:order-1">
 <div class="space-y-4">
 <span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-tertiary">Step 03 — Structure Gameplay Rules</span>
@@ -771,36 +738,20 @@ Before we could build a better version, I had to spend some quality time with th
 </div>
 <div class="order-1 lg:order-2 flex justify-center">
 <div class="relative flex items-start gap-4 lg:gap-8 max-w-[580px] w-full">
-<div class="relative flex-1 bg-surface-container-high rounded-[2.5rem] p-3 border-[6px] border-surface-container-highest phone-shadow overflow-hidden aspect-[1/2]">
-<img alt="Mobile mockup of the team/gameplay rules grouping - view 1" class="w-full h-full object-cover rounded-[1.75rem] brightness-75" src="league%20assests/Solution%203.1.jpg">
-<div class="absolute inset-0 flex flex-col justify-end p-6">
-<div class="h-10 w-full glass-panel rounded-lg border border-white/5 mb-3"></div>
+<div class="relative flex-1 bg-surface-container-high rounded-[2.5rem] border-[6px] border-surface-container-highest phone-shadow overflow-hidden aspect-[1/2]">
+<img alt="Mobile mockup of the team/gameplay rules grouping - view 1" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Solution%203.1.jpg">
 </div>
-</div>
-<div class="relative flex-1 bg-surface-container-high rounded-[2.5rem] p-3 border-[6px] border-surface-container-highest phone-shadow overflow-hidden translate-y-16 aspect-[1/2]">
-<img alt="Mobile mockup of the team/gameplay rules grouping - view 2" class="w-full h-full object-cover rounded-[1.75rem] brightness-75" src="league%20assests/Solution%203.2.jpg">
-<div class="absolute inset-0 flex flex-col justify-end p-6">
-<div class="h-10 w-full glass-panel rounded-lg border border-white/5"></div>
-</div>
+<div class="relative flex-1 bg-surface-container-high rounded-[2.5rem] border-[6px] border-surface-container-highest phone-shadow overflow-hidden translate-y-16 aspect-[1/2]">
+<img alt="Mobile mockup of the team/gameplay rules grouping - view 2" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Solution%203.2.jpg">
 </div>
 </div>
 </div>
 </section>
 <!-- Step 4 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16">
 <div class="flex justify-center">
-<div class="relative w-full max-w-[320px] aspect-[181/426] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
-<div class="w-full h-full overflow-y-auto scrollbar-hide rounded-[2rem]">
-<img alt="Mobile mockup of rule behavior/context" class="w-full h-auto brightness-50" src="league%20assests/Solution%204.jpg">
-</div>
-<div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-<div class="h-1.5 w-12 bg-white/20 rounded-full mx-auto mb-4"></div>
-</div>
-<div class="absolute top-6 right-8 pointer-events-none">
-<div class="w-10 h-10 rounded-full border-2 border-primary/50 bg-surface-container-high/50 backdrop-blur-md flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-xs">history</span>
-</div>
-</div>
+<div class="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[181/426] bg-surface-container-high rounded-[3rem] border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Mobile mockup of rule behavior/context" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/Solution%204.jpg">
 </div>
 </div>
 <div class="space-y-10">
@@ -839,8 +790,8 @@ Before we could build a better version, I had to spend some quality time with th
 </footer>
 </section>
 <!-- Section 6: Designing Auctions / Tradeoffs -->
-<section class="s7 py-48 w-full">
-<div class="max-w-5xl mx-auto px-6 md:px-12">
+<section class="s7 py-12 w-full">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
 <!-- Header -->
 <header class="mb-32">
 <div class="flex items-center gap-3 mb-8">
@@ -944,19 +895,19 @@ The "Auction feel" must prioritize the visceral energy of a high-stakes arena wh
 <p class="font-label text-xs uppercase tracking-widest text-outline mb-6 font-bold">Core Explorations</p>
 <ul class="space-y-6">
 <li class="flex gap-4 group">
-<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary">
 <span class="material-symbols-outlined text-[18px]">cached</span>
 </div>
 <p class="text-on-surface-variant text-lg leading-snug">What happens before, during, after bidding?</p>
 </li>
 <li class="flex gap-4 group">
-<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all duration-300">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary">
 <span class="material-symbols-outlined text-[18px]">balance</span>
 </div>
 <p class="text-on-surface-variant text-lg leading-snug">Where does fairness matter most?</p>
 </li>
 <li class="flex gap-4 group">
-<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-all duration-300">
+<div class="flex-none w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary">
 <span class="material-symbols-outlined text-[18px]">architecture</span>
 </div>
 <p class="text-on-surface-variant text-lg leading-snug">Which rules are foundational vs optional?</p>
@@ -968,10 +919,10 @@ The "Auction feel" must prioritize the visceral energy of a high-stakes arena wh
 <!-- Artifact Display -->
 <section class="w-full">
 <div class="relative group">
-<div class="absolute -inset-4 bg-primary/5 blur-3xl rounded-[3rem] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="absolute -inset-4 bg-primary/5 blur-3xl rounded-[3rem] opacity-50 group-hover:opacity-100"></div>
 <div class="relative bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/20 shadow-2xl">
 <!-- Journey Map Image -->
-<img alt="Comprehensive user journey map showing interconnected auction states with high-contrast UI flow diagrams on a dark technical background" class="w-full h-auto block" src="league%20assests/auction.jpg">
+<img alt="Comprehensive user journey map showing interconnected auction states with high-contrast UI flow diagrams on a dark technical background" class="w-full h-auto block" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/auction.jpg">
 <!-- Caption -->
 
 <!-- Connector Decoration -->
@@ -982,19 +933,19 @@ The "Auction feel" must prioritize the visceral energy of a high-stakes arena wh
 </div>
 </section>
 <!-- Dynamic Modular Grid -->
-<section class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
-<span class="text-primary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">01</span>
+<section class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high group">
+<span class="text-primary font-headline text-3xl font-bold block mb-2">01</span>
 <h4 class="font-headline font-bold text-on-surface mb-2">Pre-Auction Friction</h4>
 <p class="text-sm text-outline">Identifying cognitive load during registration and asset vetting.</p>
 </div>
-<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
-<span class="text-secondary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">02</span>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high group">
+<span class="text-secondary font-headline text-3xl font-bold block mb-2">02</span>
 <h4 class="font-headline font-bold text-on-surface mb-2">Live Loop Integrity</h4>
 <p class="text-sm text-outline">Mapping real-time feedback loops and synchronous bidder states.</p>
 </div>
-<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-colors group">
-<span class="text-tertiary font-headline text-3xl font-bold block mb-2 group-hover:translate-x-1 transition-transform">03</span>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high group">
+<span class="text-tertiary font-headline text-3xl font-bold block mb-2">03</span>
 <h4 class="font-headline font-bold text-on-surface mb-2">Post-Event Settlement</h4>
 <p class="text-sm text-outline">Closing the loop with automated compliance and history logging.</p>
 </div>
@@ -1020,7 +971,7 @@ The "Auction feel" must prioritize the visceral energy of a high-stakes arena wh
 </header>
 <!-- Guided Steps -->
 <!-- Step 1 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16 border-b border-outline-variant/10">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16 border-b border-outline-variant/10">
 <div class="space-y-6 order-2 lg:order-1">
 <div class="space-y-4">
 <span class="font-label text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Step 01</span>
@@ -1042,92 +993,15 @@ The "Auction feel" must prioritize the visceral energy of a high-stakes arena wh
 </div>
 </div>
 <div class="order-1 lg:order-2 flex justify-center">
-<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
-<div class="w-full h-full bg-surface rounded-[2rem] overflow-hidden flex flex-col relative">
-<div class="h-12 bg-surface/95 flex items-center px-6 justify-between border-b border-outline-variant/10">
-<span class="material-symbols-outlined text-xs text-on-surface-variant">arrow_back</span>
-<span class="font-headline text-[10px] font-bold tracking-widest uppercase">League Setup</span>
-<span class="w-4"></span>
-</div>
-<div class="p-6 space-y-4">
-<div class="h-2 w-1/3 bg-primary-container/20 rounded-full"></div>
-<div class="h-8 w-full bg-surface-container rounded-lg"></div>
-<div class="grid grid-cols-2 gap-3">
-<div class="h-24 bg-surface-container-high border-2 border-primary rounded-xl flex flex-col items-center justify-center gap-2">
-<span class="material-symbols-outlined text-primary">groups</span>
-<span class="text-[8px] font-bold">Draft</span>
-</div>
-<div class="h-24 bg-surface-container-high rounded-xl flex flex-col items-center justify-center gap-2 opacity-50">
-<span class="material-symbols-outlined">gavel</span>
-<span class="text-[8px] font-bold">Auction</span>
-</div>
-</div>
-<div class="space-y-2 mt-8">
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-<div class="h-10 w-full bg-surface-container-low rounded-lg border border-outline-variant/20"></div>
-</div>
-</div>
-<div class="absolute bottom-6 left-6 right-6">
-<div class="h-10 w-full bg-primary-container text-on-primary-container rounded-full flex items-center justify-center font-bold text-xs shadow-lg">Next Step</div>
-</div>
-<img alt="minimal abstract geometric pattern" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-10 pointer-events-none" src="league%20assests/auction%201.jpg">
-</div>
-</div>
+<div class="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[36/85] bg-surface-container-high rounded-[3rem] border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Auction league setup step 1" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/auction%201.jpg">
 </div>
 </section>
 <!-- Step 2 -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center py-16">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-24 items-center py-16">
 <div class="flex justify-center">
-<div class="relative w-full max-w-[320px] aspect-[9/19] bg-surface-container-high rounded-[3rem] p-4 border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
-<div class="w-full h-full bg-surface rounded-[2rem] overflow-hidden flex flex-col relative">
-<div class="h-12 bg-surface/95 flex items-center px-6 border-b border-outline-variant/10">
-<span class="material-symbols-outlined text-xs text-on-surface-variant">close</span>
-<span class="ml-4 font-headline text-[10px] font-bold tracking-widest uppercase">Timing Controls</span>
-</div>
-<div class="p-6 space-y-8">
-<div class="text-center py-4">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-container/20 rounded-full text-tertiary text-[10px] font-bold">
-<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1">schedule</span>
-Real-time Dynamic
-</div>
-</div>
-<div class="space-y-6">
-<div class="relative h-2 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="absolute left-0 top-0 h-full w-2/3 bg-tertiary rounded-full"></div>
-</div>
-<div class="flex justify-between text-[10px] font-bold text-on-surface-variant">
-<span>Bid Clock</span>
-<span class="text-tertiary">30 Seconds</span>
-</div>
-<div class="p-4 bg-surface-container-high rounded-xl border border-tertiary/20 flex flex-col gap-3">
-<div class="flex justify-between items-center">
-<span class="text-[9px] uppercase tracking-widest opacity-60">Reset trigger</span>
-<span class="text-[10px] font-black">10s</span>
-</div>
-<p class="text-[8px] leading-relaxed text-on-surface-variant">Bids placed within the final 10 seconds will reset the clock to ensure everyone has a fair chance to react.</p>
-</div>
-</div>
-<div class="space-y-4 pt-4 border-t border-outline-variant/10">
-<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Additional Settings</span>
-<div class="h-16 w-full bg-surface-container-low rounded-lg"></div>
-<div class="h-16 w-full bg-surface-container-low rounded-lg"></div>
-<div class="h-16 w-full bg-surface-container-low rounded-lg"></div>
-<div class="h-16 w-full bg-surface-container-low rounded-lg"></div>
-<div class="h-16 w-full bg-surface-container-low rounded-lg"></div>
-</div>
-</div>
-<img alt="abstract flowing particles" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-10 pointer-events-none" src="league%20assests/auction%202.jpg">
-</div>
-</div>
+<div class="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[36/85] bg-surface-container-high rounded-[3rem] border-[8px] border-surface-container-highest phone-shadow overflow-hidden">
+<img alt="Auction league setup step 2" class="w-full h-full object-cover" src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/league%20creation/league%20assests/auction%202.jpg">
 </div>
 </div>
 <div class="space-y-6">
@@ -1181,7 +1055,7 @@ Real-time Dynamic
 <!-- Core Learnings Grid -->
 <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
 <!-- Learning Block 01 -->
-<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high">
 <div>
 <div class="flex items-center gap-2 mb-6">
 <span class="text-primary font-headline font-bold text-sm tracking-widest">01</span>
@@ -1206,7 +1080,7 @@ Real-time Dynamic
 </ul>
 </div>
 <!-- Learning Block 02 -->
-<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high">
 <div>
 <div class="flex items-center gap-2 mb-6">
 <span class="text-secondary font-headline font-bold text-sm tracking-widest">02</span>
@@ -1227,7 +1101,7 @@ Real-time Dynamic
 </div>
 </div>
 <!-- Learning Block 03 -->
-<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors duration-300">
+<div class="md:col-span-4 bg-surface-container p-8 rounded-xl flex flex-col justify-between hover:bg-surface-container-high">
 <div>
 <div class="flex items-center gap-2 mb-6">
 <span class="text-tertiary font-headline font-bold text-sm tracking-widest">03</span>
@@ -1259,4 +1133,5 @@ Real-time Dynamic
 </section>
 <!-- Additional sections will be added here -->
 </main>
+</div>
 </body></html>
