@@ -973,55 +973,15 @@ img { display: block; max-width: 100%; }
   font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--on-surface-variant); opacity: 0.4;
 }
-/* Screen cards */
-.s11-card {
-  background: var(--surface-container); border-radius: 2rem;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5); border: 2px solid rgba(72,72,72,0.2);
-  display: flex; flex-direction: column; padding: 24px;
-  width: 256px; height: 512px;
-  position: relative; overflow: hidden;
-  transition: border-color 0.5s;
+/* Screen image frames */
+.s11-img-frame {
+  width: 220px; height: 440px; border-radius: 2rem; overflow: hidden; flex-shrink: 0;
+  border: 2px solid rgba(72,72,72,0.2);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  transition: border-color 0.5s, transform 0.5s;
 }
-.s11-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(255,181,160,0.05), transparent);
-  opacity: 0; transition: opacity 0.5s; pointer-events: none;
-}
-.s11-card:hover { border-color: rgba(255,181,160,0.3); }
-.s11-card:hover::before { opacity: 1; }
-/* Card internals */
-.s11-card-top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-.s11-avatar { width: 32px; height: 32px; border-radius: 9999px; background: var(--surface-container-highest); }
-.s11-bar { height: 16px; border-radius: 9999px; background: var(--surface-container-highest); }
-.s11-bar-3-4 { width: 75%; }
-.s11-bar-1-2 { width: 50%; }
-.s11-bar-full { width: 100%; }
-.s11-bar-2-3 { width: 66%; }
-.s11-bar-sm { height: 12px; border-radius: 9999px; background: var(--surface-container-high); }
-.s11-entry-item {
-  width: 100%; margin-top: 48px; padding: 16px;
-  background: var(--surface-container-highest);
-  border-radius: 1rem; border: 2px dashed rgba(72,72,72,0.3);
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  flex: 1;
-}
-.s11-entry-item span {
-  font-size: 0.6875rem; color: var(--on-surface-variant);
-  text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.6;
-}
-.s11-kyc-box {
-  width: 100%; background: var(--surface-container-lowest);
-  border-radius: 1rem; border: 1px solid rgba(72,72,72,0.2);
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px; text-align: center; min-height: 128px;
-}
-.s11-kyc-box span { font-size: 0.6875rem; color: var(--on-surface-variant); line-height: 1.6; }
-.s11-cta {
-  height: 48px; width: 100%; border-radius: 9999px; margin-top: auto;
-  background: rgba(255,181,160,0.1); border: 1px solid rgba(255,181,160,0.2);
-  display: flex; align-items: center; justify-content: center;
-}
-.s11-cta-dot { height: 8px; width: 33%; background: rgba(255,181,160,0.4); border-radius: 9999px; }
+.s11-img-frame:hover { border-color: rgba(255,181,160,0.3); transform: scale(1.02); }
+.s11-img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Content panel (right) */
 .s11-content {
@@ -2151,32 +2111,16 @@ section.is-visible {
     <section class="s11-visual">
       <div class="s11-visual-bg"></div>
       <div class="s11-screens">
-        <span class="s11-label">[Problem Screens]</span>
+        <span class="s11-label"></span>
 
-        <!-- Card 1: Entry Point -->
-        <div class="s11-card">
-          <div class="s11-card-top-row">
-            <div class="s11-avatar"></div>
-            <span class="material-symbols-outlined" style="color:var(--on-surface-variant)">notifications</span>
-          </div>
-          <div class="s11-bar s11-bar-3-4" style="margin-bottom:16px"></div>
-          <div class="s11-bar s11-bar-1-2" style="margin-bottom:0"></div>
-          <div class="s11-entry-item"><span>Entry Point: Balance / Withdraw CTA</span></div>
-          <div class="s11-cta"><div class="s11-cta-dot"></div></div>
+        <!-- Card 1: High Intent 1 -->
+        <div class="s11-img-frame">
+          <img src="original/High intent 1.jpg" alt="Entry point — balance and withdraw CTA"/>
         </div>
 
-        <!-- Card 2: Old KYC screen -->
-        <div class="s11-card">
-          <div class="s11-bar s11-bar-2-3" style="margin-bottom:40px"></div>
-          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
-            <div class="s11-kyc-box">
-              <span>Old KYC screen: unclear requirements</span>
-            </div>
-            <div class="s11-bar-sm s11-bar-full" style="margin-top:8px"></div>
-            <div class="s11-bar-sm s11-bar-full"></div>
-            <div class="s11-bar-sm" style="width:80%"></div>
-          </div>
-          <div class="s11-cta"><div class="s11-cta-dot"></div></div>
+        <!-- Card 2: High Intent 2 -->
+        <div class="s11-img-frame">
+          <img src="original/High intent 2.png" alt="Old KYC screen — unclear requirements"/>
         </div>
       </div>
     </section>
