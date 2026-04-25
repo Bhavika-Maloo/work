@@ -1594,24 +1594,8 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center; padding-top: 8px;
 }
 .s9-phone-notch-bar { width: 64px; height: 4px; background: rgba(255,181,160,0.4); border-radius: 9999px; }
-.s9-phone-cta {
-  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-  width: 85%; height: 48px; border-radius: 9999px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-container));
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 24px rgba(135,32,0,0.4);
-}
-.s9-phone-cta span { font-family: 'Manrope', sans-serif; font-weight: 700; color: #7c1d00; font-size: 0.875rem; }
 .s9-phone-error-bar { position: absolute; bottom: 24px; left: 24px; width: 48px; height: 4px; background: var(--error); border-radius: 9999px; }
 .s9-phone-corner { position: absolute; bottom: -16px; right: -16px; width: 96px; height: 96px; border-bottom: 2px solid rgba(238,125,119,0.4); border-right: 2px solid rgba(238,125,119,0.4); border-radius: 0 0 12px 0; }
-.s9-badge {
-  position: absolute; top: -16px; right: -16px; width: 64px; height: 64px;
-  background: var(--surface-container-highest); border-radius: 9999px;
-  border: 1px solid rgba(255,181,160,0.2);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 40px 80px rgba(231,229,229,0.04);
-}
-.s9-badge .material-symbols-outlined { font-size: 1.875rem; color: var(--primary); font-variation-settings: 'FILL' 1; }
 
 /* Divider */
 .s9-divider { display: flex; justify-content: center; padding: 8px 0; }
@@ -1707,6 +1691,165 @@ img { display: block; max-width: 100%; }
   .s9-cards-left, .s9-cards-right { width: 288px; flex-shrink: 0; }
   .s9-card-offset { transform: translateX(16px); }
   .s9-card-neg-offset { transform: translateX(-16px); }
+}
+
+/* ==============================
+   MOBILE OVERRIDES (max 767px)
+   Placed after section styles so they win the cascade
+============================== */
+@media (max-width: 767px) {
+  /* S9: Section header heading */
+  .s9-header h2 {
+    font-size: 1.5rem;
+  }
+
+  /* S9: Watermark — shrink so it doesn't cover stacked content */
+  .s9-panel-watermark {
+    font-size: 2.5rem;
+    padding: 16px;
+  }
+
+  /* S9: Panel padding */
+  .s9-panel {
+    padding: 24px 16px;
+  }
+
+  /* S9: Reset card offsets on mobile — translateX shifts cause overflow */
+  .s9-card-offset,
+  .s9-card-neg-offset {
+    transform: none;
+  }
+
+  /* S9: Ensure cards take full width in column layout */
+  .s9-cards-left,
+  .s9-cards-right {
+    width: 100%;
+  }
+
+  /* S9: Phone wrap — cap width so it doesn't stretch full container */
+  .s9-phone-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .s9-phone-frame {
+    width: 200px;
+  }
+
+  /* S10: Artifact label — pull padding so it doesn't clip into section above */
+  .s10-artifact-wrap {
+    padding-top: 24px;
+  }
+
+  .s10-artifact-label {
+    top: 8px;
+  }
+
+  /* S9: Metric summary — single column */
+  .s9-metrics {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* S13: Highlight note — remove desktop negative margin that clips text on mobile */
+  .s13-highlight-note {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* S11: Show heading before images on mobile */
+  .s11-visual { order: 2; }
+  .s11-content { order: 1; }
+
+  /* S11: Shrink phone frames so both fit side-by-side without overflowing */
+  .s11-screens {
+    gap: 12px;
+    padding: 32px 12px;
+  }
+  .s11-img-frame {
+    width: 148px;
+    height: 296px;
+    border-radius: 1rem;
+  }
+
+  /* S0: Phone showcase — fix cascade; early media query was losing to base styles */
+  .s0 {
+    min-height: unset;
+    padding: 48px 16px 56px;
+  }
+  .s0-screen-side {
+    width: 150px;
+    max-width: 150px;
+  }
+  .s0-screen-center {
+    width: 180px;
+    max-width: 180px;
+  }
+  .s0-phone-left { margin-right: -40px; }
+  .s0-phone-right { margin-left: -40px; }
+
+  /* S4: Impact metrics — fix cascade issue, numbers were stuck at desktop sizes */
+  .s4-num-1 { font-size: 2.25rem; }
+  .s4-num-2 { font-size: 2.5rem; }
+  .s4-num-3 { font-size: 2rem; }
+  .s4-card-1 { padding: 24px 20px; }
+  .s4-card-2 { padding: 28px 20px; }
+  .s4-card-3 { padding: 24px 20px; }
+  .s4-text { font-size: 0.9375rem !important; }
+
+  /* S3: Friction Journey — horizontal layout on mobile */
+  .s3-track {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 8px;
+    gap: 0;
+  }
+  .s3-line {
+    display: block;
+  }
+  .s3-step-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .s3-step-icon .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
+  .s3-step-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+  .s3-dropoff-num {
+    font-size: 0.875rem;
+    margin-top: 2px;
+  }
+  .s3-dropoff-sub {
+    font-size: 0.4375rem;
+  }
+  /* Hide floating thumb cards — they overflow in horizontal mobile layout */
+  .s3-kyc-thumb {
+    display: none;
+  }
+  .s3-kyc-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .s3-kyc-icon .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+  .s3-kyc-badge span {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+  .s3-kyc-stats {
+    font-size: 0.4375rem;
+    gap: 3px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 </style>
@@ -2543,10 +2686,6 @@ img { display: block; max-width: 100%; }
             <div class="s9-phone-frame s9-phone-frame-after">
               <img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Option%20overload%20%E2%86%92%20to%20guided%20completion-2.png" alt="Modern minimal mobile app UI with guided document selection"/>
               <div class="s9-phone-notch-top"><div class="s9-phone-notch-bar"></div></div>
-              <div class="s9-phone-cta"><span>Continue Verification</span></div>
-            </div>
-            <div class="s9-badge">
-              <span class="material-symbols-outlined">verified</span>
             </div>
           </div>
           <div class="s9-cards-right">
@@ -2566,21 +2705,6 @@ img { display: block; max-width: 100%; }
       </section>
     </div>
 
-    <!-- Metric Summary -->
-    <div class="s9-metrics">
-      <div class="s9-metric-item">
-        <span class="s9-metric-item-label">Time to Task</span>
-        <p class="s9-metric-item-value">-18s <em>avg reduction</em></p>
-      </div>
-      <div class="s9-metric-item">
-        <span class="s9-metric-item-label">Error Rate</span>
-        <p class="s9-metric-item-value">0.4% <em>critical failures</em></p>
-      </div>
-      <div class="s9-metric-item">
-        <span class="s9-metric-item-label">User Sentiment</span>
-        <p class="s9-metric-item-value">4.8/5 <em>ease of use</em></p>
-      </div>
-    </div>
   </div>
 </section>
 
