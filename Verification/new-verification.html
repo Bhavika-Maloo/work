@@ -490,6 +490,21 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--error);
 }
+.s3-kyc-stats {
+  display: flex; align-items: center; gap: 6px; margin-top: 8px;
+  font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.s3-kyc-stat-reached { color: var(--on-surface-variant); }
+.s3-kyc-stat-dot { color: var(--outline); }
+.s3-kyc-stat-completed { color: var(--primary); }
+.s3-dropoff-num {
+  font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 900;
+  letter-spacing: -0.04em; color: var(--error); margin-top: 4px; display: block;
+}
+.s3-dropoff-sub {
+  font-size: 0.5625rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(238,125,119,0.5); display: block;
+}
 
 /* ==============================
    SECTION 4: IMPACT METRICS
@@ -761,6 +776,299 @@ img { display: block; max-width: 100%; }
 .s6-pivot-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--on-surface-variant); display: block; margin-bottom: 16px; }
 .s6-pivot-heading { font-size: 1.5rem; font-weight: 800; color: var(--on-surface); letter-spacing: -0.025em; }
 .s6-pivot-heading .accent { color: var(--primary); }
+
+/* ==============================
+   SECTION: EXPLORED & DROPPED
+============================== */
+.s-explored {
+  padding: 96px 48px;
+  background: #0e0e0e;
+}
+.s-explored-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.s-explored-header {
+  text-align: left;
+  max-width: 48rem;
+  margin-bottom: 64px;
+}
+.s-explored-badge {
+  display: inline-block;
+  background: var(--surface-container-highest);
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  margin-bottom: 24px;
+}
+.s-explored-headline {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--on-surface);
+  margin-bottom: 16px;
+}
+.s-explored-sub {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  line-height: 1.75;
+}
+.s-explored-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+.s-explored-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(37,38,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(72,72,72,0.1);
+  border-radius: 2rem;
+  padding: 32px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+.s-explored-card:hover {
+  background: var(--surface-container-highest);
+  box-shadow: 0 0 40px rgba(238,125,119,0.08);
+}
+.s-explored-card-watermark {
+  position: absolute;
+  bottom: -12px;
+  right: 16px;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: rgba(238,125,119,0.04);
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Manrope', sans-serif;
+  line-height: 1;
+}
+.s-explored-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.s-explored-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--surface-container-highest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.s-explored-icon-box .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--primary);
+  font-variation-settings: 'FILL' 0, 'wght' 300;
+}
+.s-explored-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--error);
+  background: rgba(238,125,119,0.1);
+  border-radius: 9999px;
+  padding: 3px 10px;
+}
+.s-explored-card-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  font-family: 'Manrope', sans-serif;
+}
+.s-explored-card-body {
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.s-explored-divider {
+  border: none;
+  border-top: 1px solid rgba(72,72,72,0.1);
+  margin-bottom: 16px;
+}
+.s-explored-killed {
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  font-family: 'Inter', sans-serif;
+}
+.s-explored-killed span {
+  color: var(--error);
+}
+.s-explored-quote {
+  padding: 40px;
+  border-radius: 2rem;
+  background: linear-gradient(135deg, var(--surface-container), var(--surface-container-low));
+  border-left: 4px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+.s-explored-quote-glow {
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 128px;
+  height: 128px;
+  background: rgba(255,181,160,0.1);
+  filter: blur(60px);
+  border-radius: 9999px;
+}
+.s-explored-quote p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+  color: var(--on-surface);
+}
+.s-explored-quote p span {
+  color: var(--primary);
+}
+@media (min-width: 810px) {
+  .s-explored-grid { grid-template-columns: repeat(2, 1fr); }
+  .s-explored { padding: 80px 40px; }
+}
+@media (min-width: 1200px) {
+  .s-explored { padding: 96px 48px; }
+}
+@media (max-width: 809px) {
+  .s-explored { padding: 64px 16px; }
+  .s-explored-headline { font-size: 1.75rem; }
+}
+
+/* ==============================
+   SECTION: DATA DEEP DIVE
+============================== */
+.s-data { padding: 96px 48px; }
+.s-data-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+.s-data-header { text-align: left; max-width: 48rem; }
+.s-data-badge {
+  display: inline-block; background: var(--surface-container-highest); color: var(--primary);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 9999px; padding: 4px 12px; margin-bottom: 24px;
+}
+.s-data-headline {
+  font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+  color: var(--on-surface); margin-bottom: 16px;
+}
+.s-data-sub { font-size: 1rem; color: var(--on-surface-variant); line-height: 1.75; }
+.s-data-block {
+  background: var(--surface-container-low); border-radius: 3rem; padding: 48px;
+  border: 1px solid rgba(72,72,72,0.1); display: grid; grid-template-columns: 1fr; gap: 48px;
+}
+.s-data-block-num {
+  font-family: 'Manrope', sans-serif; font-size: 0.625rem; font-weight: 700;
+  letter-spacing: 0.2em; color: var(--primary); text-transform: uppercase;
+  margin-bottom: 16px; display: block;
+}
+.s-data-block-heading {
+  font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 16px; color: var(--on-surface);
+}
+.s-data-block-body { font-size: 1rem; color: var(--on-surface-variant); line-height: 1.75; }
+.s-data-pill {
+  background: rgba(255,181,160,0.05); border: 1px solid rgba(255,181,160,0.1);
+  border-radius: 9999px; padding: 8px 20px; font-size: 0.8125rem; color: var(--primary);
+  display: inline-block; margin-top: 24px;
+}
+.s-data-mockup {
+  background: var(--surface-container-lowest); border: 1px dashed rgba(255,181,160,0.15);
+  border-radius: 1.5rem; display: flex; align-items: center; justify-content: center;
+  margin-top: 32px; overflow: hidden;
+}
+.s-data-mockup-inner {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; color: rgba(255,181,160,0.3); text-align: center; padding: 24px;
+}
+.s-data-mockup-inner .material-symbols-outlined { font-size: 2rem; }
+.s-data-mockup-inner p { font-size: 0.75rem; }
+.s-data-mockup-landscape { aspect-ratio: 16/9; }
+.s-data-mockup-portrait { aspect-ratio: 9/16; max-width: 240px; margin-left: auto; margin-right: auto; }
+/* Data table */
+.s-data-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.8125rem; }
+.s-data-table thead th {
+  text-align: left; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--on-surface-variant); padding: 0 8px 12px 8px;
+  border-bottom: 1px solid rgba(72,72,72,0.15);
+}
+.s-data-table tbody td { padding: 12px 8px; border-bottom: 1px solid rgba(72,72,72,0.07); vertical-align: middle; }
+.s-data-table tbody tr:last-child td { border-bottom: none; }
+.s-data-table tr.s-data-row-warn { background: rgba(238,125,119,0.04); }
+.s-data-table .s-data-cell-mode { color: var(--on-surface); font-weight: 600; }
+.s-data-share-wrap { display: flex; flex-direction: column; gap: 5px; min-width: 80px; }
+.s-data-share-bar { height: 4px; background: var(--primary); border-radius: 9999px; }
+.s-data-success-high { color: #4ade80; font-weight: 600; }
+.s-data-success-mid { color: var(--primary); font-weight: 600; }
+.s-data-success-low { color: var(--error); font-weight: 600; }
+.s-data-tat-warn { color: var(--error); }
+.s-data-tat-ok { color: var(--on-surface-variant); }
+/* Bar chart */
+.s-data-bars { display: flex; flex-direction: column; gap: 18px; }
+.s-data-bar-row { display: flex; flex-direction: column; gap: 6px; }
+.s-data-bar-label-row { display: flex; justify-content: space-between; align-items: baseline; }
+.s-data-bar-label { font-size: 0.8125rem; color: var(--on-surface-variant); }
+.s-data-bar-pct { font-size: 0.8125rem; font-weight: 700; color: var(--primary); }
+.s-data-bar-track { background: rgba(72,72,72,0.15); height: 6px; border-radius: 9999px; overflow: hidden; }
+.s-data-bar-fill { height: 100%; border-radius: 9999px; }
+/* Stat cards */
+.s-data-stats { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.s-data-stat-card {
+  background: rgba(37,38,38,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(72,72,72,0.1); border-radius: 1.5rem; padding: 28px 24px;
+}
+.s-data-stat-num {
+  font-family: 'Manrope', sans-serif; font-weight: 900; font-size: 3rem;
+  letter-spacing: -0.05em; line-height: 1; margin-bottom: 8px; display: block;
+}
+.s-data-stat-label { font-size: 0.8125rem; color: var(--on-surface-variant); line-height: 1.5; }
+/* Footer takeaway */
+.s-data-takeaway {
+  background: linear-gradient(135deg, #872000, var(--surface-container-highest));
+  padding: 48px; border-radius: 3rem; text-align: center;
+  box-shadow: 0 40px 80px rgba(255,181,160,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.s-data-takeaway-label {
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--on-surface-variant); display: block; margin-bottom: 16px;
+}
+.s-data-takeaway-heading {
+  font-size: 1.5rem; font-weight: 800; color: var(--on-surface);
+  letter-spacing: -0.025em; font-family: 'Manrope', sans-serif; font-style: italic;
+}
+@media (min-width: 810px) {
+  .s-data { padding: 80px 40px; }
+}
+@media (min-width: 1200px) {
+  .s-data { padding: 96px 48px; }
+  .s-data-block { grid-template-columns: 1fr 1fr; align-items: start; }
+  .s-data-block-heading { font-size: 1.75rem; }
+  .s-data-stats { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 809px) {
+  .s-data { padding: 64px 16px; }
+  .s-data-block { padding: 24px; border-radius: 2rem; }
+  .s-data-block-heading { font-size: 1.25rem; }
+  .s-data-headline { font-size: 1.75rem; }
+}
 
 /* ==============================
    SECTION 8: STEP-BY-STEP
@@ -1258,7 +1566,7 @@ img { display: block; max-width: 100%; }
 .s9-drop { display: flex; align-items: center; gap: 16px; padding: 16px 24px; opacity: 0.4; }
 .s9-drop .material-symbols-outlined { color: var(--error); }
 .s9-drop span { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.s9-metric { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px; display:none;}
+.s9-metric { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px; }
 .s9-metric-num { font-family: 'Manrope', sans-serif; font-size: 1.875rem; font-weight: 900; color: var(--primary); }
 .s9-metric-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-surface-variant); }
 
@@ -1284,16 +1592,14 @@ img { display: block; max-width: 100%; }
   position: absolute; top: 0; left: 0; right: 0; height: 48px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
   display: flex; align-items: center; justify-content: center; padding-top: 8px;
-  display: none;
 }
-.s9-phone-notch-bar { width: 64px; height: 4px; background: rgba(255,181,160,0.4); border-radius: 9999px; display:none;}
+.s9-phone-notch-bar { width: 64px; height: 4px; background: rgba(255,181,160,0.4); border-radius: 9999px; }
 .s9-phone-cta {
   position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
   width: 85%; height: 48px; border-radius: 9999px;
   background: linear-gradient(135deg, var(--primary), var(--primary-container));
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 24px rgba(135,32,0,0.4);
-  display:none;
 }
 .s9-phone-cta span { font-family: 'Manrope', sans-serif; font-weight: 700; color: #7c1d00; font-size: 0.875rem; }
 .s9-phone-error-bar { position: absolute; bottom: 24px; left: 24px; width: 48px; height: 4px; background: var(--error); border-radius: 9999px; }
@@ -1312,7 +1618,7 @@ img { display: block; max-width: 100%; }
 .s9-divider-line { height: 48px; width: 1px; background: linear-gradient(to bottom, rgba(72,72,72,0.3), rgba(255,181,160,0.4)); }
 
 /* Metric summary footer */
-.s9-metrics { display: none; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-top: 1px solid rgba(72,72,72,0.15); }
+.s9-metrics { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-top: 1px solid rgba(72,72,72,0.15); }
 .s9-metric-item { display: flex; flex-direction: column; gap: 8px; }
 .s9-metric-item-label { font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); font-weight: 700; }
 .s9-metric-item-value { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 700; }
@@ -1503,9 +1809,9 @@ img { display: block; max-width: 100%; }
     <span class="s1-label">The Problem Definition</span>
     <h1 class="s1-headline">
       We didn't lose users.<br/>
-      <span class="c-primary-dim">We lost them right before they cared most.</span>
+      <span class="c-primary-dim">We lost 42% of them right before they could deposit.</span>
     </h1>
-    <p class="s1-body">Users didn't drop off randomly - they were blocked at the exact moment of intent.</p>
+    <p class="s1-body">During IPL — with ~10M users in the funnel — 100% hit the KYC wall. Only 58% made it through.</p>
   </div>
   <div class="s1-scroll">
     <span class="s1-scroll-label">Scroll to explore</span>
@@ -1564,10 +1870,17 @@ img { display: block; max-width: 100%; }
           <div class="s3-kyc-icon"><span class="material-symbols-outlined">warning</span></div>
         </div>
         <div class="s3-kyc-badge"><span>KYC Wall</span></div>
+        <div class="s3-kyc-stats">
+          <span class="s3-kyc-stat-reached">100% reached</span>
+          <span class="s3-kyc-stat-dot">·</span>
+          <span class="s3-kyc-stat-completed">58% completed</span>
+        </div>
       </div>
       <div class="s3-step drop-off">
         <div class="s3-step-icon"><span class="material-symbols-outlined" style="color:var(--on-surface-variant)">logout</span></div>
         <span class="s3-step-label">Drop-off</span>
+        <span class="s3-dropoff-num">~42%</span>
+        <span class="s3-dropoff-sub">of users lost</span>
       </div>
     </div>
   </div>
@@ -1855,13 +2168,175 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
+<!-- Section: Data Deep Dive -->
+<section class="s-data">
+  <div class="s-data-inner">
+
+    <div class="s-data-header">
+      <span class="s-data-badge">Deep Dive</span>
+      <h2 class="s-data-headline">What the data told us</h2>
+      <p class="s-data-sub">Three data stories that made the solution inevitable.</p>
+    </div>
+
+    <!-- Story 1: Verification Method Performance -->
+    <div class="s-data-block">
+      <div class="s-data-block-left">
+        <span class="s-data-block-num">01</span>
+        <h3 class="s-data-block-heading">Most users chose the fastest. Fast wasn't reliable enough.</h3>
+        <p class="s-data-block-body">Aadhaar Lite commanded 70% of all attempts — users self-selected the lowest friction option. But even the preferred method was failing 1 in 2 users. OCR, the fallback, was both the slowest and least successful.</p>
+        <span class="s-data-pill">The method users trusted most still failed nearly half the time.</span>
+      </div>
+      <div class="s-data-block-right">
+        <table class="s-data-table">
+          <thead>
+            <tr>
+              <th>Mode</th>
+              <th>Share</th>
+              <th>Success Rate</th>
+              <th>TAT (90th %ile)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="s-data-cell-mode">Aadhaar Lite</td>
+              <td>
+                <div class="s-data-share-wrap">
+                  <span style="font-size:0.75rem;color:var(--on-surface);">70.3%</span>
+                  <div class="s-data-share-bar" style="width:70.3%"></div>
+                </div>
+              </td>
+              <td><span class="s-data-success-mid">55.1%</span></td>
+              <td><span class="s-data-tat-ok">1m 13s</span></td>
+            </tr>
+            <tr>
+              <td class="s-data-cell-mode">Aadhaar OKYC</td>
+              <td>
+                <div class="s-data-share-wrap">
+                  <span style="font-size:0.75rem;color:var(--on-surface);">18.6%</span>
+                  <div class="s-data-share-bar" style="width:18.6%"></div>
+                </div>
+              </td>
+              <td><span class="s-data-success-mid">41.9%</span></td>
+              <td><span class="s-data-tat-ok">1m 48s</span></td>
+            </tr>
+            <tr class="s-data-row-warn">
+              <td class="s-data-cell-mode">OCR</td>
+              <td>
+                <div class="s-data-share-wrap">
+                  <span style="font-size:0.75rem;color:var(--on-surface);">10.8%</span>
+                  <div class="s-data-share-bar" style="width:10.8%"></div>
+                </div>
+              </td>
+              <td><span class="s-data-success-low">29.3%</span></td>
+              <td><span class="s-data-tat-warn">3m 41s</span></td>
+            </tr>
+            <tr>
+              <td class="s-data-cell-mode">Digilocker</td>
+              <td>
+                <div class="s-data-share-wrap">
+                  <span style="font-size:0.75rem;color:var(--on-surface);">0.2%</span>
+                  <div class="s-data-share-bar" style="width:0.2%"></div>
+                </div>
+              </td>
+              <td><span class="s-data-success-low">17.0%</span></td>
+              <td><span class="s-data-tat-warn">4m 50s</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Story 2: PAN Failure Breakdown -->
+    <div class="s-data-block">
+      <div class="s-data-block-left">
+        <span class="s-data-block-num">02</span>
+        <h3 class="s-data-block-heading">Failures weren't random. 40% came from one fixable problem.</h3>
+        <p class="s-data-block-body">Name mismatches alone accounted for 40% of all PAN verification failures. The top 5 error types together made up over 99% of all failures. These weren't edge cases. They were the norm.</p>
+        <span class="s-data-pill">A design problem disguised as a data problem.</span>
+      </div>
+      <div class="s-data-block-right">
+        <div class="s-data-bars">
+          <div class="s-data-bar-row">
+            <div class="s-data-bar-label-row">
+              <span class="s-data-bar-label">Name does not match</span>
+              <span class="s-data-bar-pct">40.08%</span>
+            </div>
+            <div class="s-data-bar-track"><div class="s-data-bar-fill" style="width:100%;background:var(--error);"></div></div>
+          </div>
+          <div class="s-data-bar-row">
+            <div class="s-data-bar-label-row">
+              <span class="s-data-bar-label">DOB does not match</span>
+              <span class="s-data-bar-pct">21.25%</span>
+            </div>
+            <div class="s-data-bar-track"><div class="s-data-bar-fill" style="width:53%;background:rgba(238,125,119,0.75);"></div></div>
+          </div>
+          <div class="s-data-bar-row">
+            <div class="s-data-bar-label-row">
+              <span class="s-data-bar-label">PAN number not valid</span>
+              <span class="s-data-bar-pct">15.19%</span>
+            </div>
+            <div class="s-data-bar-track"><div class="s-data-bar-fill" style="width:38%;background:rgba(238,125,119,0.6);"></div></div>
+          </div>
+          <div class="s-data-bar-row">
+            <div class="s-data-bar-label-row">
+              <span class="s-data-bar-label">Name &amp; DOB mismatch</span>
+              <span class="s-data-bar-pct">11.87%</span>
+            </div>
+            <div class="s-data-bar-track"><div class="s-data-bar-fill" style="width:30%;background:rgba(238,125,119,0.5);"></div></div>
+          </div>
+          <div class="s-data-bar-row">
+            <div class="s-data-bar-label-row">
+              <span class="s-data-bar-label">Name on doc doesn't match KYC</span>
+              <span class="s-data-bar-pct">10.36%</span>
+            </div>
+            <div class="s-data-bar-track"><div class="s-data-bar-fill" style="width:26%;background:rgba(238,125,119,0.4);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story 3: Aadhaar Coverage Gap -->
+    <div class="s-data-block">
+      <div class="s-data-block-left">
+        <span class="s-data-block-num">03</span>
+        <h3 class="s-data-block-heading">The QR idea died on a coverage problem, not a concept problem.</h3>
+        <p class="s-data-block-body">The Secure QR format with full demographic data and photo only became standard from 2019 onwards. Users with Aadhaar last downloaded before that had QR codes with incomplete data. For a base of 59M+ min-KYC users, the gap was too wide to ship on.</p>
+        <span class="s-data-pill">A great idea. The wrong moment in history.</span>
+      </div>
+      <div class="s-data-block-right">
+        <div class="s-data-stats">
+          <div class="s-data-stat-card">
+            <span class="s-data-stat-num" style="color:var(--primary);">59.7M</span>
+            <span class="s-data-stat-label">Min-KYC verified base</span>
+          </div>
+          <div class="s-data-stat-card">
+            <span class="s-data-stat-num" style="color:var(--on-surface);">~2019</span>
+            <span class="s-data-stat-label">Secure QR with photo became standard</span>
+          </div>
+          <div class="s-data-stat-card">
+            <span class="s-data-stat-num" style="color:rgba(238,125,119,0.8);">~15M</span>
+            <span class="s-data-stat-label">Users with pre-2017 Aadhaar, no secure QR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section footer -->
+    <div class="s-data-takeaway">
+      <span class="s-data-takeaway-label">The Takeaway</span>
+      <p class="s-data-takeaway-heading">"Data didn't just inform the solution. It eliminated everything else."</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- Section 7: Final Solution -->
 <section class="s7">
   <div class="s7-inner">
     <header class="s7-header">
       <div class="s7-badge-wrap"><span>Final Solution</span></div>
-      <h2>Retime the ask</h2>
-      <h3>Move KYC to after team creation - when intent is real, not assumed.</h3>
+      <h2>We moved the ask. Everything else followed.</h2>
+      <h3>KYC was interrupting users before they'd committed to anything. No team built. No contest joined. Just a government document form, at the worst possible moment.</h3>
     </header>
     <div class="s7-grid">
       <div class="s7-timeline-col">
@@ -1888,8 +2363,8 @@ img { display: block; max-width: 100%; }
           </div>
         </div>
         <div class="s7-impact">
-          <h3>Improved top-of-funnel cash conversion by 30%</h3>
-          <p>Placing KYC immediately after team creation improved top-of-funnel cash conversion by 30%, without negatively impacting paid contest joins.</p>
+          <h3>One timing change. +30% cash conversion.</h3>
+          <p>Moving KYC to post-team-creation, after the user had already invested time building their squad, impp-of-funnel cash conversion by 30%. Users who'd built a team were far more motivated to complete verification than users who hadn't started yet. Intent was real. The ask finally matched it.</p>
         </div>
       </div>
       <div class="s7-metric-col">
@@ -2152,21 +2627,86 @@ img { display: block; max-width: 100%; }
           <p>The Aadhaar fallback logic (Path B) is triggered automatically upon three failed attempts.</p>
         </div>
       </div>
-      <div class="s10-artifact-note">
-        <span class="material-symbols-outlined">info</span>
-        <p>Full Aadhaar decision tree also available in project archives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section: Explored & Dropped -->
+<section class="s-explored">
+  <div class="s-explored-inner">
+    <div class="s-explored-header">
+      <span class="s-explored-badge">Explored &amp; Dropped</span>
+      <h2 class="s-explored-headline">Roads not taken.</h2>
+      <p class="s-explored-sub">Four ideas that shaped the solution by not making it.</p>
+    </div>
+    <div class="s-explored-grid">
+
+      <!-- Card 1 -->
+      <div class="s-explored-card">
+        <div class="s-explored-card-watermark">DROPPED</div>
+        <div class="s-explored-card-top">
+          <div class="s-explored-icon-box">
+            <span class="material-symbols-outlined">qr_code_scanner</span>
+          </div>
+          <span class="s-explored-status-badge">Dropped</span>
+        </div>
+        <h3 class="s-explored-card-title">Aadhaar QR Scan</h3>
+        <p class="s-explored-card-body">Scan the QR, auto-fill the fields. Zero typing, zero uploads. But the Secure QR format with full demographic data only arrived in 2019, and a significant portion of our user base had older cards that wouldn't work. Coverage gap was too large to ship on.</p>
+        <hr class="s-explored-divider"/>
+        <p class="s-explored-killed">Killed by <span>Coverage gap</span></p>
       </div>
+
+      <!-- Card 2 -->
+      <div class="s-explored-card">
+        <div class="s-explored-card-watermark">DROPPED</div>
+        <div class="s-explored-card-top">
+          <div class="s-explored-icon-box">
+            <span class="material-symbols-outlined">link</span>
+          </div>
+          <span class="s-explored-status-badge">Dropped</span>
+        </div>
+        <h3 class="s-explored-card-title">Aadhaar + PAN, No OTP</h3>
+        <p class="s-explored-card-body">Since PAN-Aadhaar linkage is government-mandated, two numbers the user already knows could uniquely verify identity: no document upload, no OTP dependency. Clean and low friction. But it couldn't derive a user photo, failing the full KYC requirement.</p>
+        <hr class="s-explored-divider"/>
+        <p class="s-explored-killed">Killed by <span>No photo derivation</span></p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="s-explored-card">
+        <div class="s-explored-card-watermark">DROPPED</div>
+        <div class="s-explored-card-top">
+          <div class="s-explored-icon-box">
+            <span class="material-symbols-outlined">document_scanner</span>
+          </div>
+          <span class="s-explored-status-badge">Dropped</span>
+        </div>
+        <h3 class="s-explored-card-title">OCR with Inline Correction</h3>
+        <p class="s-explored-card-body">Instead of OCR failing silently, surface what it read and let users fix it upfront, like Zomato does with address parsing. The concept was sound. The reality wasn't: Voter IDs and Driving Licences have completely different layouts across every Indian state. Too many variants, too little time.</p>
+        <hr class="s-explored-divider"/>
+        <p class="s-explored-killed">Killed by <span>India's document layout chaos</span></p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="s-explored-card">
+        <div class="s-explored-card-watermark">DROPPED</div>
+        <div class="s-explored-card-top">
+          <div class="s-explored-icon-box">
+            <span class="material-symbols-outlined">id_card</span>
+          </div>
+          <span class="s-explored-status-badge">Dropped</span>
+        </div>
+        <h3 class="s-explored-card-title">Interactive Document Card UI</h3>
+        <p class="s-explored-card-body">What if instead of a flat form, users tapped fields directly on a visual representation of their ID, spatial, intuitive, document-native? The idea was strong. But rendering a consistent card UI across every document type, on three platform variants (iOS, APK, Play Store), made it technically infeasible within the timeline.</p>
+        <hr class="s-explored-divider"/>
+        <p class="s-explored-killed">Killed by <span>Tech complexity + timeline</span></p>
+      </div>
+
     </div>
 
-    <div class="s10-footer">
-      <div class="s10-footer-meta">
-        <p>Confidential Documentation</p>
-        <p>Project Obsidian Narrative • 2024 Design Audit</p>
-      </div>
-      <div class="s10-footer-actions">
-        <button class="s10-btn-outline">View Full Case Study</button>
-        <button class="s10-btn-primary">Download Artifacts</button>
-      </div>
+    <!-- Closing quote -->
+    <div class="s-explored-quote">
+      <div class="s-explored-quote-glow"></div>
+      <p>"The solution got sharper every time we <span>killed an idea.</span>"</p>
     </div>
   </div>
 </section>
@@ -2359,7 +2899,7 @@ img { display: block; max-width: 100%; }
     <header class="s13-header">
       <div class="s13-tag"><span>Navigating Uncertainty</span></div>
       <h2>Adapting to Rapid<br/>Regulation Changes</h2>
-      <p>The regulatory landscape shifted multiple times during development, requiring flexible design solutions.</p>
+      <p>The rules changed while we were building. Three times. Here's what we kept, what we scrapped, and what we rebuilt from scratch.</p>
     </header>
 
     <!-- Phase grid -->
@@ -2370,7 +2910,7 @@ img { display: block; max-width: 100%; }
           <span class="s13-phase-badge">Initial</span>
         </div>
         <h3>Withdrawals Only</h3>
-        <p>Focused exclusively on user exit strategies prior to the expansion of fiscal mechanisms.</p>
+        <p>We started with withdrawal flows only — helping users get money out. Deposits came later, which meant rebuilding the funnel halfway through.</p>
       </div>
       <div class="s13-phase">
         <div class="s13-phase-top">
@@ -2378,7 +2918,7 @@ img { display: block; max-width: 100%; }
           <span class="s13-phase-badge">Pivot</span>
         </div>
         <h3>Tamil Nadu Law Changes</h3>
-        <p>Rapid compliance adjustments triggered by localized legislative shifts in the Southern region.</p>
+        <p>Tamil Nadu banned real-money gaming mid-project. Two flows we'd already designed for that state had to be scrapped entirely.</p>
       </div>
       <div class="s13-phase">
         <div class="s13-phase-top">
@@ -2386,7 +2926,7 @@ img { display: block; max-width: 100%; }
           <span class="s13-phase-badge">Final</span>
         </div>
         <h3>Deposit and Withdrawal Revamp</h3>
-        <p>Holistic restructuring of the wallet ecosystem to accommodate new multi-layered verification.</p>
+        <p>The final scope: a full deposit and withdrawal revamp, with KYC now gating both directions. Bigger than what we signed up for, but cleaner for users.</p>
       </div>
     </div>
 
@@ -2401,7 +2941,7 @@ img { display: block; max-width: 100%; }
           <span class="s13-highlight-eyebrow">Regulatory Reality</span>
           <p class="s13-highlight-quote">"In regulated industries, design flexibility isn't nice-to-have-it's <span>survival</span>."</p>
         </div>
-        <p class="s13-highlight-note">Component-based approach enabled rapid pivots while maintaining UX continuity through every legislative hurdle.</p>
+        <p class="s13-highlight-note">Building in components meant we could swap out the Tamil Nadu flow, rebuild the deposit gate, and absorb a scope change — without starting over each time.</p>
       </div>
     </div>
 
