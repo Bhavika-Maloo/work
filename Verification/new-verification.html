@@ -209,7 +209,7 @@ img { display: block; max-width: 100%; }
   /* Multi-column desktop grids */
   .s4-grid { grid-template-columns: 1fr 1fr 1fr; }
   .s5-grid { grid-template-columns: 1fr 1fr; }
-  .s7-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .s7-mockups { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ==============================
@@ -591,6 +591,9 @@ img { display: block; max-width: 100%; }
 /* ==============================
    SECTION 7: FINAL SOLUTION
 ============================== */
+/* ==============================
+   SECTION 7: FINAL SOLUTION
+============================== */
 .s7 { padding: 80px 24px; }
 .s7-inner { max-width: 80rem; margin: 0 auto; }
 .s7-badge-wrap {
@@ -602,56 +605,43 @@ img { display: block; max-width: 100%; }
   margin-bottom: 24px;
 }
 .s7-badge-wrap span { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--primary); }
-.s7-header { margin-bottom: 64px; }
+.s7-header { margin-bottom: 48px; }
 .s7-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--on-surface); margin-bottom: 16px; line-height: 1.05; }
-.s7-header h3 { font-size: 1.25rem; font-weight: 600; color: var(--on-surface-variant); }
-.s7-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
-.s7-timeline-col { max-width: 600px; }
-.s7-steps { position: relative; }
-.s7-steps::before {
-  content: '';
-  position: absolute;
-  left: 12px; top: 16px; bottom: 16px;
-  width: 1px;
-  background: rgba(72,72,72,0.3);
-}
-.s7-step { position: relative; padding: 12px 16px 12px 40px; }
-.s7-step-dot {
-  position: absolute;
-  left: 10px; top: 50%;
-  transform: translateY(-50%);
-  width: 6px; height: 6px;
-  border-radius: 9999px;
-  background: var(--outline-variant);
-}
-.s7-step-title { font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; color: var(--on-surface); display: block; }
-.s7-step-sub { font-size: 0.75rem; color: rgba(159,157,157,0.6); font-style: italic; display: block; margin-top: 2px; }
-.s7-step-hl {
-  padding: 16px 16px 16px 40px;
-  border-radius: 1rem;
-  background: rgba(255,181,160,0.05);
-  border: 1px solid rgba(255,181,160,0.1);
-}
-.s7-step-hl .s7-step-dot { width: 8px; height: 8px; background: var(--primary); box-shadow: 0 0 8px rgba(255,181,160,0.6); left: 9px; }
-.s7-step-hl .s7-step-title { color: var(--primary); }
-.s7-step-hl .s7-step-sub { color: rgba(231,229,229,0.7); font-style: normal; font-weight: 500; }
-.s7-impact { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(72,72,72,0.1); }
-.s7-impact h3 { font-size: 1.5rem; font-weight: 700; color: var(--on-surface); margin-bottom: 16px; line-height: 1.25; }
-.s7-impact p { font-size: 1rem; line-height: 1.625; color: rgba(172,171,170,0.9); }
-.s7-metric-col { padding-top: 16px; }
-.s7-metric-box {
-  border-radius: 1.5rem; overflow: hidden;
+.s7-header h3 { font-size: 1.125rem; font-weight: 400; color: var(--on-surface-variant); max-width: 640px; line-height: 1.6; }
+
+/* Flow breadcrumb */
+.s7-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin-bottom: 56px; padding: 20px 24px; background: var(--surface-container-lowest); border: 1px solid rgba(72,72,72,0.12); border-radius: 1rem; }
+.s7-flow-step { font-size: 0.9rem; font-weight: 600; color: rgba(159,157,157,0.5); white-space: nowrap; }
+.s7-flow-step.active { color: var(--primary); font-weight: 700; }
+.s7-flow-arrow { color: rgba(72,72,72,0.4); margin: 0 10px; font-size: 0.85rem; }
+
+/* Mockup row */
+.s7-mockups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+.s7-mockup-slot {
+  border-radius: 1.5rem;
   background: var(--surface-container-lowest);
-  border: 1px solid rgba(72,72,72,0.1);
-  aspect-ratio: 1/1;
-  position: relative;
+  border: 1px dashed rgba(255,181,160,0.2);
+  aspect-ratio: 9/16;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  position: relative; overflow: hidden;
 }
-.s7-metric-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(1);  }
-.s7-metric-box:hover img { opacity: 0.4; }
-.s7-metric-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0e0e0e, rgba(14,14,14,0.2), transparent); }
-.s7-metric-label { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; align-items: baseline; gap: 16px; }
-.s7-metric-num { font-family: 'Manrope', sans-serif; font-size: 3.75rem; font-weight: 700; color: var(--primary); }
-.s7-metric-text { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(159,157,157,0.8); }
+.s7-mockup-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 1.5rem; display: block; }
+.s7-mockup-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  opacity: 0.3;
+}
+.s7-mockup-placeholder svg { width: 32px; height: 32px; }
+.s7-mockup-placeholder span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--on-surface-variant); }
+.s7-mockup-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(to top, rgba(14,14,14,0.9) 0%, transparent 100%); border-radius: 0 0 1.5rem 1.5rem; text-align: center; }
+.s7-mockup-label span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(159,157,157,0.7); }
+.s7-mockup-label.active span { color: var(--primary); }
+
+/* Impact bar */
+.s7-impact { display: flex; flex-direction: column; gap: 16px; padding: 40px; background: var(--surface-container-lowest); border-radius: 1.5rem; border: 1px solid rgba(72,72,72,0.1); }
+.s7-impact-top { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.s7-impact-num { font-family: 'Manrope', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1; }
+.s7-impact-headline { font-size: 1.25rem; font-weight: 700; color: var(--on-surface); }
+.s7-impact p { font-size: 0.95rem; line-height: 1.65; color: rgba(172,171,170,0.85); max-width: 720px; }
 
 /* ==============================
    SECTION 6: DISCOVERY
@@ -1678,8 +1668,7 @@ img { display: block; max-width: 100%; }
 
   .s6 { padding: 80px 96px; }
   .s7 { padding: 80px 96px; }
-  .s7-grid { grid-template-columns: 7fr 5fr; gap: 96px; }
-  .s7-metric-num { font-size: 4.5rem; }
+  .s7-impact-num { font-size: 4.5rem; }
 
   .s8 { padding: 80px 96px; }
   .s9 { padding: 80px 96px; }
@@ -2150,7 +2139,6 @@ img { display: block; max-width: 100%; }
       </div>
 
       <!-- Insights table -->
-      <p class="s6-insights-label">Insights</p>
       <div class="s6-table-outer" id="s6-table-outer">
         <table class="s6-table">
           <thead>
@@ -2481,45 +2469,60 @@ img { display: block; max-width: 100%; }
       <h2>We moved the ask. Everything else followed.</h2>
       <h3>KYC was interrupting users before they'd committed to anything. No team built. No contest joined. Just a government document form, at the worst possible moment.</h3>
     </header>
-    <div class="s7-grid">
-      <div class="s7-timeline-col">
-        <div class="s7-steps">
-          <div class="s7-step">
-            <div class="s7-step-dot"></div>
-            <span class="s7-step-title">1 - Browse &amp; select contest</span>
-            <span class="s7-step-sub">commit intent first</span>
-          </div>
-          <div class="s7-step">
-            <div class="s7-step-dot"></div>
-            <span class="s7-step-title">2 - Create team</span>
-            <span class="s7-step-sub">KYC triggered post-save</span>
-          </div>
-          <div class="s7-step s7-step-hl">
-            <div class="s7-step-dot"></div>
-            <span class="s7-step-title">3 - KYC + Location (grouped)</span>
-            <span class="s7-step-sub">all steps at once</span>
-          </div>
-          <div class="s7-step">
-            <div class="s7-step-dot"></div>
-            <span class="s7-step-title">4 - Join contest &amp; pay</span>
-            <span class="s7-step-sub">final transactional step</span>
-          </div>
+
+    <!-- Horizontal flow path -->
+    <div class="s7-flow">
+      <span class="s7-flow-step">Reg</span>
+      <span class="s7-flow-arrow">→</span>
+      <span class="s7-flow-step">Home</span>
+      <span class="s7-flow-arrow">→</span>
+      <span class="s7-flow-step">Contest listing</span>
+      <span class="s7-flow-arrow">→</span>
+      <span class="s7-flow-step">Gameplay</span>
+      <span class="s7-flow-arrow">→</span>
+      <span class="s7-flow-step active">KYC + Location</span>
+      <span class="s7-flow-arrow">→</span>
+      <span class="s7-flow-step">Payment</span>
+    </div>
+
+    <!-- Phone mockup placeholders -->
+    <div class="s7-mockups">
+      <div class="s7-mockup-slot">
+        <div class="s7-mockup-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+          <span>Screen 1</span>
         </div>
-        <div class="s7-impact">
-          <h3>One timing change. +30% cash conversion.</h3>
-          <p>Moving KYC to post-team-creation, after the user had already invested time building their squad, impp-of-funnel cash conversion by 30%. Users who'd built a team were far more motivated to complete verification than users who hadn't started yet. Intent was real. The ask finally matched it.</p>
+        <div class="s7-mockup-label">
+          <span>Add Cash</span>
         </div>
       </div>
-      <div class="s7-metric-col">
-        <div class="s7-metric-box">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4gjQPwBKlQuhMlPhZoruwhLY_o5YK_4OUPVjCey9tB69g5DIpIF_AJxqSaVgE9_r4Mbm5J3w_bXdhxfS-8oOwMKLIIECuYKD1tssHXErUMuoTUwJjaZDJ3wqyLwImhi7CPVAPKeAlUU4piBl9cXDKmbhSB3TEc4xQWidzyMN24ozbsi_HemL3vKn7leO_Mwadq-Mfgw9O765BrdOKnXPT4b9JBPVcgHoSeibBuF-OBeo-py75a6WvoH_J39VCTcNXVq4X8gSk2I" alt="Data visualization"/>
-          <div class="s7-metric-overlay"></div>
-          <div class="s7-metric-label">
-            <span class="s7-metric-num">+30%</span>
-            <span class="s7-metric-text">Conversion Lift</span>
-          </div>
+      <div class="s7-mockup-slot">
+        <div class="s7-mockup-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+          <span>Screen 2</span>
+        </div>
+        <div class="s7-mockup-label active">
+          <span>Verify to get full access</span>
         </div>
       </div>
+      <div class="s7-mockup-slot">
+        <div class="s7-mockup-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+          <span>Screen 3</span>
+        </div>
+        <div class="s7-mockup-label active">
+          <span>Verify Govt. ID</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact -->
+    <div class="s7-impact">
+      <div class="s7-impact-top">
+        <span class="s7-impact-num">+30%</span>
+        <span class="s7-impact-headline">cash conversion</span>
+      </div>
+      <p>Moving KYC to post-team-creation, after the user had already invested time building their squad, improved top-of-funnel cash conversion by 30%. Users who'd built a team were far more motivated to complete verification than users who hadn't started yet. Intent was real. The ask finally matched it.</p>
     </div>
   </div>
 </section>

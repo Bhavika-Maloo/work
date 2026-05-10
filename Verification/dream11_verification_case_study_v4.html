@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:#0e0e0e;">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verification Revamp · Dream11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --primary: #ffb5a0;
+  --primary-dim: #ffa086;
+  --primary-deep: #872000;
+  --bg: #0e0e0e;
+  --surface-1: #131313;
+  --surface-2: #191a1a;
+  --surface-3: #1f2020;
+  --surface-4: #252626;
+  --surface-bright: #2b2c2c;
+  --on-surface: #e7e5e5;
+  --on-surface-variant: #acabaa;
+  --outline: #767575;
+  --outline-soft: #484848;
+  --error: #ee7d77;
+  --good: #86efac;
+  --display: 'Manrope', sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --body: 'Inter', system-ui, sans-serif;
+
+  --max-width: 1080px;
+  --gutter: clamp(20px, 5vw, 48px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--on-surface);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  line-height: 1.65;
+  font-size: 16px;
+}
+img { display: block; max-width: 100%; }
+::selection { background: rgba(255,181,160,0.3); color: var(--bg); }
+
+h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.1; font-weight: 700; }
+em { font-family: var(--serif); font-style: italic; font-weight: 300; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+main > section {
+  padding: clamp(72px, 10vh, 128px) var(--gutter);
+  position: relative;
+}
+
+.shell {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eyebrow {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  display: inline-block;
+}
+
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.4;
+  color: var(--on-surface-variant);
+  letter-spacing: -0.005em;
+}
+
+/* ============ UNIVERSAL MEDIA FRAME ============ */
+.media-frame {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 48px auto;
+  border: 1px solid var(--outline-soft);
+  border-radius: 12px;
+  background: var(--surface-1);
+  position: relative;
+  overflow: hidden;
+}
+.media-frame.placeholder { border-style: dashed; }
+.media-frame.wide { aspect-ratio: 16 / 9; }
+.media-frame.square { aspect-ratio: 1 / 1; max-width: 640px; }
+.media-frame.tall { aspect-ratio: 3 / 4; max-width: 640px; }
+.media-frame.phone { aspect-ratio: 9 / 16; max-width: 320px; }
+.media-frame.flow-strip { aspect-ratio: 24 / 9; }
+.media-frame.auto { aspect-ratio: auto; }
+
+.media-frame.auto img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.media-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--outline);
+  background-image:
+    linear-gradient(135deg, transparent 49%, rgba(72,72,72,0.18) 49.5%, rgba(72,72,72,0.18) 50.5%, transparent 51%),
+    linear-gradient(45deg, transparent 49%, rgba(72,72,72,0.18) 49.5%, rgba(72,72,72,0.18) 50.5%, transparent 51%);
+  background-size: 28px 28px;
+}
+.media-placeholder .label {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 8px;
+}
+.media-placeholder .desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+.media-caption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  text-align: center;
+  margin-top: -32px;
+  margin-bottom: 48px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  padding: 0 var(--gutter);
+}
+
+/* ============ COVER ============ */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cover-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 900px;
+  height: 480px;
+  background: rgba(135,32,0,0.28);
+  filter: blur(140px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cover .shell { position: relative; z-index: 2; }
+.cover-icon-box {
+  display: inline-flex;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--surface-4);
+  border: 1px solid var(--outline-soft);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  margin-bottom: 36px;
+}
+.cover-icon-box .material-symbols-outlined {
+  font-size: 56px;
+  color: var(--primary);
+  font-variation-settings: 'FILL' 1;
+}
+.cover h1 {
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.cover-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--on-surface-variant);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.cover-pills {
+  margin-top: 36px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cover-pill {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  border: 1px solid var(--outline-soft);
+  color: var(--primary-dim);
+}
+.cover-meta {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid var(--outline-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  text-align: left;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cover-meta-item .label {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin-bottom: 6px;
+  display: block;
+}
+.cover-meta-item .value {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* ============ SECTION HEADERS ============ */
+.section-head {
+  margin-bottom: 56px;
+  max-width: 800px;
+}
+.section-head .eyebrow { margin-bottom: 16px; }
+.section-head h2 {
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.section-head h2 em { color: var(--primary); }
+.section-head .lede { margin-top: 16px; }
+
+/* ============ THE 7:25 PM MOMENT ============ */
+.moment-quote {
+  margin: 56px 0;
+  padding: 36px 40px;
+  background: var(--surface-2);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  position: relative;
+}
+.moment-quote::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 1px solid var(--outline-soft);
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  pointer-events: none;
+}
+.moment-quote-time {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 16px;
+  display: block;
+}
+.moment-quote p {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 26px);
+  line-height: 1.45;
+  color: var(--on-surface);
+  letter-spacing: -0.005em;
+}
+.moment-quote p .accent { color: var(--primary); font-style: italic; font-weight: 400; }
+
+/* ============ BUSINESS PROBLEM ============ */
+.business-problem {
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--outline-soft);
+}
+.cohort-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 48px 0;
+  background: var(--surface-2);
+}
+@media (max-width: 700px) { .cohort-stat-row { grid-template-columns: 1fr; } }
+.cohort-stat-cell {
+  padding: 36px 32px;
+  border-right: 1px solid var(--outline-soft);
+}
+.cohort-stat-cell:last-child { border-right: none; }
+@media (max-width: 700px) {
+  .cohort-stat-cell { border-right: none; border-bottom: 1px solid var(--outline-soft); }
+  .cohort-stat-cell:last-child { border-bottom: none; }
+}
+.cohort-stat-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 5vw, 56px);
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+}
+.cohort-stat-label {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+}
+
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+@media (max-width: 800px) { .context-grid { grid-template-columns: 1fr; } }
+.context-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 28px;
+}
+.context-card .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.context-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.context-card p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+
+.takeaway {
+  margin-top: 48px;
+  padding: 36px 40px;
+  background: var(--surface-2);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+}
+.takeaway-label {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 12px;
+  display: block;
+}
+.takeaway p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.45;
+  color: var(--on-surface);
+  letter-spacing: -0.005em;
+}
+
+/* ============ USER PROBLEM ============ */
+.user-problem { background: var(--bg); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin: 48px 0;
+  align-items: start;
+}
+@media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; gap: 32px; } }
+.problem-list { list-style: none; padding: 0; }
+.problem-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--outline-soft);
+}
+.problem-list li:last-child { border-bottom: none; }
+.problem-list h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.problem-list p { font-size: 15px; color: var(--on-surface-variant); line-height: 1.6; }
+
+.metric-callouts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+@media (max-width: 700px) { .metric-callouts { grid-template-columns: 1fr; } }
+.metric-callout {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 12px;
+  padding: 24px;
+}
+.metric-callout-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
+}
+.metric-callout-label { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; }
+
+/* ============ USER TYPES ============ */
+.user-types { background: var(--surface-1); }
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 48px 0;
+}
+@media (max-width: 900px) { .user-grid { grid-template-columns: 1fr; } }
+.user-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.user-card-letter {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--primary);
+  opacity: 0.18;
+  line-height: 1;
+}
+.user-card-tag {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 16px;
+}
+.user-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.user-card p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+.user-card .pct {
+  margin-top: 16px;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.audience-note {
+  margin-top: 32px;
+  padding: 28px 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 12px;
+}
+.audience-note p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--on-surface);
+}
+.audience-note p strong {
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ============ DATA SECTION ============ */
+.data { background: var(--bg); }
+.data-block {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  margin: 64px 0;
+  align-items: start;
+}
+@media (max-width: 900px) { .data-block { grid-template-columns: 1fr; gap: 32px; } }
+.data-block-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--primary);
+  opacity: 0.5;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.data-block h3 {
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.data-block-body {
+  font-size: 16px;
+  color: var(--on-surface-variant);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.data-block .pill {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,181,160,0.08);
+  border: 1px solid rgba(255,181,160,0.2);
+  color: var(--primary);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+}
+
+.data-table {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+.data-table th, .data-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--outline-soft);
+  font-size: 14px;
+  vertical-align: middle;
+}
+.data-table th {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  background: var(--surface-3);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr.warn { background: rgba(238,125,119,0.05); }
+.data-table .mode { font-weight: 600; color: var(--on-surface); }
+.bar-track {
+  height: 6px;
+  background: var(--surface-4);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.bar-fill { height: 100%; background: var(--primary-dim); border-radius: 999px; }
+.success-mid { color: var(--primary-dim); font-weight: 600; }
+.success-low { color: var(--error); font-weight: 600; }
+.tat-ok { color: var(--on-surface-variant); font-family: var(--display); }
+.tat-warn { color: var(--error); font-family: var(--display); }
+
+.fail-bars { display: flex; flex-direction: column; gap: 12px; }
+.fail-bar-row {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  padding: 16px 20px;
+  border-radius: 12px;
+}
+.fail-bar-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.fail-bar-label { font-size: 13px; color: var(--on-surface); }
+.fail-bar-pct { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--primary); }
+.fail-bar-track { height: 4px; background: var(--surface-4); border-radius: 999px; overflow: hidden; }
+.fail-bar-fill { height: 100%; background: var(--error); border-radius: 999px; }
+
+/* ============ PRINCIPLE ============ */
+.principle {
+  background: var(--surface-1);
+  border-top: 1px solid var(--outline-soft);
+  border-bottom: 1px solid var(--outline-soft);
+}
+.principle-card {
+  background: linear-gradient(135deg, var(--surface-3), var(--surface-2));
+  border-radius: 24px;
+  padding: clamp(48px, 8vw, 96px);
+  border: 1px solid var(--outline-soft);
+  position: relative;
+  overflow: hidden;
+}
+.principle-card::before {
+  content: '"';
+  position: absolute;
+  top: -50px;
+  left: 20px;
+  font-family: var(--serif);
+  font-size: 320px;
+  font-weight: 300;
+  color: rgba(255,181,160,0.08);
+  line-height: 1;
+}
+.principle-eyebrow {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 24px;
+  display: block;
+  position: relative;
+}
+.principle-text {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  position: relative;
+  max-width: 900px;
+  margin-bottom: 24px;
+}
+.principle-text strong {
+  color: var(--primary);
+  font-weight: 400;
+  font-style: italic;
+}
+.principle-after {
+  font-size: 16px;
+  color: var(--on-surface-variant);
+  max-width: 640px;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* ============ FLOW SECTIONS ============ */
+.flow-section { background: var(--bg); }
+.flow-section.alt { background: var(--surface-1); border-top: 1px solid var(--outline-soft); }
+
+.flow-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+@media (max-width: 800px) { .flow-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .flow-strip-grid { grid-template-columns: 1fr; } }
+
+.flow-step {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.flow-step-num {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  margin-bottom: 12px;
+}
+.flow-step .media-frame {
+  margin: 0 0 16px 0;
+  max-width: 100%;
+  width: 100%;
+}
+.flow-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.flow-step p { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; }
+
+.callout-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 700px) { .callout-grid { grid-template-columns: 1fr; } }
+.callout-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 12px;
+  padding: 28px;
+}
+.callout-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.callout-card p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+
+.embedded-move {
+  margin: 56px 0;
+  padding: 32px 36px;
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  position: relative;
+}
+.embedded-move-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(255,181,160,0.08);
+  border: 1px solid rgba(255,181,160,0.2);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.embedded-move h3 {
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.embedded-move-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--on-surface);
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+.embedded-move-body strong { color: var(--primary); font-weight: 600; }
+
+.embedded-move-list {
+  max-width: 720px;
+  list-style: none;
+  font-size: 14px;
+  margin-top: 16px;
+}
+.embedded-move-list li {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--outline-soft);
+}
+.embedded-move-list li:last-child { border-bottom: none; }
+.embedded-move-list strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 32px 0;
+}
+@media (max-width: 800px) { .before-after { grid-template-columns: 1fr; } }
+.ba-side {
+  background: var(--surface-3);
+  border: 1px solid var(--outline-soft);
+  border-radius: 12px;
+  padding: 20px;
+}
+.ba-side.after {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--surface-3), var(--surface-2));
+}
+.ba-tag {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ba-side .ba-tag { color: var(--error); }
+.ba-side.after .ba-tag { color: var(--primary); }
+.ba-side .media-frame { margin: 0 0 12px 0; }
+.ba-side h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.ba-side p { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; }
+
+/* Branch cards for withdrawal section */
+.branch-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+@media (max-width: 800px) { .branch-cards { grid-template-columns: 1fr; } }
+.branch-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 24px;
+}
+.branch-tag {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: block;
+}
+.branch-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+.branch-card p { font-size: 13px; color: var(--on-surface-variant); line-height: 1.6; }
+
+/* ============ METRICS ============ */
+.metrics-block {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 56px 0;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+}
+.metric-label {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin-bottom: 8px;
+}
+.metric-value {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--on-surface);
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.metric-value .delta { color: var(--primary); font-weight: 800; }
+.metric-context {
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+/* ============ OUTCOMES ============ */
+.outcomes-section { background: var(--surface-1); }
+.outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 48px 0;
+}
+@media (max-width: 900px) { .outcomes { grid-template-columns: 1fr; } }
+.outcome-col {
+  padding: 32px 28px;
+  border-right: 1px solid var(--outline-soft);
+}
+.outcome-col:last-child { border-right: none; }
+@media (max-width: 900px) {
+  .outcome-col { border-right: none; border-bottom: 1px solid var(--outline-soft); }
+  .outcome-col:last-child { border-bottom: none; }
+}
+.outcome-col.shipped { background: rgba(134,239,172,0.04); }
+.outcome-col.measured { background: var(--surface-2); }
+.outcome-col.open { background: rgba(238,125,119,0.04); }
+.outcome-label {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.outcome-label::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.shipped .outcome-label { color: var(--good); }
+.shipped .outcome-label::before { background: var(--good); }
+.measured .outcome-label { color: var(--primary); }
+.measured .outcome-label::before { background: var(--primary); }
+.open .outcome-label { color: var(--error); }
+.open .outcome-label::before { background: var(--error); }
+
+.outcome-col ul { list-style: none; padding: 0; }
+.outcome-col li {
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--outline-soft);
+  color: var(--on-surface);
+}
+.outcome-col li:last-child { border-bottom: none; }
+.outcome-col li.metric-line {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+}
+.outcome-col li.metric-line strong {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.honest {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--primary);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+}
+.honest strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.honest p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--on-surface);
+}
+
+/* ============ ROADS NOT TAKEN ============ */
+.roads { background: var(--bg); }
+.road-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 48px 0;
+}
+@media (max-width: 800px) { .road-grid { grid-template-columns: 1fr; } }
+.road-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.road-card::before {
+  content: 'DROPPED';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 80px;
+  letter-spacing: 0.08em;
+  color: rgba(238,125,119,0.04);
+  pointer-events: none;
+}
+.road-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.road-icon-box {
+  display: inline-flex;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--outline-soft);
+}
+.road-icon-box .material-symbols-outlined {
+  font-size: 24px;
+  color: var(--primary-dim);
+}
+.road-status {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--error);
+  background: rgba(238,125,119,0.1);
+  border: 1px solid rgba(238,125,119,0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.road-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+.road-card p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.road-killed {
+  padding-top: 16px;
+  border-top: 1px dashed var(--outline-soft);
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+.road-killed strong { color: var(--error); font-weight: 700; }
+
+/* ============ REGULATION TIMELINE ============ */
+.regulation {
+  background: var(--surface-1);
+  border-top: 1px solid var(--outline-soft);
+}
+.phase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 48px 0;
+}
+@media (max-width: 800px) { .phase-grid { grid-template-columns: 1fr; } }
+.phase-card {
+  background: var(--surface-2);
+  border: 1px solid var(--outline-soft);
+  border-radius: 16px;
+  padding: 28px;
+}
+.phase-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.phase-card-top .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 24px;
+}
+.phase-badge {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary-dim);
+  padding: 4px 10px;
+  background: rgba(255,181,160,0.08);
+  border: 1px solid rgba(255,181,160,0.2);
+  border-radius: 999px;
+}
+.phase-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; }
+.phase-card p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+
+/* ============ CLOSER ============ */
+.closer {
+  background: var(--bg);
+  border-top: 1px solid var(--outline-soft);
+  text-align: center;
+}
+.closer .shell { max-width: 760px; }
+.closer-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(24px, 3.5vw, 36px);
+  line-height: 1.4;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+.closer-quote strong { color: var(--primary); font-weight: 400; }
+
+/* ============ FOOTER ============ */
+.foot {
+  padding: 48px var(--gutter);
+  border-top: 1px solid var(--outline-soft);
+  background: var(--bg);
+  text-align: center;
+}
+.foot p {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cover .shell > * { animation: fadeUp 0.8s ease-out backwards; }
+.cover .shell > *:nth-child(1) { animation-delay: 0.1s; }
+.cover .shell > *:nth-child(2) { animation-delay: 0.25s; }
+.cover .shell > *:nth-child(3) { animation-delay: 0.4s; }
+.cover .shell > *:nth-child(4) { animation-delay: 0.55s; }
+.cover .shell > *:nth-child(5) { animation-delay: 0.7s; }
+
+@supports (animation-timeline: view()) {
+  section:not(.cover) {
+    animation: fadeUp 0.8s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="cover-glow"></div>
+  <div class="shell">
+    <div class="cover-icon-box">
+      <span class="material-symbols-outlined">verified_user</span>
+    </div>
+    <h1>Verification, rebuilt.</h1>
+    <p class="cover-sub">A four-month redesign of Dream11's KYC system across iOS, APK, and Play Store — turning a fragmented, regulation-vulnerable funnel into a connected flow that absorbed a compliance mandate without breaking conversion.</p>
+    <div class="cover-pills">
+      <span class="cover-pill">Compliance</span>
+      <span class="cover-pill">200M users</span>
+      <span class="cover-pill">Tier 2 / Tier 3</span>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="label">Role</span>
+        <span class="value">Product Design — end-to-end UX/UI</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">Duration</span>
+        <span class="value">~4 months</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">Collaboration</span>
+        <span class="value">Product · Engineering · Research · Content · Data · Legal</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">Year</span>
+        <span class="value">2023</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUSINESS PROBLEM ============ -->
+<section class="business-problem">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">The Business Problem</span>
+      <h2>A new regulation was about to force <em>26% of users — generating 64% of revenue —</em> through our most broken funnel.</h2>
+      <p class="lede">Dream11 operates in a regulated industry. When MEITY signaled mandatory Min-KYC verification before deposits, we ran the numbers on who'd be affected. The answer was the cohort that paid for the company.</p>
+    </div>
+
+    <div class="moment-quote">
+      <span class="moment-quote-time">7:25 PM · Match starts at 7:30</span>
+      <p>Across India, millions of users open Dream11 to join contests before the toss. Most build their team, tap <span class="accent">Join Contest</span> — and meet a verification screen they've never seen before. Five document options. A wall of text. <span class="accent">Many close the app.</span> They'll catch the next match.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778272503864_image.png" alt="Cohort distribution table — PAN × Aadhaar verification status by users, contest joins, and cash entry amount">
+    </div>
+
+    <div class="cohort-stat-row">
+      <div class="cohort-stat-cell">
+        <div class="cohort-stat-num">26%</div>
+        <div class="cohort-stat-label">of users were PAN-verified but had never been put through Aadhaar — exactly the cohort the regulation would target.</div>
+      </div>
+      <div class="cohort-stat-cell">
+        <div class="cohort-stat-num">64%</div>
+        <div class="cohort-stat-label">of total cash entry came from this cohort. They were our highest-value users.</div>
+      </div>
+      <div class="cohort-stat-cell">
+        <div class="cohort-stat-num">10.56M</div>
+        <div class="cohort-stat-label">concurrent users at IPL 2023 peak. The verification wall hit all of them at once.</div>
+      </div>
+    </div>
+
+    <div class="context-grid">
+      <div class="context-card">
+        <span class="material-symbols-outlined">gavel</span>
+        <h4>Regulatory ambiguity</h4>
+        <p>MEITY (Ministry of Electronics &amp; IT) was expected to mandate Min-KYC at deposit. Timeline unconfirmed. Rules could land any day.</p>
+      </div>
+      <div class="context-card">
+        <span class="material-symbols-outlined">layers</span>
+        <h4>Three platforms, three rule-sets</h4>
+        <p>Verification differed across iOS, APK, and Play Store. Play Store enforced state and age via Aadhaar Lite. APK and iOS relied on self-declaration. Same product, fragmented logic.</p>
+      </div>
+      <div class="context-card">
+        <span class="material-symbols-outlined">trending_down</span>
+        <h4>KYC was the largest funnel leak</h4>
+        <p>Verification was the single biggest drop-off in the registration-to-deposit funnel. Adding more mandatory checks would deepen the leak — unless the design absorbed it.</p>
+      </div>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778272456194_image.png" alt="Different verification process across platforms — Playstore, APK, iOS — with associated problems for each">
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-label">The constraint we set</span>
+      <p>Add mandatory verification ahead of the regulation, without breaking the funnel that paid for the company.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USER PROBLEM ============ -->
+<section class="user-problem">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">The User Problem</span>
+      <h2>The system worked. <em>Just not for users.</em></h2>
+      <p class="lede">When we mapped what users actually hit, three symptoms kept showing up. They looked unrelated. They had the same root cause.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778272603760_image.png" alt="Pre-revamp Play Store verification on deposit — five document options, dense explainer text, no progress indication">
+    </div>
+    <p class="media-caption">Old verification on deposit (Play Store). Triggered before commitment. Five document options on a single screen. Reads as a customs form, not a product flow.</p>
+
+    <div class="media-frame auto">
+      <img src="assets/1778273141254_image.png" alt="End-to-end pre-revamp flow with drop-off percentages annotated at each step">
+    </div>
+    <p class="media-caption">End-to-end pre-revamp flow — drop-off concentrated at the verification step.</p>
+
+    <div class="problem-grid">
+      <ul class="problem-list">
+        <li>
+          <h4>Symptom 01 — Withdrawal walls</h4>
+          <p>Users reached withdrawal and discovered their PAN, KYC, and bank account names had to match. By then, the mismatch was already baked in. Nothing at deposit had warned them.</p>
+        </li>
+        <li>
+          <h4>Symptom 02 — PAN entry failures</h4>
+          <p>88% of PAN verification failures were data-entry mismatches. Users were re-typing names the system already had on file from prior KYC.</p>
+        </li>
+        <li>
+          <h4>Symptom 03 — Re-verification fatigue</h4>
+          <p>Already-verified users were being asked to verify again to satisfy the upcoming regulation. Each touchpoint behaved as if prior verification didn't exist.</p>
+        </li>
+      </ul>
+      <div class="metric-callouts">
+        <div class="metric-callout">
+          <div class="metric-callout-num">15%</div>
+          <div class="metric-callout-label">of all support tickets were tied to KYC friction and failed withdrawals.</div>
+        </div>
+        <div class="metric-callout">
+          <div class="metric-callout-num">~9K</div>
+          <div class="metric-callout-label">weekly support tickets during major tournament peaks. Most about verification.</div>
+        </div>
+        <div class="metric-callout">
+          <div class="metric-callout-num">35 min</div>
+          <div class="metric-callout-label">average time for a new user to complete their first successful withdrawal during peak events.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-label">The root cause</span>
+      <p>Verification was built as a sequence of independent forms, each unaware of the others. Three symptoms, one structural problem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USER TYPES ============ -->
+<section class="user-types">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">Who We Were Solving For</span>
+      <h2>Three users in three different verification states. <em>The system treated them all the same.</em></h2>
+      <p class="lede">Each user type entered the system with different prior verification — and each needed a different path through it. The redesign had to route them differently using the same components.</p>
+    </div>
+
+    <div class="user-grid">
+      <div class="user-card">
+        <div class="user-card-letter">A</div>
+        <div class="user-card-tag">The high-value cohort</div>
+        <h3>PAN-verified only</h3>
+        <p>Verified PAN for tax purposes. Never put through Aadhaar or state checks. The cohort the regulation would target. Generated the bulk of revenue.</p>
+        <div class="pct">26% of users · 64% of cash entry</div>
+      </div>
+      <div class="user-card">
+        <div class="user-card-letter">B</div>
+        <div class="user-card-tag">The new user</div>
+        <h3>No verification done</h3>
+        <p>Hits Aadhaar OTP for the first time at deposit. Qualitative research surfaced real anxiety — <em>"AADHAR OTP misuse ho sakta hai (camera access karke)"</em> — P4, Jaunpur.</p>
+        <div class="pct">First-time verification path</div>
+      </div>
+      <div class="user-card">
+        <div class="user-card-letter">C</div>
+        <div class="user-card-tag">The returning user</div>
+        <h3>Lite/OCR verified</h3>
+        <p>Already verified through a lighter method. Now needs to re-verify under the upgraded standard. Highest churn risk if the system doesn't acknowledge their prior effort.</p>
+        <div class="pct">Re-verification path</div>
+      </div>
+    </div>
+
+    <div class="audience-note">
+      <p><strong>One layer that shaped every decision:</strong> the majority of Dream11's user base lives in tier 2 and tier 3 India — only 28% are from tier 1 cities. For this audience, sharing personal documents online isn't routine. Asking for Aadhaar at the wrong moment doesn't just create friction — it triggers active distrust. The same flow that works in Bangalore can fail in Jaunpur.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778272479293_image.png" alt="Qualitative research finding — mandatory verification not expected, users uncomfortable sharing AADHAR details">
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA ============ -->
+<section class="data">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">What the Data Told Us</span>
+      <h2>Three diagnostic stories. <em>Each ruled out one possible solution.</em></h2>
+      <p class="lede">When the funnel breaks, the temptation is to redesign the screen. We pulled the data first to make sure we were redesigning the right thing.</p>
+    </div>
+
+    <div class="data-block">
+      <div>
+        <div class="data-block-num">01</div>
+        <h3>Users picked the fastest method. Fast wasn't reliable.</h3>
+        <p class="data-block-body">Aadhaar Lite captured 70% of all attempts — users self-selected the lowest-friction option. But even the preferred method failed 1 in 2 users. OCR, the fallback, was the slowest <em>and</em> the least successful.</p>
+        <span class="pill">The method users trusted most still failed nearly half the time.</span>
+      </div>
+      <div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Share</th>
+              <th>Success</th>
+              <th>TAT (p90)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mode">Aadhaar Lite</td>
+              <td><div class="bar-track" style="width: 70%;"><div class="bar-fill" style="width: 100%;"></div></div><div style="font-size: 11px; margin-top: 4px;">70.3%</div></td>
+              <td><span class="success-mid">55.1%</span></td>
+              <td><span class="tat-ok">1m 13s</span></td>
+            </tr>
+            <tr>
+              <td class="mode">Aadhaar OKYC</td>
+              <td><div class="bar-track" style="width: 30%;"><div class="bar-fill" style="width: 100%;"></div></div><div style="font-size: 11px; margin-top: 4px;">18.6%</div></td>
+              <td><span class="success-mid">41.9%</span></td>
+              <td><span class="tat-ok">1m 48s</span></td>
+            </tr>
+            <tr class="warn">
+              <td class="mode">OCR</td>
+              <td><div class="bar-track" style="width: 18%;"><div class="bar-fill" style="width: 100%;"></div></div><div style="font-size: 11px; margin-top: 4px;">10.8%</div></td>
+              <td><span class="success-low">29.3%</span></td>
+              <td><span class="tat-warn">3m 41s</span></td>
+            </tr>
+            <tr>
+              <td class="mode">Digilocker</td>
+              <td><div class="bar-track" style="width: 4%;"><div class="bar-fill" style="width: 100%;"></div></div><div style="font-size: 11px; margin-top: 4px;">0.2%</div></td>
+              <td><span class="success-low">17.0%</span></td>
+              <td><span class="tat-warn">4m 50s</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="data-block">
+      <div>
+        <div class="data-block-num">02</div>
+        <h3>Failures weren't random. 88% came from one fixable category.</h3>
+        <p class="data-block-body">When PAN verification failed, the reason was almost always a mismatch between what the user typed and what the system already had on file. Name. DOB. Document number. <em>The user was re-typing data we already knew.</em></p>
+        <span class="pill">A design problem disguised as a data problem.</span>
+      </div>
+      <div>
+        <div class="fail-bars">
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">Name does not match</span><span class="fail-bar-pct">40.08%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">DOB does not match</span><span class="fail-bar-pct">21.25%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 53%; opacity: 0.85;"></div></div>
+          </div>
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">PAN number invalid</span><span class="fail-bar-pct">15.19%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 38%; opacity: 0.7;"></div></div>
+          </div>
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">Name &amp; DOB mismatch</span><span class="fail-bar-pct">11.87%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 30%; opacity: 0.55;"></div></div>
+          </div>
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">Doc name doesn't match KYC</span><span class="fail-bar-pct">10.36%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 26%; opacity: 0.45;"></div></div>
+          </div>
+          <div class="fail-bar-row">
+            <div class="fail-bar-label-row"><span class="fail-bar-label">Technical error</span><span class="fail-bar-pct">1.03%</span></div>
+            <div class="fail-bar-track"><div class="fail-bar-fill" style="width: 3%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="data-block">
+      <div>
+        <div class="data-block-num">03</div>
+        <h3>Users wanted to give what was handy. We were asking for what wasn't.</h3>
+        <p class="data-block-body">In 19 in-person guerilla sessions across tier 2/3 audiences, the same pattern came back: Driving Licence preferred (it lived in the wallet). Voter ID second. PAN — kept at home. Passport — almost no one carried it. The form was asking for what users didn't have on hand at 7:25 PM on a match night.</p>
+        <span class="pill">Users want to give what's handy. The form was asking for what wasn't.</span>
+      </div>
+      <div>
+        <div class="media-frame auto">
+          <img src="assets/1778272491566_image.png" alt="Guerilla research with 19 users showing document priority and willingness across PAN, Voter ID, DL, and Passport">
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-label">What the data ruled out</span>
+      <p>The fix wasn't a better verification screen, a better OCR engine, or better explainer copy. <em>The fix was a system that knew what it already had — and asked the right user for the right document at the right time.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRINCIPLE ============ -->
+<section class="principle">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">The Insight</span>
+      <h2>The fix wasn't a better form. <em>It was a connected system.</em></h2>
+    </div>
+
+    <div class="principle-card">
+      <span class="principle-eyebrow">Design Principle</span>
+      <p class="principle-text">Verification only works when <strong>every touchpoint knows about every other touchpoint.</strong></p>
+      <p class="principle-after">The old system was four independent forms — deposit, withdrawal, PAN, bank — none of which shared what they knew. The new system makes each touchpoint aware of the others: warn ahead, fill in behind, never ask twice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOSIT FLOW ============ -->
+<section class="flow-section">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">The Solution · Deposit, End-to-End</span>
+      <h2>Move the ask. <em>Sequence the steps.</em> Set expectations for what comes after.</h2>
+      <p class="lede">Deposit is the simpler of the two flows. The win was timing — verification triggers after commitment, not before — and sequencing, where each screen prepares the user for the next.</p>
+    </div>
+
+    <div class="embedded-move">
+      <span class="embedded-move-tag">First fix · Timing</span>
+      <h3>KYC moved from <em>before</em> contest selection to <em>after</em> team creation.</h3>
+      <p class="embedded-move-body">In the old flow, KYC interrupted users before they had built a team or joined a contest. Zero sunk cost. Walking away cost them nothing. We moved verification to <strong>post-team-creation, pre-payment</strong>. By then, users have spent 3-5 minutes selecting players, picking a captain, building their squad. Now walking away costs them.</p>
+
+      <div class="media-frame auto">
+        <img src="assets/1778272655318_image.png" alt="KYC Post Create Team — A/B test result showing +30% Reg to Cash Add Page funnel uplift">
+      </div>
+      <p class="media-caption">A/B test: +30% lift in Registration → Cash Add Page funnel for the test group versus control. Honest framing of this number is in the Outcomes section.</p>
+    </div>
+
+    <div class="section-head" style="margin-top: 80px;">
+      <h3 style="font-size: clamp(24px, 3vw, 32px); font-weight: 700; margin-bottom: 16px;">The new deposit flow, screen by screen</h3>
+      <p style="color: var(--on-surface-variant); line-height: 1.6;">Same destination as the old flow — but each screen has a single purpose, and the verification step now sets expectations for withdrawal-time requirements before commitment.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778304670367_image.png" alt="New deposit flow — Add Cash, Verify in 2 easy steps, Share Location, Verify Lite Govt ID">
+    </div>
+    <p class="media-caption">Four-step deposit flow: contest commitment → expectation setting → location → document verification.</p>
+
+    <div class="callout-grid">
+      <div class="callout-card">
+        <h4>Sequenced, not stacked</h4>
+        <p>The old flow asked everything at once on a single screen. The new flow breaks it into four single-purpose steps with clear progress: contest selection, what to expect, location, document.</p>
+      </div>
+      <div class="callout-card">
+        <h4>Withdrawal warning at deposit</h4>
+        <p>The line "You can withdraw Winnings only if your Govt ID &amp; Bank name match" appears at the document selection step — before the user commits — so withdrawal-time mismatches stop being a surprise.</p>
+      </div>
+    </div>
+
+    <div class="embedded-move">
+      <span class="embedded-move-tag">Second fix · Form intelligence</span>
+      <h3>PAN entry knows what KYC already collected. <em>Stop asking for data we have.</em></h3>
+      <p class="embedded-move-body"><strong>88% of PAN failures were data-entry mismatches</strong> — users typing names, DOBs, and numbers the system already had on file. The form was actively producing failure. Four UI changes, each tied directly to a failure category in the data:</p>
+
+      <ul class="embedded-move-list">
+        <li><strong>Pre-fill name from KYC</strong> at PAN entry — eliminates the 40% name-mismatch class.</li>
+        <li><strong>Calendar picker for DOB</strong> instead of free-text — eliminates the 21% DOB mismatch class.</li>
+        <li><strong>Inline PAN format validation</strong> — catches invalid PAN at entry, not after submit.</li>
+        <li><strong>Field-appropriate keypads</strong> — alphabetic for name, numeric for PAN, calendar for DOB.</li>
+      </ul>
+    </div>
+
+    <div class="embedded-move">
+      <span class="embedded-move-tag">Third fix · Error recovery</span>
+      <h3>Every error becomes a route. <em>Failure is never a dead-end.</em></h3>
+      <p class="embedded-move-body">When verification failed, the old system told the user it failed and stopped. No alternative path, no fallback, no escape. The new system uses <strong>one error component for every failure type</strong> — Aadhaar not linked, record already in use, OTP timeout, technical fault. Each shows a specific reason and a one-tap switch to a different verification method. Switching is easier than retrying.</p>
+
+      <div class="media-frame auto">
+        <img src="assets/1778274674305_image.png" alt="Error states — four different error reasons using the same component pattern with retry alternatives">
+      </div>
+      <p class="media-caption">Four causes, one component. Every error offers a way out — never a wall.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WITHDRAWAL FLOW ============ -->
+<section class="flow-section alt">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">The Solution · Withdrawal, End-to-End</span>
+      <h2>A conditional state machine. <em>Same components, three paths.</em></h2>
+      <p class="lede">Withdrawal is harder than deposit because users arrive in three different verification states. The flow has to detect which state they're in and route them through the right path — without making any of them feel like a special case.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778273543674_image.png" alt="Withdrawal entry point — My Balance, Withdraw Max Winnings, Verify Account with email PAN bank options, Verify in 3 easy steps">
+    </div>
+    <p class="media-caption">Same entry for all users. The flow branches behind the scenes based on what's already verified.</p>
+
+    <div class="branch-cards">
+      <div class="branch-card">
+        <span class="branch-tag">Branch A · No KYC done</span>
+        <h4>First-time withdrawer</h4>
+        <p>User has played but never been put through KYC. Full path: Email → Verify Lite (Aadhaar) → PAN. Three steps, three progress bars.</p>
+      </div>
+      <div class="branch-card">
+        <span class="branch-tag">Branch B · Aadhaar Lite/OCR</span>
+        <h4>Returning, partially verified</h4>
+        <p>System detects prior Lite verification. Re-verification screen reframed as <strong>"Re-verify with your Aadhaar as a final check"</strong> — acknowledges the prior step instead of pretending it didn't happen.</p>
+      </div>
+      <div class="branch-card">
+        <span class="branch-tag">Branch C · RE-KYC required</span>
+        <h4>Cleanup cohort</h4>
+        <p>Existing users whose verification didn't meet the new standard. Routed through a dedicated re-KYC path with the same "final check" framing — minimizes churn risk on the high-value cohort.</p>
+      </div>
+    </div>
+
+    <div class="embedded-move">
+      <span class="embedded-move-tag">Fourth fix · Copy as routing</span>
+      <h3>For users who already verified once: <em>"as a final check"</em> — not "verify again."</h3>
+      <p class="embedded-move-body">User Type C — already Aadhaar Lite/OCR verified — would need to re-verify under the upgraded standard. Asking them to verify again risked a "we don't trust you" perception and high churn. We reframed re-verification as <strong>completion, not repetition</strong>. The screen acknowledges prior verification and presents the new step as the last one in a sequence. Same data collected. Different psychology.</p>
+    </div>
+
+    <div class="section-head" style="margin-top: 80px;">
+      <h3 style="font-size: clamp(24px, 3vw, 32px); font-weight: 700; margin-bottom: 16px;">The full state machine</h3>
+      <p style="color: var(--on-surface-variant); line-height: 1.6;">Users don't see the branching. From their perspective, they tap "Verify to Withdraw" and land on the right path. The complexity is absorbed by the system, not surfaced to the user.</p>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778304714147_image.png" alt="Full withdrawal state machine — branching paths for No KYC done, Aadhaar Lite OCR, and RE-KYC, converging on PAN verification">
+    </div>
+    <p class="media-caption">The full conditional flow: one entry, three paths, converging on PAN entry and final withdrawal.</p>
+
+    <div class="media-frame auto">
+      <img src="assets/1778273585974_image.png" alt="Bank verification states — verification failed, name mismatch, upload bank proof, account number entry">
+    </div>
+    <p class="media-caption">Bank verification handles its own state machine: success, name mismatch with PAN, manual proof upload as fallback. Every failure mode has a defined recovery path.</p>
+
+    <div class="callout-grid">
+      <div class="callout-card">
+        <h4>One entry, three paths</h4>
+        <p>The branching logic is invisible to users. They tap "Verify to Withdraw" and land where the system thinks they should be. The complexity is absorbed by the architecture.</p>
+      </div>
+      <div class="callout-card">
+        <h4>The "Maybe Later" trade-off</h4>
+        <p>For users where PAN was optional at this step, we allowed deferral via a "Maybe Later" CTA. This protected the funnel but introduced a known risk: revenue-relevant data collection could be delayed indefinitely. Flagged in Outcomes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METRICS BLOCK ============ -->
+<section class="flow-section">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">What Moved</span>
+      <h2>The numbers that landed.</h2>
+    </div>
+
+    <div class="media-frame auto">
+      <img src="assets/1778274153722_image.png" alt="PAN verification data — 2 to 4 second TAT, 99.99% automation, success rate, average attempts">
+    </div>
+
+    <div class="metrics-block">
+      <div class="metrics-grid">
+        <div>
+          <div class="metric-label">PAN Success Rate</div>
+          <div class="metric-value">~50% → <span class="delta">~72%</span></div>
+          <div class="metric-context">+22pp absolute lift</div>
+        </div>
+        <div>
+          <div class="metric-label">PAN Verification TAT</div>
+          <div class="metric-value">12 min → <span class="delta">2-4 sec</span></div>
+          <div class="metric-context">~180× faster</div>
+        </div>
+        <div>
+          <div class="metric-label">PAN Automation</div>
+          <div class="metric-value">~90% → <span class="delta">99.99%</span></div>
+          <div class="metric-context">Manual review nearly eliminated</div>
+        </div>
+        <div>
+          <div class="metric-label">Avg. Attempts to Complete PAN</div>
+          <div class="metric-value"><span class="delta">2 attempts</span></div>
+          <div class="metric-context">Down from a multi-attempt slog</div>
+        </div>
+        <div>
+          <div class="metric-label">Reg → Cash Add Page</div>
+          <div class="metric-value"><span class="delta">+30%</span></div>
+          <div class="metric-context">A/B tested, TG vs CG, Dec 15 – Jan 31</div>
+        </div>
+        <div>
+          <div class="metric-label">Downstream Conversion</div>
+          <div class="metric-value">Held <span class="delta">flat</span></div>
+          <div class="metric-context">Compliance absorbed without penalty</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOMES, HONESTLY ============ -->
+<section class="outcomes-section">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">Outcomes</span>
+      <h2>What shipped. What moved. <em>What's still open.</em></h2>
+      <p class="lede">Some metrics moved. Some didn't propagate downstream. Some couldn't be measured at the cohort level. All of it goes in the case study.</p>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcome-col shipped">
+        <div class="outcome-label">Shipped</div>
+        <ul>
+          <li>Unified verification across iOS, APK, Play Store</li>
+          <li>Conditional routing engine — same components, different paths by user state</li>
+          <li>Reason-specific error states with one-tap mode switching</li>
+          <li>Deposit ↔ withdrawal awareness via cross-step warnings</li>
+          <li>Re-verification flow with "final check" framing</li>
+          <li>Architecture portable to deposit-side verification when MEITY mandates land</li>
+        </ul>
+      </div>
+      <div class="outcome-col measured">
+        <div class="outcome-label">Measured</div>
+        <ul>
+          <li class="metric-line">PAN success: ~50% → <strong>~72%</strong></li>
+          <li class="metric-line">PAN TAT: 12 min → <strong>2-4 sec</strong></li>
+          <li class="metric-line">PAN automation: ~90% → <strong>99.99%</strong></li>
+          <li class="metric-line">Avg. PAN attempts: <strong>2</strong></li>
+          <li class="metric-line">Reg → Cash Add Page: <strong>+30%</strong></li>
+          <li class="metric-line">7-day R→D &amp; PCJ: <strong>held flat</strong></li>
+        </ul>
+      </div>
+      <div class="outcome-col open">
+        <div class="outcome-label">Open</div>
+        <ul>
+          <li>Verification-step completion rate at cohort level — data existed but didn't make it into the case study at the time</li>
+          <li>Bank verification 48-hour lock state — descoped, needs v2</li>
+          <li>"Maybe Later" PAN deferral — return rate not measured; risk of indefinite revenue-data delay</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="honest">
+      <strong>On the funnel result, honestly</strong>
+      <p>The 30% lift in Registration → Cash Add Page didn't fully propagate to Paid Contest Join. The downstream funnel was held flat. We absorbed compliance overhead without a conversion penalty — which, for regulatory work, is the realistic ceiling. Most teams shipping a forced KYC flow tank downstream conversion. We didn't.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADS NOT TAKEN ============ -->
+<section class="roads">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">Roads Not Taken</span>
+      <h2>Four ideas that <em>shaped the solution by not making it.</em></h2>
+      <p class="lede">Good design choices are often the result of killing better-sounding ideas for non-obvious reasons.</p>
+    </div>
+
+    <div class="road-grid">
+      <div class="road-card">
+        <div class="road-card-top">
+          <div class="road-icon-box"><span class="material-symbols-outlined">qr_code_scanner</span></div>
+          <span class="road-status">Dropped</span>
+        </div>
+        <h3>Aadhaar QR Scan</h3>
+        <p>Scan the QR, auto-fill the fields. Zero typing, zero uploads. But the Secure QR format with full demographic data only became standard from 2019, and a significant share of our user base had older cards that wouldn't work. Coverage gap was too large to ship on.</p>
+        <div class="road-killed">Killed by <strong>Coverage gap</strong></div>
+      </div>
+      <div class="road-card">
+        <div class="road-card-top">
+          <div class="road-icon-box"><span class="material-symbols-outlined">link</span></div>
+          <span class="road-status">Dropped</span>
+        </div>
+        <h3>Aadhaar + PAN, no OTP</h3>
+        <p>Since PAN-Aadhaar linkage is government-mandated, two numbers the user already knows could uniquely verify identity — no document upload, no OTP dependency. Clean and low friction. But it couldn't derive a user photo, failing the full KYC requirement.</p>
+        <div class="road-killed">Killed by <strong>No photo derivation</strong></div>
+      </div>
+      <div class="road-card">
+        <div class="road-card-top">
+          <div class="road-icon-box"><span class="material-symbols-outlined">document_scanner</span></div>
+          <span class="road-status">Dropped</span>
+        </div>
+        <h3>OCR with inline correction</h3>
+        <p>Instead of OCR failing silently, surface what it read and let users fix it upfront — the way Zomato handles address parsing. The concept was sound. The reality wasn't: Voter IDs and Driving Licences have different layouts in every Indian state. Too many variants, too little time.</p>
+        <div class="road-killed">Killed by <strong>India's document layout chaos</strong></div>
+      </div>
+      <div class="road-card">
+        <div class="road-card-top">
+          <div class="road-icon-box"><span class="material-symbols-outlined">id_card</span></div>
+          <span class="road-status">Dropped</span>
+        </div>
+        <h3>Interactive Document Card UI</h3>
+        <p>What if instead of a flat form, users tapped fields directly on a visual representation of their ID — spatial, intuitive, document-native? The idea was strong. But rendering a consistent card UI across every document type, on three platform variants, was technically infeasible within the timeline.</p>
+        <div class="road-killed">Killed by <strong>Tech complexity + timeline</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGULATION CHAOS ============ -->
+<section class="regulation">
+  <div class="shell">
+    <div class="section-head">
+      <span class="eyebrow">Navigating Uncertainty</span>
+      <h2>The rules changed three times <em>while we were building.</em></h2>
+      <p class="lede">A regulated-industry redesign isn't a linear project. We kept what was reusable, scrapped what was state-specific, and rebuilt the deposit gate from scratch.</p>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-card-top">
+          <span class="material-symbols-outlined">stream</span>
+          <span class="phase-badge">Initial scope</span>
+        </div>
+        <h3>Withdrawals only</h3>
+        <p>We started with the withdrawal flow — verifying users at the point money exited the platform. Deposits would come later.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-card-top">
+          <span class="material-symbols-outlined">gavel</span>
+          <span class="phase-badge">Mid-flight pivot</span>
+        </div>
+        <h3>Tamil Nadu RMG ban</h3>
+        <p>State law changed mid-project. Tamil Nadu banned real-money gaming. Two flows we'd already designed for that state had to be scrapped entirely.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-card-top">
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+          <span class="phase-badge">Final scope</span>
+        </div>
+        <h3>Deposit + withdrawal</h3>
+        <p>Final scope expanded: KYC gating both ends of the funnel. Bigger than what we signed up for. The component-based architecture meant we absorbed the change without starting over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSER ============ -->
+<section class="closer">
+  <div class="shell">
+    <p class="closer-quote">A regulated, multi-platform, conversion-critical funnel — redesigned in four months without breaking what was already working. <strong>The system now warns ahead, fills in behind, and never asks twice.</strong></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p>Verification Revamp · Dream11 · Product Design · 2023</p>
+</footer>
+
+</body>
+</html>
