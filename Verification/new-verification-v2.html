@@ -2306,8 +2306,9 @@ img { display: block; max-width: 100%; }
 .s-landscape-mockup-label { display: none; }
 
 /* s-who section */
-.s-who { padding: var(--space-10) var(--space-5); background: var(--background); }
-.s-who-inner { max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
+.s-who { position: relative; padding: var(--space-10) var(--space-5); background: var(--background); }
+.s-who::before { content: ''; position: absolute; inset: 0; background: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Mask%20group.png') center center / cover no-repeat; opacity: 0.4; pointer-events: none; }
+.s-who-inner { position: relative; max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
 .s-who-header { display: flex; flex-direction: column; gap: var(--space-3); }
 .s-who-eyebrow { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
 .s-who-title { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); color: var(--on-surface); }
