@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KYC Verification Tool — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --ink-2: #3a3a3a;
+  --ink-3: #7a7a7a;
+  --ink-4: #b0b0b0;
+  --surface: #f7f6f3;
+  --surface-2: #eeecea;
+  --surface-3: #e4e2de;
+  --green: #1d6b45;
+  --green-light: #d4ede0;
+  --amber: #7a4a00;
+  --amber-light: #fdf0d5;
+  --red: #8b1a1a;
+  --red-light: #fde8e8;
+  --blue: #0f3d6e;
+  --blue-light: #ddeaf8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --pad: clamp(20px, 5vw, 64px);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--surface); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad); height: 52px;
+  background: rgba(247,246,243,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--surface-3);
+}
+.nav-brand { font-family: var(--serif); font-size: 16px; letter-spacing: -0.02em; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { font-size: 13px; color: var(--ink-3); text-decoration: none; }
+.nav-links a:hover { color: var(--ink); }
+.menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 4px; padding: 6px; }
+.menu-btn span { display: block; width: 20px; height: 1.5px; background: var(--ink); }
+
+/* MOBILE NAV */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: rgba(247,246,243,0.97); backdrop-filter: blur(8px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a { font-family: var(--serif); font-size: 24px; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+
+/* HERO */
+.hero {
+  min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 80px var(--pad) 56px;
+  background: var(--ink); color: #f7f6f3; position: relative; overflow: hidden;
+}
+.hero-bg { position: absolute; top: 50%; left: var(--pad); transform: translateY(-50%); font-family: var(--serif); font-size: clamp(72px,16vw,200px); color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; user-select: none; white-space: nowrap; }
+.hero-kicker { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(247,246,243,0.4); margin-bottom: 18px; }
+.hero-title { font-family: var(--serif); font-size: clamp(34px,6vw,74px); line-height: 1.06; letter-spacing: -0.03em; max-width: 840px; margin-bottom: 22px; }
+.hero-title em { font-style: italic; color: rgba(247,246,243,0.5); }
+.hero-desc { font-size: clamp(14px,1.8vw,16px); font-weight: 300; color: rgba(247,246,243,0.6); max-width: 520px; line-height: 1.8; margin-bottom: 44px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 24px 36px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+.meta-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(247,246,243,0.3); margin-bottom: 4px; }
+.meta-val { font-size: 13px; color: rgba(247,246,243,0.75); }
+
+/* SECTIONS */
+section { padding: clamp(52px,8vw,96px) var(--pad); }
+section.alt { background: #fff; }
+.inner { max-width: 1080px; margin: 0 auto; }
+.kicker { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 12px; }
+.sec-title { font-family: var(--serif); font-size: clamp(26px,4vw,48px); letter-spacing: -0.025em; line-height: 1.1; max-width: 660px; margin-bottom: 18px; }
+.sec-body { font-size: clamp(14px,1.6vw,15px); font-weight: 300; color: var(--ink-2); max-width: 580px; line-height: 1.85; margin-bottom: 36px; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--surface-3); border: 1px solid var(--surface-3); border-radius: 14px; overflow: hidden; margin-bottom: 48px; }
+.stat { background: #fff; padding: clamp(20px,3.5vw,32px) clamp(18px,3vw,28px); }
+.stat-n { font-family: var(--serif); font-size: clamp(32px,4.5vw,48px); letter-spacing: -0.03em; line-height: 1; margin-bottom: 7px; }
+.stat-l { font-size: 13px; color: var(--ink-3); line-height: 1.5; }
+
+/* BEFORE AFTER */
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--surface-3); border-radius: 14px; overflow: hidden; margin-bottom: 48px; }
+.ba-panel { padding: clamp(22px,3.5vw,36px) clamp(18px,3vw,32px); }
+.ba-panel.b { background: #fafafa; }
+.ba-panel.a { background: #fff; }
+.ba-lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+.ba-lbl.b { color: var(--red); }
+.ba-lbl.a { color: var(--green); }
+.ba-row { display: flex; gap: 10px; margin-bottom: 11px; align-items: flex-start; }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.dot.r { background: #c0392b; }
+.dot.g { background: #1d6b45; }
+.ba-t { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+/* TIMELINE */
+.tl { max-width: 640px; }
+.tl-row { display: flex; gap: 18px; padding-bottom: 36px; }
+.tl-row:last-child { padding-bottom: 0; }
+.tl-l { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 28px; }
+.tl-n { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: #f7f6f3; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; }
+.tl-line { width: 1px; background: var(--surface-3); flex: 1; margin-top: 5px; }
+.tl-row:last-child .tl-line { display: none; }
+.tl-b { padding-top: 2px; }
+.tl-title { font-size: 15px; font-weight: 500; margin-bottom: 5px; }
+.tl-desc { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.75; }
+
+/* SCREENSHOTS */
+.ss-wrap { margin: 36px 0; }
+.ss-lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 9px; }
+.ss-frame { border-radius: 12px; overflow: hidden; border: 1px solid var(--surface-3); background: #111; min-height: 260px; }
+.ss-frame img { width: 100%; display: block; }
+.ss-cap { font-size: 13px; color: var(--ink-3); margin-top: 9px; line-height: 1.6; }
+
+/* FEATURES */
+.feats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 48px; }
+.feat { background: #fff; border: 1px solid var(--surface-3); border-radius: 12px; padding: clamp(18px,2.5vw,24px) clamp(14px,2vw,20px); }
+.feat-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.feat-icon.bl { background: var(--blue-light); }
+.feat-icon.gr { background: var(--green-light); }
+.feat-icon.am { background: var(--amber-light); }
+.feat-icon.rd { background: var(--red-light); }
+.feat-t { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.feat-d { font-size: 12px; font-weight: 300; color: var(--ink-2); line-height: 1.65; }
+
+/* TAGS */
+.tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 5px; }
+.tg-am { background: var(--amber-light); color: var(--amber); }
+.tg-bl { background: var(--blue-light); color: var(--blue); }
+
+/* QUOTE */
+.quote { border-left: 2px solid var(--ink); padding-left: 22px; margin: 36px 0; max-width: 620px; }
+.quote p { font-family: var(--serif); font-size: clamp(17px,2.2vw,24px); line-height: 1.45; letter-spacing: -0.01em; }
+
+/* NAME TRAIL */
+.trail-card { background: #fff; border: 1px solid var(--surface-3); border-radius: 14px; overflow: hidden; margin-bottom: 36px; }
+.trail-head { padding: 18px 22px; border-bottom: 1px solid var(--surface-3); }
+.trail-head .lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 2px; }
+.trail-head .sub { font-size: 13px; color: var(--ink-3); }
+.trail-scroll { overflow-x: auto; }
+.trail-t { width: 100%; border-collapse: collapse; min-width: 460px; }
+.trail-t th { font-size: 11px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-4); text-align: left; padding: 9px 18px; border-bottom: 1px solid var(--surface-3); }
+.trail-t td { font-size: 13px; color: var(--ink-2); padding: 13px 18px; border-bottom: 1px solid var(--surface-3); vertical-align: middle; }
+.trail-t tr:last-child td { border-bottom: none; }
+.trail-t td:first-child { font-weight: 500; color: var(--ink); }
+.n-old { color: var(--ink-4); text-decoration: line-through; }
+.n-new { color: var(--green); }
+.n-arr { color: var(--ink-4); margin: 0 5px; font-size: 11px; }
+
+/* SCENARIOS */
+.scens { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.scen { background: #fff; border: 1px solid var(--surface-3); border-radius: 11px; padding: 16px 15px; }
+.scen-type { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.scen-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.scen-desc { font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+
+/* LEARNINGS */
+.learn { padding: 28px 0; border-top: 1px solid var(--surface-3); }
+.learn:last-child { padding-bottom: 0; }
+.learn-n { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 7px; }
+.learn-t { font-size: 17px; font-weight: 500; margin-bottom: 7px; }
+.learn-d { font-size: 14px; font-weight: 300; color: var(--ink-2); line-height: 1.8; max-width: 600px; }
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(247,246,243,0.4); padding: 36px var(--pad); text-align: center; font-size: 13px; font-weight: 300; }
+footer strong { color: rgba(247,246,243,0.75); font-weight: 500; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .menu-btn { display: flex; }
+  .stats { grid-template-columns: 1fr; }
+  .ba { grid-template-columns: 1fr; }
+  .feats { grid-template-columns: 1fr 1fr; }
+  .scens { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .feats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Portfolio</div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#discovery">Discovery</a>
+    <a href="#solution">Solution</a>
+    <a href="#namechange">Audit Trail</a>
+    <a href="#vhistory">Verify History</a>
+    <a href="#impact">Impact</a>
+    <a href="#learnings">Learnings</a>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-nav" id="mobNav">
+  <a href="#problem" class="ml">Problem</a>
+  <a href="#discovery" class="ml">Discovery</a>
+  <a href="#solution" class="ml">Solution</a>
+  <a href="#namechange" class="ml">Audit Trail</a>
+  <a href="#vhistory" class="ml">Verify History</a>
+  <a href="#impact" class="ml">Impact</a>
+  <a href="#learnings" class="ml">Learnings</a>
+</div>
+
+<div class="hero">
+  <div class="hero-bg">KYC</div>
+  <div class="hero-kicker">Product Case Study &nbsp;·&nbsp; Internal Tooling &nbsp;·&nbsp; Compliance</div>
+  <h1 class="hero-title">KYC Verification Tool <em>for CS agents</em></h1>
+  <p class="hero-desc">CS agents had no way to look up a user's Aadhaar status. Every single query went to the backend team. This is how we fixed that.</p>
+  <div class="hero-meta">
+    <div><div class="meta-lbl">Role</div><div class="meta-val">Product Designer</div></div>
+    <div><div class="meta-lbl">Domain</div><div class="meta-val">Fantasy Sports Platform</div></div>
+    <div><div class="meta-lbl">Surface</div><div class="meta-val">Internal CS Tool (MSD)</div></div>
+    <div><div class="meta-lbl">Type</div><div class="meta-val">0 to 1 feature build</div></div>
+  </div>
+</div>
+
+<section id="problem" class="alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">01 · Background</div>
+      <h2 class="sec-title">It was all manual. All of it.</h2>
+      <p class="sec-body">We had already built PAN and bank verification views for CS agents inside the MSD panel. But Aadhaar? Nothing. Product was moving fast, KYC got deprioritised, and before we knew it agents were handling every Aadhaar query by asking users to re-share their details over chat and then raising a backend ticket.</p>
+      <p class="sec-body">Nobody could see anything. Not the agent. Not the user. If something failed, nobody knew why.</p>
+    </div>
+
+    <div class="quote reveal">
+      <p>"When a user had a KYC problem, the agent's only option was to ask them for their details again, raise a ticket, and wait. That was it."</p>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">of Aadhaar queries handled manually before this tool</div></div>
+      <div class="stat"><div class="stat-n">0</div><div class="stat-l">visibility into KYC status available to CS agents</div></div>
+      <div class="stat"><div class="stat-n">3+</div><div class="stat-l">teams involved to resolve a single Aadhaar issue</div></div>
+    </div>
+
+    <div class="ba reveal">
+      <div class="ba-panel b">
+        <div class="ba-lbl b">Before</div>
+        <div class="ba-row"><div class="dot r"></div><div class="ba-t">Agent asks the user to re-share their Aadhaar number, name, and doc type over chat</div></div>
+        <div class="ba-row"><div class="dot r"></div><div class="ba-t">Raises a backend ticket and waits for someone else to investigate</div></div>
+        <div class="ba-row"><div class="dot r"></div><div class="ba-t">No way to check which document is on file or what the OCR actually returned</div></div>
+        <div class="ba-row"><div class="dot r"></div><div class="ba-t">If Aadhaar changed the account name, the original was just gone. No record.</div></div>
+        <div class="ba-row"><div class="dot r"></div><div class="ba-t">Users had no idea what document they had even submitted</div></div>
+      </div>
+      <div class="ba-panel a">
+        <div class="ba-lbl a">After</div>
+        <div class="ba-row"><div class="dot g"></div><div class="ba-t">Full KYC details right there: doc type, number, name, DoB, state</div></div>
+        <div class="ba-row"><div class="dot g"></div><div class="ba-t">The actual image the user uploaded, OCR response, IDFY validation, all visible</div></div>
+        <div class="ba-row"><div class="dot g"></div><div class="ba-t">Verification status shown with the rejection reason if it failed</div></div>
+        <div class="ba-row"><div class="dot g"></div><div class="ba-t">Name change trail so agents know what the name was before, and when it changed</div></div>
+        <div class="ba-row"><div class="dot g"></div><div class="ba-t">Agents can unlink KYC themselves. No backend ticket needed.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="discovery">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">02 · Discovery and scoping</div>
+      <h2 class="sec-title">First, figure out what you're actually solving</h2>
+      <p class="sec-body">Before jumping into solutions, I wanted to understand the full shape of the problem. What kinds of issues were agents actually dealing with? And which of those could a better tool realistically fix?</p>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-row">
+        <div class="tl-l"><div class="tl-n">1</div><div class="tl-line"></div></div>
+        <div class="tl-b">
+      <div class="tl-title">Mapped the issue types first</div>
+          <div class="tl-desc">There were five things that kept coming up: wrong Aadhaar linked, Aadhaar with a restricted GPS state, no alternate document to fall back on, same Aadhaar used across multiple accounts, and name change requests. Each one needed a slightly different fix. But they all had the same root cause: agents couldn't see anything.</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-l"><div class="tl-n">2</div><div class="tl-line"></div></div>
+        <div class="tl-b">
+          <div class="tl-title">Checked what data actually existed on the backend</div>
+          <div class="tl-desc">Turns out a lot was already there. OCR API responses from IDFY, Digilocker responses, image validation results, partner metadata. None of it was surfaced to agents. We also found that verified, pending, and rejected states all existed in the system but only verified was being shown. Small fix, meaningful difference.</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-l"><div class="tl-n">3</div><div class="tl-line"></div></div>
+        <div class="tl-b">
+          <div class="tl-title">Cut what didn't need to exist</div>
+          <div class="tl-desc">We had originally considered a standalone KYC verification log page. Then we checked: OCR and Digilocker queries never go into the manual queue. A dedicated log page would always be empty. We dropped it and folded everything into the existing user management page. Less to build, same outcome.</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-l"><div class="tl-n">4</div><div class="tl-line"></div></div>
+        <div class="tl-b">
+          <div class="tl-title">Found something nobody had flagged</div>
+          <div class="tl-desc">While mapping the unlinking scenarios, we realised that when an Aadhaar gets verified, the account name silently updates to match it. If someone verified the wrong Aadhaar, the name changed and the original just disappeared. No record. No timestamp. We had to build that from scratch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solution" class="alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">03 · Solution</div>
+      <h2 class="sec-title">A KYC section inside the MSD panel</h2>
+      <p class="sec-body">We already had a PAN Verification page that agents used. This followed the same pattern. One place to see everything about a user's KYC, and actually do something about it if needed.</p>
+    </div>
+
+    <div class="ss-wrap reveal">
+      <div class="ss-lbl">Screen 1 — KYC verification queue</div>
+      <div class="ss-frame">
+        <img src="https://raw.githubusercontent.com/Bhavika-Maloo/work/main/Assests/%20KYC%20verification%20queue.png" alt="KYC verification list view showing pending cases" onerror="this.style.display='none';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.innerHTML='<p style=&quot;color:rgba(255,255,255,0.2);font-size:13px;padding:40px;text-align:center;&quot;>Screenshot: KYC queue list view</p>'">
+      </div>
+      <div class="ss-cap">The KYC verification queue. Agents can see all pending cases, how closely the PAN name matches the KYC name, and when the document was added. Filterable by Pending, Verified, and Rejected. Alerts can be reassigned across the team.</div>
+    </div>
+
+    <div class="ss-wrap reveal">
+      <div class="ss-lbl">Screen 2 — KYC document detail view</div>
+      <div class="ss-frame">
+        <img src="https://raw.githubusercontent.com/Bhavika-Maloo/work/main/Assests/%20KYC%20document%20detail%20view.png" alt="KYC detail view showing Aadhaar image and OCR data" onerror="this.style.display='none';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.innerHTML='<p style=&quot;color:rgba(255,255,255,0.2);font-size:13px;padding:40px;text-align:center;&quot;>Screenshot: KYC document detail view</p>'">
+      </div>
+      <div class="ss-cap">The document detail view. The Aadhaar image the user actually uploaded sits next to the OCR-extracted fields: name, DoB, state. Below that, the KYC API result, the verification decision, and the raw API response for when agents need to dig deeper.</div>
+    </div>
+
+    <div class="feats reveal">
+      <div class="feat">
+        <div class="feat-icon bl"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#0f3d6e" stroke-width="1.5"/><path d="M5 8h6M5 5.5h6M5 10.5h4" stroke="#0f3d6e" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        <div class="feat-t">Full KYC visibility</div>
+        <div class="feat-d">Doc type, number, name, DoB, GPS state, and verification status surfaced for every user.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon bl"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#0f3d6e" stroke-width="1.5"/><path d="M5 6.5l2 2 4-3" stroke="#0f3d6e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="feat-t">Status with rejection reason</div>
+        <div class="feat-d">Verified, pending, and rejected states shown. Rejected cases surface the reason inline.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon gr"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1d6b45" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#1d6b45" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="feat-t">OCR and Digilocker detail</div>
+        <div class="feat-d">Uploaded image, IDFY validation response, OCR API response, and Digilocker response in one panel.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon am"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4M8 10v4M2 8h4M10 8h4" stroke="#7a4a00" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="feat-t">KYC unlink (maker-checker)</div>
+        <div class="feat-d">Agents can initiate unlink for wrong Aadhaar, restricted state, or multi-account conflicts via a controlled flow.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon am"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M3 5h10M3 11h6" stroke="#7a4a00" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="feat-t">GST state update</div>
+        <div class="feat-d">Agents can view and update a user's GST state, a compliance requirement with no prior facility in the panel.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon rd"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="#8b1a1a" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" stroke="#8b1a1a" stroke-width="1.2"/></svg></div>
+        <div class="feat-t">GPS location (read-only)</div>
+        <div class="feat-d">Current GPS state shown for context. History tracking to be evaluated for compliance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="namechange">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">03b · Something we found along the way</div>
+      <h2 class="sec-title">The name change nobody was tracking</h2>
+      <p class="sec-body">When we started mapping the unlinking scenarios, we hit something unexpected. Every time a user verifies an Aadhaar, the account name updates to match the name on that document. Silently. Automatically. No confirmation, no record.</p>
+      <p class="sec-body">So if someone accidentally verified the wrong Aadhaar, their account name just changed. And once it changed, you had no way to know what it was before. We built the name change trail to fix that.</p>
+    </div>
+
+    <div class="quote reveal">
+      <p>"Once the name changed, it was just gone. No record of the original, no timestamp, no way to know which document caused it."</p>
+    </div>
+
+    <div class="trail-card reveal">
+      <div class="trail-head">
+        <div class="lbl">Example — name change audit trail</div>
+        <div class="sub">As it appears in the CS agent view</div>
+      </div>
+      <div class="trail-scroll">
+        <table class="trail-t">
+          <thead>
+            <tr><th>User ID</th><th>Account name change</th><th>Triggered by</th><th>Date and time</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2345678</td>
+              <td><span class="n-old">Rahul Sharma</span><span class="n-arr">&#8594;</span><span class="n-new">Vimal Kumar</span></td>
+              <td><span class="tag tg-am">Aadhaar OCR</span></td>
+              <td>12 Mar 2020, 10:15 AM</td>
+            </tr>
+            <tr>
+              <td>3456789</td>
+              <td><span class="n-old">Priya Singh</span><span class="n-arr">&#8594;</span><span class="n-new">Priya S.</span></td>
+              <td><span class="tag tg-bl">Digilocker</span></td>
+              <td>15 Mar 2020, 2:34 PM</td>
+            </tr>
+            <tr>
+              <td>4567890</td>
+              <td><span class="n-old">Analkumar Kumar</span><span class="n-arr">&#8594;</span><span class="n-new">Anal Kumar</span></td>
+              <td><span class="tag tg-am">Aadhaar OCR</span></td>
+              <td>15 Mar 2020, 3:42 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div style="font-size:11px;font-weight:500;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Unlinking scenarios this trail now supports</div>
+      <div class="scens">
+        <div class="scen"><div class="scen-type" style="color:var(--red)">Scenario A</div><div class="scen-title">Wrong Aadhaar linked</div><div class="scen-desc">Name changed to wrong person. Trail shows what it was before and confirms the unlink is legitimate.</div></div>
+        <div class="scen"><div class="scen-type" style="color:var(--amber)">Scenario B</div><div class="scen-title">Restricted state doc</div><div class="scen-desc">Aadhaar state is restricted. User needs to verify a different document. Requires KYC unlink first.</div></div>
+        <div class="scen"><div class="scen-type" style="color:var(--blue)">Scenario C</div><div class="scen-title">Multi-account conflict</div><div class="scen-desc">Same Aadhaar on Account A, needs to move to Account B. Unlink from A, re-verify on B.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vhistory" class="alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">03c · One more thing</div>
+      <h2 class="sec-title">Verification history: every attempt, one view</h2>
+      <p class="sec-body">The more we talked to agents, the more a pattern came up. They couldn't tell what a user had tried before. Had they already attempted verification? Was there a previous attempt that got unlinked? Which one changed the name? They were always looking at a single snapshot with no backstory.</p>
+      <p class="sec-body">So we built a Verification History modal on the user profile. Every KYC, PAN, bank, and UPI attempt, in order, with status and timestamps. And you can click into any attempt to see the full detail right there.</p>
+    </div>
+
+    <div class="ss-wrap reveal">
+      <div class="ss-lbl">Screen 3 — Verification history modal</div>
+      <div class="ss-frame">
+        <img src="https://raw.githubusercontent.com/Bhavika-Maloo/work/main/Assests/Verification%20history%20modal.png" alt="Verification history modal showing multiple KYC attempts with verified and unlinked states" onerror="this.style.display='none';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.innerHTML='<p style=&quot;color:rgba(255,255,255,0.2);font-size:13px;padding:40px;text-align:center;&quot;>Screenshot: Verification history modal</p>'">
+      </div>
+      <div class="ss-cap">The Verification History modal. KYC, PAN, Bank, and UPI each get their own tab. The left panel shows each attempt with its status (Verified or Unlinked) and timestamp. Click any attempt and the full detail loads on the right: Aadhaar image, OCR data, verification decision.</div>
+    </div>
+
+    <div class="reveal">
+      <div style="font-size:11px;font-weight:500;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">What the history view unlocked for agents</div>
+      <div class="feats">
+        <div class="feat">
+          <div class="feat-icon bl">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h7M3 12h5" stroke="#0f3d6e" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="feat-t">Full attempt timeline</div>
+          <div class="feat-d">Every attempt across KYC, PAN, Bank, and UPI, in one place, with exact timestamps.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon gr">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1d6b45" stroke-width="1.5"/><path d="M5.5 8l2 2 3-3" stroke="#1d6b45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="feat-t">Status per attempt</div>
+          <div class="feat-d">Each attempt clearly labelled as Verified or Unlinked, so agents can see at a glance what changed and when.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon am">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#7a4a00" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="#7a4a00" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="feat-t">Drill into any attempt</div>
+          <div class="feat-d">Click any attempt and the full detail loads: image, OCR fields, API response. No new page, no extra navigation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:8px;">
+      <div style="background:var(--surface);border-radius:14px;padding:clamp(20px,3vw,32px);border:1px solid var(--surface-3);">
+        <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-4);margin-bottom:14px;">Why a modal and not a separate page</div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.8;max-width:600px;">Agents are usually mid-conversation when they need to look something up. Sending them to a separate page and back would have broken that flow completely. The modal keeps them on the user profile. The tab structure (KYC, PAN, Bank, UPI) matched how agents already thought about verification types, so there was nothing new to learn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="alt">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">05 · Impact</div>
+      <h2 class="sec-title">What changed for agents and users</h2>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-n" style="font-size:clamp(22px,3vw,34px);color:var(--green)">Eliminated</div><div class="stat-l">Backend escalation for standard KYC issue types. Agents resolve end-to-end within the CS panel.</div></div>
+      <div class="stat"><div class="stat-n" style="font-size:clamp(22px,3vw,34px)">Faster</div><div class="stat-l">Resolution times. No re-submission of documents. No waiting on backend tickets.</div></div>
+      <div class="stat"><div class="stat-n" style="font-size:clamp(22px,3vw,34px);color:var(--blue)">Closed</div><div class="stat-l">Critical name change audit gap. A compliance record now exists where none did before.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="learnings">
+  <div class="inner">
+    <div class="reveal">
+      <div class="kicker">06 · What I learned</div>
+      <h2 class="sec-title">What stayed with me</h2>
+    </div>
+    <div class="reveal">
+      <div class="learn">
+        <div class="learn-n">01</div>
+        <div class="learn-t">Tooling debt is quiet until it isn't</div>
+        <div class="learn-d">KYC got skipped because the product was moving fast. By the time it became a problem, the manual load was enormous. Internal tools are easy to deprioritise. They're also the ones that slow everything down when they don't exist.</div>
+      </div>
+      <div class="learn">
+        <div class="learn-n">02</div>
+        <div class="learn-t">Saying no to a feature is also design</div>
+        <div class="learn-d">The verification log page sounded useful. But once we understood that OCR and Digilocker queries never reach the manual queue, it became obvious the log would always be empty. Descoping it wasn't laziness. It was the right call.</div>
+      </div>
+      <div class="learn">
+        <div class="learn-n">03</div>
+        <div class="learn-t">The edge cases are where it gets interesting</div>
+        <div class="learn-d">The name change trail wasn't on anyone's list. We found it by asking what happens when the wrong Aadhaar gets verified. Once we pulled that thread, the compliance risk was obvious. The most important design decisions in this project came from scenarios nobody thought to raise.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>KYC Verification Tool</strong> &nbsp;·&nbsp; Product Case Study &nbsp;·&nbsp; Fantasy Sports Platform
+</footer>
+
+<script>
+document.getElementById('menuBtn').addEventListener('click',function(){
+  document.getElementById('mobNav').classList.toggle('open');
+});
+document.querySelectorAll('.ml').forEach(function(a){
+  a.addEventListener('click',function(){ document.getElementById('mobNav').classList.remove('open'); });
+});
+const obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.08,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+</script>
+</body>
+</html>
