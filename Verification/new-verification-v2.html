@@ -1127,7 +1127,7 @@ img { display: block; max-width: 100%; }
   margin-bottom: var(--space-4);
 }
 .s-explored-sub {
-  font-size: var(--text-body);
+  font-size: var(--text-h4);
   color: var(--on-surface-variant);
   line-height: var(--leading-relaxed);
 }
@@ -1166,6 +1166,11 @@ img { display: block; max-width: 100%; }
   font-family: 'Manrope', sans-serif;
   line-height: var(--leading-display);
 }
+.s-explored-card-img {
+  width: 100%; aspect-ratio: 16/9; border-radius: 1rem; overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+.s-explored-card-img img { width: 100%; height: 100%; object-fit: cover; }
 .s-explored-card-top {
   display: flex;
   align-items: center;
@@ -1397,7 +1402,7 @@ img { display: block; max-width: 100%; }
 }
 .s8-header h2 { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); margin-bottom: var(--space-5); }
 .s8-header h2 span { color: var(--primary-dim); }
-.s8-header p { font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
+.s8-header p { font-size: var(--text-h4); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
 .s8-rows { display: flex; flex-direction: column; gap: var(--space-9); }
 .s8-row { display: grid; grid-template-columns: 1fr; gap: var(--space-7); align-items: center; }
 .s8-phone-col { display: flex; justify-content: center; }
@@ -1745,7 +1750,7 @@ img { display: block; max-width: 100%; }
 }
 .s10-tag span { font-size: var(--text-caption); letter-spacing: var(--tracking-wide); text-transform: uppercase; font-weight: 600; color: var(--primary); }
 .s10-header h2 { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); }
-.s10-header p { font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: var(--leading-relaxed); font-weight: 400; }
+.s10-header p { font-size: var(--text-h4); color: var(--on-surface-variant); line-height: var(--leading-relaxed); font-weight: 400; }
 
 /* Bento grid */
 .s10-bento { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
@@ -1959,7 +1964,6 @@ img { display: block; max-width: 100%; }
   .s6-pivot-heading { font-size: var(--text-h2); }
 
   .s8 { padding: var(--space-9) var(--space-7); }
-  .s8-header p { font-size: var(--text-h4); }
   .s8-rows { gap: var(--space-11); }
   .s8-row { grid-template-columns: 5fr 7fr; }
   .s8-row-reverse .s8-phone-col { order: 2; }
@@ -2197,7 +2201,7 @@ img { display: block; max-width: 100%; }
   color: var(--on-surface);
 }
 .s-landscape-sub {
-  font-size: var(--text-body);
+  font-size: var(--text-h4);
   color: var(--on-surface-variant);
   line-height: var(--leading-normal);
   max-width: var(--width-prose);
@@ -2305,7 +2309,7 @@ img { display: block; max-width: 100%; }
 .s-who { padding: var(--space-10) var(--space-5); background: var(--background); }
 .s-who-inner { max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
 .s-who-header { display: flex; flex-direction: column; gap: var(--space-3); }
-.s-who-eyebrow { font-size: var(--text-caption); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
+.s-who-eyebrow { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
 .s-who-title { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); color: var(--on-surface); }
 
 .s-who-context {
@@ -2320,8 +2324,8 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center; font-size: var(--text-body);
 }
 .s-who-context-body { display: flex; flex-direction: column; gap: var(--space-1); }
-.s-who-context-label { font-size: var(--text-micro); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
-.s-who-context-text { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); }
+.s-who-context-label { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
+.s-who-context-text { font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: var(--leading-normal); }
 .s-who-context-text strong { color: var(--on-surface); font-weight: 600; }
 
 .s-who-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
@@ -2336,14 +2340,14 @@ img { display: block; max-width: 100%; }
   background: var(--surface-container-high);
   display: flex; align-items: center; justify-content: center; font-size: var(--text-body-lg);
 }
-.s-who-card-tag { font-size: var(--text-micro); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; padding: var(--space-1) var(--space-2); border-radius: 9999px; width: fit-content; }
+.s-who-card-tag { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; padding: var(--space-1) var(--space-2); border-radius: 9999px; width: fit-content; }
 .tag-new { background: rgba(255,181,160,0.08); border: 1px solid rgba(255,181,160,0.18); color: var(--primary); }
 .tag-risk { background: rgba(238,125,119,0.08); border: 1px solid rgba(238,125,119,0.18); color: var(--error); }
 .tag-upgrade { background: rgba(172,171,170,0.06); border: 1px solid rgba(72,72,72,0.2); color: var(--on-surface-variant); }
-.s-who-card-name { font-family: 'Manrope', sans-serif; font-size: var(--text-body-lg); font-weight: 700; color: var(--on-surface); line-height: var(--leading-snug); }
-.s-who-card-desc { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); flex: 1; }
+.s-who-card-name { font-family: 'Manrope', sans-serif; font-size: var(--text-h3); font-weight: 700; color: var(--on-surface); line-height: var(--leading-snug); }
+.s-who-card-desc { font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: var(--leading-normal); flex: 1; }
 .s-who-card-tension {
-  font-size: var(--text-body-sm); line-height: var(--leading-normal); padding: var(--space-2) var(--space-3);
+  font-size: var(--text-body-lg); line-height: var(--leading-normal); padding: var(--space-2) var(--space-3);
   border-radius: 0.75rem; margin-top: var(--space-1);
   background: var(--surface-container-high);
   color: var(--on-surface-variant);
@@ -2365,7 +2369,7 @@ img { display: block; max-width: 100%; }
 .s-scene-header { display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-7); }
 .s-scene-eyebrow { font-size: var(--text-caption); font-weight: 700; color: var(--primary); letter-spacing: var(--tracking-wide); text-transform: uppercase; display: block; }
 .s-scene-title { font-family: 'Manrope', sans-serif; font-size: var(--text-h2); font-weight: 800; color: var(--on-surface); letter-spacing: var(--tracking-display); line-height: var(--leading-tight); max-width: var(--width-prose); }
-.s-scene-body { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
+.s-scene-body { font-size: var(--text-h4); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
 /* Mockup frame */
 .s-mockup-frame { border: 1px solid rgba(72,72,72,0.3); border-radius: 14px; padding: var(--space-5) var(--space-5); background: rgba(19,19,19,0.5); margin-bottom: var(--space-7); overflow: hidden; }
 .s-mockup-fullbleed { width: 100vw; position: relative; left: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0; border: none; padding: 0; background: none; margin-bottom: var(--space-7); }
@@ -2382,7 +2386,7 @@ img { display: block; max-width: 100%; }
 .s-wd-header { display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-7); }
 .s-wd-eyebrow { font-size: var(--text-caption); font-weight: 700; color: var(--primary); letter-spacing: var(--tracking-wide); text-transform: uppercase; display: block; }
 .s-wd-title { font-family: 'Manrope', sans-serif; font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); color: var(--on-surface); line-height: var(--leading-tight); }
-.s-wd-sub { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
+.s-wd-sub { font-size: var(--text-h4); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
 /* Impact grid */
 .s-impact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); margin-top: var(--space-7); }
 .s-symptoms { display: flex; flex-direction: column; gap: var(--space-6); }
@@ -3099,6 +3103,7 @@ img { display: block; max-width: 100%; }
           </div>
           <span class="s-explored-status-badge">Dropped</span>
         </div>
+        <div class="s-explored-card-img"><img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Aadhaar%20QR%20Scan.png" alt="Aadhaar QR Scan"/></div>
         <h3 class="s-explored-card-title">Aadhaar QR Scan</h3>
         <p class="s-explored-card-body"><strong>Zero typing, zero uploads.</strong> Scan and auto-fill. Dropped because older Aadhaar cards lacked the Secure QR format, leaving too large a coverage gap to ship.</p>
         <hr class="s-explored-divider"/>
@@ -3114,6 +3119,7 @@ img { display: block; max-width: 100%; }
           </div>
           <span class="s-explored-status-badge">Dropped</span>
         </div>
+        <div class="s-explored-card-img"><img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Aadhaar%20%2B%20PAN%2C%20No%20OTP.png" alt="Aadhaar + PAN, No OTP"/></div>
         <h3 class="s-explored-card-title">Aadhaar + PAN, No OTP</h3>
         <p class="s-explored-card-body"><strong>No uploads, no OTP.</strong> Two numbers users already know. Clean in theory, but it couldn't derive a photo, which failed the full KYC requirement.</p>
         <hr class="s-explored-divider"/>
@@ -3129,6 +3135,7 @@ img { display: block; max-width: 100%; }
           </div>
           <span class="s-explored-status-badge">Dropped</span>
         </div>
+        <div class="s-explored-card-img"><img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/OCR%20with%20Inline%20Correction.png" alt="OCR with Inline Correction"/></div>
         <h3 class="s-explored-card-title">OCR with Inline Correction</h3>
         <p class="s-explored-card-body"><strong>Show what OCR read, let users fix it.</strong> Sound concept, but Voter IDs and Driving Licences have wildly different layouts across states, too many variants to handle in time.</p>
         <hr class="s-explored-divider"/>
@@ -3144,6 +3151,7 @@ img { display: block; max-width: 100%; }
           </div>
           <span class="s-explored-status-badge">Dropped</span>
         </div>
+        <div class="s-explored-card-img"><img src="https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Interactive%20Document%20Card%20UI.png" alt="Interactive Document Card UI"/></div>
         <h3 class="s-explored-card-title">Interactive Document Card UI</h3>
         <p class="s-explored-card-body"><strong>Tap fields on a visual ID card, not a flat form.</strong> Intuitive, but rendering it consistently across all document types and three platform variants made it technically infeasible within the timeline.</p>
         <hr class="s-explored-divider"/>
