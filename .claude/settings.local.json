@@ -8,7 +8,9 @@
       "Bash(git commit:*)",
       "Bash(git config:*)",
       "Bash(cp:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(curl -s \"https://purge.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Step%20by%20Step%20guidance%20-%20A.png\")",
+      "Bash(curl -s \"https://purge.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Option%20overload%20%E2%86%92%20to%20guided%20completion%20-%20A.png\")"
     ]
   }
 }
