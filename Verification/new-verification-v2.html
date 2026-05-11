@@ -2305,10 +2305,25 @@ img { display: block; max-width: 100%; }
 }
 .s-landscape-mockup-label { display: none; }
 
+/* s-metrics section */
+.s-metrics { padding: var(--space-10) var(--space-5); background: var(--background); }
+.s-metrics-inner { max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
+.s-metrics-header { display: flex; flex-direction: column; gap: var(--space-3); }
+.s-metrics-eyebrow { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
+.s-metrics-title { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); color: var(--on-surface); }
+.s-metrics-card { background: var(--surface-container); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: var(--space-7); }
+.s-metrics-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); }
+@media (min-width: 640px) { .s-metrics-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.s-metrics-item { display: flex; flex-direction: column; gap: var(--space-2); }
+.s-metrics-label { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--on-surface-variant); }
+.s-metrics-value { font-family: 'Manrope', sans-serif; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; line-height: var(--leading-tight); color: var(--on-surface); }
+.s-metrics-highlight { color: var(--primary); }
+.s-metrics-value-unit { font-size: var(--text-body-lg); font-weight: 600; color: var(--on-surface-variant); }
+.s-metrics-sub { font-size: var(--text-body); font-style: italic; color: var(--on-surface-variant); line-height: var(--leading-normal); margin: 0; }
+
 /* s-who section */
-.s-who { position: relative; padding: var(--space-10) var(--space-5); background: var(--background); }
-.s-who::before { content: ''; position: absolute; inset: 0; background: url('https://cdn.jsdelivr.net/gh/Bhavika-Maloo/work@main/Verification/original/Mask%20group.png') center center / cover no-repeat; opacity: 0.4; pointer-events: none; }
-.s-who-inner { position: relative; max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
+.s-who { padding: var(--space-10) var(--space-5); background: var(--background); }
+.s-who-inner { max-width: var(--width-wide); margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-7); }
 .s-who-header { display: flex; flex-direction: column; gap: var(--space-3); }
 .s-who-eyebrow { font-size: var(--text-body-sm); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); }
 .s-who-title { font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); color: var(--on-surface); }
@@ -2389,18 +2404,19 @@ img { display: block; max-width: 100%; }
 .s-wd-title { font-family: 'Manrope', sans-serif; font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); color: var(--on-surface); line-height: var(--leading-tight); }
 .s-wd-sub { font-size: var(--text-h4); color: var(--on-surface-variant); line-height: var(--leading-normal); max-width: var(--width-prose); }
 /* Impact grid */
-.s-impact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); margin-top: var(--space-7); }
+.s-impact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); margin-top: var(--space-7); align-items: stretch; }
+.s-symptom-title { font-size: var(--text-h3); font-weight: 700; color: var(--primary); margin-bottom: var(--space-3); }
+.s-symptom-body { font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: var(--leading-normal); }
 .s-symptoms { display: flex; flex-direction: column; gap: var(--space-6); }
-.s-symptom-title { font-size: var(--text-body); font-weight: 700; color: var(--primary); margin-bottom: var(--space-2); }
-.s-symptom-body { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); }
 .s-stat-cards { display: flex; flex-direction: column; gap: var(--space-3); }
-.s-stat-card { padding: var(--space-5); background: var(--surface-container); border: 1px solid rgba(72,72,72,0.2); border-radius: 12px; }
-.s-stat-num { font-family: 'Manrope', sans-serif; font-size: var(--text-h2); font-weight: 800; letter-spacing: var(--tracking-display); display: block; margin-bottom: var(--space-1); }
-.s-stat-card p { font-size: var(--text-body-sm); color: var(--on-surface-variant); line-height: var(--leading-normal); }
+.s-stat-card { padding: var(--space-5); background: var(--surface-container); border: 1px solid rgba(72,72,72,0.2); border-radius: 12px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.s-stat-num { font-family: 'Manrope', sans-serif; font-size: var(--text-h1); font-weight: 800; letter-spacing: var(--tracking-display); display: block; margin-bottom: var(--space-2); }
+.s-stat-card p { font-size: var(--text-body); color: var(--on-surface-variant); line-height: var(--leading-normal); }
 @media (min-width: 640px) {
   .s-scene-title { font-size: var(--text-h2); }
   .s-wd-title { font-size: var(--text-h2); }
-  .s-impact-grid { grid-template-columns: 5fr 3fr; }
+  .s-impact-grid { grid-template-columns: 5fr 3fr; align-items: stretch; }
+  .s-stat-cards { height: 100%; }
 }
 @media (min-width: 1024px) {
   .s-scene-title { font-size: var(--text-h2); }
@@ -2763,16 +2779,12 @@ img { display: block; max-width: 100%; }
       <!-- Left: symptoms -->
       <div class="s-symptoms">
         <div>
-          <p class="s-symptom-title">Symptom 01 — Withdrawal walls</p>
+          <p class="s-symptom-title">Withdrawal walls</p>
           <p class="s-symptom-body">Users reached withdrawal and discovered their PAN, KYC, and bank account names had to match. By then, the mismatch was already baked in. Nothing at deposit had warned them.</p>
         </div>
         <div>
-          <p class="s-symptom-title">Symptom 02 — PAN entry failures</p>
+          <p class="s-symptom-title">PAN entry failures</p>
           <p class="s-symptom-body">88% of PAN verification failures were data-entry mismatches. Users were re-typing names the system already had on file from prior KYC.</p>
-        </div>
-        <div>
-          <p class="s-symptom-title">Symptom 03 — Re-verification fatigue</p>
-          <p class="s-symptom-body">Already-verified users were being asked to verify again to satisfy the upcoming regulation. Each touchpoint behaved as if prior verification didn't exist.</p>
         </div>
       </div>
 
@@ -3334,8 +3346,65 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
+<!-- Section: Metrics -->
+<section class="s-metrics">
+  <div class="s-metrics-inner">
+    <div class="s-metrics-header">
+      <span class="s-metrics-eyebrow">Results</span>
+      <h2 class="s-metrics-title">Impact at a glance.</h2>
+    </div>
+    <div class="s-metrics-card">
+      <div class="s-metrics-grid">
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">PAN Success Rate</span>
+          <div class="s-metrics-value">~50% → <span class="s-metrics-highlight">~72%</span></div>
+          <p class="s-metrics-sub">+22pp absolute lift</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">PAN Verification TAT</span>
+          <div class="s-metrics-value">12 min → <span class="s-metrics-highlight">2–4 sec</span></div>
+          <p class="s-metrics-sub">~180× faster</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">PAN Automation</span>
+          <div class="s-metrics-value">~90% → <span class="s-metrics-highlight">99.99%</span></div>
+          <p class="s-metrics-sub">Manual review nearly eliminated</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">Reg → Cash Add Page</span>
+          <div class="s-metrics-value"><span class="s-metrics-highlight">+30%</span></div>
+          <p class="s-metrics-sub">A/B tested, TG vs CG, Dec 15 – Jan 31</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">KYC Completion Rate</span>
+          <div class="s-metrics-value">45% → <span class="s-metrics-highlight">~55%</span></div>
+          <p class="s-metrics-sub">Reduced abandonment through better timing</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">First Withdrawal Time</span>
+          <div class="s-metrics-value">35 min → <span class="s-metrics-highlight">~8 min</span></div>
+          <p class="s-metrics-sub">Faster trust-building moment</p>
+        </div>
+
+        <div class="s-metrics-item">
+          <span class="s-metrics-label">Verification Support Load</span>
+          <div class="s-metrics-value">~9K → <span class="s-metrics-highlight">~7K</span><span class="s-metrics-value-unit">/week</span></div>
+          <p class="s-metrics-sub">Event-driven support tickets</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Section 14: Earned Lessons -->
-<section class="s14">
+<section class="s14" style="display:none;">
   <div class="s14-inner">
 
     <header class="s14-header">
