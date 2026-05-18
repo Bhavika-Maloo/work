@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiggy Finance Dashboard</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --card-strong: #fbfcfd;
+      --line: #dfe4ea;
+      --line-soft: #edf0f3;
+      --text: #171b22;
+      --muted: #697386;
+      --soft: #8b95a5;
+      --orange: #fc8019;
+      --orange-soft: #fff2e7;
+      --purple: #7048e8;
+      --purple-soft: #f0ebff;
+      --refund: #cfd6df;
+      --green: #11845b;
+      --green-soft: #e7f6ef;
+      --amber: #a86105;
+      --amber-soft: #fff6df;
+      --red: #c2410c;
+      --red-soft: #fff0eb;
+      --shadow: 0 18px 48px rgba(31, 41, 55, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(31, 41, 55, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 41, 55, 0.045) 1px, transparent 1px),
+        radial-gradient(circle at 20% 10%, rgba(252, 128, 25, 0.08), transparent 24rem),
+        var(--bg);
+      background-size: 72px 72px, 72px 72px, auto, auto;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 244px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      padding: 26px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: var(--orange);
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(252, 128, 25, 0.24);
+    }
+
+    .nav { display: grid; gap: 7px; }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 42px;
+      padding: 0 13px;
+      color: var(--muted);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav a.active {
+      color: var(--orange);
+      background: var(--orange-soft);
+    }
+
+    .nav-count {
+      min-width: 22px;
+      min-height: 22px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 7px;
+      color: var(--orange);
+      background: #ffffff;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .main {
+      width: min(1500px, 100%);
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .input,
+    .select,
+    .button,
+    .icon-button {
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .input { width: 292px; padding: 0 14px; }
+    .select { padding: 0 12px; }
+
+    .button {
+      padding: 0 16px;
+      border-color: var(--orange);
+      background: var(--orange);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(252, 128, 25, 0.18);
+      cursor: pointer;
+    }
+
+    .secondary-button {
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .danger-button {
+      color: var(--red);
+      border-color: #ffd1c2;
+      background: var(--red-soft);
+    }
+
+    .danger-button-solid {
+      background: var(--red);
+      border-color: var(--red);
+      color: #ffffff;
+    }
+
+    .icon-button {
+      width: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 146px;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .metric-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .metric-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      color: var(--orange);
+      background: var(--orange-soft);
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .metric-value {
+      margin-bottom: 7px;
+      font-size: 28px;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .metric-note {
+      min-height: 32px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .metric-progress {
+      width: 100%;
+      height: 8px;
+      overflow: hidden;
+      margin: 8px 0 8px;
+      background: #eceff3;
+      border-radius: 999px;
+    }
+
+    .metric-progress span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--orange));
+    }
+
+    .metric-action,
+    .panel-action {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .metric-action { margin-top: auto; }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .dashboard-grid.balanced { grid-template-columns: 1fr 1fr; }
+    .dashboard-grid.focus { grid-template-columns: 1fr; }
+
+    .panel { overflow: hidden; }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px 12px;
+    }
+
+    .panel-title {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .panel-kpi {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 850;
+    }
+
+    .panel-subtitle {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .panel-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tool-select,
+    .tool-button,
+    .tool-label {
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tool-select { padding: 0 9px; }
+
+    .tool-button {
+      width: 34px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .tool-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 11px;
+      color: var(--muted);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 4px 20px 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      background: var(--purple);
+    }
+
+    .swatch.orange { background: var(--orange); }
+    .swatch.gray { background: #9aa3af; }
+    .swatch.refund { background: var(--refund); }
+
+    .chart { padding: 0 18px 16px; }
+
+    .chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .trend-insights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0 20px 18px;
+    }
+
+    .trend-insight {
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      background: var(--card-strong);
+    }
+
+    .trend-insight strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .trend-insight span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .donut-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 252px;
+    }
+
+    .donut-chart {
+      width: 220px;
+      height: 220px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--purple) 0deg 168deg,
+        var(--orange) 168deg 268deg,
+        #9aa3af 268deg 331deg,
+        var(--refund) 331deg 360deg
+      );
+      justify-self: center;
+      position: relative;
+    }
+
+    .donut-tag {
+      position: absolute;
+      min-width: 48px;
+      min-height: 30px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 850;
+      box-shadow: 0 10px 24px rgba(31, 41, 55, 0.08);
+    }
+
+    .donut-tag.restaurant { top: 16px; right: 22px; color: var(--purple); border-color: #ddd4ff; background: var(--purple-soft); }
+    .donut-tag.delivery { right: 12px; bottom: 48px; color: #c6540a; border-color: #ffd2b0; background: var(--orange-soft); }
+    .donut-tag.vendor { left: 18px; bottom: 46px; color: #596273; background: #f2f5f8; }
+    .donut-tag.refund { top: 28px; left: 28px; color: #697386; background: #f5f7f9; }
+
+    .donut-chart::before {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      background: var(--card);
+      border-radius: 50%;
+    }
+
+    .donut-chart::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      border: 12px solid var(--card);
+      pointer-events: none;
+    }
+
+    .donut-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .donut-wrap {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.92fr) 1fr;
+      gap: 26px;
+      align-items: center;
+      padding: 6px 28px 26px;
+    }
+
+    .donut-center { font-size: 21px; font-weight: 850; }
+
+    .donut-list { display: grid; gap: 10px; }
+
+    .donut-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 14px;
+    }
+
+    .donut-row:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .donut-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .donut-meta { display: grid; gap: 2px; }
+
+    .donut-percent {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .compact-table { table-layout: fixed; }
+    .compact-table th, .compact-table td { padding-left: 12px; padding-right: 12px; }
+    .compact-table th:nth-child(1), .compact-table td:nth-child(1) { width: 40%; }
+    .compact-table th:nth-child(2), .compact-table td:nth-child(2) { width: 16%; }
+    .compact-table th:nth-child(3), .compact-table td:nth-child(3) { width: 16%; }
+    .compact-table th:nth-child(4), .compact-table td:nth-child(4) { width: 16%; }
+    .compact-table th:nth-child(5), .compact-table td:nth-child(5) { width: 12%; }
+
+    th, td {
+      padding: 13px 16px;
+      text-align: left;
+      border-top: 1px solid var(--line-soft);
+      vertical-align: middle;
+    }
+
+    th {
+      color: var(--soft);
+      background: var(--card-strong);
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .amount, .strong { font-weight: 850; white-space: nowrap; }
+
+    .muted {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .badge.high { color: var(--red); background: var(--red-soft); }
+    .badge.medium { color: var(--amber); background: var(--amber-soft); }
+    .badge.good { color: var(--green); background: var(--green-soft); }
+
+    .progress {
+      width: 104px;
+      height: 8px;
+      overflow: hidden;
+      background: #eceff3;
+      border-radius: 999px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--orange));
+    }
+
+    .action-list { display: grid; }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 20px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .action-title { font-size: 14px; font-weight: 800; }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding: 0 20px 20px;
+    }
+
+    .summary-card {
+      min-height: 150px;
+      display: grid;
+      align-content: space-between;
+      gap: 18px;
+      padding: 16px;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      background: var(--card-strong);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .summary-card.accent {
+      border-color: #ffd9bd;
+      background: linear-gradient(180deg, #fffaf6, #ffffff);
+    }
+
+    .summary-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .summary-value {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 850;
+      line-height: 1.18;
+      overflow-wrap: anywhere;
+    }
+
+    .summary-card .muted { overflow-wrap: anywhere; }
+
+    .feed {
+      display: grid;
+      padding: 0 20px 20px;
+    }
+
+    .feed-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .feed-item:first-child { border-top: 0; }
+
+    .feed-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 6px var(--orange-soft);
+    }
+
+    .table-panel { margin-top: 18px; }
+
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 20px 16px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      color: var(--orange);
+      border-color: #ffd2b0;
+      background: var(--orange-soft);
+    }
+
+    /* Alert view */
+    .alert-list { display: grid; padding: 0 20px 20px; }
+
+    .alert-row {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 14px;
+      align-items: start;
+      padding: 16px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .alert-row:first-child { border-top: 0; }
+
+    .alert-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .alert-icon.high { color: var(--red); background: var(--red-soft); }
+    .alert-icon.medium { color: var(--amber); background: var(--amber-soft); }
+
+    .alert-meta { font-size: 13px; }
+    .alert-title { font-weight: 800; margin-bottom: 4px; }
+    .alert-context { color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .alert-date { color: var(--soft); font-size: 11px; margin-top: 5px; font-weight: 700; }
+
+    .alert-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    /* Retry button */
+    .retry-button {
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid #ddd4ff;
+      border-radius: 8px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(23, 27, 34, 0.28);
+    }
+
+    .modal-backdrop.active { display: flex; }
+
+    .modal {
+      width: min(480px, 100%);
+      padding: 24px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 64px rgba(31, 41, 55, 0.18);
+    }
+
+    .modal h2 { margin: 0 0 8px; font-size: 18px; }
+
+    .modal p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .modal-fields {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .modal .input,
+    .modal .select {
+      width: 100%;
+      height: 40px;
+    }
+
+    .modal .select { padding: 0 12px; }
+
+    .field-preview {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      background: var(--card-strong);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .is-hidden { display: none !important; }
+    .is-dimmed { opacity: 0.28; }
+
+    @media (max-width: 1180px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .metrics { grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+      .dashboard-grid, .dashboard-grid.balanced { grid-template-columns: 1fr; }
+      .summary-grid, .trend-insights { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .main { padding: 18px; }
+      .topbar, .controls { align-items: stretch; flex-direction: column; }
+      .input, .select, .button { width: 100%; }
+      .metrics { grid-template-columns: 1fr; }
+      .donut-wrap { grid-template-columns: 1fr; padding: 6px 20px 22px; }
+      .alert-row { grid-template-columns: 36px 1fr; }
+      .alert-actions { grid-column: 2; }
+      .drawer { width: 100vw; }
+    }
+
+    /* ── Agent matrix ───────────────────────── */
+    .agent-matrix { overflow-x: auto; padding: 0 0 8px; }
+    .matrix-grid { display: grid; grid-template-columns: 140px repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; min-width: 560px; }
+    .matrix-head { background: var(--bg); padding: 10px 14px; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .matrix-fn { background: var(--bg); padding: 14px; font-size: 13px; font-weight: 700; display: flex; align-items: center; }
+    .matrix-cell { background: #fff; padding: 12px 14px; cursor: pointer; transition: background .12s; }
+    .matrix-cell:hover { background: #f5f7fa; }
+    .matrix-cell.status-risk { border-left: 3px solid var(--red); }
+    .matrix-cell.status-watch { border-left: 3px solid var(--amber); }
+    .matrix-cell.status-normal { border-left: 3px solid transparent; }
+    .matrix-cell.status-empty { cursor: default; opacity: .5; }
+    .matrix-cell.status-empty:hover { background: #fff; }
+    .mc-amount { font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+    .mc-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .mc-badge { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+    .mc-badge.risk { background: #fee2e2; color: var(--red); }
+    .mc-badge.watch { background: #fef9c3; color: #92400e; }
+    .mc-badge.normal { background: #dcfce7; color: #166534; }
+
+    /* ── Agent drawer list ───────────────────────── */
+    .agent-drawer-list { list-style: none; padding: 0; margin: 0; }
+    .agent-drawer-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .agent-drawer-item:last-child { border-bottom: none; }
+    .adi-name { font-weight: 800; font-size: 14px; }
+    .adi-meta { font-size: 12px; color: var(--muted); margin: 2px 0 8px; }
+    .adi-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+    .adi-bar span { display:block; height:100%; border-radius:3px; }
+    .adi-nums { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+    .adi-chips { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+    .adi-chip { font-size:11px; font-weight:700; padding:3px 8px; border-radius:20px; cursor:pointer; border:1px solid transparent; background:var(--bg); color:var(--muted); }
+    .adi-chip.risk  { background:#fee2e2; color:var(--red); }
+    .adi-chip.watch { background:#fef9c3; color:#92400e; }
+    .adi-chip.normal{ background:#dcfce7; color:#166534; }
+    .adi-chip.active { outline:2px solid currentColor; }
+    .adi-search { width:100%; padding:7px 10px; border:1px solid var(--border); border-radius:6px; font-size:13px; margin-bottom:12px; outline:none; }
+    .adi-search:focus { border-color:var(--orange); }
+    .adi-group-label { font-size:11px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; padding:12px 0 4px; }
+    .adi-row-actions { display:flex; gap:6px; margin-top:8px; }
+    .adi-btn { font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; border:1px solid var(--border); background:#fff; cursor:pointer; color:var(--text); }
+    .adi-btn:hover { background:var(--bg); }
+    .adi-btn.danger { color:var(--red); border-color:#fecaca; }
+    .adi-show-more { display:block; width:100%; padding:10px; font-size:12px; color:var(--orange); cursor:pointer; font-weight:700; border:none; background:none; text-align:center; }
+
+    /* ── Side drawer ─────────────────────────── */
+    .drawer-overlay {
+      position: fixed; inset: 0; z-index: 20;
+      display: none;
+      background: rgba(23, 27, 34, 0.18);
+    }
+    .drawer-overlay.active { display: block; }
+
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 21;
+      width: min(460px, 100vw);
+      background: #ffffff;
+      border-left: 1px solid var(--line);
+      box-shadow: -24px 0 64px rgba(31, 41, 55, 0.14);
+      transform: translateX(100%);
+      transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px; padding: 22px 22px 16px;
+      border-bottom: 1px solid var(--line-soft);
+      position: sticky; top: 0; background: #ffffff; z-index: 1;
+    }
+    .drawer-title { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+    .drawer-sub { color: var(--muted); font-size: 13px; }
+
+    .drawer-body { padding: 20px 22px; flex: 1; display: grid; align-content: start; gap: 0; }
+
+    .drawer-field {
+      display: grid; grid-template-columns: 148px 1fr;
+      gap: 8px; align-items: baseline;
+      padding: 11px 0; border-bottom: 1px solid var(--line-soft);
+      font-size: 13px;
+    }
+    .drawer-field:last-child { border-bottom: 0; }
+    .drawer-label { color: var(--muted); font-weight: 700; }
+    .drawer-value { font-weight: 650; }
+
+    .drawer-footer {
+      display: flex; gap: 10px; padding: 16px 22px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    /* ── Report modal (wider than agent modals) ─ */
+    .modal.modal-report { width: min(520px, 100%); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>Swiggy Finance</div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#overview" data-view-target="overview">Overview <span>•</span></a>
+        <a href="#alerts" data-view-target="alerts">Alerts <span class="nav-count">5</span></a>
+        <a href="#agents" data-view-target="agents">Agents <span class="nav-count">5</span></a>
+        <a href="#payments" data-view-target="payments">Upcoming Payments</a>
+        <a href="#transactions" data-view-target="transactions">Transactions</a>
+        <a href="#approvals" data-view-target="approvals">Approvals <span class="nav-count">5</span></a>
+        <a href="#reports" data-view-target="reports">Reports</a>
+        <a href="#settings" data-view-target="settings">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Good morning, Bhavika.</h1>
+          <p class="subtitle">Monitor payment agents, limits, approvals, and transaction activity.</p>
+        </div>
+
+        <div class="controls" aria-label="Dashboard controls">
+          <input class="input" id="globalSearch" type="search" placeholder="Search this tab">
+          <select class="select" id="dateRange" aria-label="Date range">
+            <option value="month">This month: May 1–17</option>
+            <option value="week">This week: May 11–17</option>
+            <option value="today">Today: May 17</option>
+          </select>
+          <button class="icon-button" aria-label="Notifications">●</button>
+          <button class="button" id="primaryAction" type="button">Review approvals</button>
+        </div>
+      </header>
+
+      <!-- ── OVERVIEW ─────────────────────────────── -->
+      <section class="view active" data-view="overview">
+        <section class="metrics" aria-label="Key metrics">
+          <article class="card metric">
+            <div class="metric-top">
+              <div class="metric-label" data-range="allocationLabel">Allocation Left</div>
+              <div class="metric-icon">₹</div>
+            </div>
+            <div class="metric-value" data-range="allocationValue">₹7.1L</div>
+            <div class="metric-note" data-range="allocationNote">₹18.4L used of ₹25.5L monthly allocation</div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-top">
+              <div class="metric-label" data-range="spentLabel">Spent This Month</div>
+              <div class="metric-icon">↗</div>
+            </div>
+            <div class="metric-value" data-range="spentValue">₹18.4L</div>
+            <div class="metric-progress" aria-label="Monthly allocation used">
+              <span data-range-style="spentProgress" style="width: 72%"></span>
+            </div>
+            <div class="metric-note" data-range="spentNote">72% of ₹25.5L allocation used</div>
+            <a class="metric-action" href="#reports" data-jump-view="reports">View spend</a>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-top">
+              <div class="metric-label" data-range="upcomingLabel">Upcoming Payments</div>
+              <div class="metric-icon">↻</div>
+            </div>
+            <div class="metric-value">₹9.2L</div>
+            <div class="metric-note" data-range="upcomingNote">Due May 17–23, 2026</div>
+            <a class="metric-action" href="#payments" data-jump-view="payments">View schedule</a>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-top">
+              <div class="metric-label">Pending Approvals</div>
+              <div class="metric-icon">✓</div>
+            </div>
+            <div class="metric-value">5</div>
+            <div class="metric-note">₹2.8L total value</div>
+            <a class="metric-action" href="#approvals" data-jump-view="approvals">Review approvals</a>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-top">
+              <div class="metric-label">Agent Limit Risk</div>
+              <div class="metric-icon">◎</div>
+            </div>
+            <div class="metric-value">3</div>
+            <div class="metric-note">of 5 active agents are above 85% limit</div>
+            <a class="metric-action" href="#agents" data-jump-view="agents">Manage agents</a>
+          </article>
+        </section>
+
+        <section class="dashboard-grid focus">
+          <article class="card panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Attention Needed</h2>
+                <p class="panel-subtitle">Top 3 items ranked by urgency and financial risk</p>
+              </div>
+              <a class="panel-action" href="#alerts" data-jump-view="alerts">View all alerts</a>
+            </div>
+
+            <div class="summary-grid">
+              <article class="summary-card accent">
+                <div>
+                  <div class="summary-card-top">
+                    <span class="badge high">High</span>
+                    <span class="amount">₹2.8L</span>
+                  </div>
+                  <div class="summary-value">5 payments need approval</div>
+                  <div class="muted">2 high-value payments included · Due May 17</div>
+                </div>
+                <a class="panel-action" href="#approvals" data-jump-view="approvals">Review</a>
+              </article>
+              <article class="summary-card">
+                <div>
+                  <div class="summary-card-top">
+                    <span class="badge medium">Medium</span>
+                    <span class="amount">3 agents</span>
+                  </div>
+                  <div class="summary-value">Above 85% limit</div>
+                  <div class="muted">Restaurant payout and vendor payment agents · May 17</div>
+                </div>
+                <a class="panel-action" href="#agents" data-jump-view="agents">View agents</a>
+              </article>
+              <article class="summary-card">
+                <div>
+                  <div class="summary-card-top">
+                    <span class="badge medium">Medium</span>
+                    <span class="amount">2 payments</span>
+                  </div>
+                  <div class="summary-value">Approver assignment pending</div>
+                  <div class="muted">Scheduled payments need owner review · Due May 18</div>
+                </div>
+                <a class="panel-action" href="#payments" data-jump-view="payments">Assign</a>
+              </article>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid balanced">
+          <article class="card panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title" data-range="chartTitle">Monthly Spend Activity</h2>
+                <p class="panel-kpi" data-range="chartValue">₹18.4L</p>
+                <p class="panel-subtitle" data-range="chartSubtitle">May 01, 2026 → May 17, 2026 · 72% of allocation</p>
+              </div>
+              <div class="panel-tools">
+                <span class="tool-label">Trend signal</span>
+              </div>
+            </div>
+
+            <div class="legend">
+              <span><i class="swatch"></i>Restaurant payouts</span>
+              <span><i class="swatch orange"></i>Delivery payouts</span>
+              <span><i class="swatch gray"></i>Vendor payments</span>
+              <span><i class="swatch refund"></i>Refund batches</span>
+            </div>
+
+            <div class="chart" aria-label="Monthly spend line chart">
+              <svg viewBox="0 0 720 300" role="img">
+                <defs>
+                  <linearGradient id="areaPurple" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#7048e8" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#7048e8" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g stroke="#e5e9ef" stroke-dasharray="4 5">
+                  <line x1="40" y1="40" x2="700" y2="40"/>
+                  <line x1="40" y1="95" x2="700" y2="95"/>
+                  <line x1="40" y1="150" x2="700" y2="150"/>
+                  <line x1="40" y1="205" x2="700" y2="205"/>
+                  <line x1="40" y1="260" x2="700" y2="260"/>
+                  <line x1="120" y1="32" x2="120" y2="268"/>
+                  <line x1="230" y1="32" x2="230" y2="268"/>
+                  <line x1="340" y1="32" x2="340" y2="268"/>
+                  <line x1="450" y1="32" x2="450" y2="268"/>
+                  <line x1="560" y1="32" x2="560" y2="268"/>
+                </g>
+                <path d="M40 222 C82 222 93 220 120 180 S180 120 230 132 302 82 340 74 408 145 450 172 520 198 560 155 640 150 700 110" fill="none" stroke="#fc8019" stroke-width="4" stroke-linecap="round"/>
+                <path d="M40 158 C90 158 104 158 120 188 S190 205 230 154 290 132 340 132 390 132 420 88 476 82 500 138 545 172 560 152 610 130 700 130" fill="none" stroke="#7048e8" stroke-width="4" stroke-linecap="round"/>
+                <path d="M40 230 C100 230 122 198 160 190 S220 188 260 154 330 146 380 144 460 142 500 178 552 202 600 190 660 164 700 148" fill="none" stroke="#6b7280" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+                <path d="M40 246 C98 244 132 238 170 232 S250 226 310 218 400 216 455 224 520 236 580 232 650 224 700 218" fill="none" stroke="#cfd6df" stroke-width="4" stroke-linecap="round"/>
+                <path d="M40 260 L40 158 C90 158 104 158 120 188 S190 205 230 154 290 132 340 132 390 132 420 88 476 82 500 138 545 172 560 152 610 130 700 130 L700 260 Z" fill="url(#areaPurple)"/>
+                <g fill="#697386" font-size="13">
+                  <text x="35" y="45">18L</text>
+                  <text x="35" y="100">14L</text>
+                  <text x="35" y="155">10L</text>
+                  <text x="41" y="210">6L</text>
+                  <text x="42" y="265">0</text>
+                  <text x="95" y="288" data-range="axisOne">May 1</text>
+                  <text x="210" y="288" data-range="axisTwo">May 4</text>
+                  <text x="320" y="288" data-range="axisThree">May 8</text>
+                  <text x="430" y="288" data-range="axisFour">May 12</text>
+                  <text x="540" y="288" data-range="axisFive">May 17</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="trend-insights" aria-label="Spend trend insights">
+              <div class="trend-insight">
+                <strong data-range="trendOneTitle">Delivery spike</strong>
+                <span data-range="trendOneCopy">May 8 peaked near ₹15.6L; check payout batch size.</span>
+              </div>
+              <div class="trend-insight">
+                <strong data-range="trendTwoTitle">Restaurant surge</strong>
+                <span data-range="trendTwoCopy">May 12 touched ₹16.0L before approvals slowed spend.</span>
+              </div>
+              <div class="trend-insight">
+                <strong data-range="trendThreeTitle">Refunds stable</strong>
+                <span data-range="trendThreeCopy">Refund batches stayed under ₹1.5L equivalent share.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Payment Mix</h2>
+                <p class="panel-kpi" data-range="mixValue">₹18.4L</p>
+                <p class="panel-subtitle" data-range="mixSubtitle">Current monthly spend by category</p>
+              </div>
+              <div class="panel-tools">
+                <span class="tool-label">Category split</span>
+              </div>
+            </div>
+
+            <div class="donut-wrap">
+              <div class="donut-visual">
+                <div class="donut-chart" aria-label="Payment mix donut chart">
+                  <div class="donut-copy">
+                    <span class="donut-center" data-range="donutValue">₹18.4L</span>
+                    <span class="muted">spent</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="donut-list">
+                <div class="donut-row">
+                  <span class="donut-label"><i class="swatch"></i><span class="donut-meta"><span data-range="restaurantName">Restaurant payouts</span><span class="donut-percent" data-range="restaurantShare">47% of spend</span></span></span>
+                  <span class="amount" data-range="restaurantValue">₹8.6L</span>
+                </div>
+                <div class="donut-row">
+                  <span class="donut-label"><i class="swatch orange"></i><span class="donut-meta"><span data-range="deliveryName">Delivery payouts</span><span class="donut-percent" data-range="deliveryShare">28% of spend</span></span></span>
+                  <span class="amount" data-range="deliveryValue">₹5.1L</span>
+                </div>
+                <div class="donut-row">
+                  <span class="donut-label"><i class="swatch gray"></i><span class="donut-meta"><span data-range="vendorName">Vendor payments</span><span class="donut-percent" data-range="vendorShare">17% of spend</span></span></span>
+                  <span class="amount" data-range="vendorValue">₹3.2L</span>
+                </div>
+                <div class="donut-row">
+                  <span class="donut-label"><i class="swatch refund"></i><span class="donut-meta"><span data-range="refundName">Refund batches</span><span class="donut-percent" data-range="refundShare">8% of spend</span></span></span>
+                  <span class="amount" data-range="refundValue">₹1.5L</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid balanced">
+          <article class="card panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Recent Transactions</h2>
+                <p class="panel-subtitle">Latest 3 transactions for quick verification</p>
+              </div>
+              <a class="panel-action" href="#transactions" data-jump-view="transactions">Open transactions</a>
+            </div>
+
+            <div class="feed">
+              <div class="feed-item">
+                <span class="feed-dot"></span>
+                <div>
+                  <div class="strong">Priya Nair completed vendor payment</div>
+                  <div class="muted">TXN-20491 · May 17, 2026 · 09:18 AM</div>
+                </div>
+                <span class="amount">₹84,000</span>
+              </div>
+              <div class="feed-item">
+                <span class="feed-dot"></span>
+                <div>
+                  <div class="strong">Ankit Sharma submitted restaurant payout</div>
+                  <div class="muted">TXN-20487 · May 16, 2026 · 08:42 AM</div>
+                </div>
+                <span class="amount">₹1.2L</span>
+              </div>
+              <div class="feed-item">
+                <span class="feed-dot"></span>
+                <div>
+                  <div class="strong">Rahul Mehta processed refund batch</div>
+                  <div class="muted">TXN-20482 · May 15, 2026 · 06:10 PM</div>
+                </div>
+                <span class="amount">₹32,000</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Quick Actions</h2>
+                <p class="panel-subtitle">Frequent finance manager workflows</p>
+              </div>
+            </div>
+
+            <div class="action-list">
+              <div class="action-row">
+                <div>
+                  <div class="action-title">Add payment agent</div>
+                  <div class="muted">Create access, role, and spending limits</div>
+                </div>
+                <button class="secondary-button" type="button" data-agent-action="add">Start</button>
+              </div>
+              <div class="action-row">
+                <div>
+                  <div class="action-title">Update agent access</div>
+                  <div class="muted">Change role, payment category, or monthly limit</div>
+                </div>
+                <button class="secondary-button" type="button" data-agent-action="update">Update</button>
+              </div>
+              <div class="action-row">
+                <div>
+                  <div class="action-title">Deactivate agent</div>
+                  <div class="muted">Pause access before handover or exit</div>
+                </div>
+                <button class="secondary-button danger-button" type="button" data-agent-action="deactivate">Deactivate</button>
+              </div>
+              <div class="action-row">
+                <div>
+                  <div class="action-title">Export report</div>
+                  <div class="muted">Download monthly agent activity</div>
+                </div>
+                <a class="panel-action" href="#reports" data-jump-view="reports">Export</a>
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <!-- ── ALERTS ──────────────────────────────── -->
+      <section class="view" data-view="alerts">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Alerts</h2>
+              <p class="panel-subtitle">5 active alerts ranked by urgency. Act on or dismiss each item.</p>
+            </div>
+            <button class="secondary-button" id="dismissAllAlerts">Dismiss all</button>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="filter-group" aria-label="Alert filters">
+              <button class="filter-pill active" data-filter="all">All 5</button>
+              <button class="filter-pill" data-filter="high">High 2</button>
+              <button class="filter-pill" data-filter="medium">Medium 3</button>
+            </div>
+          </div>
+
+          <div class="alert-list">
+            <div class="alert-row" data-priority="high">
+              <div class="alert-icon high">!</div>
+              <div class="alert-meta">
+                <div class="alert-title">3 agents above 85% monthly limit</div>
+                <div class="alert-context">Ankit Sharma (88.75%), Arjun Das (86.7%), Meera Iyer (86%) · ₹3.9L combined remaining across the three agents</div>
+                <div class="alert-date">May 17, 2026</div>
+              </div>
+              <div class="alert-actions">
+                <a class="panel-action" href="#agents" data-jump-view="agents">View agents</a>
+                <button class="secondary-button" data-dismiss-alert>Dismiss</button>
+              </div>
+            </div>
+
+            <div class="alert-row" data-priority="high">
+              <div class="alert-icon high">!</div>
+              <div class="alert-meta">
+                <div class="alert-title">5 payments pending approval · ₹2.8L total</div>
+                <div class="alert-context">2 high-value items (PAY-501, INV-778) due today. Delay will push payouts past the May 17 settlement window.</div>
+                <div class="alert-date">Due May 17, 2026</div>
+              </div>
+              <div class="alert-actions">
+                <a class="panel-action" href="#approvals" data-jump-view="approvals">Review now</a>
+                <button class="secondary-button" data-dismiss-alert>Snooze</button>
+              </div>
+            </div>
+
+            <div class="alert-row" data-priority="medium">
+              <div class="alert-icon medium">~</div>
+              <div class="alert-meta">
+                <div class="alert-title">2 payments need approver assignment</div>
+                <div class="alert-context">PAY-502 (Arjun Das) and INV-778 (Ankit Sharma) have no assigned approver. Scheduled for May 18.</div>
+                <div class="alert-date">Due May 18, 2026</div>
+              </div>
+              <div class="alert-actions">
+                <a class="panel-action" href="#payments" data-jump-view="payments">Assign</a>
+                <button class="secondary-button" data-dismiss-alert>Dismiss</button>
+              </div>
+            </div>
+
+            <div class="alert-row" data-priority="medium">
+              <div class="alert-icon medium">~</div>
+              <div class="alert-meta">
+                <div class="alert-title">Arjun Das projected to hit limit by May 20</div>
+                <div class="alert-context">Delivery payouts · ₹1.6L remaining with 14 days left in cycle. Current spend rate will exhaust the limit 11 days early.</div>
+                <div class="alert-date">May 17, 2026</div>
+              </div>
+              <div class="alert-actions">
+                <a class="panel-action" href="#agents" data-jump-view="agents">Adjust limit</a>
+                <button class="secondary-button" data-dismiss-alert>Dismiss</button>
+              </div>
+            </div>
+
+            <div class="alert-row" data-priority="medium">
+              <div class="alert-icon medium">~</div>
+              <div class="alert-meta">
+                <div class="alert-title">Monthly allocation 72% used — 14 days remaining</div>
+                <div class="alert-context">₹7.1L of ₹25.5L allocation left. At current daily burn rate of ₹1.1L, the allocation may run short by May 23.</div>
+                <div class="alert-date">May 17, 2026</div>
+              </div>
+              <div class="alert-actions">
+                <a class="panel-action" href="#reports" data-jump-view="reports">View spend</a>
+                <button class="secondary-button" data-dismiss-alert>Dismiss</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ── AGENTS ──────────────────────────────── -->
+      <section class="view" data-view="agents">
+        <article class="card panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Agents</h2>
+              <p class="panel-subtitle" data-range="agentSubtitle">Function × executor view. Click any cell to see agents and allocation detail.</p>
+            </div>
+          </div>
+          <div class="table-toolbar">
+            <div class="filter-group" aria-label="Agent filters">
+              <button class="filter-pill active" data-matrix-filter="all">All</button>
+              <button class="filter-pill" data-matrix-filter="watch">Watch</button>
+              <button class="filter-pill" data-matrix-filter="risk">Risk</button>
+              <button class="filter-pill" data-matrix-filter="normal">Normal</button>
+            </div>
+          </div>
+          <div class="agent-matrix">
+            <div class="matrix-grid" id="agentMatrix"></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ── PAYMENTS ────────────────────────────── -->
+      <section class="view" data-view="payments">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Upcoming Payments</h2>
+              <p class="panel-subtitle" data-range="paymentSubtitle">Next 4 scheduled payments from May 17–23, 2026. Total due is ₹9.2L.</p>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="filter-group" aria-label="Payment filters">
+              <button class="filter-pill active" data-filter="all">All 4</button>
+              <button class="filter-pill" data-filter="approval">Approval 2</button>
+              <button class="filter-pill" data-filter="ready">Ready 1</button>
+              <button class="filter-pill" data-filter="confirmed">Confirmed 1</button>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Payment</th>
+                <th>Owner</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-status="approval">
+                <td><div class="strong">Restaurant partner payout</div><div class="muted">Scheduled payout · Batch PAY-501</div></td>
+                <td>Priya Nair</td>
+                <td>May 17</td>
+                <td class="amount">₹1.2L</td>
+                <td><span class="badge medium">Approval</span></td>
+                <td><a class="panel-action" href="#approvals" data-jump-view="approvals">Review</a></td>
+              </tr>
+              <tr data-status="ready">
+                <td><div class="strong">Delivery partner payout</div><div class="muted">Scheduled payout · Batch PAY-502</div></td>
+                <td>Arjun Das</td>
+                <td>May 18</td>
+                <td class="amount">₹3.8L</td>
+                <td><span class="badge good">Ready</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="payment">View</a></td>
+              </tr>
+              <tr data-status="approval">
+                <td><div class="strong">Cloud kitchen vendor invoice</div><div class="muted">Scheduled payout · Invoice INV-778</div></td>
+                <td>Ankit Sharma</td>
+                <td>May 19</td>
+                <td class="amount">₹1.6L</td>
+                <td><span class="badge medium">Approval</span></td>
+                <td><a class="panel-action" href="#approvals" data-jump-view="approvals">Review</a></td>
+              </tr>
+              <tr data-status="confirmed">
+                <td><div class="strong">Refund batch settlement</div><div class="muted">Scheduled payout · Batch REF-118</div></td>
+                <td>Rahul Mehta</td>
+                <td>May 20</td>
+                <td class="amount">₹2.6L</td>
+                <td><span class="badge good">Confirmed</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="payment">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <!-- ── TRANSACTIONS ────────────────────────── -->
+      <section class="view" data-view="transactions">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Transactions</h2>
+              <p class="panel-subtitle" data-range="transactionSubtitle">Latest payment activity across agents for May 2026 audit checks.</p>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="filter-group" aria-label="Transaction filters">
+              <button class="filter-pill active" data-filter="all">All 7</button>
+              <button class="filter-pill" data-filter="completed">Completed 4</button>
+              <button class="filter-pill" data-filter="pending">Pending 1</button>
+              <button class="filter-pill" data-filter="failed">Failed 2</button>
+            </div>
+            <a class="panel-action" href="#">Export transactions</a>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Transaction</th>
+                <th>Agent</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-status="completed">
+                <td><div class="strong">TXN-20491</div><div class="muted">Vendor payment</div></td>
+                <td>Priya Nair</td>
+                <td>Vendor payments</td>
+                <td>May 17</td>
+                <td class="amount">₹84,000</td>
+                <td><span class="badge good">Completed</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="transaction">View</a></td>
+              </tr>
+              <tr data-status="pending">
+                <td><div class="strong">TXN-20487</div><div class="muted">Restaurant payout</div></td>
+                <td>Ankit Sharma</td>
+                <td>Restaurant payouts</td>
+                <td>May 17</td>
+                <td class="amount">₹1.2L</td>
+                <td><span class="badge medium">Pending</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="transaction">View</a></td>
+              </tr>
+              <tr data-status="completed">
+                <td><div class="strong">TXN-20482</div><div class="muted">Refund batch</div></td>
+                <td>Rahul Mehta</td>
+                <td>Refund batches</td>
+                <td>May 15</td>
+                <td class="amount">₹32,000</td>
+                <td><span class="badge good">Completed</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="transaction">View</a></td>
+              </tr>
+              <tr data-status="failed">
+                <td><div class="strong">TXN-20479</div><div class="muted">Delivery payout · Bank timeout</div></td>
+                <td>Arjun Das</td>
+                <td>Delivery payouts</td>
+                <td>May 14</td>
+                <td class="amount">₹2.1L</td>
+                <td><span class="badge high">Failed</span></td>
+                <td><button class="retry-button" type="button">Retry</button></td>
+              </tr>
+              <tr data-status="completed">
+                <td><div class="strong">TXN-20474</div><div class="muted">Cloud kitchen invoice</div></td>
+                <td>Meera Iyer</td>
+                <td>Cloud kitchen invoices</td>
+                <td>May 13</td>
+                <td class="amount">₹95,000</td>
+                <td><span class="badge good">Completed</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="transaction">View</a></td>
+              </tr>
+              <tr data-status="completed">
+                <td><div class="strong">TXN-20468</div><div class="muted">Vendor payment</div></td>
+                <td>Ankit Sharma</td>
+                <td>Vendor payments</td>
+                <td>May 12</td>
+                <td class="amount">₹1.6L</td>
+                <td><span class="badge good">Completed</span></td>
+                <td><a class="panel-action" href="#" data-open-drawer="transaction">View</a></td>
+              </tr>
+              <tr data-status="failed">
+                <td><div class="strong">TXN-20461</div><div class="muted">Restaurant payout · Insufficient balance</div></td>
+                <td>Priya Nair</td>
+                <td>Restaurant payouts</td>
+                <td>May 11</td>
+                <td class="amount">₹3.2L</td>
+                <td><span class="badge high">Failed</span></td>
+                <td><button class="retry-button" type="button">Retry</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <!-- ── APPROVALS ───────────────────────────── -->
+      <section class="view" data-view="approvals">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Approvals</h2>
+              <p class="panel-subtitle">Five pending payment approvals with a total value of ₹2.8L.</p>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Approval Item</th>
+                <th>Owner</th>
+                <th>Priority</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="strong">Restaurant payout approval</div><div class="muted">PAY-501 · high-value batch</div></td>
+                <td>Priya Nair</td>
+                <td><span class="badge high">High</span></td>
+                <td>May 17</td>
+                <td class="amount">₹1.0L</td>
+                <td><a class="panel-action" href="#">Review</a></td>
+              </tr>
+              <tr>
+                <td><div class="strong">Vendor invoice approval</div><div class="muted">INV-778 · cloud kitchen invoice</div></td>
+                <td>Ankit Sharma</td>
+                <td><span class="badge high">High</span></td>
+                <td>May 19</td>
+                <td class="amount">₹80K</td>
+                <td><a class="panel-action" href="#">Review</a></td>
+              </tr>
+              <tr>
+                <td><div class="strong">Restaurant payout exception</div><div class="muted">PAY-501 · partner adjustment</div></td>
+                <td>Priya Nair</td>
+                <td><span class="badge medium">Medium</span></td>
+                <td>May 17</td>
+                <td class="amount">₹45K</td>
+                <td><a class="panel-action" href="#">Review</a></td>
+              </tr>
+              <tr>
+                <td><div class="strong">Vendor tax hold release</div><div class="muted">INV-781 · compliance cleared</div></td>
+                <td>Ankit Sharma</td>
+                <td><span class="badge medium">Medium</span></td>
+                <td>May 19</td>
+                <td class="amount">₹35K</td>
+                <td><a class="panel-action" href="#">Review</a></td>
+              </tr>
+              <tr>
+                <td><div class="strong">Refund batch check</div><div class="muted">REF-119 · small batch approval</div></td>
+                <td>Rahul Mehta</td>
+                <td><span class="badge medium">Medium</span></td>
+                <td>May 19</td>
+                <td class="amount">₹20K</td>
+                <td><a class="panel-action" href="#">Review</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <!-- ── REPORTS ─────────────────────────────── -->
+      <section class="view" data-view="reports">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Reports</h2>
+              <p class="panel-subtitle">Export-ready summaries for monthly finance review.</p>
+            </div>
+          </div>
+
+          <div class="action-list">
+            <div class="action-row">
+              <div>
+                <div class="action-title">Monthly agent activity</div>
+                <div class="muted">May 01–17, 2026 · includes limits, usage, and approvals</div>
+              </div>
+              <a class="panel-action" href="#" data-open-report="Monthly agent activity">Export</a>
+            </div>
+            <div class="action-row">
+              <div>
+                <div class="action-title">Payment category spend</div>
+                <div class="muted">Restaurant, delivery, vendor, and refund breakdown</div>
+              </div>
+              <a class="panel-action" href="#" data-open-report="Payment category spend">Export</a>
+            </div>
+            <div class="action-row">
+              <div>
+                <div class="action-title">Transaction audit log</div>
+                <div class="muted">All transactions with agent, category, and status</div>
+              </div>
+              <a class="panel-action" href="#" data-open-report="Transaction audit log">Export</a>
+            </div>
+            <div class="action-row">
+              <div>
+                <div class="action-title">Approval history</div>
+                <div class="muted">Approved and rejected items with decision trail</div>
+              </div>
+              <a class="panel-action" href="#" data-open-report="Approval history">Export</a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ── SETTINGS ───────────────────────────── -->
+      <section class="view" data-view="settings">
+        <article class="card panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Settings</h2>
+              <p class="panel-subtitle">Finance controls for limits, approval routing, and dashboard access.</p>
+            </div>
+          </div>
+
+          <div class="action-list">
+            <div class="action-row">
+              <div>
+                <div class="action-title">Approval routing</div>
+                <div class="muted">Set approvers by payment type and amount threshold</div>
+              </div>
+              <a class="panel-action" href="#">Edit</a>
+            </div>
+            <div class="action-row">
+              <div>
+                <div class="action-title">Agent limit policy</div>
+                <div class="muted">Define default monthly limits and near-limit warnings</div>
+              </div>
+              <a class="panel-action" href="#">Edit</a>
+            </div>
+            <div class="action-row">
+              <div>
+                <div class="action-title">Alert configuration</div>
+                <div class="muted">Set thresholds for limit warnings and approval reminders</div>
+              </div>
+              <a class="panel-action" href="#">Edit</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- ── DRAWER ────────────────────────────────── -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="detailDrawer" aria-label="Detail panel">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" id="drawerTitle">Detail</div>
+        <div class="drawer-sub" id="drawerSub"></div>
+      </div>
+      <button class="icon-button" id="drawerClose" aria-label="Close detail panel">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-footer" id="drawerFooter"></div>
+  </aside>
+
+  <!-- ── MODALS ─────────────────────────────────── -->
+  <div class="modal-backdrop" id="modalBackdrop">
+
+    <!-- Add Agent -->
+    <div class="modal" id="addAgentModal">
+      <h2>Add payment agent</h2>
+      <p>Create access credentials, assign a payment category and role, and set a monthly spend limit.</p>
+      <div class="modal-fields">
+        <input class="input" type="text" placeholder="Full name">
+        <input class="input" type="email" placeholder="Work email">
+        <select class="select">
+          <option value="">Payment category</option>
+          <option>Restaurant payouts</option>
+          <option>Delivery payouts</option>
+          <option>Vendor payments</option>
+          <option>Refund operations</option>
+          <option>Cloud kitchen invoices</option>
+        </select>
+        <select class="select">
+          <option value="">Role</option>
+          <option>Initiator</option>
+          <option>Approver</option>
+        </select>
+        <input class="input" type="number" placeholder="Monthly limit (₹)">
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-button" data-modal-close>Cancel</button>
+        <button class="button">Add Agent</button>
+      </div>
+    </div>
+
+    <!-- Edit Agent -->
+    <div class="modal is-hidden" id="editAgentModal">
+      <h2>Edit <span class="modal-agent-name">agent</span></h2>
+      <p>Update role, category, or monthly spend limit. Changes take effect immediately.</p>
+      <div class="modal-fields">
+        <!-- Agent picker shown only when opened from Quick Actions (no row context) -->
+        <div id="editAgentPicker" class="is-hidden">
+          <select class="select" style="width:100%">
+            <option value="">Select agent</option>
+            <option>Priya Nair</option>
+            <option>Ankit Sharma</option>
+            <option>Arjun Das</option>
+            <option>Rahul Mehta</option>
+            <option>Meera Iyer</option>
+          </select>
+        </div>
+        <div class="field-preview">
+          <span>Current usage</span>
+          <span class="modal-agent-usage strong">—</span>
+        </div>
+        <select class="select" id="editRole">
+          <option>Initiator</option>
+          <option>Approver</option>
+        </select>
+        <select class="select" id="editCategory">
+          <option>Restaurant payouts</option>
+          <option>Delivery payouts</option>
+          <option>Vendor payments</option>
+          <option>Refund operations</option>
+          <option>Cloud kitchen invoices</option>
+        </select>
+        <input class="input" type="number" id="editLimit" placeholder="Monthly limit (₹)">
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-button" data-modal-close>Cancel</button>
+        <button class="button">Save changes</button>
+      </div>
+    </div>
+
+    <!-- Report Preview / Download -->
+    <div class="modal modal-report is-hidden" id="reportModal">
+      <h2>Create report</h2>
+      <p>Choose the report type, period, and format. Preview before downloading or export directly.</p>
+      <div class="modal-fields">
+        <select class="select" id="reportType">
+          <option>Monthly agent activity</option>
+          <option>Payment category spend</option>
+          <option>Transaction audit log</option>
+          <option>Approval history</option>
+        </select>
+        <select class="select" id="reportPeriod">
+          <option>May 1–17, 2026 (current period)</option>
+          <option>April 1–30, 2026</option>
+          <option>March 1–31, 2026</option>
+          <option>Q1 2026 (Jan–Mar)</option>
+        </select>
+        <select class="select" id="reportFormat">
+          <option value="pdf">PDF — formatted for review</option>
+          <option value="csv">CSV — raw data for analysis</option>
+        </select>
+        <div class="field-preview">
+          <span>Estimated size</span>
+          <span class="strong">~240 KB · 12 pages</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-button" data-modal-close>Cancel</button>
+        <button class="secondary-button" id="previewReportBtn">Preview</button>
+        <button class="button" id="downloadReportBtn">Download</button>
+      </div>
+    </div>
+
+    <!-- Deactivate Agent -->
+    <div class="modal is-hidden" id="deactivateModal">
+      <h2>Deactivate <span class="modal-agent-name">agent</span>?</h2>
+      <p>Access is paused immediately. Transaction history and audit trail are preserved. Reactivation is available from Settings.</p>
+      <div class="modal-fields">
+        <!-- Agent picker shown only when opened from Quick Actions -->
+        <div id="deactivateAgentPicker" class="is-hidden">
+          <select class="select" style="width:100%">
+            <option value="">Select agent to deactivate</option>
+            <option>Priya Nair</option>
+            <option>Ankit Sharma</option>
+            <option>Arjun Das</option>
+            <option>Rahul Mehta</option>
+            <option>Meera Iyer</option>
+          </select>
+        </div>
+        <div class="field-preview">
+          <span>Category</span>
+          <span class="modal-agent-category strong">—</span>
+        </div>
+        <div class="field-preview">
+          <span>Limit used</span>
+          <span class="modal-agent-usage strong">—</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-button" data-modal-close>Cancel</button>
+        <button class="button danger-button-solid" style="height:40px;padding:0 16px;border-radius:12px;border:none;font-size:14px;font-weight:800;cursor:pointer">Deactivate</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const searchInput = document.querySelector("#globalSearch");
+    const dateRange = document.querySelector("#dateRange");
+    const primaryAction = document.querySelector("#primaryAction");
+    const navLinks = Array.from(document.querySelectorAll("[data-view-target]"));
+    const jumpLinks = Array.from(document.querySelectorAll("[data-jump-view]"));
+    const views = Array.from(document.querySelectorAll("[data-view]"));
+    const titleEl = document.querySelector("h1");
+    const subtitleEl = document.querySelector(".subtitle");
+    const filterPills = Array.from(document.querySelectorAll(".filter-pill"));
+    const modalBackdrop = document.getElementById("modalBackdrop");
+
+    const copy = {
+      overview:     ["Good morning, Bhavika.", "Monitor payment agents, limits, approvals, and transaction activity."],
+      alerts:       ["Alerts", "Active alerts ranked by urgency. Act on or dismiss each item."],
+      agents:       ["Agents", "Manage access, roles, monthly limits, and spend usage."],
+      payments:     ["Upcoming Payments", "Review scheduled payouts and payment readiness."],
+      transactions: ["Transactions", "Audit recent payment activity across agents."],
+      approvals:    ["Approvals", "Work through pending finance approvals and risk items."],
+      reports:      ["Reports", "Export monthly finance and payment-agent summaries."],
+      settings:     ["Settings", "Configure approval routing, limit policy, and access controls."]
+    };
+
+    const primaryActions = {
+      overview:     ["Review approvals", "approvals"],
+      alerts:       ["Configure alerts", "settings"],
+      agents:       ["Add Agent", null],
+      payments:     ["Schedule Payment", null],
+      transactions: ["Export transactions", null],
+      approvals:    ["Bulk review", null],
+      reports:      ["Create Report", null],
+      settings:     ["Save settings", null]
+    };
+
+    const searchPlaceholders = {
+      overview:     "Search overview",
+      alerts:       "Search alerts",
+      agents:       "Search agents",
+      payments:     "Search upcoming payments",
+      transactions: "Search transactions",
+      approvals:    "Search approvals",
+      reports:      "Search reports",
+      settings:     "Search settings"
+    };
+
+    const rangeCopy = {
+      month: {
+        allocationLabel: "Allocation Left",
+        allocationValue: "₹7.1L",
+        allocationNote: "₹18.4L used of ₹25.5L monthly allocation",
+        spentLabel: "Spent This Month",
+        spentValue: "₹18.4L",
+        spentNote: "72% of ₹25.5L allocation used",
+        spentProgress: "72%",
+        upcomingLabel: "Upcoming Payments",
+        upcomingNote: "Due May 17–23, 2026",
+        chartTitle: "Monthly Spend Activity",
+        chartValue: "₹18.4L",
+        chartSubtitle: "May 01, 2026 → May 17, 2026 · 72% of allocation",
+        trendOneTitle: "Delivery spike",
+        trendOneCopy: "May 8 peaked near ₹15.6L; check payout batch size.",
+        trendTwoTitle: "Restaurant surge",
+        trendTwoCopy: "May 12 touched ₹16.0L before approvals slowed spend.",
+        trendThreeTitle: "Refunds stable",
+        trendThreeCopy: "Refund batches stayed under ₹1.5L equivalent share.",
+        mixValue: "₹18.4L",
+        mixSubtitle: "Current monthly spend by category",
+        donutValue: "₹18.4L",
+        restaurantPercent: "47%", restaurantName: "Restaurant payouts", restaurantShare: "47% of spend", restaurantValue: "₹8.6L",
+        deliveryPercent: "28%",   deliveryName: "Delivery payouts",    deliveryShare: "28% of spend",    deliveryValue: "₹5.1L",
+        vendorPercent: "17%",     vendorName: "Vendor payments",       vendorShare: "17% of spend",      vendorValue: "₹3.2L",
+        refundPercent: "8%",      refundName: "Refund batches",        refundShare: "8% of spend",       refundValue: "₹1.5L",
+        axisOne: "May 1", axisTwo: "May 4", axisThree: "May 8", axisFour: "May 12", axisFive: "May 17",
+        donutGradient: "conic-gradient(var(--purple) 0deg 168deg, var(--orange) 168deg 268deg, #9aa3af 268deg 331deg, var(--refund) 331deg 360deg)",
+        agentSubtitle: "Full access and limit view for 5 payment agents. Three agents are currently near limit.",
+        paymentSubtitle: "Next 4 scheduled payments from May 17–23, 2026. Total due is ₹9.2L.",
+        transactionSubtitle: "7 transactions across agents for May 1–17, 2026."
+      },
+      week: {
+        allocationLabel: "Allocation Left",
+        allocationValue: "₹7.1L",
+        allocationNote: "₹18.4L used of ₹25.5L monthly allocation",
+        spentLabel: "Spent This Week",
+        spentValue: "₹7.6L",
+        spentNote: "₹7.6L this week · 72% of monthly allocation used",
+        spentProgress: "72%",
+        upcomingLabel: "Upcoming This Week",
+        upcomingNote: "Due May 17–23, 2026",
+        chartTitle: "Weekly Spend Activity",
+        chartValue: "₹7.6L",
+        chartSubtitle: "May 11, 2026 → May 17, 2026 · 30% of allocation",
+        trendOneTitle: "Weekend build-up",
+        trendOneCopy: "Delivery and restaurant payouts rose before May 17 approvals.",
+        trendTwoTitle: "Vendor dip",
+        trendTwoCopy: "Vendor payments eased after May 15; no limit pressure added.",
+        trendThreeTitle: "Refunds controlled",
+        trendThreeCopy: "Refund batches remain the smallest weekly spend category.",
+        mixValue: "₹7.6L",
+        mixSubtitle: "This week's spend by category",
+        donutValue: "₹7.6L",
+        restaurantPercent: "45%", restaurantName: "Restaurant payouts", restaurantShare: "45% of spend", restaurantValue: "₹3.4L",
+        deliveryPercent: "28%",   deliveryName: "Delivery payouts",    deliveryShare: "28% of spend",    deliveryValue: "₹2.1L",
+        vendorPercent: "17%",     vendorName: "Vendor payments",       vendorShare: "17% of spend",      vendorValue: "₹1.3L",
+        refundPercent: "10%",     refundName: "Refund batches",        refundShare: "10% of spend",      refundValue: "₹0.8L",
+        axisOne: "May 11", axisTwo: "May 13", axisThree: "May 15", axisFour: "May 16", axisFive: "May 17",
+        donutGradient: "conic-gradient(var(--purple) 0deg 162deg, var(--orange) 162deg 263deg, #9aa3af 263deg 324deg, var(--refund) 324deg 360deg)",
+        agentSubtitle: "Limit usage for 5 payment agents, week of May 11–17.",
+        paymentSubtitle: "Payments due this week and through May 23.",
+        transactionSubtitle: "5 transactions across agents for May 11–17, 2026."
+      },
+      today: {
+        allocationLabel: "Allocation Left",
+        allocationValue: "₹7.1L",
+        allocationNote: "₹18.4L used of ₹25.5L monthly allocation",
+        spentLabel: "Spent Today",
+        spentValue: "₹1.8L",
+        spentNote: "₹1.8L today · 72% of monthly allocation used",
+        spentProgress: "72%",
+        upcomingLabel: "Due Today",
+        upcomingNote: "1 payment needs approval today",
+        chartTitle: "Today's Spend Activity",
+        chartValue: "₹1.8L",
+        chartSubtitle: "May 17, 2026 · 7% of allocation",
+        trendOneTitle: "Morning activity",
+        trendOneCopy: "₹84K vendor payment completed at 09:18 AM.",
+        trendTwoTitle: "Pending batch",
+        trendTwoCopy: "₹1.2L restaurant payout still needs approval today.",
+        trendThreeTitle: "No refund surge",
+        trendThreeCopy: "Refund activity is low compared with payout categories.",
+        mixValue: "₹1.8L",
+        mixSubtitle: "Today's spend by category",
+        donutValue: "₹1.8L",
+        restaurantPercent: "44%", restaurantName: "Restaurant payouts", restaurantShare: "44% of spend", restaurantValue: "₹0.8L",
+        deliveryPercent: "28%",   deliveryName: "Delivery payouts",    deliveryShare: "28% of spend",    deliveryValue: "₹0.5L",
+        vendorPercent: "17%",     vendorName: "Vendor payments",       vendorShare: "17% of spend",      vendorValue: "₹0.3L",
+        refundPercent: "11%",     refundName: "Refund batches",        refundShare: "11% of spend",      refundValue: "₹0.2L",
+        axisOne: "9 AM", axisTwo: "12 PM", axisThree: "3 PM", axisFour: "6 PM", axisFive: "9 PM",
+        donutGradient: "conic-gradient(var(--purple) 0deg 158deg, var(--orange) 158deg 259deg, #9aa3af 259deg 320deg, var(--refund) 320deg 360deg)",
+        agentSubtitle: "Limit usage for 5 payment agents as of May 17.",
+        paymentSubtitle: "1 payment due today. Next scheduled is May 18.",
+        transactionSubtitle: "2 transactions completed today, May 17, 2026."
+      }
+    };
+
+    // ── Search ──────────────────────────────────────
+    function rowsInActiveView() {
+      const activeView = document.querySelector(".view.active");
+      return Array.from(activeView.querySelectorAll(
+        "tbody tr, .action-row, .summary-card, .feed-item, .metric, .alert-row"
+      ));
+    }
+
+    function applySearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      rowsInActiveView().forEach((item) => {
+        item.classList.toggle("is-hidden", query !== "" && !item.innerText.toLowerCase().includes(query));
+      });
+    }
+
+    function clearHiddenItems() {
+      document.querySelectorAll(".is-hidden").forEach((item) => {
+        // Don't unhide modal panels
+        if (!item.closest("#modalBackdrop") && !item.id.endsWith("Modal") && !item.id.endsWith("Picker")) {
+          item.classList.remove("is-hidden");
+        }
+      });
+      document.querySelectorAll(".is-dimmed").forEach((item) => item.classList.remove("is-dimmed"));
+    }
+
+    // ── View switching ───────────────────────────────
+    function showView(viewName) {
+      const nextView = document.querySelector(`[data-view="${viewName}"]`) || document.querySelector('[data-view="overview"]');
+      const nextName = nextView.dataset.view;
+
+      views.forEach((view) => view.classList.toggle("active", view === nextView));
+      navLinks.forEach((link) => link.classList.toggle("active", link.dataset.viewTarget === nextName));
+
+      if (copy[nextName]) {
+        titleEl.textContent = copy[nextName][0];
+        subtitleEl.textContent = copy[nextName][1];
+      }
+
+      if (primaryActions[nextName]) {
+        primaryAction.textContent = primaryActions[nextName][0];
+        primaryAction.dataset.jumpView = primaryActions[nextName][1] || "";
+      }
+
+      searchInput.placeholder = searchPlaceholders[nextName] || "Search this tab";
+      clearHiddenItems();
+      applySearch();
+    }
+
+    // ── Date range ───────────────────────────────────
+    function updateRange() {
+      const selected = rangeCopy[dateRange.value] || rangeCopy.month;
+
+      Object.entries(selected).forEach(([key, value]) => {
+        document.querySelectorAll(`[data-range="${key}"]`).forEach((el) => {
+          el.textContent = value;
+        });
+        const styleTarget = document.querySelector(`[data-range-style="${key}"]`);
+        if (styleTarget) styleTarget.style.width = value;
+      });
+
+      const donut = document.querySelector(".donut-chart");
+      if (donut && selected.donutGradient) donut.style.background = selected.donutGradient;
+    }
+
+    // ── Filter pills (data-attribute based) ─────────
+    filterPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const group = pill.closest(".filter-group");
+        const panel = pill.closest(".panel");
+        const filter = (pill.dataset.filter || "").toLowerCase().trim();
+
+        group.querySelectorAll(".filter-pill").forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+
+        const rows = panel.querySelectorAll("tbody tr, .alert-row");
+        rows.forEach((row) => {
+          if (filter.startsWith("all")) {
+            row.classList.remove("is-hidden");
+            return;
+          }
+          const byRole     = row.dataset.role     === filter;
+          const byStatus   = row.dataset.status   === filter;
+          const byPriority = row.dataset.priority  === filter;
+          row.classList.toggle("is-hidden", !(byRole || byStatus || byPriority));
+        });
+      });
+    });
+
+    // ── Drawer ───────────────────────────────────────
+    const drawerOverlay = document.getElementById("drawerOverlay");
+    const detailDrawer  = document.getElementById("detailDrawer");
+    const drawerTitle   = document.getElementById("drawerTitle");
+    const drawerSub     = document.getElementById("drawerSub");
+    const drawerBody    = document.getElementById("drawerBody");
+    const drawerFooter  = document.getElementById("drawerFooter");
+
+    function openDrawer(title, sub, fields, footerHTML, bodyHTML) {
+      drawerTitle.textContent = title;
+      drawerSub.textContent   = sub;
+      drawerBody.innerHTML = bodyHTML || fields.map(([label, value]) =>
+        `<div class="drawer-field"><span class="drawer-label">${label}</span><span class="drawer-value">${value}</span></div>`
+      ).join("");
+      drawerFooter.innerHTML = footerHTML;
+      drawerOverlay.classList.add("active");
+      detailDrawer.classList.add("open");
+    }
+
+    function closeDrawer() {
+      drawerOverlay.classList.remove("active");
+      detailDrawer.classList.remove("open");
+    }
+
+    drawerOverlay.addEventListener("click", closeDrawer);
+    document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-drawer-close]")) { closeDrawer(); return; }
+      const dlBtn = e.target.closest("[data-drawer-download]");
+      if (dlBtn) { alert(`Download ${dlBtn.dataset.drawerDownload.toUpperCase()} — connect to backend.`); }
+    });
+
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest("[data-open-drawer]");
+      if (!link) return;
+      e.preventDefault();
+      const type = link.dataset.openDrawer;
+      const row  = link.closest("tr");
+      if (!row) return;
+      const cells = row.cells;
+
+      if (type === "transaction") {
+        const id       = cells[0]?.querySelector(".strong")?.textContent?.trim() || "—";
+        const subType  = cells[0]?.querySelector(".muted")?.textContent?.trim()  || "—";
+        const agent    = cells[1]?.textContent?.trim() || "—";
+        const category = cells[2]?.textContent?.trim() || "—";
+        const date     = cells[3]?.textContent?.trim() || "—";
+        const amount   = cells[4]?.textContent?.trim() || "—";
+        const badge    = cells[5]?.querySelector(".badge");
+        const status   = badge ? `<span class="badge ${badge.className.replace("badge","").trim()}">${badge.textContent}</span>` : "—";
+        openDrawer(
+          id,
+          `${subType} · ${date}, 2026`,
+          [
+            ["Transaction ID", id],
+            ["Agent",          agent],
+            ["Category",       category],
+            ["Date",           `${date}, 2026`],
+            ["Amount",         amount],
+            ["Status",         status],
+            ["Reference",      "Internal batch ref"],
+            ["Initiated by",   agent]
+          ],
+          `<button class="secondary-button" data-drawer-close>Close</button>
+           <button class="button" style="margin-left:auto" data-drawer-download="receipt">Download receipt</button>`
+        );
+      }
+
+      if (type === "payment") {
+        const name    = cells[0]?.querySelector(".strong")?.textContent?.trim() || "—";
+        const batchId = cells[0]?.querySelector(".muted")?.textContent?.trim()  || "—";
+        const owner   = cells[1]?.textContent?.trim() || "—";
+        const due     = cells[2]?.textContent?.trim() || "—";
+        const amount  = cells[3]?.textContent?.trim() || "—";
+        const badge   = cells[4]?.querySelector(".badge");
+        const status  = badge ? `<span class="badge ${badge.className.replace("badge","").trim()}">${badge.textContent}</span>` : "—";
+        openDrawer(
+          name,
+          `${batchId} · Due ${due}`,
+          [
+            ["Payment",   name],
+            ["Batch / ID", batchId],
+            ["Owner",     owner],
+            ["Due date",  `${due}, 2026`],
+            ["Amount",    amount],
+            ["Status",    status],
+            ["Approver",  "Unassigned"],
+            ["Created",   "May 15, 2026"]
+          ],
+          `<button class="secondary-button" data-drawer-close>Close</button>
+           <button class="button" style="margin-left:auto" data-drawer-download="pdf">Download PDF</button>`
+        );
+      }
+    });
+
+    // ── Agent Matrix ─────────────────────────────────
+    const matrixFns = ["Refunds","Delivery payouts","Restaurants","Vendors","Cloud kitchen"];
+    const matrixCols = ["Humans","AI Agents","Scheduled / API"];
+
+    const matrixData = {
+      "Refunds|Humans": { amount:"₹2.3L", label:"2 initiators, 1 approver", pct:46, status:"normal", agents:[
+        {name:"Rahul Mehta",  role:"Initiator", limit:"₹5L",  used:"₹2.3L", remaining:"₹2.7L", pct:46, status:"normal"},
+        {name:"Sneha Kapoor", role:"Initiator", limit:"₹3L",  used:"₹0.9L", remaining:"₹2.1L", pct:30, status:"normal"},
+        {name:"Dev Anand",    role:"Approver",  limit:"₹8L",  used:"₹2.3L", remaining:"₹5.7L", pct:29, status:"normal"}
+      ]},
+      "Refunds|AI Agents": { amount:"₹4.8L", label:"3 bots · approvals spiking", pct:60, status:"risk", agents:[
+        {name:"Bot-Refund-01", role:"Auto-approver", limit:"₹2L",   used:"₹1.84L", remaining:"₹0.16L", pct:92, status:"risk"},
+        {name:"Bot-Refund-03", role:"Auto-approver", limit:"₹2L",   used:"₹1.76L", remaining:"₹0.24L", pct:88, status:"watch"},
+        {name:"Bot-Refund-07", role:"Classifier",    limit:"₹1.5L", used:"₹0.82L", remaining:"₹0.68L", pct:55, status:"normal"}
+      ]},
+      "Refunds|Scheduled / API": { amount:"₹0", label:"No scheduled refunds", pct:0, status:"normal", agents:[] },
+      "Delivery payouts|Humans": { amount:"₹10.4L", label:"2 initiators, 1 approver", pct:87, status:"watch", agents:[
+        {name:"Arjun Das",    role:"Initiator", limit:"₹12L", used:"₹10.4L", remaining:"₹1.6L", pct:87, status:"watch"},
+        {name:"Kiran Rao",    role:"Initiator", limit:"₹5L",  used:"₹2.1L",  remaining:"₹2.9L", pct:42, status:"normal"},
+        {name:"Nisha Verma",  role:"Approver",  limit:"₹15L", used:"₹10.4L", remaining:"₹4.6L", pct:69, status:"normal"}
+      ]},
+      "Delivery payouts|AI Agents": { amount:"₹2.9L", label:"2 agents · incentive checks", pct:36, status:"normal", agents:[
+        {name:"Bot-Delivery-01", role:"Incentive-checker", limit:"₹2L",   used:"₹0.72L", remaining:"₹1.28L", pct:36, status:"normal"},
+        {name:"Bot-Delivery-02", role:"Incentive-checker", limit:"₹2.5L", used:"₹0.90L", remaining:"₹1.60L", pct:36, status:"normal"}
+      ]},
+      "Delivery payouts|Scheduled / API": { amount:"₹17.6L", label:"2 batches · 72% settled", pct:72, status:"normal", agents:[
+        {name:"Batch-DP-Weekly",  role:"Payout rail",  limit:"₹12L", used:"₹8.6L",  remaining:"₹3.4L", pct:72, status:"normal"},
+        {name:"Batch-DP-Daily",   role:"Payout rail",  limit:"₹8L",  used:"₹5.8L",  remaining:"₹2.2L", pct:72, status:"normal"}
+      ]},
+      "Restaurants|Humans": { amount:"₹8.7L", label:"2 initiators, 2 approvers", pct:73, status:"normal", agents:[
+        {name:"Priya Nair",    role:"Initiator", limit:"₹12L", used:"₹8.7L",  remaining:"₹3.3L", pct:73, status:"normal"},
+        {name:"Ravi Menon",    role:"Initiator", limit:"₹6L",  used:"₹2.4L",  remaining:"₹3.6L", pct:40, status:"normal"},
+        {name:"Sunita Ghosh",  role:"Approver",  limit:"₹14L", used:"₹8.7L",  remaining:"₹5.3L", pct:62, status:"normal"},
+        {name:"Ajay Pillai",   role:"Approver",  limit:"₹10L", used:"₹4.1L",  remaining:"₹5.9L", pct:41, status:"normal"}
+      ]},
+      "Restaurants|AI Agents": { amount:"₹9.6L", label:"4 agents · normal", pct:48, status:"normal", agents:[
+        {name:"Bot-Rest-01", role:"Invoice-matcher", limit:"₹3L",   used:"₹1.44L", remaining:"₹1.56L", pct:48, status:"normal"},
+        {name:"Bot-Rest-02", role:"Invoice-matcher", limit:"₹3L",   used:"₹1.56L", remaining:"₹1.44L", pct:52, status:"normal"},
+        {name:"Bot-Rest-03", role:"Reconciler",      limit:"₹2.5L", used:"₹0.88L", remaining:"₹1.62L", pct:35, status:"normal"},
+        {name:"Bot-Rest-04", role:"Reconciler",      limit:"₹2.5L", used:"₹1.53L", remaining:"₹0.97L", pct:61, status:"normal"}
+      ]},
+      "Restaurants|Scheduled / API": { amount:"₹23.6L", label:"3 rails · ₹46L queued", pct:51, status:"normal", agents:[
+        {name:"Rail-Rest-Weekly",  role:"Payout rail", limit:"₹10L", used:"₹5.1L",  remaining:"₹4.9L", pct:51, status:"normal"},
+        {name:"Rail-Rest-Biweekly",role:"Payout rail", limit:"₹20L", used:"₹10.2L", remaining:"₹9.8L", pct:51, status:"normal"},
+        {name:"Rail-Rest-Invoice", role:"Invoice rail", limit:"₹16L", used:"₹8.2L", remaining:"₹7.8L", pct:51, status:"normal"}
+      ]},
+      "Vendors|Humans": { amount:"₹7.1L", label:"1 initiator, 1 approver", pct:89, status:"watch", agents:[
+        {name:"Ankit Sharma", role:"Initiator", limit:"₹8L",  used:"₹7.1L", remaining:"₹0.9L", pct:89, status:"watch"},
+        {name:"Fatima Khan",  role:"Approver",  limit:"₹10L", used:"₹7.1L", remaining:"₹2.9L", pct:71, status:"normal"}
+      ]},
+      "Vendors|AI Agents": { amount:"₹0", label:"No AI agents", pct:0, status:"normal", agents:[] },
+      "Vendors|Scheduled / API": { amount:"₹5.5L", label:"Vendor API · 1.9× volume", pct:55, status:"watch", agents:[
+        {name:"Vendor-API-Rail", role:"API rail", limit:"₹10L", used:"₹5.5L", remaining:"₹4.5L", pct:55, status:"watch"}
+      ]},
+      "Cloud kitchen|Humans": { amount:"₹8.6L", label:"1 initiator, 1 approver", pct:86, status:"watch", agents:[
+        {name:"Meera Iyer",   role:"Initiator", limit:"₹10L", used:"₹8.6L", remaining:"₹1.4L", pct:86, status:"watch"},
+        {name:"Sameer Joshi", role:"Approver",  limit:"₹12L", used:"₹8.6L", remaining:"₹3.4L", pct:72, status:"normal"}
+      ]},
+      "Cloud kitchen|AI Agents": { amount:"₹0", label:"No AI agents", pct:0, status:"normal", agents:[] },
+      "Cloud kitchen|Scheduled / API": { amount:"₹7.3L", label:"1 batch · 428 invoices", pct:73, status:"normal", agents:[
+        {name:"Batch-CK-Monthly", role:"Invoice batch", limit:"₹10L", used:"₹7.3L", remaining:"₹2.7L", pct:73, status:"normal"}
+      ]}
+    };
+
+    function barClass(pct) { return pct >= 85 ? "red" : pct >= 70 ? "amber" : ""; }
+    function badgeLabel(s) { return s === "risk" ? "Risk" : s === "watch" ? "Watch" : "Normal"; }
+
+    function renderMatrix(filter) {
+      const el = document.getElementById("agentMatrix");
+      if (!el) return;
+      let html = "";
+      // header
+      html += `<div class="matrix-head"></div>`;
+      matrixCols.forEach(c => html += `<div class="matrix-head">${c}</div>`);
+      // rows
+      matrixFns.forEach(fn => {
+        html += `<div class="matrix-fn">${fn}</div>`;
+        matrixCols.forEach(col => {
+          const key  = `${fn}|${col}`;
+          const cell = matrixData[key];
+          if (!cell) { html += `<div class="matrix-cell status-empty"><div class="mc-amount">—</div></div>`; return; }
+          const show = filter === "all" || cell.status === filter;
+          const cls  = show ? `status-${cell.status}` : `status-${cell.status}` + " is-filtered-out";
+          html += `<div class="matrix-cell ${cls}" data-matrix-key="${key}" style="${show?'':'opacity:.3;pointer-events:none'}">
+            <div class="mc-amount">${cell.amount}</div>
+            <div class="mc-label">${cell.label}</div>
+            <span class="mc-badge ${cell.status}">${badgeLabel(cell.status)}</span>
+          </div>`;
+        });
+      });
+      el.innerHTML = html;
+    }
+
+    renderMatrix("all");
+
+    document.addEventListener("click", (e) => {
+      const pill = e.target.closest("[data-matrix-filter]");
+      if (pill) {
+        document.querySelectorAll("[data-matrix-filter]").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        renderMatrix(pill.dataset.matrixFilter);
+        return;
+      }
+      const cell = e.target.closest("[data-matrix-key]");
+      if (!cell) return;
+      const data = matrixData[cell.dataset.matrixKey];
+      if (!data) return;
+      const [fn, col] = cell.dataset.matrixKey.split("|");
+
+      const counts = {risk:0, watch:0, normal:0};
+      data.agents.forEach(a => counts[a.status]++);
+
+      const footerHTML = col === "Humans"
+        ? `<button class="secondary-button">Add human</button><button class="secondary-button" data-drawer-close>Close</button>`
+        : col === "AI Agents"
+        ? `<button class="secondary-button">Add agent</button>${counts.risk ? `<button class="secondary-button" style="color:var(--red)">Pause at-risk (${counts.risk})</button>` : ""}<button class="secondary-button" data-drawer-close>Close</button>`
+        : `<button class="secondary-button">Add rail</button><button class="secondary-button" data-drawer-close>Close</button>`;
+
+      openDrawer(
+        `${fn} — ${col}`,
+        `${data.amount} · ${badgeLabel(data.status)}`,
+        [],
+        footerHTML,
+        buildAgentDrawerBody(data, col)
+      );
+    });
+
+    function buildAgentDrawerBody(data, col) {
+      if (!data.agents.length) return `<div style="padding:20px 0;color:var(--muted);font-size:13px">${data.label}</div>`;
+      const agents = col === "Humans" ? data.agents : [...data.agents].sort((a,b) => b.pct - a.pct);
+      const counts = {risk:0, watch:0, normal:0};
+      agents.forEach(a => counts[a.status]++);
+      const showSearch = agents.length > 8;
+
+      let html = `<div class="adi-chips">
+        <button class="adi-chip active" onclick="adiChip(this,'all')">All ${agents.length}</button>`;
+      if (counts.risk)   html += `<button class="adi-chip risk"   onclick="adiChip(this,'risk')">Risk ${counts.risk}</button>`;
+      if (counts.watch)  html += `<button class="adi-chip watch"  onclick="adiChip(this,'watch')">Watch ${counts.watch}</button>`;
+      if (counts.normal) html += `<button class="adi-chip normal" onclick="adiChip(this,'normal')">Normal ${counts.normal}</button>`;
+      html += `</div>`;
+      if (showSearch) html += `<input class="adi-search" placeholder="Search agents…" oninput="adiSearch(this.value)">`;
+
+      if (col === "Humans") {
+        const roles = [...new Set(agents.map(a => a.role))];
+        roles.forEach(role => {
+          const group = agents.filter(a => a.role === role);
+          html += `<div class="adi-group-label">${role}s (${group.length})</div>` + adiItems(group, col, false);
+        });
+      } else {
+        html += adiItems(agents, col, agents.length > 5);
+      }
+      return html;
+    }
+
+    function adiItems(agents, col, truncate) {
+      const LIMIT = 5;
+      const rowActions = col === "Humans"
+        ? `<button class="adi-btn">Edit limit</button><button class="adi-btn">Reassign</button>`
+        : col === "AI Agents"
+        ? `<button class="adi-btn danger">Pause</button><button class="adi-btn">Edit limit</button>`
+        : `<button class="adi-btn danger">Pause rail</button><button class="adi-btn">Edit threshold</button>`;
+      let html = `<ul class="agent-drawer-list" id="adiList">`;
+      agents.forEach((a, i) => {
+        const bc = barClass(a.pct);
+        const color = bc === "red" ? "var(--red)" : bc === "amber" ? "var(--amber)" : "var(--green)";
+        const overflow = truncate && i >= LIMIT;
+        html += `<li class="agent-drawer-item" data-name="${a.name.toLowerCase()}" data-status="${a.status}"${overflow ? ' data-overflow style="display:none"' : ''}>
+          <div class="adi-name">${a.name}</div>
+          <div class="adi-meta">${a.role} · ${a.used} of ${a.limit}</div>
+          <div class="adi-bar"><span style="width:${a.pct}%;background:${color}"></span></div>
+          <div class="adi-nums"><span>${a.remaining} left</span><span>${a.pct}%</span></div>
+          <div class="adi-row-actions">${rowActions}</div>
+        </li>`;
+      });
+      html += `</ul>`;
+      if (truncate && agents.length > LIMIT)
+        html += `<button class="adi-show-more" onclick="adiShowAll()">Show all ${agents.length} ↓</button>`;
+      return html;
+    }
+
+    window.adiChip = (btn, status) => {
+      btn.closest(".adi-chips").querySelectorAll(".adi-chip").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll("#adiList .agent-drawer-item").forEach(li => {
+        li.style.display = status === "all" || li.dataset.status === status ? "" : "none";
+      });
+    };
+    window.adiSearch = val => {
+      const q = val.toLowerCase();
+      document.querySelectorAll("#adiList .agent-drawer-item").forEach(li => {
+        li.style.display = li.dataset.name.includes(q) ? "" : "none";
+      });
+    };
+    window.adiShowAll = () => {
+      document.querySelectorAll("[data-overflow]").forEach(li => { li.style.display = ""; delete li.dataset.overflow; });
+      const btn = document.querySelector(".adi-show-more");
+      if (btn) btn.remove();
+    };
+
+    // ── Modals ───────────────────────────────────────
+    const modals = {
+      add:        document.getElementById("addAgentModal"),
+      update:     document.getElementById("editAgentModal"),
+      deactivate: document.getElementById("deactivateModal"),
+      report:     document.getElementById("reportModal")
+    };
+
+    function openModal(type, agentData = {}) {
+      Object.values(modals).forEach((m) => m && m.classList.add("is-hidden"));
+      const modal = modals[type];
+      if (!modal) return;
+      modal.classList.remove("is-hidden");
+      modalBackdrop.classList.add("active");
+
+      if (type === "update") {
+        const picker  = document.getElementById("editAgentPicker");
+        const nameEl  = modal.querySelector(".modal-agent-name");
+        const usageEl = modal.querySelector(".modal-agent-usage");
+        if (agentData.name) {
+          picker.classList.add("is-hidden");
+          if (nameEl) nameEl.textContent = agentData.name;
+          if (usageEl) usageEl.textContent = agentData.usage || "—";
+          const roleSelect = document.getElementById("editRole");
+          if (roleSelect && agentData.role) roleSelect.value = agentData.role;
+        } else {
+          picker.classList.remove("is-hidden");
+          if (nameEl) nameEl.textContent = "agent";
+          if (usageEl) usageEl.textContent = "—";
+        }
+      }
+
+      if (type === "deactivate") {
+        const picker  = document.getElementById("deactivateAgentPicker");
+        const nameEls = modal.querySelectorAll(".modal-agent-name");
+        const catEl   = modal.querySelector(".modal-agent-category");
+        const usageEl = modal.querySelector(".modal-agent-usage");
+        if (agentData.name) {
+          picker.classList.add("is-hidden");
+          nameEls.forEach((el) => (el.textContent = agentData.name));
+          if (catEl)   catEl.textContent   = agentData.category || "—";
+          if (usageEl) usageEl.textContent = agentData.usage    || "—";
+        } else {
+          picker.classList.remove("is-hidden");
+          nameEls.forEach((el) => (el.textContent = "agent"));
+          if (catEl)   catEl.textContent   = "—";
+          if (usageEl) usageEl.textContent = "—";
+        }
+      }
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("active");
+    }
+
+    // Delegate agent-action clicks (buttons anywhere on the page)
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-agent-action]");
+      if (!btn) return;
+
+      const action = btn.dataset.agentAction;
+      const row    = btn.closest("tr");
+      let agentData = {};
+
+      if (row) {
+        const cells = row.cells;
+        agentData = {
+          name:     cells[0]?.querySelector(".strong")?.textContent?.trim() || "",
+          category: cells[0]?.querySelector(".muted")?.textContent?.trim()  || "",
+          role:     cells[1]?.textContent?.trim()                            || "",
+          usage:    cells[4]?.querySelector(".muted")?.textContent?.trim()  || ""
+        };
+      }
+
+      if (action === "add")        openModal("add",        {});
+      else if (action === "update")     openModal("update",     agentData);
+      else if (action === "deactivate") openModal("deactivate", agentData);
+    });
+
+    // Close modal on backdrop click or [data-modal-close] buttons
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+
+    document.querySelectorAll("[data-modal-close]").forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+
+    // ── Report modal ─────────────────────────────────
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest("[data-open-report]");
+      if (!link) return;
+      e.preventDefault();
+      const reportTypeEl = document.getElementById("reportType");
+      if (reportTypeEl && link.dataset.openReport) {
+        const opt = Array.from(reportTypeEl.options).find(o => o.text === link.dataset.openReport);
+        if (opt) reportTypeEl.value = opt.value;
+      }
+      openModal("report", {});
+    });
+
+    document.getElementById("previewReportBtn")?.addEventListener("click", () => {
+      alert("Report preview — connect to backend renderer.");
+    });
+    document.getElementById("downloadReportBtn")?.addEventListener("click", () => {
+      alert("Downloading report — connect to backend.");
+    });
+
+    // ── Dismiss alerts ───────────────────────────────
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-dismiss-alert]");
+      if (!btn) return;
+      btn.closest(".alert-row").classList.add("is-hidden");
+    });
+
+    document.getElementById("dismissAllAlerts")?.addEventListener("click", () => {
+      document.querySelectorAll(".alert-row").forEach((row) => row.classList.add("is-hidden"));
+    });
+
+    // ── Jump links ───────────────────────────────────
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => showView(link.dataset.viewTarget));
+    });
+
+    jumpLinks.forEach((link) => {
+      link.addEventListener("click", () => showView(link.dataset.jumpView));
+    });
+
+    primaryAction.addEventListener("click", () => {
+      const viewName = primaryAction.dataset.jumpView;
+      if (viewName) {
+        location.hash = viewName;
+        showView(viewName);
+      } else {
+        // Tab-specific primary action (no navigation needed)
+        const activeView = document.querySelector(".view.active")?.dataset.view;
+        if (activeView === "agents")        openModal("add", {});
+        if (activeView === "payments")      alert("Schedule Payment — connect to backend.");
+        if (activeView === "transactions")  alert("Export transactions — connect to backend.");
+        if (activeView === "approvals")     alert("Bulk review — connect to backend.");
+        if (activeView === "reports")       openModal("report", {});
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      clearHiddenItems();
+      applySearch();
+    });
+
+    dateRange.addEventListener("change", updateRange);
+
+    window.addEventListener("hashchange", () => {
+      showView(location.hash.replace("#", "") || "overview");
+    });
+
+    updateRange();
+    showView(location.hash.replace("#", "") || "overview");
+  </script>
+</body>
+</html>
